@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <!-- TODO: to be removed -->
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <!---->
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.0-dev-00806"/>
+        <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2"/>
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.2.0-dev-00756"/>
+        <PackageReference Include="Serilog.Expressions" Version="4.0.0"/>
+        <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.1-dev-00054"/>
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.1-dev-00575"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1"/>
+        <PackageReference Include="Serilog.Sinks.Seq" Version="6.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj" />
+    </ItemGroup>
+
+</Project>
