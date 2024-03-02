@@ -5,7 +5,7 @@ namespace Common.Utilities.Exceptions;
 /// <summary>
 /// Represents a domain exception.
 /// </summary>
-public sealed class DomainException : CoreException
+public class DomainException : CoreException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DomainException"/> class.

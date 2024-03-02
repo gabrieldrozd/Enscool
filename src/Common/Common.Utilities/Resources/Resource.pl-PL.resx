@@ -83,4 +83,10 @@
     <data name="ServerError" xml:space="preserve">
         <value>Wystąpił błąd serwera</value>
     </data>
+    <data name="DeletionError" xml:space="preserve">
+        <value>Obiekt nie może zostać usunięty</value>
+    </data>
+    <data name="RestorationError" xml:space="preserve">
+        <value>Obiekt nie może zostać przywrócony</value>
+    </data>
 </root>

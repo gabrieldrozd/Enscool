@@ -69,6 +69,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Object cannot be deleted.
+        /// </summary>
+        public static string DeletionError {
+            get {
+                return ResourceManager.GetString("DeletionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forbidden.
         /// </summary>
         public static string Forbidden {
@@ -92,6 +101,15 @@ namespace Common.Utilities.Resources {
         public static string ObjectNotFound {
             get {
                 return ResourceManager.GetString("ObjectNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object cannot be restored.
+        /// </summary>
+        public static string RestorationError {
+            get {
+                return ResourceManager.GetString("RestorationError", resourceCulture);
             }
         }
         

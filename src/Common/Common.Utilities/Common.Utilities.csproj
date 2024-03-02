@@ -27,7 +27,7 @@
         <!-- Text resources -->
         <EmbeddedResource Update="Resources\Resource.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>Resource.Designer.cs</LastGenOutput>
         </EmbeddedResource>
         <EmbeddedResource Update="Resources\Resource.pl-PL.resx">
             <SubType>Designer</SubType>

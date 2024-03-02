@@ -83,4 +83,10 @@
     <data name="ServerError" xml:space="preserve">
         <value>Server error</value>
     </data>
+    <data name="DeletionError" xml:space="preserve">
+        <value>Object cannot be deleted</value>
+    </data>
+    <data name="RestorationError" xml:space="preserve">
+        <value>Object cannot be restored</value>
+    </data>
 </root>
