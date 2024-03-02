@@ -13,6 +13,7 @@ public static class ResultExtensions
     public static Result ToResult(this Exception exception)
         => exception switch
         {
+            ParameterException ex => Result.Failure.BadRequest(ex.Message),
             DomainException ex => Result.Failure.BadRequest(ex.Message),
             ApplicationException ex => Result.Failure.BadRequest(ex.Message),
             NotAuthenticatedException ex => Result.Failure.Unauthorized(ex.Message),

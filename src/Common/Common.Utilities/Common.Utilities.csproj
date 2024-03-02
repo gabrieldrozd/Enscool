@@ -16,20 +16,36 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Text resources -->
+        <!-- Common resources -->
         <Compile Update="Resources\Resource.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>Resource.resx</DependentUpon>
         </Compile>
+        <!-- Ensure resources -->
+        <Compile Update="Primitives\Ensures\Resources\EnsureResource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>EnsureResource.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
-        <!-- Text resources -->
+        <!-- Common resources -->
         <EmbeddedResource Update="Resources\Resource.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resource.Designer.cs</LastGenOutput>
         </EmbeddedResource>
         <EmbeddedResource Update="Resources\Resource.pl-PL.resx">
+            <SubType>Designer</SubType>
+            <Generator>PublicResXFileCodeGenerator</Generator>
+        </EmbeddedResource>
+
+        <!-- Ensure resources -->
+        <EmbeddedResource Update="Primitives\Ensures\Resources\EnsureResource.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>EnsureResource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Primitives\Ensures\Resources\EnsureResource.pl-PL.resx">
             <SubType>Designer</SubType>
             <Generator>PublicResXFileCodeGenerator</Generator>
         </EmbeddedResource>

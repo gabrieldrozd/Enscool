@@ -6,9 +6,9 @@ namespace Core.Domain.Primitives;
 public interface IEntity
 {
     /// <summary>
-    /// The related tenant identifier.
+    /// The related institution identifier.
     /// </summary>
-    InstitutionId? TenantId { get; }
+    InstitutionId? InstitutionId { get; }
 
     /// <summary>
     /// Created on date and time in UTC format.

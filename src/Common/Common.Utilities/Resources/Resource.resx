@@ -75,7 +75,7 @@
         <value>Forbidden</value>
     </data>
     <data name="NotFound" xml:space="preserve">
-        <value>{0} not found</value>
+        <value>'{0}' not found</value>
     </data>
     <data name="ObjectNotFound" xml:space="preserve">
         <value>Object not found</value>
@@ -88,5 +88,11 @@
     </data>
     <data name="RestorationError" xml:space="preserve">
         <value>Object cannot be restored</value>
+    </data>
+    <data name="InvalidUserStateTransition" xml:space="preserve">
+        <value>Cannot change user state from '{0}' to '{1}'</value>
+    </data>
+    <data name="InvalidFullName" xml:space="preserve">
+        <value>Invalid full name</value>
     </data>
 </root>

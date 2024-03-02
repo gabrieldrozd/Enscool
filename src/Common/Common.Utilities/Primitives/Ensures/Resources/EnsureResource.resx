@@ -65,34 +65,25 @@
     </resheader>
 
     <!-- <data> tags below -->
-    <data name="BadRequest" xml:space="preserve">
-        <value>Nieprawidłowe zapytanie</value>
+    <data name="ParameterInvalidFormat" xml:space="preserve">
+        <value>Parameter '{0}' has invalid format</value>
     </data>
-    <data name="Unauthorized" xml:space="preserve">
-        <value>Brak autoryzacji</value>
+    <data name="ParameterInvalidUriFormat" xml:space="preserve">
+        <value>Parameter '{0}' has invalid URI format</value>
     </data>
-    <data name="Forbidden" xml:space="preserve">
-        <value>Brak dostępu</value>
+    <data name="ParameterNull" xml:space="preserve">
+        <value>Parameter '{0}' cannot be null</value>
     </data>
-    <data name="NotFound" xml:space="preserve">
-        <value>{0} nie został znaleziony/a</value>
+    <data name="ParameterDefault" xml:space="preserve">
+        <value>Parameter '{0}' cannot have default value</value>
     </data>
-    <data name="ObjectNotFound" xml:space="preserve">
-        <value>Obiekt nie został znaleziony</value>
+    <data name="ParameterNullEmptyOrWhitespace" xml:space="preserve">
+        <value>Parameter '{0}' cannot be null, empty or whitespace</value>
     </data>
-    <data name="ServerError" xml:space="preserve">
-        <value>Wystąpił błąd serwera</value>
+    <data name="ParameterNullOrEmpty" xml:space="preserve">
+        <value>Parameter '{0}' cannot be null or empty</value>
     </data>
-    <data name="DeletionError" xml:space="preserve">
-        <value>Obiekt nie może zostać usunięty</value>
-    </data>
-    <data name="RestorationError" xml:space="preserve">
-        <value>Obiekt nie może zostać przywrócony</value>
-    </data>
-    <data name="InvalidUserStateTransition" xml:space="preserve">
-        <value>Nie można zmienić stanu użytkownika z '{0}' na '{1}'</value>
-    </data>
-    <data name="InvalidFullName" xml:space="preserve">
-        <value>Nieprawidłowe imię, drugie imię lub nazwisko</value>
+    <data name="ParameterInvalidPrefix" xml:space="preserve">
+        <value>Parameter '{0}' has invalid prefix: '{1}'</value>
     </data>
 </root>

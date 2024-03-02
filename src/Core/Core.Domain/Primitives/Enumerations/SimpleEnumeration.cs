@@ -34,7 +34,7 @@ public abstract record SimpleEnumeration<TEnum>(string Value)
         return enumerations;
     }
 
-    private static void AddEnumerationsFromType(IReflect type, Type enumerationType, IDictionary<int, TEnum>? enumerations, ref int index)
+    private static void AddEnumerationsFromType(Type type, Type enumerationType, Dictionary<int, TEnum>? enumerations, ref int index)
     {
         var fieldsForType = type
             .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)

@@ -26,7 +26,7 @@ services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
     // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TenantAccessBehavior<,>));
+    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(InstitutionAccessBehavior<,>));
     // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 });
 

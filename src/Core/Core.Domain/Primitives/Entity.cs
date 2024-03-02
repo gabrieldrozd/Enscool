@@ -13,9 +13,9 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IEntity
     public TId Id { get; } = default!;
 
     /// <summary>
-    /// The related tenant identifier.
+    /// The related institution identifier.
     /// </summary>
-    public InstitutionId? TenantId { get; private set; }
+    public InstitutionId? InstitutionId { get; private set; }
 
     /// <summary>
     /// Created on date and time in UTC format.
@@ -140,7 +140,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IEntity
     public override int GetHashCode()
         => (GetType(), Id).GetHashCode();
 
-    protected void SetTenantId(InstitutionId? tenantId) => TenantId = tenantId;
+    protected void SetInstitutionId(InstitutionId? institutionId) => InstitutionId = institutionId;
 
     /// <summary>
     /// Validates the business rule.

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Common.Utilities.Resources {
+namespace Common.Utilities.Primitives.Ensures.Resources {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace Common.Utilities.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resource {
+    public class EnsureResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal EnsureResource() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Common.Utilities.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Common.Utilities.Resources.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Common.Utilities.Primitives.Ensures.Resources.EnsureResource", typeof(EnsureResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,92 +60,65 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bad request.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; cannot have default value.
         /// </summary>
-        public static string BadRequest {
+        public static string ParameterDefault {
             get {
-                return ResourceManager.GetString("BadRequest", resourceCulture);
+                return ResourceManager.GetString("ParameterDefault", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Object cannot be deleted.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has invalid format.
         /// </summary>
-        public static string DeletionError {
+        public static string ParameterInvalidFormat {
             get {
-                return ResourceManager.GetString("DeletionError", resourceCulture);
+                return ResourceManager.GetString("ParameterInvalidFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forbidden.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has invalid prefix: &apos;{1}&apos;.
         /// </summary>
-        public static string Forbidden {
+        public static string ParameterInvalidPrefix {
             get {
-                return ResourceManager.GetString("Forbidden", resourceCulture);
+                return ResourceManager.GetString("ParameterInvalidPrefix", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid full name.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has invalid URI format.
         /// </summary>
-        public static string InvalidFullName {
+        public static string ParameterInvalidUriFormat {
             get {
-                return ResourceManager.GetString("InvalidFullName", resourceCulture);
+                return ResourceManager.GetString("ParameterInvalidUriFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot change user state from &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; cannot be null.
         /// </summary>
-        public static string InvalidUserStateTransition {
+        public static string ParameterNull {
             get {
-                return ResourceManager.GetString("InvalidUserStateTransition", resourceCulture);
+                return ResourceManager.GetString("ParameterNull", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; not found.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; cannot be null, empty or whitespace.
         /// </summary>
-        public static string NotFound {
+        public static string ParameterNullEmptyOrWhitespace {
             get {
-                return ResourceManager.GetString("NotFound", resourceCulture);
+                return ResourceManager.GetString("ParameterNullEmptyOrWhitespace", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Object not found.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; cannot be null or empty.
         /// </summary>
-        public static string ObjectNotFound {
+        public static string ParameterNullOrEmpty {
             get {
-                return ResourceManager.GetString("ObjectNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Object cannot be restored.
-        /// </summary>
-        public static string RestorationError {
-            get {
-                return ResourceManager.GetString("RestorationError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server error.
-        /// </summary>
-        public static string ServerError {
-            get {
-                return ResourceManager.GetString("ServerError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unauthorized.
-        /// </summary>
-        public static string Unauthorized {
-            get {
-                return ResourceManager.GetString("Unauthorized", resourceCulture);
+                return ResourceManager.GetString("ParameterNullOrEmpty", resourceCulture);
             }
         }
     }
