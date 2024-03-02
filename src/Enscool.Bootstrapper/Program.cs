@@ -1,6 +1,7 @@
 using Core.Infrastructure;
 using Core.Infrastructure.Abstractions.Modules;
 using Enscool.Bootstrapper;
+using FluentValidation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +22,15 @@ var services = builder.Services;
 services.AddCoreInfrastructure(assemblies, modules, builder.Configuration);
 foreach (var module in modules) module.RegisterModule(services, builder.Configuration);
 
-// TODO: MediatR configuration goes here
-// TODO: FluentValidation configuration goes here
+services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
+    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TenantAccessBehavior<,>));
+    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+});
+
+services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
 // TODO: MediatR Transactional decorator configuration goes here
 
 #endregion

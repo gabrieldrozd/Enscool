@@ -4,10 +4,15 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Common\Common.Utilities\Common.Utilities.csproj" />
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Common.Utilities\Common.Utilities.csproj"/>
     </ItemGroup>
 
 </Project>
