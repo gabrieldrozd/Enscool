@@ -8,15 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="MediatR" Version="12.2.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Common\Common.Utilities\Common.Utilities.csproj"/>
+        <ProjectReference Include="..\..\Common\Common.Utilities\Common.Utilities.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Shared\Defaults\" />
+        <Folder Include="Shared\Defaults\" />
     </ItemGroup>
 
 </Project>

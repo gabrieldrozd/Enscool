@@ -8,14 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <!-- TODO: to be removed -->
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-        <!---->
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
         <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.0-dev-00806"/>
         <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2"/>
@@ -28,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj" />
+        <ProjectReference Include="..\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj"/>
     </ItemGroup>
 
 </Project>
