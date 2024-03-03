@@ -51,7 +51,9 @@ internal static class Extensions
     {
         app.UseCors(CorsPolicy);
         app.UseRegisteredMiddleware();
+
         // TODO: UseModulesConfiguration goes here
+
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
