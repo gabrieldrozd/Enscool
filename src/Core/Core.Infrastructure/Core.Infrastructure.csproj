@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Carter" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.1.3"/>
