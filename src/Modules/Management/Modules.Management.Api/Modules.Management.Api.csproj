@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Modules.Management.Infrastructure\Modules.Management.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Endpoints\" />
+    </ItemGroup>
+
 </Project>

@@ -1,159 +1,74 @@
 ﻿using Common.Utilities.Primitives.Envelope;
+using Core.Domain.Shared.Enumerations.Roles;
+using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 
 namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
 
 public static class EndpointBaseExtensions
 {
-    public static void ProducesEnvelope<TResult>(this RouteHandlerBuilder endpoint, int statusCode)
-    {
-        endpoint
-            .Produces<Envelope<TResult>>(statusCode)
-            .Produces<EmptyEnvelope>(StatusCodes.Status400BadRequest)
-            .Produces<EmptyEnvelope>(StatusCodes.Status401Unauthorized)
-            .Produces<EmptyEnvelope>(StatusCodes.Status404NotFound)
-            .Produces<EmptyEnvelope>(StatusCodes.Status500InternalServerError);
-    }
+    /// <summary>
+    /// Specifies required <see cref="UserRole"/>s for the endpoint.
+    /// </summary>
+    public static RouteHandlerBuilder RequireRoles(
+        this RouteHandlerBuilder builder,
+        params UserRole[] roles
+    ) => builder.RequireAuthorization(new RoleRequirementAttribute(roles));
 
-    public static void ProducesEnvelope(this RouteHandlerBuilder endpoint, int statusCode)
+    /// <summary>
+    /// Adds the produces configuration.
+    /// </summary>
+    public static RouteHandlerBuilder ProducesEnvelope(this RouteHandlerBuilder routeHandlerBuilder, int statusCode)
     {
-        endpoint
+        routeHandlerBuilder
             .Produces<Envelope>(statusCode)
             .Produces<EmptyEnvelope>(StatusCodes.Status400BadRequest)
             .Produces<EmptyEnvelope>(StatusCodes.Status401Unauthorized)
             .Produces<EmptyEnvelope>(StatusCodes.Status404NotFound)
             .Produces<EmptyEnvelope>(StatusCodes.Status500InternalServerError);
+
+        return routeHandlerBuilder;
     }
 
-    #region GET
-
-    public static RouteHandlerBuilder MapGetEndpoint<TResult>(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
+    /// <summary>
+    /// Adds the generic produces configuration.
+    /// </summary>
+    public static RouteHandlerBuilder ProducesEnvelope<TResult>(this RouteHandlerBuilder routeHandlerBuilder, int statusCode)
     {
-        var builder = endpointRouteBuilder.MapGet(pattern, handler);
-        builder.ProducesEnvelope<TResult>(StatusCodes.Status200OK);
-        builder.WithOpenApi();
+        routeHandlerBuilder
+            .Produces<Envelope<TResult>>(statusCode)
+            .Produces<EmptyEnvelope>(StatusCodes.Status400BadRequest)
+            .Produces<EmptyEnvelope>(StatusCodes.Status401Unauthorized)
+            .Produces<EmptyEnvelope>(StatusCodes.Status404NotFound)
+            .Produces<EmptyEnvelope>(StatusCodes.Status500InternalServerError);
+
+        return routeHandlerBuilder;
+    }
+
+    /// <summary>
+    /// Adds the endpoint documentation.
+    /// </summary>
+    /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
+    /// <param name="name">The name of the endpoint.</param>
+    /// <param name="title">The title of the endpoint.</param>
+    /// <param name="description">The description of the endpoint.</param>
+    /// <param name="example">The example of the endpoint.</param>
+    public static TBuilder WithDocumentation<TBuilder>(
+        this TBuilder builder,
+        string name,
+        string title,
+        string description,
+        string? example = null
+    )
+        where TBuilder : IEndpointConventionBuilder
+    {
+        builder
+            .WithName(name)
+            .WithSummary(title)
+            .WithDescription(example is null ? description : $"{description}\n\n```{example}```")
+            .WithOpenApi();
+
         return builder;
     }
-
-    public static RouteHandlerBuilder MapGetEndpoint(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapGet(pattern, handler);
-        builder.ProducesEnvelope(StatusCodes.Status200OK);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    #endregion
-
-    #region POST
-
-    public static RouteHandlerBuilder MapPostEndpoint<TResult>(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPost(pattern, handler);
-        builder.ProducesEnvelope<TResult>(StatusCodes.Status201Created);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    public static RouteHandlerBuilder MapPostEndpoint(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPost(pattern, handler);
-        builder.ProducesEnvelope(StatusCodes.Status201Created);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    #endregion
-
-    #region PUT
-
-    public static RouteHandlerBuilder MapPutWithEnvelope<TResult>(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPut(pattern, handler);
-        builder.ProducesEnvelope<TResult>(StatusCodes.Status200OK);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    public static RouteHandlerBuilder MapPutWithEnvelope(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPut(pattern, handler);
-        builder.ProducesEnvelope(StatusCodes.Status200OK);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    #endregion
-
-    #region PATCH
-
-    public static RouteHandlerBuilder MapPatchEndpoint<TResult>(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPatch(pattern, handler);
-        builder.ProducesEnvelope<TResult>(StatusCodes.Status200OK);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    public static RouteHandlerBuilder MapPatchEndpoint(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapPatch(pattern, handler);
-        builder.ProducesEnvelope(StatusCodes.Status200OK);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    #endregion
-
-    #region DELETE
-
-    public static RouteHandlerBuilder MapDeleteEndpoint<TResult>(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapDelete(pattern, handler);
-        builder.ProducesEnvelope<TResult>(StatusCodes.Status204NoContent);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    public static RouteHandlerBuilder MapDeleteEndpoint(
-        this IEndpointRouteBuilder endpointRouteBuilder,
-        string pattern,
-        Delegate handler)
-    {
-        var builder = endpointRouteBuilder.MapDelete(pattern, handler);
-        builder.ProducesEnvelope(StatusCodes.Status204NoContent);
-        builder.WithOpenApi();
-        return builder;
-    }
-
-    #endregion
 }
