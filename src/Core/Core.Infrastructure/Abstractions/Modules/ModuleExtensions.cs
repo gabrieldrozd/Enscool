@@ -1,4 +1,8 @@
+using System.Reflection;
+using Core.Infrastructure.Abstractions.Modules.Swagger;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Core.Infrastructure.Abstractions.Modules;
@@ -8,6 +12,20 @@ namespace Core.Infrastructure.Abstractions.Modules;
 /// </summary>
 public static class ModuleExtensions
 {
+    internal static IServiceCollection AddModules(this IServiceCollection services, IList<Assembly> assemblies)
+    {
+        services.AddSwaggerDocumentation(assemblies);
+
+        return services;
+    }
+
+    internal static IApplicationBuilder UseModules(this WebApplication app)
+    {
+        app.UseSwaggerDocumentation();
+
+        return app;
+    }
+
     /// <summary>
     /// Configures modules for the host builder by adding JSON configuration files based on the environment.
     /// </summary>

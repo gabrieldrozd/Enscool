@@ -5,7 +5,7 @@ namespace Core.Infrastructure.Auth.Contexts;
 
 internal static class ContextsExtensions
 {
-    public static IServiceCollection RegisterContexts(this IServiceCollection services)
+    public static IServiceCollection AddContexts(this IServiceCollection services)
     {
         services.AddHttpContextAccessor();
         services.AddTransient<IUserContext, UserContext>();

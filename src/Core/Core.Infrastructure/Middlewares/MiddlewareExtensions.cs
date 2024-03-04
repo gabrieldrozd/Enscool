@@ -10,7 +10,7 @@ namespace Core.Infrastructure.Middlewares;
 
 internal static class MiddlewareExtensions
 {
-    public static IServiceCollection RegisterMiddlewares(this IServiceCollection services)
+    public static IServiceCollection AddMiddlewares(this IServiceCollection services)
     {
         services.AddSingleton<IExceptionMapper, ExceptionMapper>();
 

@@ -3,8 +3,6 @@
         "http": {
             "commandName": "Project",
             "dotnetRunMessages": true,
-            "launchBrowser": true,
-            "launchUrl": "docs",
             "applicationUrl": "http://localhost:5000",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"

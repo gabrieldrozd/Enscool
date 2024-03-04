@@ -21,7 +21,7 @@ internal static class SwaggerExtensions
             {
                 swagger.SwaggerDoc(
                     group.Value,
-                    new()
+                    new OpenApiInfo
                     {
                         Title = $"{group.Key}",
                         Version = group.Value
@@ -36,17 +36,15 @@ internal static class SwaggerExtensions
                 In = ParameterLocation.Header,
                 Scheme = JwtBearerDefaults.AuthenticationScheme,
                 BearerFormat = "JWT",
-                Reference = new()
+                Reference = new OpenApiReference
                 {
                     Id = JwtBearerDefaults.AuthenticationScheme,
                     Type = ReferenceType.SecurityScheme
                 }
             };
             swagger.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, securityScheme);
-            swagger.AddSecurityRequirement(new()
-            {
-                { securityScheme, new List<string>() }
-            });
+            var requirement = new OpenApiSecurityRequirement { { securityScheme, new List<string>() } };
+            swagger.AddSecurityRequirement(requirement);
 
             using var serviceProvider = services.BuildServiceProvider();
             var xmlComments = serviceProvider.GetRequiredService<XmlComments>();

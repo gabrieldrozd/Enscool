@@ -12,7 +12,7 @@ namespace Core.Infrastructure.Auth;
 
 internal static class Extensions
 {
-    public static IServiceCollection RegisterAuth(this IServiceCollection services)
+    public static IServiceCollection AddAuth(this IServiceCollection services)
     {
         var options = services.GetSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
         services.AddSingleton(options);

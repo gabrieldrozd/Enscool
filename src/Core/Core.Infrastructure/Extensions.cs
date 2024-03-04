@@ -29,20 +29,23 @@ internal static class Extensions
             }
         }
 
-        services.AddCors(cors =>
-        {
-            cors.AddPolicy(CorsPolicy, builder =>
+        services
+            .AddCors(cors =>
             {
-                builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            });
-        });
+                cors.AddPolicy(CorsPolicy, builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            })
+            .AddMiddlewares()
+            .AddAuth()
+            .AddContexts()
+            .AddModules(assemblies);
 
-        services.RegisterMiddlewares();
-        services.RegisterAuth();
-        services.RegisterContexts();
+        // TODO: DB configuration
 
         return services;
     }
@@ -51,9 +54,7 @@ internal static class Extensions
     {
         app.UseCors(CorsPolicy);
         app.UseRegisteredMiddleware();
-
-        // TODO: UseModulesConfiguration goes here
-
+        app.UseModules();
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();

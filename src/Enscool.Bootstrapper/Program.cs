@@ -1,3 +1,4 @@
+using Carter;
 using Core.Infrastructure;
 using Core.Infrastructure.Abstractions.Modules;
 using Enscool.Bootstrapper;
@@ -19,6 +20,7 @@ var modules = ProjectLoader.LoadProjects<IModuleBase>(assemblies);
 
 var services = builder.Services;
 
+services.AddCarter();
 services.AddCoreInfrastructure(assemblies, modules, builder.Configuration);
 foreach (var module in modules) module.RegisterModule(services, builder.Configuration);
 
@@ -40,12 +42,12 @@ services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
 var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
+app.MapCarter();
 app.UseCoreInfrastructure();
 logger.LogInformation(message: "Modules: [{ModuleNames}]", string.Join(", ", modules.Select(x => x.Name)));
 
 foreach (var module in modules) module.UseModule(app);
 
-app.MapControllers();
 app.MapGet("/", context => context.Response.WriteAsync(
     $"Enscool API is running!\nGo to: {app.Urls.Select(x => x).First()}/docs")
 );
