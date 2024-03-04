@@ -15,8 +15,4 @@
         <ProjectReference Include="..\..\Common\Common.Utilities\Common.Utilities.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Shared\Defaults\" />
-    </ItemGroup>
-
 </Project>
