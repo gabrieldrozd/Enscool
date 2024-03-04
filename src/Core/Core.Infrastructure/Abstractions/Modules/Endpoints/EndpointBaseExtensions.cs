@@ -1,74 +1,66 @@
-﻿using Common.Utilities.Primitives.Envelope;
-using Core.Domain.Shared.Enumerations.Roles;
-using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
 
 public static class EndpointBaseExtensions
 {
-    /// <summary>
-    /// Specifies required <see cref="UserRole"/>s for the endpoint.
-    /// </summary>
-    public static RouteHandlerBuilder RequireRoles(
-        this RouteHandlerBuilder builder,
-        params UserRole[] roles
-    ) => builder.RequireAuthorization(new RoleRequirementAttribute(roles));
+    public static RouteHandlerBuilder MapGetEndpoint(
+        this IEndpointRouteBuilder endpointRouteBuilder,
+        EndpointTag tag,
+        string pattern,
+        Delegate handler
+    ) => endpointRouteBuilder
+        .MapGet(pattern, handler)
+        .ConfigureEndpoint(tag);
+
+    public static RouteHandlerBuilder MapPostEndpoint(
+        this IEndpointRouteBuilder endpointRouteBuilder,
+        EndpointTag tag,
+        string pattern,
+        Delegate handler
+    ) => endpointRouteBuilder
+        .MapPost(pattern, handler)
+        .ConfigureEndpoint(tag);
+
+    public static RouteHandlerBuilder MapPutEndpoint(
+        this IEndpointRouteBuilder endpointRouteBuilder,
+        EndpointTag tag,
+        string pattern,
+        Delegate handler
+    ) => endpointRouteBuilder
+        .MapPut(pattern, handler)
+        .ConfigureEndpoint(tag);
+
+    public static RouteHandlerBuilder MapPatchEndpoint(
+        this IEndpointRouteBuilder endpointRouteBuilder,
+        EndpointTag tag,
+        string pattern,
+        Delegate handler
+    ) => endpointRouteBuilder
+        .MapPatch(pattern, handler)
+        .ConfigureEndpoint(tag);
+
+    public static RouteHandlerBuilder MapDeleteEndpoint(
+        this IEndpointRouteBuilder endpointRouteBuilder,
+        EndpointTag tag,
+        string pattern,
+        Delegate handler
+    ) => endpointRouteBuilder
+        .MapDelete(pattern, handler)
+        .ConfigureEndpoint(tag);
 
     /// <summary>
-    /// Adds the produces configuration.
+    /// Configures the endpoint tag and open api.
     /// </summary>
-    public static RouteHandlerBuilder ProducesEnvelope(this RouteHandlerBuilder routeHandlerBuilder, int statusCode)
+    /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
+    /// <param name="tag">The <see cref="EndpointTag"/>.</param>
+    /// <returns>The <see cref="RouteHandlerBuilder"/> with configuration applied.</returns>
+    private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, EndpointTag tag)
     {
-        routeHandlerBuilder
-            .Produces<Envelope>(statusCode)
-            .Produces<EmptyEnvelope>(StatusCodes.Status400BadRequest)
-            .Produces<EmptyEnvelope>(StatusCodes.Status401Unauthorized)
-            .Produces<EmptyEnvelope>(StatusCodes.Status404NotFound)
-            .Produces<EmptyEnvelope>(StatusCodes.Status500InternalServerError);
-
-        return routeHandlerBuilder;
-    }
-
-    /// <summary>
-    /// Adds the generic produces configuration.
-    /// </summary>
-    public static RouteHandlerBuilder ProducesEnvelope<TResult>(this RouteHandlerBuilder routeHandlerBuilder, int statusCode)
-    {
-        routeHandlerBuilder
-            .Produces<Envelope<TResult>>(statusCode)
-            .Produces<EmptyEnvelope>(StatusCodes.Status400BadRequest)
-            .Produces<EmptyEnvelope>(StatusCodes.Status401Unauthorized)
-            .Produces<EmptyEnvelope>(StatusCodes.Status404NotFound)
-            .Produces<EmptyEnvelope>(StatusCodes.Status500InternalServerError);
-
-        return routeHandlerBuilder;
-    }
-
-    /// <summary>
-    /// Adds the endpoint documentation.
-    /// </summary>
-    /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
-    /// <param name="name">The name of the endpoint.</param>
-    /// <param name="title">The title of the endpoint.</param>
-    /// <param name="description">The description of the endpoint.</param>
-    /// <param name="example">The example of the endpoint.</param>
-    public static TBuilder WithDocumentation<TBuilder>(
-        this TBuilder builder,
-        string name,
-        string title,
-        string description,
-        string? example = null
-    )
-        where TBuilder : IEndpointConventionBuilder
-    {
-        builder
-            .WithName(name)
-            .WithSummary(title)
-            .WithDescription(example is null ? description : $"{description}\n\n```{example}```")
-            .WithOpenApi();
-
+        builder.WithTags(tag.Value);
+        builder.WithOpenApi();
         return builder;
     }
 }
