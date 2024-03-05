@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using IOpenApiAny = Microsoft.OpenApi.Any.IOpenApiAny;
 using OpenApiString = Microsoft.OpenApi.Any.OpenApiString;
 
-namespace Core.Infrastructure.Abstractions.Modules.Swagger;
+namespace Core.Infrastructure.Modules.Swagger;
 
 internal sealed class LanguageHeaderParameter : IOperationFilter
 {

@@ -1,11 +1,11 @@
 using System.Reflection;
-using Core.Infrastructure.Abstractions.Modules.Swagger.Settings;
+using Core.Infrastructure.Modules.Swagger.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Core.Infrastructure.Abstractions.Modules.Swagger;
+namespace Core.Infrastructure.Modules.Swagger;
 
 public sealed record XmlComments(List<string> Comments);
 

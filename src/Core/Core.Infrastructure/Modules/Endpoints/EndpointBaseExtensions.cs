@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 public static class EndpointBaseExtensions
 {

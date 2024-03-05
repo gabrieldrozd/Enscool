@@ -3,7 +3,7 @@ using Carter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 public static class EndpointsExtensions
 {

@@ -1,13 +1,10 @@
 using Carter;
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
-using Core.Application.Abstractions.Auth;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 /// <summary>
 /// Represents an endpoint in the application.

@@ -1,4 +1,4 @@
-using Core.Infrastructure.Abstractions.Modules.Endpoints;
+using Core.Infrastructure.Modules.Endpoints;
 
 namespace Modules.Management.Api;
 

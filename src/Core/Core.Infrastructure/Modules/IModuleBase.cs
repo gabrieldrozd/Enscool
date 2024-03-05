@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Infrastructure.Abstractions.Modules;
+namespace Core.Infrastructure.Modules;
 
 public interface IModuleBase
 {

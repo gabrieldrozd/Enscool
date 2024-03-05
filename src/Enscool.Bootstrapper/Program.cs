@@ -1,6 +1,5 @@
-using Carter;
 using Core.Infrastructure;
-using Core.Infrastructure.Abstractions.Modules;
+using Core.Infrastructure.Modules;
 using Enscool.Bootstrapper;
 using FluentValidation;
 using Serilog;
@@ -19,20 +18,7 @@ var modules = ProjectLoader.LoadProjects<IModuleBase>(assemblies);
 #region services
 
 var services = builder.Services;
-
 services.AddCoreInfrastructure(assemblies, modules, builder.Configuration);
-foreach (var module in modules) module.RegisterModule(services, builder.Configuration);
-
-services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
-    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(InstitutionAccessBehavior<,>));
-    // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-});
-
-services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
-// TODO: MediatR Transactional decorator configuration goes here
 
 #endregion
 
@@ -41,10 +27,8 @@ services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
 var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-app.UseCoreInfrastructure();
-logger.LogInformation(message: "Modules: [{ModuleNames}]", string.Join(", ", modules.Select(x => x.Name)));
-
-foreach (var module in modules) module.UseModule(app);
+app.UseCoreInfrastructure(modules);
+logger.LogInformation("Modules: [{ModuleNames}]", string.Join(", ", modules.Select(x => x.Name)));
 
 app.MapGet("/", context => context.Response.WriteAsync(
     $"Enscool API is running!\nGo to: {app.Urls.Select(x => x).First()}/docs")

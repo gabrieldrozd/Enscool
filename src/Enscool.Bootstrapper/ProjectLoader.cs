@@ -1,4 +1,5 @@
 using System.Reflection;
+using Core.Application.Helpers;
 
 namespace Enscool.Bootstrapper;
 
@@ -16,7 +17,7 @@ public static class ProjectLoader
             .ToList();
 
         var disabledProjects = new List<string>();
-        var modulePart = IsTestMode() ? TestModulePart : ModulePart;
+        var modulePart = TestDetector.IsTestMode() ? TestModulePart : ModulePart;
         RemoveDisabledProjects(configuration, files, disabledProjects, modulePart);
 
         disabledProjects.ForEach(disabledModule => files.Remove(disabledModule));
@@ -25,7 +26,7 @@ public static class ProjectLoader
         return assemblies;
     }
 
-    public static IList<TProjectType> LoadProjects<TProjectType>(IEnumerable<Assembly> assemblies)
+    public static List<TProjectType> LoadProjects<TProjectType>(IEnumerable<Assembly> assemblies)
     {
         var projects = assemblies
             .SelectMany(x => x.GetTypes())
@@ -49,8 +50,4 @@ public static class ProjectLoader
             if (!enabled) disabledProjects.Add(file);
         }
     }
-
-    private static bool IsTestMode() => AppDomain.CurrentDomain.GetAssemblies()
-        .SelectMany(x => x.FullName is not null ? [x.FullName] : x.GetReferencedAssemblies().Select(y => y.FullName))
-        .Any(x => x.Contains("xunit") || x.Contains("nunit") || x.Contains("mstest") || x.Contains("testhost"));
 }

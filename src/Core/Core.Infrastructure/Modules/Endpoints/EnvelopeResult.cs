@@ -1,7 +1,7 @@
 using Common.Utilities.Primitives.Envelope;
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 public class EnvelopeResult : IResult
 {

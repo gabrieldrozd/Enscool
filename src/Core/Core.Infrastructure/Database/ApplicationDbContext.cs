@@ -1,11 +1,9 @@
 using Core.Application.Abstractions.Auth;
 using Core.Domain.Primitives;
-using Core.Domain.Shared.Defaults;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Core.Infrastructure.Database;
 

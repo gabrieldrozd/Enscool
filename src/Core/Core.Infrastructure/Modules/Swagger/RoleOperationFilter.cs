@@ -2,7 +2,7 @@ using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Core.Infrastructure.Abstractions.Modules.Swagger;
+namespace Core.Infrastructure.Modules.Swagger;
 
 internal sealed class RoleOperationFilter : IOperationFilter
 {

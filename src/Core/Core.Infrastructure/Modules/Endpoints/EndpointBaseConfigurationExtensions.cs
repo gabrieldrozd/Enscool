@@ -4,7 +4,7 @@ using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 public static class EndpointBaseConfigurationExtensions
 {

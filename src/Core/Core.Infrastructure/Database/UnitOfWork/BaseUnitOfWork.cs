@@ -2,7 +2,6 @@ using Common.Utilities.Primitives.Results;
 using Common.Utilities.Resources;
 using Core.Application.Abstractions.Database;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Core.Infrastructure.Database.UnitOfWork;
 

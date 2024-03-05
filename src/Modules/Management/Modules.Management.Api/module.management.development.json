@@ -1,0 +1,19 @@
+{
+    "ManagementSeeder": {
+        "Enable": true,
+        "GlobalAdmin": {
+            "Email": "wisseapp@outlook.com",
+            "Phone": "531432137",
+            "Password": "zaq1@WSX",
+            "FirstName": "GlobalAdmin",
+            "LastName": "Wisse"
+        },
+        "BackOfficeAdmin": {
+            "Email": "boadmin@wisse.io",
+            "Phone": "531432137",
+            "Password": "zaq1@WSX",
+            "FirstName": "BackOfficeAdmin",
+            "LastName": "Wisse"
+        }
+    }
+}

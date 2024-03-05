@@ -2,7 +2,6 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Common.Utilities.Exceptions;
 using Common.Utilities.Primitives.Ensures.Resources;
-using Common.Utilities.Resources;
 
 namespace Common.Utilities.Primitives.Ensures.EnsureNotExtensions;
 

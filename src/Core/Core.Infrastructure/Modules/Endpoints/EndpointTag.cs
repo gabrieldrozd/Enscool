@@ -1,6 +1,6 @@
 using Core.Domain.Primitives.Enumerations;
 
-namespace Core.Infrastructure.Abstractions.Modules.Endpoints;
+namespace Core.Infrastructure.Modules.Endpoints;
 
 /// <summary>
 /// <para>Abstract class representing a tag for an endpoint.</para>

@@ -1,6 +1,6 @@
 using Common.Utilities.Primitives.Results;
 using Core.Domain.Shared.Enumerations.Roles;
-using Core.Infrastructure.Abstractions.Modules.Endpoints;
+using Core.Infrastructure.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;

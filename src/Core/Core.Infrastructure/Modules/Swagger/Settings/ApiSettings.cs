@@ -1,4 +1,4 @@
-namespace Core.Infrastructure.Abstractions.Modules.Swagger.Settings;
+namespace Core.Infrastructure.Modules.Swagger.Settings;
 
 public static class ApiSettings
 {

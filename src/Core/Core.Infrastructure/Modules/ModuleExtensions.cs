@@ -1,12 +1,12 @@
 using System.Reflection;
-using Core.Infrastructure.Abstractions.Modules.Endpoints;
-using Core.Infrastructure.Abstractions.Modules.Swagger;
+using Core.Infrastructure.Modules.Endpoints;
+using Core.Infrastructure.Modules.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Core.Infrastructure.Abstractions.Modules;
+namespace Core.Infrastructure.Modules;
 
 /// <summary>
 /// Extension methods for configuring modules.
