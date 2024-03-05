@@ -1,10 +1,6 @@
 {
-    // NOTE: Module information
     "ManagementModule": {
         "Name": "ManagementModule",
         "Enabled": true
-    },
-    "ActivationCodeSettings": {
-        "BaseUrl": "http://localhost:3000"
     }
 }

@@ -8,8 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
-      <ProjectReference Include="..\Modules.Management.Application\Modules.Management.Application.csproj" />
+        <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules.Management.Application\Modules.Management.Application.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Modules.Management.Api"/>
     </ItemGroup>
 
 </Project>
