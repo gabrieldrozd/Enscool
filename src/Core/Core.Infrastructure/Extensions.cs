@@ -16,20 +16,6 @@ internal static class Extensions
 
     public static IServiceCollection AddCoreInfrastructure(this IServiceCollection services, IList<Assembly> assemblies, IList<IModuleBase> modules, IConfiguration configuration)
     {
-        List<string> disabledModules = [];
-        using (var serviceProvider = services.BuildServiceProvider())
-        {
-            var config = serviceProvider.GetRequiredService<IConfiguration>();
-            foreach (var (key, value) in config.AsEnumerable())
-            {
-                if (!key.Contains(":module:enabled"))
-                    continue;
-
-                if (!bool.Parse(value!))
-                    disabledModules.Add(key.Split(":")[0]);
-            }
-        }
-
         services
             .AddCors(cors =>
             {

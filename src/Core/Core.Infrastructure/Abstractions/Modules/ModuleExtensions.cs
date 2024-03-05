@@ -1,4 +1,5 @@
 using System.Reflection;
+using Core.Infrastructure.Abstractions.Modules.Endpoints;
 using Core.Infrastructure.Abstractions.Modules.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,9 @@ public static class ModuleExtensions
 {
     internal static IServiceCollection AddModules(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        services.AddSwaggerDocumentation(assemblies);
+        services
+            .AddSwaggerDocumentation(assemblies)
+            .AddEndpoints(assemblies);
 
         return services;
     }
@@ -22,6 +25,7 @@ public static class ModuleExtensions
     internal static IApplicationBuilder UseModules(this WebApplication app)
     {
         app.UseSwaggerDocumentation();
+        app.UseEndpoints();
 
         return app;
     }
