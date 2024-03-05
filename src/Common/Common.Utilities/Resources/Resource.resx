@@ -95,4 +95,7 @@
     <data name="InvalidFullName" xml:space="preserve">
         <value>Invalid full name</value>
     </data>
+    <data name="DatabaseError" xml:space="preserve">
+        <value>Database unexpected error occurred while processing the request</value>
+    </data>
 </root>

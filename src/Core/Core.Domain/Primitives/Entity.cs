@@ -1,4 +1,5 @@
 using Core.Domain.Primitives.Rules;
+using Core.Domain.Shared.Defaults;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Rules;
 using Core.Domain.Shared.ValueObjects;
@@ -77,9 +78,9 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IEntity
         Id = id;
     }
 
-    public void SetCreated(Date createdOnUtc, UserId createdBy) => (CreatedOnUtc, CreatedBy) = (createdOnUtc, createdBy);
-    public void SetModified(Date modifiedOnUtc, UserId modifiedBy) => (ModifiedOnUtc, ModifiedBy) = (modifiedOnUtc, modifiedBy);
-    public void SetDeletedBy(UserId deletedBy) => DeletedBy = deletedBy;
+    public void SetCreated(Date createdOnUtc, UserId? createdBy) => (CreatedOnUtc, CreatedBy) = (createdOnUtc, createdBy ?? SystemUser.Id);
+    public void SetModified(Date modifiedOnUtc, UserId? modifiedBy) => (ModifiedOnUtc, ModifiedBy) = (modifiedOnUtc, modifiedBy ?? SystemUser.Id);
+    public void SetDeletedBy(UserId? deletedBy) => DeletedBy = deletedBy;
 
     public virtual void Delete()
     {

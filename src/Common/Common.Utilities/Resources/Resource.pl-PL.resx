@@ -95,4 +95,7 @@
     <data name="InvalidFullName" xml:space="preserve">
         <value>Nieprawidłowe imię, drugie imię lub nazwisko</value>
     </data>
+    <data name="DatabaseError" xml:space="preserve">
+        <value>Nieoczekiwany błąd bazy danych podczas przetwarzania zapytania</value>
+    </data>
 </root>

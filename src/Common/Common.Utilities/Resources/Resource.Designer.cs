@@ -69,6 +69,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database unexpected error occurred while processing the request.
+        /// </summary>
+        public static string DatabaseError {
+            get {
+                return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object cannot be deleted.
         /// </summary>
         public static string DeletionError {

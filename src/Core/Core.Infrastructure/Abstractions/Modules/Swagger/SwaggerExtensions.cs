@@ -63,7 +63,7 @@ internal static class SwaggerExtensions
         app.UseSwaggerUI(options =>
         {
             options.RoutePrefix = "";
-            options.DocumentTitle = "Wisse API";
+            options.DocumentTitle = "Enscool API";
 
             foreach (var group in ApiGroups.GetNameValueDictionary())
             {
@@ -76,8 +76,8 @@ internal static class SwaggerExtensions
 
     private static IServiceCollection RegisterXmlComments(IServiceCollection services, IList<Assembly> assemblies)
     {
-        const string modulePart = "Wisse.Modules.";
-        const string commonPart = "Wisse.Core.Domain";
+        const string modulePart = "Enscool.Modules.";
+        const string commonPart = "Enscool.Core.Domain";
         const string searchPattern = "*.xml";
 
         var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;

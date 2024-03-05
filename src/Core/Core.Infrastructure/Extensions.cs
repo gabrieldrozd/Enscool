@@ -2,6 +2,7 @@ using System.Reflection;
 using Core.Infrastructure.Abstractions.Modules;
 using Core.Infrastructure.Auth;
 using Core.Infrastructure.Auth.Contexts;
+using Core.Infrastructure.Database;
 using Core.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -43,9 +44,8 @@ internal static class Extensions
             .AddMiddlewares()
             .AddAuth()
             .AddContexts()
-            .AddModules(assemblies);
-
-        // TODO: DB configuration
+            .AddModules(assemblies)
+            .AddDatabase();
 
         return services;
     }

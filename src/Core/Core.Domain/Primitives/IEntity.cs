@@ -54,17 +54,17 @@ public interface IEntity
     /// <summary>
     /// Sets the created on date and time in UTC format.
     /// </summary>
-    void SetCreated(Date createdOnUtc, UserId createdBy);
+    void SetCreated(Date createdOnUtc, UserId? createdBy);
 
     /// <summary>
     /// Sets the modified on date and time in UTC format.
     /// </summary>
-    void SetModified(Date modifiedOnUtc, UserId modifiedBy);
+    void SetModified(Date modifiedOnUtc, UserId? modifiedBy);
 
     /// <summary>
     /// Sets the deleted by <see cref="UserId"/>.
     /// </summary>
-    void SetDeletedBy(UserId deletedBy);
+    void SetDeletedBy(UserId? deletedBy);
 
     /// <summary>
     /// Sets the deleted to <see langword="true"/> and sets the deleted on date and time in UTC format.

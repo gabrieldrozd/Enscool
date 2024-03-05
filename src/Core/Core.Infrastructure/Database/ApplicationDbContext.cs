@@ -80,10 +80,10 @@ public abstract class ApplicationDbContext : DbContext
         foreach (var entityEntry in ChangeTracker.Entries<IEntity>())
         {
             if (entityEntry.State == EntityState.Added)
-                entityEntry.Entity.SetCreated(utcNow, userId ?? SystemUser.Id);
+                entityEntry.Entity.SetCreated(utcNow, userId);
 
             if (entityEntry.State == EntityState.Modified)
-                entityEntry.Entity.SetModified(utcNow, userId ?? SystemUser.Id);
+                entityEntry.Entity.SetModified(utcNow, userId);
         }
     }
 
