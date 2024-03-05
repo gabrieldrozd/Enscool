@@ -8,59 +8,68 @@ public static class EndpointBaseExtensions
 {
     public static RouteHandlerBuilder MapGetEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointTag tag,
+        EndpointInfo info,
         string pattern,
         Delegate handler
     ) => endpointRouteBuilder
-        .MapGet(pattern, handler)
-        .ConfigureEndpoint(tag);
+        .MapGet(CreateEndpointPath(info, pattern), handler)
+        .ConfigureEndpoint(info.Value);
 
     public static RouteHandlerBuilder MapPostEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointTag tag,
+        EndpointInfo info,
         string pattern,
         Delegate handler
     ) => endpointRouteBuilder
-        .MapPost(pattern, handler)
-        .ConfigureEndpoint(tag);
+        .MapPost(CreateEndpointPath(info, pattern), handler)
+        .ConfigureEndpoint(info.Value);
 
     public static RouteHandlerBuilder MapPutEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointTag tag,
+        EndpointInfo info,
         string pattern,
         Delegate handler
     ) => endpointRouteBuilder
-        .MapPut(pattern, handler)
-        .ConfigureEndpoint(tag);
+        .MapPut(CreateEndpointPath(info, pattern), handler)
+        .ConfigureEndpoint(info.Value);
 
     public static RouteHandlerBuilder MapPatchEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointTag tag,
+        EndpointInfo info,
         string pattern,
         Delegate handler
     ) => endpointRouteBuilder
-        .MapPatch(pattern, handler)
-        .ConfigureEndpoint(tag);
+        .MapPatch(CreateEndpointPath(info, pattern), handler)
+        .ConfigureEndpoint(info.Value);
 
     public static RouteHandlerBuilder MapDeleteEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointTag tag,
+        EndpointInfo info,
         string pattern,
         Delegate handler
     ) => endpointRouteBuilder
-        .MapDelete(pattern, handler)
-        .ConfigureEndpoint(tag);
+        .MapDelete(CreateEndpointPath(info, pattern), handler)
+        .ConfigureEndpoint(info.Value);
 
     /// <summary>
-    /// Configures the endpoint tag and open api.
+    /// Configures the endpoint info and open api.
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
-    /// <param name="tag">The <see cref="EndpointTag"/>.</param>
+    /// <param name="tag">The <see cref="EndpointInfo"/> tag.</param>
     /// <returns>The <see cref="RouteHandlerBuilder"/> with configuration applied.</returns>
-    private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, EndpointTag tag)
+    private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, string tag)
     {
-        builder.WithTags(tag.Value);
+        builder.WithTags(tag);
         builder.WithOpenApi();
         return builder;
     }
+
+    /// <summary>
+    /// Creates the endpoint path.
+    /// </summary>
+    /// <param name="info">The <see cref="EndpointInfo"/>.</param>
+    /// <param name="pattern">The pattern.</param>
+    /// <returns>The full, combined endpoint path.</returns>
+    private static string CreateEndpointPath(EndpointInfo info, string pattern)
+        => $"{info.ModulePath.TrimEnd('/')}/{info.Route.TrimEnd('/').TrimStart('/')}/{pattern.TrimStart('/')}";
 }

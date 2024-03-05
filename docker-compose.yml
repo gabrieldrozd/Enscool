@@ -1,0 +1,59 @@
+version: '3.9'
+
+networks:
+  Enscool.Network:
+    name: Enscool.Network
+
+services:
+  # Can be commented out if API is not needed
+  enscool.bootstrapper:
+    container_name: Enscool.Bootstrapper
+    build:
+      context: .
+      dockerfile: src/Enscool.Bootstrapper/Dockerfile
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DatabaseSettings__ConnectionString=Host=enscool.postgres;Port=5432;Database=EnscoolDb;Username=postgres;Password=;
+    ports:
+      - "5000:8080"
+    depends_on:
+      - enscool.postgres
+      - enscool.seq
+    networks:
+      - Enscool.Network
+
+  enscool.postgres:
+    image: postgres:latest
+    container_name: Enscool.Postgres
+    hostname: Enscool.Postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.container/postgres:/var/lib/postgresql
+      - ./.container/postgres:/var/log/postgresql
+    command: -p 5432
+    networks:
+      - Enscool.Network
+
+  enscool.seq:
+    image: datalust/seq:latest
+    container_name: Enscool.Seq
+    hostname: Enscool.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    volumes:
+      - ./.container/seq:/var/lib/seq
+      - ./.container/seq:/var/log/seq
+    networks:
+      - Enscool.Network
+
+volumes:
+  postgres:
+    driver: local

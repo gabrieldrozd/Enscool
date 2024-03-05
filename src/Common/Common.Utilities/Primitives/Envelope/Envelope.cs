@@ -16,11 +16,6 @@ public class Envelope
     public bool IsSuccess { get; set; }
 
     /// <summary>
-    /// Indicates if the request was not successful and contains failures
-    /// </summary>
-    public bool HasErrors { get; set; }
-
-    /// <summary>
     /// List of failures
     /// </summary>
     public string? Message { get; set; }

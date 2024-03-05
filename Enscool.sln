@@ -1,52 +1,42 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enscool.Bootstrapper", "src\Enscool.Bootstrapper\Enscool.Bootstrapper.csproj", "{665E9D07-F877-445D-AEF7-513E53ED3378}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enscool.Bootstrapper", "src\Enscool.Bootstrapper\Enscool.Bootstrapper.csproj", "{665E9D07-F877-445D-AEF7-513E53ED3378}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CBF7EF35-89C1-419A-B7B5-7DC447D683B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2798BEA4-7135-4544-AF81-D32BC53D46C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities", "src\Common\Common.Utilities\Common.Utilities.csproj", "{900CABFD-E920-4E1F-9E3E-737B13DE0C4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities", "src\Common\Common.Utilities\Common.Utilities.csproj", "{900CABFD-E920-4E1F-9E3E-737B13DE0C4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "src\Core\Core.Domain\Core.Domain.csproj", "{F2BA4BE4-6C2B-44CC-AFE1-0A4126C67FC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\Core\Core.Domain\Core.Domain.csproj", "{F2BA4BE4-6C2B-44CC-AFE1-0A4126C67FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "src\Core\Core.Application\Core.Application.csproj", "{E4D2CAB4-792E-4091-8890-BA7108FEF080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\Core\Core.Application\Core.Application.csproj", "{E4D2CAB4-792E-4091-8890-BA7108FEF080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure", "src\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{39820F20-EC99-4C47-A4ED-FA1C362D220F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "src\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{39820F20-EC99-4C47-A4ED-FA1C362D220F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E17AE5EA-261C-4F0E-B37E-60E59D7EF5A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Management", "Management", "{67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Api", "src\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj", "{450F9686-E7C3-4DEB-9247-FB28A0E2710E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Management.Api", "src\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj", "{450F9686-E7C3-4DEB-9247-FB28A0E2710E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Application", "src\Modules\Management\Modules.Management.Application\Modules.Management.Application.csproj", "{2307A469-C92E-461E-9A75-64F91C79C3E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Management.Application", "src\Modules\Management\Modules.Management.Application\Modules.Management.Application.csproj", "{2307A469-C92E-461E-9A75-64F91C79C3E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Domain", "src\Modules\Management\Modules.Management.Domain\Modules.Management.Domain.csproj", "{A62FB9DD-B457-4F8E-BB6C-42084AC123E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Management.Domain", "src\Modules\Management\Modules.Management.Domain\Modules.Management.Domain.csproj", "{A62FB9DD-B457-4F8E-BB6C-42084AC123E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Infrastructure", "src\Modules\Management\Modules.Management.Infrastructure\Modules.Management.Infrastructure.csproj", "{366F1340-157D-4991-9522-C88082B20973}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Management.Infrastructure", "src\Modules\Management\Modules.Management.Infrastructure\Modules.Management.Infrastructure.csproj", "{366F1340-157D-4991-9522-C88082B20973}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{23F4F10D-821C-41CD-BEB8-14CEA0B8040B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{665E9D07-F877-445D-AEF7-513E53ED3378} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
-		{CBF7EF35-89C1-419A-B7B5-7DC447D683B0} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
-		{2798BEA4-7135-4544-AF81-D32BC53D46C5} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
-		{900CABFD-E920-4E1F-9E3E-737B13DE0C4F} = {2798BEA4-7135-4544-AF81-D32BC53D46C5}
-		{F2BA4BE4-6C2B-44CC-AFE1-0A4126C67FC3} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
-		{E4D2CAB4-792E-4091-8890-BA7108FEF080} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
-		{39820F20-EC99-4C47-A4ED-FA1C362D220F} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
-		{E17AE5EA-261C-4F0E-B37E-60E59D7EF5A9} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
-		{67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2} = {E17AE5EA-261C-4F0E-B37E-60E59D7EF5A9}
-		{450F9686-E7C3-4DEB-9247-FB28A0E2710E} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
-		{2307A469-C92E-461E-9A75-64F91C79C3E7} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
-		{A62FB9DD-B457-4F8E-BB6C-42084AC123E6} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
-		{366F1340-157D-4991-9522-C88082B20973} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{665E9D07-F877-445D-AEF7-513E53ED3378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -85,5 +75,27 @@ Global
 		{366F1340-157D-4991-9522-C88082B20973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366F1340-157D-4991-9522-C88082B20973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366F1340-157D-4991-9522-C88082B20973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F4F10D-821C-41CD-BEB8-14CEA0B8040B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F4F10D-821C-41CD-BEB8-14CEA0B8040B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F4F10D-821C-41CD-BEB8-14CEA0B8040B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F4F10D-821C-41CD-BEB8-14CEA0B8040B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{665E9D07-F877-445D-AEF7-513E53ED3378} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
+		{CBF7EF35-89C1-419A-B7B5-7DC447D683B0} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
+		{2798BEA4-7135-4544-AF81-D32BC53D46C5} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
+		{900CABFD-E920-4E1F-9E3E-737B13DE0C4F} = {2798BEA4-7135-4544-AF81-D32BC53D46C5}
+		{F2BA4BE4-6C2B-44CC-AFE1-0A4126C67FC3} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
+		{E4D2CAB4-792E-4091-8890-BA7108FEF080} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
+		{39820F20-EC99-4C47-A4ED-FA1C362D220F} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
+		{E17AE5EA-261C-4F0E-B37E-60E59D7EF5A9} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
+		{67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2} = {E17AE5EA-261C-4F0E-B37E-60E59D7EF5A9}
+		{450F9686-E7C3-4DEB-9247-FB28A0E2710E} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
+		{2307A469-C92E-461E-9A75-64F91C79C3E7} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
+		{A62FB9DD-B457-4F8E-BB6C-42084AC123E6} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
+		{366F1340-157D-4991-9522-C88082B20973} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
 	EndGlobalSection
 EndGlobal

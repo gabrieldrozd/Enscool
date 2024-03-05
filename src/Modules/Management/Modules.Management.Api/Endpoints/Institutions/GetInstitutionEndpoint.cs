@@ -17,16 +17,15 @@ public class GetInstitutionEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapGetEndpoint(
-                ManagementEndpointTag.Institutions,
-                "/institutions/{institutionId}",
+                ManagementEndpointInfo.Institutions,
+                "{institutionId}",
                 async (Guid institutionId) =>
                 {
                     var result = await Sender.Send(new GetInstitutionQuery(institutionId));
                     return BuildEnvelope(result);
                 })
-            .RequireRoles(UserRole.InstitutionAdmin)
+            // .RequireRoles(UserRole.InstitutionAdmin)
             .ProducesEnvelope<Institution>(StatusCodes.Status200OK)
-            .ProducesEnvelope(StatusCodes.Status404NotFound)
             .WithDocumentation(
                 "GetInstitution",
                 "Get institution",
@@ -37,12 +36,33 @@ public class GetInstitutionEndpoint : EndpointBase
 
 public class Institution
 {
+    public Guid Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string City { get; set; } = string.Empty;
+    public string State { get; set; } = string.Empty;
+    public string ZipCode { get; set; } = string.Empty;
+    public string Country { get; set; } = string.Empty;
 }
 
-public class GetInstitutionQuery : IRequest<Result>
+public record GetInstitutionQuery(Guid InstitutionId) : IRequest<Result<Institution>>
 {
-    public GetInstitutionQuery(Guid institutionId)
+    internal sealed class Handler : IRequestHandler<GetInstitutionQuery, Result<Institution>>
     {
-        throw new NotImplementedException();
+        public Task<Result<Institution>> Handle(GetInstitutionQuery request, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Result.Success.Ok(new Institution
+            {
+                Id = request.InstitutionId,
+                Name = "Institution",
+                Description = "Institution description",
+                Address = "Institution address",
+                City = "Institution city",
+                State = "Institution state",
+                ZipCode = "Institution zip code",
+                Country = "Institution country"
+            }));
+        }
     }
 }
