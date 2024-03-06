@@ -8,14 +8,14 @@ namespace Core.Application.Abstractions.Auth;
 
 public interface IUserContext
 {
-    [MemberNotNullWhen(true, nameof(Expires), nameof(UserId), nameof(Fullname), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNullWhen(true, nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     bool Authenticated { get; }
 
     public Date? Expires { get; }
     public UserId? UserId { get; }
     public InstitutionId? InstitutionId { get; }
     public IEnumerable<InstitutionId> InstitutionIds { get; }
-    public Fullname? Fullname { get; }
+    public FullName? FullName { get; }
     public Email? Email { get; }
     public Phone? Phone { get; }
     public UserState? State { get; }
@@ -23,9 +23,9 @@ public interface IUserContext
 
     bool IsInRole(IEnumerable<UserRole> requiredRoles);
 
-    [MemberNotNull(nameof(Expires), nameof(UserId), nameof(Fullname), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNull(nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     void EnsureAuthenticated();
 
-    [MemberNotNull(nameof(Expires), nameof(UserId), nameof(Fullname), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
+    [MemberNotNull(nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
     void EnsureInstitutionUserAuthenticated();
 }

@@ -42,11 +42,11 @@ internal static class ClaimsExtractor
             .ToList() ?? [];
     }
 
-    internal static Fullname? GetUserFullname(ClaimsPrincipal? claimsPrincipal)
+    internal static FullName? GetUserFullName(ClaimsPrincipal? claimsPrincipal)
     {
         return claimsPrincipal?.Claims
-            .Where(x => x.Type == ClaimConsts.Fullname)
-            .Select(x => !string.IsNullOrWhiteSpace(x.Value) ? Fullname.FromString(x.Value) : null)
+            .Where(x => x.Type == ClaimConsts.FullName)
+            .Select(x => !string.IsNullOrWhiteSpace(x.Value) ? FullName.FromString(x.Value) : null)
             .FirstOrDefault();
     }
 

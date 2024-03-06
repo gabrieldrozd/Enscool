@@ -96,6 +96,42 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string InstitutionStateActive {
+            get {
+                return ResourceManager.GetString("InstitutionStateActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted.
+        /// </summary>
+        public static string InstitutionStateDeleted {
+            get {
+                return ResourceManager.GetString("InstitutionStateDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive.
+        /// </summary>
+        public static string InstitutionStateInactive {
+            get {
+                return ResourceManager.GetString("InstitutionStateInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string InstitutionStateNew {
+            get {
+                return ResourceManager.GetString("InstitutionStateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid full name.
         /// </summary>
         public static string InvalidFullName {

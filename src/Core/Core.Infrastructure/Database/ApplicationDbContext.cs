@@ -48,9 +48,7 @@ public abstract class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         if (!string.IsNullOrWhiteSpace(Schema))
-        {
             modelBuilder.HasDefaultSchema(Schema);
-        }
 
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         base.OnModelCreating(modelBuilder);

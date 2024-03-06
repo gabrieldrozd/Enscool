@@ -98,4 +98,16 @@
     <data name="DatabaseError" xml:space="preserve">
         <value>Database unexpected error occurred while processing the request</value>
     </data>
+    <data name="InstitutionStateNew" xml:space="preserve">
+        <value>New</value>
+    </data>
+    <data name="InstitutionStateActive" xml:space="preserve">
+        <value>Active</value>
+    </data>
+    <data name="InstitutionStateInactive" xml:space="preserve">
+        <value>Inactive</value>
+    </data>
+    <data name="InstitutionStateDeleted" xml:space="preserve">
+        <value>Deleted</value>
+    </data>
 </root>

@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.Database.Converters;
 
-public sealed class FullnameConverter : ValueConverter<Fullname, string>
+public sealed class FullNameConverter : ValueConverter<FullName, string>
 {
-    public FullnameConverter() : base(
+    public FullNameConverter() : base(
         fullName => fullName.ToString(),
-        fullName => Fullname.FromString(fullName)
+        fullName => FullName.FromString(fullName)
     )
     {
     }

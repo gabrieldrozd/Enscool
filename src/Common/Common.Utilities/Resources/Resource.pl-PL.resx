@@ -98,4 +98,16 @@
     <data name="DatabaseError" xml:space="preserve">
         <value>Nieoczekiwany błąd bazy danych podczas przetwarzania zapytania</value>
     </data>
+    <data name="InstitutionStateNew" xml:space="preserve">
+        <value>Nowa</value>
+    </data>
+    <data name="InstitutionStateActive" xml:space="preserve">
+        <value>Aktywna</value>
+    </data>
+    <data name="InstitutionStateInactive" xml:space="preserve">
+        <value>Nieaktywna</value>
+    </data>
+    <data name="InstitutionStateDeleted" xml:space="preserve">
+        <value>Usunięta</value>
+    </data>
 </root>

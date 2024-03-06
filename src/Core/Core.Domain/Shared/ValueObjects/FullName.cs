@@ -6,7 +6,7 @@ using Core.Domain.Primitives;
 
 namespace Core.Domain.Shared.ValueObjects;
 
-public sealed class Fullname : ValueObject
+public sealed class FullName : ValueObject
 {
     private const string Separator = ";";
 
@@ -14,7 +14,7 @@ public sealed class Fullname : ValueObject
     public string? Middle { get; }
     public string Last { get; }
 
-    private Fullname(string first, string? middle, string last)
+    private FullName(string first, string? middle, string last)
     {
         Ensure.Not.NullOrEmpty(first);
         Ensure.Not.NullOrEmpty(last);
@@ -24,26 +24,26 @@ public sealed class Fullname : ValueObject
         Last = last;
     }
 
-    public static Fullname Create(string first, string? middle, string last)
+    public static FullName Create(string first, string? middle, string last)
         => new(first, middle, last);
 
-    public static Fullname FromString(string fullName)
+    public static FullName FromString(string fullName)
     {
         var names = fullName.Split(Separator);
         return names.Length switch
         {
-            2 => new Fullname(names[0], null, names[1]),
-            3 => new Fullname(names[0], names[1], names[2]),
+            2 => new FullName(names[0], null, names[1]),
+            3 => new FullName(names[0], names[1], names[2]),
             _ => throw new DomainException(Resource.InvalidFullName)
         };
     }
 
-    public static implicit operator string(Fullname fullname)
-        => string.IsNullOrEmpty(fullname.Middle)
-            ? $"{fullname.First}{Separator}{fullname.Last}"
-            : $"{fullname.First}{Separator}{fullname.Middle}{Separator}{fullname.Last}";
+    public static implicit operator string(FullName fullName)
+        => string.IsNullOrEmpty(fullName.Middle)
+            ? $"{fullName.First}{Separator}{fullName.Last}"
+            : $"{fullName.First}{Separator}{fullName.Middle}{Separator}{fullName.Last}";
 
-    public static implicit operator Fullname((string, string?, string) fullName)
+    public static implicit operator FullName((string, string?, string) fullName)
         => new(fullName.Item1, fullName.Item2, fullName.Item3);
 
     public override string ToString()
