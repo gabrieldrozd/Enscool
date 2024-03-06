@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -9,8 +11,8 @@ public static class EndpointBaseExtensions
     public static RouteHandlerBuilder MapGetEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         EndpointInfo info,
-        string pattern,
-        Delegate handler
+        [RouteTemplate, StringSyntax("Route")] string pattern,
+        [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
         .MapGet(CreateEndpointPath(info, pattern), handler)
         .ConfigureEndpoint(info.Value);
@@ -18,8 +20,8 @@ public static class EndpointBaseExtensions
     public static RouteHandlerBuilder MapPostEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         EndpointInfo info,
-        string pattern,
-        Delegate handler
+        [RouteTemplate, StringSyntax("Route")] string pattern,
+        [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
         .MapPost(CreateEndpointPath(info, pattern), handler)
         .ConfigureEndpoint(info.Value);
@@ -27,8 +29,8 @@ public static class EndpointBaseExtensions
     public static RouteHandlerBuilder MapPutEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         EndpointInfo info,
-        string pattern,
-        Delegate handler
+        [RouteTemplate, StringSyntax("Route")] string pattern,
+        [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
         .MapPut(CreateEndpointPath(info, pattern), handler)
         .ConfigureEndpoint(info.Value);
@@ -36,8 +38,8 @@ public static class EndpointBaseExtensions
     public static RouteHandlerBuilder MapPatchEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         EndpointInfo info,
-        string pattern,
-        Delegate handler
+        [RouteTemplate, StringSyntax("Route")] string pattern,
+        [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
         .MapPatch(CreateEndpointPath(info, pattern), handler)
         .ConfigureEndpoint(info.Value);
@@ -45,8 +47,8 @@ public static class EndpointBaseExtensions
     public static RouteHandlerBuilder MapDeleteEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         EndpointInfo info,
-        string pattern,
-        Delegate handler
+        [RouteTemplate, StringSyntax("Route")] string pattern,
+        [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
         .MapDelete(CreateEndpointPath(info, pattern), handler)
         .ConfigureEndpoint(info.Value);
