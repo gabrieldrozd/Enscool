@@ -1,5 +1,4 @@
 using Common.Utilities.Primitives.Results;
-using Core.Domain.Shared.Enumerations.Roles;
 using Core.Infrastructure.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Http;

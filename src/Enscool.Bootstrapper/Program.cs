@@ -1,7 +1,6 @@
 using Core.Infrastructure;
 using Core.Infrastructure.Modules;
 using Enscool.Bootstrapper;
-using FluentValidation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,8 +38,3 @@ app.MapGet("/", context => context.Response.WriteAsync(
 assemblies.Clear();
 modules.Clear();
 app.Run();
-
-namespace Enscool.Bootstrapper
-{
-    public abstract class Program;
-}

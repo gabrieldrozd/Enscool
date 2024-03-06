@@ -5,7 +5,7 @@ using Core.Infrastructure.Communication;
 using Core.Infrastructure.Database;
 using Core.Infrastructure.Middlewares;
 using Core.Infrastructure.Modules;
-using FluentValidation;
+using Core.Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,16 +19,7 @@ internal static class Extensions
     public static IServiceCollection AddCoreInfrastructure(this IServiceCollection services, IList<Assembly> assemblies, List<IModuleBase> modules, IConfiguration configuration)
     {
         services
-            .AddCors(cors =>
-            {
-                cors.AddPolicy(CorsPolicy, builder =>
-                {
-                    builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                });
-            })
+            .AddSecurity()
             .AddMiddlewares()
             .AddAuth()
             .AddContexts()
@@ -44,7 +35,7 @@ internal static class Extensions
 
     public static IApplicationBuilder UseCoreInfrastructure(this WebApplication app, List<IModuleBase> modules)
     {
-        app.UseCors(CorsPolicy);
+        app.UseSecurity();
         app.UseRegisteredMiddleware();
         app.UseModules();
         app.UseAuthentication();

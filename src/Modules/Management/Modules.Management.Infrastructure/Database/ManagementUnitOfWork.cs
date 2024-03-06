@@ -1,5 +1,4 @@
 using Core.Infrastructure.Database.UnitOfWork;
-using Microsoft.Extensions.Logging;
 using Modules.Management.Application.Abstractions;
 
 namespace Modules.Management.Infrastructure.Database;
