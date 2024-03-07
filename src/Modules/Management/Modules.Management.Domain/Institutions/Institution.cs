@@ -26,6 +26,12 @@ public sealed class Institution : AggregateRoot<InstitutionId>
         AddAdministrators([administratorId]);
     }
 
+    /// <summary>
+    /// Creates new <see cref="Institution"/>.
+    /// </summary>
+    public static Institution Create(InstitutionId id, UserId administratorId)
+        => new(id, administratorId);
+
     private void AddAdministrators(List<UserId> userIds)
     {
         foreach (var administratorId in userIds.Where(userId => !_administratorIds.Contains(userId)))
