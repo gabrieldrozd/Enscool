@@ -1,5 +1,5 @@
 using Common.Utilities.Exceptions;
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Core.Infrastructure.Auth.Api.Authenticated;

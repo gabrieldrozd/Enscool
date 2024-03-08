@@ -1,7 +1,7 @@
 using Common.Utilities.Exceptions;
 using Common.Utilities.Primitives.Envelope;
 using Common.Utilities.Resources;
-using Core.Application.Abstractions.Exceptions;
+using Core.Application.Exceptions;
 using ApplicationException = Common.Utilities.Exceptions.ApplicationException;
 
 namespace Core.Infrastructure.Middlewares.Exceptions;

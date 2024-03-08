@@ -4,7 +4,7 @@ using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
 
-namespace Core.Application.Abstractions.Auth;
+namespace Core.Application.Auth;
 
 public interface IUserContext
 {

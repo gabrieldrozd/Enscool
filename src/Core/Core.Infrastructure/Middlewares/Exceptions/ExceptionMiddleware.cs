@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Exceptions;
+using Core.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 

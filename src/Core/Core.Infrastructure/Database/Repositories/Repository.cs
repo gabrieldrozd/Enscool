@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Core.Application.Abstractions.Database;
+using Core.Application.Database;
 using Core.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 

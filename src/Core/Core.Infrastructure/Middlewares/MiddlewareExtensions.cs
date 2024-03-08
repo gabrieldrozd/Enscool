@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Exceptions;
+using Core.Application.Exceptions;
 using Core.Domain.Shared.Enumerations;
 using Core.Infrastructure.Middlewares.Culture;
 using Core.Infrastructure.Middlewares.Exceptions;

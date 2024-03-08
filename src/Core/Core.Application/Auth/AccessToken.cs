@@ -1,7 +1,7 @@
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 
-namespace Core.Application.Abstractions.Auth;
+namespace Core.Application.Auth;
 
 public sealed class AccessToken
 {

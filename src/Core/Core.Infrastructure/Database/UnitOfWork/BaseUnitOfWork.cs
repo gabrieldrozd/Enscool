@@ -1,6 +1,6 @@
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Resources;
-using Core.Application.Abstractions.Database;
+using Core.Application.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Database.UnitOfWork;

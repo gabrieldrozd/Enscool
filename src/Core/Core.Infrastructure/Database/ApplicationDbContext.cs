@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Core.Domain.Primitives;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;

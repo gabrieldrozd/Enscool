@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Infrastructure.Auth.Contexts;

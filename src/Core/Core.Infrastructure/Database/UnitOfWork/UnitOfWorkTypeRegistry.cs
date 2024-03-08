@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Database;
+using Core.Application.Database;
 using Core.Infrastructure.Helpers;
 
 namespace Core.Infrastructure.Database.UnitOfWork;

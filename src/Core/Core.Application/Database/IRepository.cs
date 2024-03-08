@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Core.Domain.Primitives;
 
-namespace Core.Application.Abstractions.Database;
+namespace Core.Application.Database;
 
 public interface IRepository<TEntity>
     where TEntity : class, IEntity

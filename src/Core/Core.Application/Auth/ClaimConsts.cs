@@ -1,4 +1,4 @@
-namespace Core.Application.Abstractions.Auth;
+namespace Core.Application.Auth;
 
 public static class ClaimConsts
 {

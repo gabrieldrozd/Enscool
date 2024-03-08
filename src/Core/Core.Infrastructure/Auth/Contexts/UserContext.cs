@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using Common.Utilities.Exceptions;
 using Common.Utilities.Extensions;
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;

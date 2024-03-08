@@ -1,5 +1,5 @@
-using Core.Application.Abstractions.Auth;
-using Core.Application.Abstractions.Database;
+using Core.Application.Auth;
+using Core.Application.Database;
 using Core.Application.Helpers;
 using Core.Infrastructure.Database.Interceptors;
 using Core.Infrastructure.Database.UnitOfWork;

@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Database;
+using Core.Application.Database;
 
 namespace Modules.Management.Application.Abstractions;
 

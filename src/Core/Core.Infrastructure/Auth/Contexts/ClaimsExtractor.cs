@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;

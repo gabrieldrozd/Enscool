@@ -1,4 +1,4 @@
-using Core.Application.Abstractions.Auth;
+using Core.Application.Auth;
 using Core.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

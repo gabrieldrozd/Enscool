@@ -1,6 +1,6 @@
 using Common.Utilities.Primitives.Envelope;
 
-namespace Core.Application.Abstractions.Exceptions;
+namespace Core.Application.Exceptions;
 
 public interface IExceptionMapper
 {

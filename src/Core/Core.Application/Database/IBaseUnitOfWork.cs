@@ -1,6 +1,6 @@
 using Common.Utilities.Primitives.Results;
 
-namespace Core.Application.Abstractions.Database;
+namespace Core.Application.Database;
 
 public interface IBaseUnitOfWork
 {
