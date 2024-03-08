@@ -1,7 +1,7 @@
 using Core.Application.Communication.Commands;
 using Core.Domain.Shared.Enumerations.Roles;
 
-namespace Modules.Management.Application.Features.Users;
+namespace Modules.Management.Application.Features.Users.Commands.Register;
 
 /// <summary>
 /// Registers new <see cref="UserRole.InstitutionAdmin"/> user.

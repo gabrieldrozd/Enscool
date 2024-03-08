@@ -7,7 +7,7 @@ using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.Users;
+namespace Modules.Management.Application.Features.Users.Commands.Register;
 
 internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 {
