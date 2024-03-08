@@ -14,10 +14,7 @@ public sealed class User : AggregateRoot<UserId>
     public UserState State { get; private set; } = UserState.Pending;
     public Email Email { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
-
-    // TODO: Password will be set during activation process.
     public Password? Password { get; private set; }
-
     public FullName FullName { get; private set; } = default!;
     public UserRole Role { get; }
 
