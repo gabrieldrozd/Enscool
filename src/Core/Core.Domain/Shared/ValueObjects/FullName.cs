@@ -34,7 +34,7 @@ public sealed class FullName : ValueObject
         {
             2 => new FullName(names[0], null, names[1]),
             3 => new FullName(names[0], names[1], names[2]),
-            _ => throw new DomainException(Resource.InvalidFullName)
+            _ => throw new DomainLayerException(Resource.InvalidFullName)
         };
     }
 

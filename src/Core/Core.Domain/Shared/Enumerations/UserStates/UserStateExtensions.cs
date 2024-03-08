@@ -16,6 +16,6 @@ public static class UserStateExtensions
     public static void ValidateTransitionTo(this UserState current, UserState next)
     {
         if (!NextStates[current].Contains(next))
-            throw new DomainException(Resource.InvalidUserStateTransition, current, next);
+            throw new DomainLayerException(Resource.InvalidUserStateTransition, current, next);
     }
 }

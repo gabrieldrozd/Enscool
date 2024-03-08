@@ -1,5 +1,7 @@
 using System.Reflection;
+using Core.Infrastructure.Communication.Internal;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,13 +14,11 @@ public static class CommunicationExtensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
-            // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(InstitutionAccessBehavior<,>));
-            // TODO: cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        });
 
-        services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
-        // TODO: MediatR Transactional decorator configuration goes here
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+        });
 
         return services;
     }

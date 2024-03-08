@@ -1,5 +1,4 @@
 using Common.Utilities.Exceptions;
-using ApplicationException = Common.Utilities.Exceptions.ApplicationException;
 
 namespace Common.Utilities.Primitives.Results.Extensions;
 
@@ -14,8 +13,8 @@ public static class ResultExtensions
         => exception switch
         {
             ParameterException ex => Result.Failure.BadRequest(ex.Message),
-            DomainException ex => Result.Failure.BadRequest(ex.Message),
-            ApplicationException ex => Result.Failure.BadRequest(ex.Message),
+            DomainLayerException ex => Result.Failure.BadRequest(ex.Message),
+            ApplicationLayerException ex => Result.Failure.BadRequest(ex.Message),
             NotAuthenticatedException ex => Result.Failure.Unauthorized(ex.Message),
             NotAllowedException ex => Result.Failure.Forbidden(ex.Message),
             NotFoundException ex => Result.Failure.NotFound(ex.Message),
