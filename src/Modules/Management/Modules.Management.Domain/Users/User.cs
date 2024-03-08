@@ -45,4 +45,10 @@ public sealed class User : AggregateRoot<UserId>
     /// </summary>
     public static User Create(UserId id, Email email, Phone phone, FullName fullName, UserRole role, InstitutionId? institutionId)
         => new(id, email, phone, fullName, role, institutionId);
+
+    /// <summary>
+    /// Creates initial <see cref="UserRole.InstitutionAdmin"/> user.
+    /// </summary>
+    public static User CreateInitialInstitutionAdmin(Email email, Phone phone, FullName fullName)
+        => new(UserId.New, email, phone, fullName, UserRole.InstitutionAdmin, InstitutionId.New);
 }

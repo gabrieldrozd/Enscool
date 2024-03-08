@@ -13,9 +13,6 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
     protected Repository(TDbContext context) => _context = context;
 
-    public Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
-        => _context.Set<TEntity>().AnyAsync(predicate, cancellationToken);
-
     public void Insert(TEntity entity)
         => _context.Set<TEntity>().Add(entity);
 

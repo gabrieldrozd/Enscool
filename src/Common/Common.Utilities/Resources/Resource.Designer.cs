@@ -87,6 +87,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is already taken.
+        /// </summary>
+        public static string EmailTaken {
+            get {
+                return ResourceManager.GetString("EmailTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forbidden.
         /// </summary>
         public static string Forbidden {

@@ -110,4 +110,7 @@
     <data name="InstitutionStateDeleted" xml:space="preserve">
         <value>Deleted</value>
     </data>
+    <data name="EmailTaken" xml:space="preserve">
+        <value>Email is already taken</value>
+    </data>
 </root>
