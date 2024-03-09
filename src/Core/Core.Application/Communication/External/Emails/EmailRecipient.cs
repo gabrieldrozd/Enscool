@@ -1,3 +1,5 @@
+using Core.Domain.Shared.ValueObjects;
+
 namespace Core.Application.Communication.External.Emails;
 
 public sealed class EmailRecipient
@@ -19,4 +21,10 @@ public sealed class EmailRecipient
     /// <returns>Email recipient.</returns>
     public static EmailRecipient Create(string toAddress, string toName)
         => new(toAddress, toName);
+
+    public static implicit operator (Email toAddress, FullName toName)(EmailRecipient recipient)
+        => (recipient.ToAddress, FullName.FromString(recipient.ToName));
+
+    public static implicit operator EmailRecipient((Email toAddress, FullName toName) recipient)
+        => new(recipient.toAddress.Value, recipient.toName.ToString());
 }

@@ -1,7 +1,5 @@
 using System.Reflection;
 using Core.Infrastructure.Communication.Internal;
-using FluentValidation;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

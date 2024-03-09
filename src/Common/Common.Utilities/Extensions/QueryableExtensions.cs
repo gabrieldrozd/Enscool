@@ -1,5 +1,3 @@
 namespace Common.Utilities.Extensions;
 
-public static class QueryableExtensions
-{
-}
+public static class QueryableExtensions;

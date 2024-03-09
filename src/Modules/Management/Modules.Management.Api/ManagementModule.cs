@@ -1,5 +1,5 @@
-using Core.Infrastructure.Modules;
-using Core.Infrastructure.Modules.Swagger.Settings;
+using Core.Infrastructure.Cores.Modules;
+using Core.Infrastructure.Cores.Modules.Swagger.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ using Modules.Management.Infrastructure;
 
 namespace Modules.Management.Api;
 
-internal class ManagementModule : IModuleBase
+internal class ManagementModule : IModuleCore
 {
     public string Name => ApiSettings.Management;
     public string Path => ApiGroups.Management;

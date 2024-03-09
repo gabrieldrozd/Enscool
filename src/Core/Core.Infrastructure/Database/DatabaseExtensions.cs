@@ -1,3 +1,4 @@
+using System.Reflection;
 using Core.Application.Auth;
 using Core.Application.Database;
 using Core.Application.Helpers;
@@ -10,7 +11,7 @@ namespace Core.Infrastructure.Database;
 
 public static class DatabaseExtensions
 {
-    internal static IServiceCollection AddDatabase(this IServiceCollection services)
+    internal static IServiceCollection AddDatabase(this IServiceCollection services, IList<Assembly> assemblies)
     {
         var options = services.GetSettings<DatabaseSettings>(DatabaseSettings.SectionName);
         services.AddSingleton(options);

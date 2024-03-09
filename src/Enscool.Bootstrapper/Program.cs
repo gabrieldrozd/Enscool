@@ -1,6 +1,6 @@
 using Core.Infrastructure;
-using Core.Infrastructure.Modules;
-using Core.Infrastructure.Services;
+using Core.Infrastructure.Cores.Modules;
+using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
 using Serilog;
 
@@ -10,12 +10,12 @@ builder.Configuration.AddUserSecrets<Program>();
 builder.Host.UseSerilog((context, loggerConfig)
     => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-builder.Host.ConfigureModules();
-builder.Host.ConfigureServices();
+builder.Host.ConfigureModuleCores();
+builder.Host.ConfigureServiceCores();
 
 var assemblies = ProjectLoader.LoadAssemblies(builder.Configuration);
-var appModules = ProjectLoader.LoadProjects<IModuleBase>(assemblies);
-var appServices = ProjectLoader.LoadProjects<IServiceBase>(assemblies);
+var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
+var appModules = ProjectLoader.LoadProjects<IModuleCore>(assemblies);
 
 #region services
 

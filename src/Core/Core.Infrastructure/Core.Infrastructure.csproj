@@ -28,4 +28,8 @@
         <InternalsVisibleTo Include="Enscool.Bootstrapper"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Cores\" />
+    </ItemGroup>
+
 </Project>

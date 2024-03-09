@@ -11,12 +11,18 @@ namespace Modules.Management.Domain.Users;
 /// </summary>
 public sealed class User : AggregateRoot<UserId>
 {
+    private readonly List<ActivationCode> _activationCodes = [];
+
     public UserState State { get; private set; } = UserState.Pending;
     public Email Email { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
     public Password? Password { get; private set; }
     public FullName FullName { get; private set; } = default!;
     public UserRole Role { get; }
+
+    public IReadOnlyList<ActivationCode> ActivationCodes => _activationCodes.AsReadOnly();
+
+    public ActivationCode? CurrentActivationCode => _activationCodes.MaxBy(x => x.CreatedAt);
 
     private User()
     {
@@ -49,6 +55,20 @@ public sealed class User : AggregateRoot<UserId>
     /// <summary>
     /// Creates initial <see cref="UserRole.InstitutionAdmin"/> user.
     /// </summary>
-    public static User CreateInitialInstitutionAdmin(Email email, Phone phone, FullName fullName)
-        => new(UserId.New, email, phone, fullName, UserRole.InstitutionAdmin, InstitutionId.New);
+    public static User CreateInitialInstitutionAdmin(Email email, Phone phone, FullName fullName, ActivationCode activationCode)
+    {
+        var user = new User(UserId.New, email, phone, fullName, UserRole.InstitutionAdmin, InstitutionId.New);
+        user.AddActivationCode(activationCode);
+        return user;
+    }
+
+    /// <summary>
+    /// Adds activation code to the <see cref="User"/>.
+    /// Deactivates all previous activation codes.
+    /// </summary>
+    private void AddActivationCode(ActivationCode code)
+    {
+        _activationCodes.ForEach(x => x.Deactivate());
+        _activationCodes.Add(code);
+    }
 }

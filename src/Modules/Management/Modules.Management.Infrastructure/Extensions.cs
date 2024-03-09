@@ -1,7 +1,5 @@
-using Core.Infrastructure.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Management.Application.Abstractions;
 using Modules.Management.Infrastructure.Database;
 
 namespace Modules.Management.Infrastructure;

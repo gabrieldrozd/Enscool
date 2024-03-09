@@ -6,5 +6,5 @@ namespace Modules.Management.Application.Abstractions.Repositories;
 
 public interface IUserRepository : IRepository<User>
 {
-    Task<bool> DoesInstitutionUserExistAsync(Email email, CancellationToken cancellationToken = default);
+    Task<bool> ExistsWithEmailAsync(Email email, CancellationToken cancellationToken = default);
 }

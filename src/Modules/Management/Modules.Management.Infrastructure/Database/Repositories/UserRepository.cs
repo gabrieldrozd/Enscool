@@ -1,4 +1,3 @@
-using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +15,6 @@ internal sealed class UserRepository : Repository<User, ManagementDbContext>, IU
         _context = context;
     }
 
-    public Task<bool> DoesInstitutionUserExistAsync(Email email, CancellationToken cancellationToken = default)
-        => _context.Users
-            .Where(x =>
-                x.Role == UserRole.Student ||
-                x.Role == UserRole.Teacher ||
-                x.Role == UserRole.Secretary ||
-                x.Role == UserRole.InstitutionAdmin)
-            .AnyAsync(x => x.Email == email, cancellationToken);
+    public Task<bool> ExistsWithEmailAsync(Email email, CancellationToken cancellationToken = default)
+        => _context.Users.AnyAsync(x => x.Email == email, cancellationToken);
 }

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using Services.Email.Sender.Builder;
-using Services.Email.Settings;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace Services.Email.Sender;

@@ -1,5 +1,5 @@
+using Core.Application.Communication.External.Emails;
 using Microsoft.Extensions.Hosting;
-using Services.Email.Queue;
 using Services.Email.Sender;
 
 namespace Services.Email;

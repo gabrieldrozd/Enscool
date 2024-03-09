@@ -9,8 +9,8 @@
 
 namespace Common.Utilities.Resources.EmailTemplates {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,15 +22,15 @@ namespace Common.Utilities.Resources.EmailTemplates {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FileResource {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal FileResource() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -44,7 +44,7 @@ namespace Common.Utilities.Resources.EmailTemplates {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,9 +58,9 @@ namespace Common.Utilities.Resources.EmailTemplates {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Enscool - Account and School activation ⏱️✅
+        ///   Looks up a localized string similar to Enscool - Account and Institution activation ⏱️✅
         ///&lt;div&gt;
         ///    &lt;p&gt;Hello, {{user_name}} 👋🏽&lt;/p&gt;
         ///
@@ -76,14 +76,14 @@ namespace Common.Utilities.Resources.EmailTemplates {
         ///    &lt;div&gt;
         ///        Best regards 💜 &lt;br&gt;
         ///        Enscool
-        ///    &lt;/d [rest of string was truncated]&quot;;.
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string TenantAdminActivationLinkEmailTemplate {
+        public static string InstitutionAdminActivationLinkEmailTemplate {
             get {
-                return ResourceManager.GetString("TenantAdminActivationLinkEmailTemplate", resourceCulture);
+                return ResourceManager.GetString("InstitutionAdminActivationLinkEmailTemplate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &lt;div style=&quot;font-family: Arial, sans-serif; color: #202020; padding-top: 20px&quot;&gt;
         ///    &lt;div style=&quot;margin: auto; min-width: 350px; max-width: 700px; border-radius: 20px; background-color: #f5f5f5&quot;&gt;

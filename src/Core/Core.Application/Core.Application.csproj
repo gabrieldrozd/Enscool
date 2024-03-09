@@ -21,7 +21,6 @@
 
     <ItemGroup>
         <Folder Include="Communication\External\" />
-        <Folder Include="Communication\External\Emails\Models\" />
         <Folder Include="Communication\Internal\" />
         <Folder Include="Validations\"/>
     </ItemGroup>
