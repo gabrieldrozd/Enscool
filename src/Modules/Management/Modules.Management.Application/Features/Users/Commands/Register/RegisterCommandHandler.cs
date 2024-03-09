@@ -13,20 +13,20 @@ namespace Modules.Management.Application.Features.Users.Commands.Register;
 
 internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 {
-    private readonly IEmailQueue _emailQueue;
+    // private readonly IEmailQueue _emailQueue;
     private readonly IActivationLinkService _activationLinkService;
     private readonly IActivationCodeService _activationCodeService;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public RegisterCommandHandler(
-        IEmailQueue emailQueue,
+        // IEmailQueue emailQueue,
         IActivationLinkService activationLinkService,
         IActivationCodeService activationCodeService,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
-        _emailQueue = emailQueue;
+        // _emailQueue = emailQueue;
         _activationLinkService = activationLinkService;
         _activationCodeService = activationCodeService;
         _userRepository = userRepository;
@@ -46,18 +46,13 @@ internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 
         _userRepository.Insert(user);
         var result = await _unitOfWork.CommitAsync(cancellationToken);
-        return result.IsSuccess switch
-        {
-            true => EnqueueEmailMessage(result, user),
-            false => result
-        };
-    }
+        if (result.IsFailure)
+            return result;
 
-    private Result EnqueueEmailMessage(Result result, User user)
-    {
         var template = InstitutionRegisteredEmailTemplate.Populate(user.FullName.First, _activationLinkService.Create(user));
         var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);
-        _emailQueue.Enqueue(emailMessage);
+        // TODO: Issue with IEmailQueue Dependency Injection
+        // _emailQueue.Enqueue(emailMessage);
         return result;
     }
 }

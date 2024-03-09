@@ -1,4 +1,5 @@
-﻿using Common.Utilities.Primitives.Envelope;
+﻿using System.Diagnostics.CodeAnalysis;
+using Common.Utilities.Primitives.Envelope;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.AspNetCore.Builder;
@@ -59,12 +60,20 @@ public static class EndpointBaseConfigurationExtensions
         string name,
         string title,
         string description,
+        [StringSyntax(StringSyntaxAttribute.Json)]
         string? example = null)
     {
         builder
             .WithName(name)
             .WithSummary(title)
-            .WithDescription(example is null ? description : $"{description}\n\n```{example}```")
+            .WithDescription(example is not null
+                ? $"""
+                   {description}
+                   ```
+                   {example}
+                   ```
+                   """
+                : description)
             .WithOpenApi();
 
         return builder;

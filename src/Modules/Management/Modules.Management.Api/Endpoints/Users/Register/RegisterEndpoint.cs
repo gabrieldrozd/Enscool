@@ -31,11 +31,11 @@ public sealed class RegisterEndpoint : EndpointBase
                 "Registers new InstitutionAdmin user with new InstitutionId",
                 """
                 {
-                    "Email": "string",
-                    "Phone": "string",
-                    "FirstName": "string",
-                    "MiddleName": "string",
-                    "LastName": "string"
+                    "Email": "example_email@email.com",
+                    "Phone": "+48512456456",
+                    "FirstName": "John",
+                    "MiddleName": null,
+                    "LastName": "Doe"
                 }
                 """);
     }
