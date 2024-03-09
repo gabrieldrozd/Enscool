@@ -1,0 +1,7 @@
+{
+    "EmailService": {
+        "Name": "EmailService",
+        "Enabled": true
+    },
+    "EmailSettings": {}
+}

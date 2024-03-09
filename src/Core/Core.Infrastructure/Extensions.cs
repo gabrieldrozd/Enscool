@@ -6,6 +6,7 @@ using Core.Infrastructure.Database;
 using Core.Infrastructure.Middlewares;
 using Core.Infrastructure.Modules;
 using Core.Infrastructure.Security;
+using Core.Infrastructure.Services;
 using Core.Infrastructure.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,12 @@ internal static class Extensions
 {
     private const string CorsPolicy = "cors-policy";
 
-    public static IServiceCollection AddCoreInfrastructure(this IServiceCollection services, IList<Assembly> assemblies, List<IModuleBase> modules, IConfiguration configuration)
+    public static IServiceCollection AddCoreInfrastructure(
+        this IServiceCollection services,
+        IList<Assembly> assemblies,
+        List<IModuleBase> appModules,
+        List<IServiceBase> appServices,
+        IConfiguration configuration)
     {
         services
             .AddSecurity()
@@ -25,21 +31,24 @@ internal static class Extensions
             .AddAuth()
             .AddContexts()
             .AddModules(assemblies)
+            .AddServices(assemblies)
             .AddDatabase()
             .AddCommunication(assemblies)
             .AddValidations(assemblies);
 
         // Register modules
-        modules.ForEach(module => module.RegisterModule(services, configuration));
+        appModules.ForEach(module => module.RegisterModule(services, configuration));
+        appServices.ForEach(service => service.RegisterService(services, configuration));
 
         return services;
     }
 
-    public static IApplicationBuilder UseCoreInfrastructure(this WebApplication app, List<IModuleBase> modules)
+    public static IApplicationBuilder UseCoreInfrastructure(this WebApplication app, List<IModuleBase> appModules, List<IServiceBase> appServices)
     {
         app.UseSecurity();
         app.UseRegisteredMiddleware();
         app.UseModules();
+        app.UseServices();
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
@@ -47,7 +56,8 @@ internal static class Extensions
         app.UseValidations();
 
         // Use modules
-        modules.ForEach(module => module.UseModule(app));
+        appModules.ForEach(module => module.UseModule(app));
+        appServices.ForEach(service => service.UseService(app));
 
         return app;
     }

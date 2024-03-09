@@ -1,7 +1,7 @@
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Resources;
 using Core.Application.Auth;
-using Core.Application.Communication.Commands;
+using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.ValueObjects;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;

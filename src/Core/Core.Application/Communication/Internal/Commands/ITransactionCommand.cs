@@ -1,6 +1,6 @@
 using Common.Utilities.Primitives.Results;
 
-namespace Core.Application.Communication.Commands;
+namespace Core.Application.Communication.Internal.Commands;
 
 /// <summary>
 /// <see cref="ITransactionCommand"/> - waits for all <see cref="IInternalCommand"/>s to be processed before committing.

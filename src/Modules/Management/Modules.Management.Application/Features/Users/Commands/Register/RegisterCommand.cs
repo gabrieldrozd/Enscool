@@ -1,4 +1,4 @@
-using Core.Application.Communication.Commands;
+using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.Enumerations.Roles;
 
 namespace Modules.Management.Application.Features.Users.Commands.Register;

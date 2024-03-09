@@ -13,7 +13,8 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0"/>
-        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0"/>
+        <PackageReference Include="Scriban" Version="5.9.1"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +23,12 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>Resource.resx</DependentUpon>
+        </Compile>
+        <!-- File resources -->
+        <Compile Update="Resources\EmailTemplates\FileResource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>FileResource.resx</DependentUpon>
         </Compile>
         <!-- Ensure resources -->
         <Compile Update="Primitives\Ensures\Resources\EnsureResource.Designer.cs">
@@ -37,6 +44,16 @@
             <LastGenOutput>Resource.Designer.cs</LastGenOutput>
         </EmbeddedResource>
         <EmbeddedResource Update="Resources\Resource.pl-PL.resx">
+            <SubType>Designer</SubType>
+            <Generator>PublicResXFileCodeGenerator</Generator>
+        </EmbeddedResource>
+
+        <!-- File resources -->
+        <EmbeddedResource Update="Resources\EmailTemplates\FileResource.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>FileResource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\EmailTemplates\FileResource.pl-PL.resx">
             <SubType>Designer</SubType>
             <Generator>PublicResXFileCodeGenerator</Generator>
         </EmbeddedResource>

@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Transactions;
 using Common.Utilities.Primitives.Results;
-using Core.Application.Communication.Commands;
+using Core.Application.Communication.Internal.Commands;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
