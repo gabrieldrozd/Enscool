@@ -9,14 +9,25 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/Enscool.Bootstrapper/Enscool.Bootstrapper.csproj", "src/Enscool.Bootstrapper/"]
-COPY ["src/Modules/Management/Modules.Management.Api/Modules.Management.Api.csproj", "src/Modules/Management/Modules.Management.Api/"]
-COPY ["src/Modules/Management/Modules.Management.Infrastructure/Modules.Management.Infrastructure.csproj", "src/Modules/Management/Modules.Management.Infrastructure/"]
+
+# Common
+COPY ["src/Common/Common.Utilities/Common.Utilities.csproj", "src/Common/Common.Utilities/"]
+
+# Core
 COPY ["src/Core/Core.Infrastructure/Core.Infrastructure.csproj", "src/Core/Core.Infrastructure/"]
 COPY ["src/Core/Core.Application/Core.Application.csproj", "src/Core/Core.Application/"]
 COPY ["src/Core/Core.Domain/Core.Domain.csproj", "src/Core/Core.Domain/"]
-COPY ["src/Common/Common.Utilities/Common.Utilities.csproj", "src/Common/Common.Utilities/"]
+
+# Modules
+# ManagementModule
+COPY ["src/Modules/Management/Modules.Management.Api/Modules.Management.Api.csproj", "src/Modules/Management/Modules.Management.Api/"]
 COPY ["src/Modules/Management/Modules.Management.Application/Modules.Management.Application.csproj", "src/Modules/Management/Modules.Management.Application/"]
 COPY ["src/Modules/Management/Modules.Management.Domain/Modules.Management.Domain.csproj", "src/Modules/Management/Modules.Management.Domain/"]
+COPY ["src/Modules/Management/Modules.Management.Infrastructure/Modules.Management.Infrastructure.csproj", "src/Modules/Management/Modules.Management.Infrastructure/"]
+
+# Services
+COPY ["src/Services/Services.Email/Services.Email.csproj", "src/Services/Services.Email/"]
+
 RUN dotnet restore "./src/Enscool.Bootstrapper/./Enscool.Bootstrapper.csproj"
 COPY . .
 WORKDIR "/src/src/Enscool.Bootstrapper"

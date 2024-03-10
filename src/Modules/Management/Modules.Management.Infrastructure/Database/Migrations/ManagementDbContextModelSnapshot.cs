@@ -137,7 +137,7 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("User", "Management");
+                    b.ToTable("Users", "Management");
                 });
 
             modelBuilder.Entity("Modules.Management.Domain.Institutions.Institution", b =>
@@ -205,6 +205,43 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("AdministratorIds");
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.User", b =>
+                {
+                    b.OwnsMany("Modules.Management.Domain.Users.ActivationCode", "ActivationCodes", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTimeOffset>("CreatedAt")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<DateTimeOffset>("Expires")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("UserActivationCodes", "Management");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("ActivationCodes");
                 });
 #pragma warning restore 612, 618
         }

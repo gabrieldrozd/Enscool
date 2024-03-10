@@ -29,6 +29,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Modules\Management\Modules.Management.Api\Modules.Management.Api.csproj"/>
+        <ProjectReference Include="..\Services\Services.Email\Services.Email.csproj" />
     </ItemGroup>
 
 </Project>

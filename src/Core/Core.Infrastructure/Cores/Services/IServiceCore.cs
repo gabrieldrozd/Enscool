@@ -6,7 +6,7 @@ namespace Core.Infrastructure.Cores.Services;
 
 public interface IServiceCore
 {
-    string Name => GetType().Name;
+    string Name { get; }
 
     void RegisterService(IServiceCollection services, IConfiguration configuration);
 

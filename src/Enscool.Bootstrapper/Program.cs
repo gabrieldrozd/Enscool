@@ -14,8 +14,8 @@ builder.Host.ConfigureModuleCores();
 builder.Host.ConfigureServiceCores();
 
 var assemblies = ProjectLoader.LoadAssemblies(builder.Configuration);
-var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 var appModules = ProjectLoader.LoadProjects<IModuleCore>(assemblies);
+var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 
 #region services
 

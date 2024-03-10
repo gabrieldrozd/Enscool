@@ -9,6 +9,8 @@ namespace Services.Email;
 
 public class EmailServiceCore : IServiceCore
 {
+    public string Name => "Email";
+
     public void RegisterService(IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<EmailSettings>(configuration.GetSection(EmailSettings.SectionName));

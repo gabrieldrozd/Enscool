@@ -36,11 +36,11 @@ internal static class Extensions
             .AddValidations(assemblies)
             .AddServices(assemblies);
 
-        // Register services
-        appServices.ForEach(service => service.RegisterService(services, configuration));
-
         // Register modules
         appModules.ForEach(module => module.RegisterModule(services, configuration));
+
+        // Register services
+        appServices.ForEach(service => service.RegisterService(services, configuration));
 
         return services;
     }
@@ -58,11 +58,11 @@ internal static class Extensions
         app.UseValidations();
         app.UseServices();
 
-        // Use services
-        appServices.ForEach(service => service.UseService(app));
-
         // Use modules
         appModules.ForEach(module => module.UseModule(app));
+
+        // Use services
+        appServices.ForEach(service => service.UseService(app));
 
         return app;
     }

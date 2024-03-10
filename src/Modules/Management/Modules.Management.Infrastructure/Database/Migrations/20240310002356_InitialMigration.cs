@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Management.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Added_Institution : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,6 +46,33 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                schema: "Management",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    State = table.Column<int>(type: "integer", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Phone = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    FullName = table.Column<string>(type: "text", nullable: false),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    InstitutionId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    ModifiedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InstitutionAdministratorIds",
                 schema: "Management",
                 columns: table => new
@@ -67,11 +94,43 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserActivationCodes",
+                schema: "Management",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Value = table.Column<string>(type: "text", nullable: false),
+                    Expires = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivationCodes", x => new { x.UserId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_UserActivationCodes_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Management",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_InstitutionAdministratorIds_InstitutionId",
                 schema: "Management",
                 table: "InstitutionAdministratorIds",
                 column: "InstitutionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                schema: "Management",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -82,7 +141,15 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 schema: "Management");
 
             migrationBuilder.DropTable(
+                name: "UserActivationCodes",
+                schema: "Management");
+
+            migrationBuilder.DropTable(
                 name: "Institution",
+                schema: "Management");
+
+            migrationBuilder.DropTable(
+                name: "Users",
                 schema: "Management");
         }
     }
