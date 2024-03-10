@@ -13,8 +13,7 @@ public static class DatabaseExtensions
 {
     internal static IServiceCollection AddDatabase(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        var options = services.GetSettings<DatabaseSettings>(DatabaseSettings.SectionName);
-        services.AddSingleton(options);
+        services.ConfigureSettings<DatabaseSettings>(DatabaseSettings.SectionName);
         services.AddSingleton(new UnitOfWorkTypeRegistry());
 
         services.AddHostedService<DatabaseInitializer>();
@@ -25,7 +24,7 @@ public static class DatabaseExtensions
     public static IServiceCollection AddDatabaseContext<T>(this IServiceCollection services, string? connectionString = null)
         where T : DbContext
     {
-        var settings = services.GetSettings<DatabaseSettings>(DatabaseSettings.SectionName);
+        var settings = services.ConfigureSettings<DatabaseSettings>(DatabaseSettings.SectionName);
         services.AddDbContext<T>((sp, options) =>
         {
             options.UseNpgsql(connectionString ?? settings.ConnectionString);

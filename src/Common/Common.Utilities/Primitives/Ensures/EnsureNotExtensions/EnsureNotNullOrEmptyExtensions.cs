@@ -28,7 +28,7 @@ public static class EnsureNotNullOrEmptyExtensions
         if (typeof(T).IsValueType && value.Equals(default(T)))
             throw new ParameterException(EnsureResource.ParameterDefault, paramName);
 
-        if (value is string s && !string.IsNullOrWhiteSpace(s))
+        if (value is string s && string.IsNullOrWhiteSpace(s))
             throw new ParameterException(EnsureResource.ParameterNullEmptyOrWhitespace, paramName);
 
         if (value is IEnumerable enumerable)

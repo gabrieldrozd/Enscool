@@ -13,9 +13,9 @@ public static class CommunicationExtensions
         {
             cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
 
-            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>), ServiceLifetime.Scoped);
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>), ServiceLifetime.Scoped);
+            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>), ServiceLifetime.Scoped);
         });
 
         return services;

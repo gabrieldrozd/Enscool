@@ -14,9 +14,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddAuth(this IServiceCollection services)
     {
-        var options = services.GetSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
-        services.AddSingleton(options);
-
+        var settings = services.ConfigureSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
         services
             .AddAuthentication(opt =>
             {
@@ -32,9 +30,9 @@ internal static class Extensions
                     ValidateAudience = false,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
-                    ValidIssuer = options.JwtSettings.Issuer,
-                    ValidAudience = options.JwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.JwtSettings.IssuerSigningKey))
+                    ValidIssuer = settings.JwtSettings.Issuer,
+                    ValidAudience = settings.JwtSettings.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSettings.IssuerSigningKey))
                 };
             });
 

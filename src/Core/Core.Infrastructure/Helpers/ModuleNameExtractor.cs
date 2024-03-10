@@ -12,7 +12,7 @@ public static class ModuleNameExtractor
 
     private static string GetModuleName(this Type? type)
     {
-        const string modulePart = "Enscool.Modules.";
+        const string modulePart = "Modules.";
         if (type?.Namespace is null)
         {
             return string.Empty;

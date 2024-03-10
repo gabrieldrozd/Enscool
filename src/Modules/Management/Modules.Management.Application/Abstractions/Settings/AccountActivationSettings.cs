@@ -1,6 +1,8 @@
+using Common.Utilities.Abstractions;
+
 namespace Modules.Management.Application.Abstractions.Settings;
 
-public sealed class AccountActivationSettings
+internal sealed class AccountActivationSettings : ISettings
 {
     public const string SectionName = "AccountActivationSettings";
 

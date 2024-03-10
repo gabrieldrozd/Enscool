@@ -1,6 +1,8 @@
+using Common.Utilities.Abstractions;
+
 namespace Core.Infrastructure.Auth;
 
-public class JwtSettings
+public class JwtSettings : ISettings
 {
     public required string IssuerSigningKey { get; set; }
     public required string Issuer { get; set; }

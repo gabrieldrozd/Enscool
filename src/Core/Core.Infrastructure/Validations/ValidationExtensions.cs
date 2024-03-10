@@ -9,7 +9,7 @@ public static class ValidationExtensions
 {
     public static IServiceCollection AddValidations(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
+        services.AddValidatorsFromAssemblies(assemblies);
 
         return services;
     }

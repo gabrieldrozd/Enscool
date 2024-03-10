@@ -76,8 +76,8 @@ internal static class SwaggerExtensions
 
     private static IServiceCollection RegisterXmlComments(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        const string modulePart = "Enscool.Modules.";
-        const string commonPart = "Enscool.Core.Domain";
+        const string modulePart = "Modules.";
+        const string commonPart = "Core.Domain";
         const string searchPattern = "*.xml";
 
         var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;

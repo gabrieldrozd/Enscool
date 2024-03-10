@@ -1,14 +1,11 @@
 using System.Reflection;
 using Core.Infrastructure.Auth;
 using Core.Infrastructure.Auth.Contexts;
-using Core.Infrastructure.Communication;
 using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Core.Infrastructure.Database;
 using Core.Infrastructure.Middlewares;
 using Core.Infrastructure.Security;
-using Core.Infrastructure.Services;
-using Core.Infrastructure.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,10 +28,7 @@ internal static class Extensions
             .AddContexts()
             .AddModuleCores(assemblies)
             .AddServiceCores(assemblies)
-            .AddDatabase(assemblies)
-            .AddCommunication(assemblies)
-            .AddValidations(assemblies)
-            .AddServices(assemblies);
+            .AddDatabase(assemblies);
 
         // Register modules
         appModules.ForEach(module => module.RegisterModule(services, configuration));
@@ -54,9 +48,6 @@ internal static class Extensions
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
-        app.UseCommunication();
-        app.UseValidations();
-        app.UseServices();
 
         // Use modules
         appModules.ForEach(module => module.UseModule(app));

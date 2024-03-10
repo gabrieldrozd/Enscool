@@ -1,4 +1,5 @@
-﻿using Core.Application.Communication.External.Emails;
+﻿using Common.Utilities.Extensions;
+using Core.Application.Communication.External.Emails;
 using Core.Application.Helpers;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;
@@ -35,8 +36,16 @@ public sealed class EmailSender : IEmailSender
                 .Build();
 
             using var client = new SmtpClient();
-            await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SmtpPort, SecureSocketOptions.StartTls, cancellationToken);
-            await client.AuthenticateAsync(_emailSettings.Username, _emailSettings.AppPassword, cancellationToken);
+
+            // TODO: Test whether it works as expected
+            // TODO: Test whether it works as expected
+            // TODO: Test whether it works as expected
+            await _emailSettings.UseSsl.IfElse(
+                ifTrue: client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SslSmtpPort, SecureSocketOptions.SslOnConnect, cancellationToken),
+                ifFalse: client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.TlsSmtpPort, SecureSocketOptions.StartTls, cancellationToken));
+
+            // await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SmtpPort, SecureSocketOptions.StartTls, cancellationToken);
+            await client.AuthenticateAsync(_emailSettings.Username, _emailSettings.Password, cancellationToken);
 
             _logger.LogInformation("[EmailService]: Sending email to '{ToAddress}'", emailMessage.Recipient.ToAddress);
             await client.SendAsync(message, cancellationToken);

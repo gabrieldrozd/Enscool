@@ -1,6 +1,8 @@
+using Common.Utilities.Abstractions;
+
 namespace Core.Infrastructure.Auth;
 
-public sealed class AuthenticationSettings
+public sealed class AuthenticationSettings : ISettings
 {
     public const string SectionName = "AuthenticationSettings";
 

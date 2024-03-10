@@ -1,6 +1,8 @@
 using Core.Infrastructure.Database;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Management.Application.Abstractions;
+using Modules.Management.Application.Abstractions.Repositories;
+using Modules.Management.Infrastructure.Database.Repositories;
 
 namespace Modules.Management.Infrastructure.Database;
 
@@ -10,6 +12,8 @@ public static class DatabaseExtensions
     {
         services.AddDatabaseContext<ManagementDbContext>();
         services.AddUnitOfWork<IUnitOfWork, ManagementUnitOfWork>();
+
+        services.AddTransient<IUserRepository, UserRepository>();
 
         return services;
     }

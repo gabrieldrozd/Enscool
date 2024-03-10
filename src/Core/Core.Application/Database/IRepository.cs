@@ -1,9 +1,8 @@
-using Common.Utilities.Abstractions;
 using Core.Domain.Primitives;
 
 namespace Core.Application.Database;
 
-public interface IRepository<in TEntity> : IRepository
+public interface IRepository<in TEntity>
     where TEntity : class, IEntity
 {
     void Insert(TEntity entity);

@@ -1,6 +1,6 @@
 namespace Common.Utilities.Abstractions;
 
 /// <summary>
-/// Marker interface for services.
+/// Marker interface for settings classes.
 /// </summary>
-public interface IService;
+public interface ISettings;

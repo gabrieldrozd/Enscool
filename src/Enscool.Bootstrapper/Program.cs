@@ -1,7 +1,9 @@
 using Core.Infrastructure;
+using Core.Infrastructure.Communication.Internal;
 using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
+using FluentValidation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,17 @@ var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 var services = builder.Services;
 services.AddCoreInfrastructure(assemblies, appModules, appServices, builder.Configuration);
 
+services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
+
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+});
+
+services.AddValidatorsFromAssemblies(assemblies);
+
 #endregion
 
 #region app
@@ -30,8 +43,8 @@ var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 app.UseCoreInfrastructure(appModules, appServices);
-logger.LogInformation("Modules: [{ModuleNames}]", string.Join(", ", appModules.Select(x => x.Name)));
-logger.LogInformation("Services: [{ServiceNames}]", string.Join(", ", appServices.Select(x => x.Name)));
+logger.LogInformation("Modules: [{ModuleNames}]", string.Join(", ", appModules.Select(x => $"{x.Name}Module")));
+logger.LogInformation("Services: [{ServiceNames}]", string.Join(", ", appServices.Select(x => $"{x.Name}Service")));
 
 app.MapGet("/", context
     => context.Response.WriteAsync(

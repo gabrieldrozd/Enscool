@@ -5,8 +5,11 @@ namespace Enscool.Bootstrapper;
 
 public static class ProjectLoader
 {
-    private const string ModulePart = "Enscool.Modules.";
-    private const string TestModulePart = @".IntegrationTests\bin\Debug\net8.0\Enscool.Modules.";
+    private const string ModulePart = "Modules.";
+    private const string TestModulePart = @".IntegrationTests\bin\Debug\net8.0\Modules.";
+
+    private const string ServicePart = "Services.";
+    private const string TestServicePart = @".IntegrationTests\bin\Debug\net8.0\Services.";
 
     public static IList<Assembly> LoadAssemblies(IConfiguration configuration)
     {
@@ -17,10 +20,14 @@ public static class ProjectLoader
             .ToList();
 
         var disabledProjects = new List<string>();
-        var modulePart = TestDetector.IsTestMode() ? TestModulePart : ModulePart;
-        RemoveDisabledProjects(configuration, files, disabledProjects, modulePart);
 
-        disabledProjects.ForEach(disabledModule => files.Remove(disabledModule));
+        var modulePart = TestDetector.IsTestMode() ? TestModulePart : ModulePart;
+        RemoveDisabledModules(configuration, files, disabledProjects, modulePart);
+
+        var servicePart = TestDetector.IsTestMode() ? TestServicePart : ServicePart;
+        RemoveDisabledServices(configuration, files, disabledProjects, servicePart);
+
+        disabledProjects.ForEach(disabledProject => files.Remove(disabledProject));
         files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
 
         return assemblies;
@@ -38,7 +45,7 @@ public static class ProjectLoader
         return projects.ToList();
     }
 
-    private static void RemoveDisabledProjects(IConfiguration configuration, List<string> files, List<string> disabledProjects, string modulePart)
+    private static void RemoveDisabledModules(IConfiguration configuration, List<string> files, List<string> disabledProjects, string modulePart)
     {
         foreach (var file in files)
         {
@@ -47,6 +54,19 @@ public static class ProjectLoader
 
             var name = file.Split(modulePart)[1].Split(".")[0];
             var enabled = configuration.GetValue<bool>($"{name}Module:Enabled");
+            if (!enabled) disabledProjects.Add(file);
+        }
+    }
+
+    private static void RemoveDisabledServices(IConfiguration configuration, List<string> files, List<string> disabledProjects, string servicePart)
+    {
+        foreach (var file in files)
+        {
+            if (!file.Contains(servicePart))
+                return;
+
+            var name = file.Split(servicePart)[1].Split(".")[0];
+            var enabled = configuration.GetValue<bool>($"{name}Service:Enabled");
             if (!enabled) disabledProjects.Add(file);
         }
     }
