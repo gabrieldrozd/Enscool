@@ -4,6 +4,7 @@ using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
 using FluentValidation;
+using MediatR;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,18 +23,20 @@ var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 #region services
 
 var services = builder.Services;
-services.AddCoreInfrastructure(assemblies, appModules, appServices, builder.Configuration);
+
+services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Scoped);
+
+services.AddCoreInfrastructure(assemblies, builder.Configuration);
+appModules.ForEach(module => module.RegisterModule(services, builder.Configuration));
+appServices.ForEach(service => service.RegisterService(services, builder.Configuration));
 
 services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
-
-    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-    cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+    // cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    // cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    // cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
 });
-
-services.AddValidatorsFromAssemblies(assemblies);
 
 #endregion
 
@@ -42,9 +45,12 @@ services.AddValidatorsFromAssemblies(assemblies);
 var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-app.UseCoreInfrastructure(appModules, appServices);
+app.UseCoreInfrastructure();
 logger.LogInformation("Modules: [{ModuleNames}]", string.Join(", ", appModules.Select(x => $"{x.Name}Module")));
 logger.LogInformation("Services: [{ServiceNames}]", string.Join(", ", appServices.Select(x => $"{x.Name}Service")));
+
+appModules.ForEach(module => module.UseModule(app));
+appServices.ForEach(service => service.UseService(app));
 
 app.MapGet("/", context
     => context.Response.WriteAsync(

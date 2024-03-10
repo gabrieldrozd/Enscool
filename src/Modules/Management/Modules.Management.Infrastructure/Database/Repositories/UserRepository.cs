@@ -6,7 +6,7 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Infrastructure.Database.Repositories;
 
-internal sealed class UserRepository : Repository<User, ManagementDbContext>, IUserRepository
+public sealed class UserRepository : Repository<User, ManagementDbContext>, IUserRepository
 {
     private readonly ManagementDbContext _context;
 

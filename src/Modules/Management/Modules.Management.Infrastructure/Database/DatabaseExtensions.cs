@@ -13,7 +13,7 @@ public static class DatabaseExtensions
         services.AddDatabaseContext<ManagementDbContext>();
         services.AddUnitOfWork<IUnitOfWork, ManagementUnitOfWork>();
 
-        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

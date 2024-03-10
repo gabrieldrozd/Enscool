@@ -17,29 +17,21 @@ internal static class Extensions
     public static IServiceCollection AddCoreInfrastructure(
         this IServiceCollection services,
         IList<Assembly> assemblies,
-        List<IModuleCore> appModules,
-        List<IServiceCore> appServices,
         IConfiguration configuration)
     {
         services
             .AddSecurity()
             .AddMiddlewares()
-            .AddAuth()
+            .AddAuth(configuration)
             .AddContexts()
             .AddModuleCores(assemblies)
             .AddServiceCores(assemblies)
             .AddDatabase(assemblies);
 
-        // Register modules
-        appModules.ForEach(module => module.RegisterModule(services, configuration));
-
-        // Register services
-        appServices.ForEach(service => service.RegisterService(services, configuration));
-
         return services;
     }
 
-    public static IApplicationBuilder UseCoreInfrastructure(this WebApplication app, List<IModuleCore> appModules, List<IServiceCore> appServices)
+    public static IApplicationBuilder UseCoreInfrastructure(this WebApplication app)
     {
         app.UseSecurity();
         app.UseRegisteredMiddleware();
@@ -48,12 +40,6 @@ internal static class Extensions
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
-
-        // Use modules
-        appModules.ForEach(module => module.UseModule(app));
-
-        // Use services
-        appServices.ForEach(service => service.UseService(app));
 
         return app;
     }

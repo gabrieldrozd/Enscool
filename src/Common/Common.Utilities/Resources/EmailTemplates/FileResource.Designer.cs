@@ -78,9 +78,9 @@ namespace Common.Utilities.Resources.EmailTemplates {
         ///        Enscool
         ///   [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string InstitutionAdminActivationLinkEmailTemplate {
+        public static string InstitutionRegisteredEmailTemplate {
             get {
-                return ResourceManager.GetString("InstitutionAdminActivationLinkEmailTemplate", resourceCulture);
+                return ResourceManager.GetString("InstitutionRegisteredEmailTemplate", resourceCulture);
             }
         }
         

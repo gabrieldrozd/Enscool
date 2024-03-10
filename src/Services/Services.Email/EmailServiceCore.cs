@@ -17,7 +17,7 @@ public class EmailServiceCore : IServiceCore
 
         services.AddSingleton<IEmailQueue, EmailQueue>();
         services.AddHostedService<EmailSenderBackgroundService>();
-        services.AddTransient<IEmailSender, EmailSender>();
+        services.AddScoped<IEmailSender, EmailSender>();
     }
 
     public void UseService(WebApplication app)

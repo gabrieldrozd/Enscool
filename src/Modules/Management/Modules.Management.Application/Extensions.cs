@@ -11,9 +11,9 @@ internal static class Extensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.ConfigureSettings<AccountActivationSettings>(AccountActivationSettings.SectionName);
-        services.AddTransient<IActivationCodeService, ActivationCodeService>();
-        services.AddTransient<IActivationLinkService, ActivationLinkService>();
+        services.RegisterSettings<AccountActivationSettings>(AccountActivationSettings.SectionName);
+        services.AddSingleton<IActivationCodeService, ActivationCodeService>();
+        services.AddSingleton<IActivationLinkService, ActivationLinkService>();
 
         return services;
     }

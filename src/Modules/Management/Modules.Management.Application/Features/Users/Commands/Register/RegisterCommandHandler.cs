@@ -4,6 +4,7 @@ using Common.Utilities.Resources;
 using Core.Application.Communication.External.Emails;
 using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.ValueObjects;
+using MediatR;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Abstractions;

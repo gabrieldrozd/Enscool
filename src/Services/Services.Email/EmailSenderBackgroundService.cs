@@ -1,4 +1,5 @@
 using Core.Application.Communication.External.Emails;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Email.Sender;
 
@@ -6,13 +7,13 @@ namespace Services.Email;
 
 public sealed class EmailSenderBackgroundService : BackgroundService
 {
+    private readonly IServiceProvider _serviceProvider;
     private readonly IEmailQueue _emailQueue;
-    private readonly IEmailSender _emailSender;
 
-    public EmailSenderBackgroundService(IEmailQueue emailQueue, IEmailSender emailSender)
+    public EmailSenderBackgroundService(IServiceProvider serviceProvider, IEmailQueue emailQueue)
     {
+        _serviceProvider = serviceProvider;
         _emailQueue = emailQueue;
-        _emailSender = emailSender;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -20,7 +21,10 @@ public sealed class EmailSenderBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             if (_emailQueue.Dequeue(out var message))
-                await _emailSender.Send(message, stoppingToken);
+            {
+                var emailSender = _serviceProvider.GetRequiredService<IEmailSender>();
+                await emailSender.Send(message, stoppingToken);
+            }
 
             await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
         }

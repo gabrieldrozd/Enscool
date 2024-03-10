@@ -7,12 +7,12 @@ namespace Core.Infrastructure.Database;
 
 internal sealed class DatabaseInitializer : IHostedService
 {
-    private readonly IServiceScopeFactory _serviceScopeFactory;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<DatabaseInitializer> _logger;
 
-    public DatabaseInitializer(IServiceScopeFactory serviceScopeFactory, ILogger<DatabaseInitializer> logger)
+    public DatabaseInitializer(IServiceProvider serviceProvider, ILogger<DatabaseInitializer> logger)
     {
-        _serviceScopeFactory = serviceScopeFactory;
+        _serviceProvider = serviceProvider;
         _logger = logger;
     }
 
@@ -22,7 +22,7 @@ internal sealed class DatabaseInitializer : IHostedService
             .SelectMany(x => x.GetTypes())
             .Where(x => typeof(ApplicationDbContext).IsAssignableFrom(x) && !x.IsInterface && x != typeof(ApplicationDbContext));
 
-        using var scope = _serviceScopeFactory.CreateScope();
+        using var scope = _serviceProvider.CreateScope();
         foreach (var contextType in contextTypes)
         {
             if (scope.ServiceProvider.GetService(contextType) is not ApplicationDbContext context)

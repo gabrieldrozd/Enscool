@@ -10,10 +10,7 @@ public static class EndpointsExtensions
     public static IServiceCollection AddEndpoints(this IServiceCollection services, IList<Assembly> assemblies)
     {
         services.AddEndpointsApiExplorer();
-        services.AddCarter(new DependencyContextAssemblyCatalog(assemblies.ToArray()), c =>
-        {
-            c.WithEmptyValidators();
-        });
+        services.AddCarter(new DependencyContextAssemblyCatalog(assemblies.ToArray()), cfg => cfg.WithEmptyValidators());
 
         return services;
     }

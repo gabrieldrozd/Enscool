@@ -1,5 +1,6 @@
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
@@ -24,6 +25,7 @@ public sealed class RegisterEndpoint : EndpointBase
                     var result = await Sender.Send(request.Map());
                     return BuildEnvelope(result);
                 })
+            .AllowAnonymous()
             .ProducesEnvelope(StatusCodes.Status201Created)
             .WithDocumentation(
                 "Register",

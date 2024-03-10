@@ -19,18 +19,42 @@ public static class ProjectLoader
             .Where(x => !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
             .ToList();
 
+        var isTestMode = TestDetector.IsTestMode();
         var disabledProjects = new List<string>();
 
-        var modulePart = TestDetector.IsTestMode() ? TestModulePart : ModulePart;
-        RemoveDisabledModules(configuration, files, disabledProjects, modulePart);
+        RemoveDisabledProjects(configuration, files, disabledProjects, isTestMode);
 
-        var servicePart = TestDetector.IsTestMode() ? TestServicePart : ServicePart;
-        RemoveDisabledServices(configuration, files, disabledProjects, servicePart);
-
-        disabledProjects.ForEach(disabledProject => files.Remove(disabledProject));
+        disabledProjects.ForEach(disabledModule => files.Remove(disabledModule));
         files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
 
         return assemblies;
+    }
+
+    private static void RemoveDisabledProjects(IConfiguration configuration, List<string> files, List<string> disabledProjects, bool isTestMode)
+    {
+        foreach (var file in files)
+        {
+            if (isTestMode)
+            {
+                CheckAndAddDisabledProject(configuration, file, disabledProjects, TestModulePart, "Module");
+                CheckAndAddDisabledProject(configuration, file, disabledProjects, TestServicePart, "Service");
+            }
+            else
+            {
+                CheckAndAddDisabledProject(configuration, file, disabledProjects, ModulePart, "Module");
+                CheckAndAddDisabledProject(configuration, file, disabledProjects, ServicePart, "Service");
+            }
+        }
+    }
+
+    private static void CheckAndAddDisabledProject(IConfiguration configuration, string file, List<string> disabledProjects, string part, string type)
+    {
+        if (!file.Contains(part))
+            return;
+
+        var name = file.Split(part)[1].Split(".")[0];
+        var enabled = configuration.GetValue<bool>($"{name}{type}:Enabled");
+        if (!enabled) disabledProjects.Add(file);
     }
 
     public static List<TProjectType> LoadProjects<TProjectType>(IEnumerable<Assembly> assemblies)
@@ -43,31 +67,5 @@ public static class ProjectLoader
             .Cast<TProjectType>();
 
         return projects.ToList();
-    }
-
-    private static void RemoveDisabledModules(IConfiguration configuration, List<string> files, List<string> disabledProjects, string modulePart)
-    {
-        foreach (var file in files)
-        {
-            if (!file.Contains(modulePart))
-                return;
-
-            var name = file.Split(modulePart)[1].Split(".")[0];
-            var enabled = configuration.GetValue<bool>($"{name}Module:Enabled");
-            if (!enabled) disabledProjects.Add(file);
-        }
-    }
-
-    private static void RemoveDisabledServices(IConfiguration configuration, List<string> files, List<string> disabledProjects, string servicePart)
-    {
-        foreach (var file in files)
-        {
-            if (!file.Contains(servicePart))
-                return;
-
-            var name = file.Split(servicePart)[1].Split(".")[0];
-            var enabled = configuration.GetValue<bool>($"{name}Service:Enabled");
-            if (!enabled) disabledProjects.Add(file);
-        }
     }
 }

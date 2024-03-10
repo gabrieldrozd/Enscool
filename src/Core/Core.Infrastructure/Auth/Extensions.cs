@@ -5,6 +5,7 @@ using Core.Infrastructure.Auth.Api.Authenticated;
 using Core.Infrastructure.Auth.Api.Roles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,9 +13,9 @@ namespace Core.Infrastructure.Auth;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddAuth(this IServiceCollection services)
+    public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        var settings = services.ConfigureSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
+        var settings = services.RegisterSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
         services
             .AddAuthentication(opt =>
             {
