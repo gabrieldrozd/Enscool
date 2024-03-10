@@ -1,6 +1,6 @@
 namespace Common.Utilities.Models;
 
-public interface IMapTo<out TDestination>
+public interface IWithMapTo<out TDestination>
 {
     public TDestination Map();
 }
