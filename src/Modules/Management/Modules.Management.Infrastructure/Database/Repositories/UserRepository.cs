@@ -1,3 +1,4 @@
+using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,9 @@ public sealed class UserRepository : Repository<User, ManagementDbContext>, IUse
     {
         _context = context;
     }
+
+    public async Task<User?> GetAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Users.FindAsync([userId], cancellationToken);
 
     public Task<bool> ExistsWithEmailAsync(Email email, CancellationToken cancellationToken = default)
         => _context.Users.AnyAsync(x => x.Email == email, cancellationToken);

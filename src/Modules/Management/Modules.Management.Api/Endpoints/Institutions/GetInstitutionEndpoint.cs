@@ -12,8 +12,8 @@ public class GetInstitutionEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapGetEndpoint(
-                ManagementEndpointInfo.Institutions,
                 "{institutionId}",
+                ManagementEndpointInfo.Institutions,
                 async (Guid institutionId, ISender sender) =>
                 {
                     var result = await sender.Send(new GetInstitutionQuery(institutionId));

@@ -4,19 +4,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.Register;
+namespace Modules.Management.Api.Endpoints.Users.Activate;
 
 /// <summary>
 /// Register <see cref="EndpointBase"/>.
 /// </summary>
-internal sealed class RegisterEndpoint : EndpointBase
+internal sealed class ActivateAccountEndpoint : EndpointBase
 {
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
-            .MapPostEndpoint(
+            .MapPatchEndpoint(
+                "activate",
                 ManagementEndpointInfo.Access,
-                async (RegisterRequest request, ISender sender) =>
+                async (ActivateAccountRequest request, ISender sender) =>
                 {
                     var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
@@ -24,16 +25,14 @@ internal sealed class RegisterEndpoint : EndpointBase
             .AllowAnonymous()
             .ProducesEnvelope(StatusCodes.Status201Created)
             .WithDocumentation(
-                "Register",
-                "Register as Institution Admin",
-                "Registers new InstitutionAdmin user with new InstitutionId",
+                "Activate",
+                "Activate User",
+                "Activates user account",
                 """
                 {
-                    "email": "example_email@email.com",
-                    "phone": "+48512456456",
-                    "firstName": "John",
-                    "middleName": null,
-                    "lastName": "Doe"
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "code": "NIVnT1IJCglFs4KkmcPdmW2sjKCge/d4WMuZYAJLqwAP2zo/FgqmEjUOFvrARibTvu74MT0/sAHPq0Av3gqTGw==",
+                    "password": "SomePassword123!@#"
                 }
                 """);
     }

@@ -1,17 +1,11 @@
-using Common.Utilities.Primitives.Results.Extensions;
-using Modules.Management.Api.Endpoints.Users.Register;
 using Core.Infrastructure;
 using Core.Infrastructure.Communication.Internal;
 using Core.Infrastructure.Cores.Modules;
-using Core.Infrastructure.Cores.Modules.Endpoints;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Identity.Data;
-using Modules.Management.Api;
 using Serilog;
-using RegisterRequest = Modules.Management.Api.Endpoints.Users.Register.RegisterRequest;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();

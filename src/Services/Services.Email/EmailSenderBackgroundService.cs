@@ -1,5 +1,4 @@
 using Core.Application.Communication.External.Emails;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Email.Sender;
 

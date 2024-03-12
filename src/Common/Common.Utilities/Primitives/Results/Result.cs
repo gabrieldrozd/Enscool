@@ -39,11 +39,11 @@ public class Result
 
     public static class Failure
     {
-        public static Result BadRequest(string? message = null)
-            => new(ResultStatus.BadRequest(message));
+        public static Result BadRequest(string? message = null, params object[] args)
+            => new(ResultStatus.BadRequest(message is not null ? string.Format(message, args) : message));
 
-        public static Result<T> BadRequest<T>(string? message = null)
-            => new Result(ResultStatus.BadRequest(message))
+        public static Result<T> BadRequest<T>(string? message = null, params object[] args)
+            => new Result(ResultStatus.BadRequest(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
 
         public static Result Validation(ValidationResult validationResult)
@@ -53,39 +53,39 @@ public class Result
             => new Result(ResultStatus.BadRequest(string.Join(", ", validationResult.Errors)))
                 .AsResult<T>();
 
-        public static Result NotFound(string? message = null)
-            => new(ResultStatus.NotFound(message));
+        public static Result NotFound(string? message = null, params object[] args)
+            => new(ResultStatus.NotFound(message is not null ? string.Format(message, args) : message));
 
-        public static Result<T> NotFound<T>(string? message = null)
-            => new Result(ResultStatus.NotFound<T>(message))
+        public static Result<T> NotFound<T>(string? message = null, params object[] args)
+            => new Result(ResultStatus.NotFound<T>(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
 
-        public static Result<T> NotFound<T, TNotFound>(string? message = null)
-            => new Result(ResultStatus.NotFound<TNotFound>(message))
+        public static Result<T> NotFound<T, TNotFound>(string? message = null, params object[] args)
+            => new Result(ResultStatus.NotFound<TNotFound>(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
 
-        public static Result Unauthorized(string? message = null)
-            => new(ResultStatus.Unauthorized(message));
+        public static Result Unauthorized(string? message = null, params object[] args)
+            => new(ResultStatus.Unauthorized(message is not null ? string.Format(message, args) : message));
 
-        public static Result<T> Unauthorized<T>(string? message = null)
-            => new Result(ResultStatus.Unauthorized(message))
+        public static Result<T> Unauthorized<T>(string? message = null, params object[] args)
+            => new Result(ResultStatus.Unauthorized(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
 
-        public static Result Forbidden(string? message = null)
-            => new(ResultStatus.Forbidden(message));
+        public static Result Forbidden(string? message = null, params object[] args)
+            => new(ResultStatus.Forbidden(message is not null ? string.Format(message, args) : message));
 
-        public static Result<T> Forbidden<T>(string? message = null)
-            => new Result(ResultStatus.Forbidden(message))
+        public static Result<T> Forbidden<T>(string? message = null, params object[] args)
+            => new Result(ResultStatus.Forbidden(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
     }
 
     public static class Error
     {
-        public static Result ServerError(string? message = null)
-            => new(ResultStatus.ServerError(message));
+        public static Result ServerError(string? message = null, params object[] args)
+            => new(ResultStatus.ServerError(message is not null ? string.Format(message, args) : message));
 
-        public static Result<T> ServerError<T>(string? message = null)
-            => new Result(ResultStatus.ServerError(message))
+        public static Result<T> ServerError<T>(string? message = null, params object[] args)
+            => new Result(ResultStatus.ServerError(message is not null ? string.Format(message, args) : message))
                 .AsResult<T>();
     }
 

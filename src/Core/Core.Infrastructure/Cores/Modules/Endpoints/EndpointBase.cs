@@ -1,6 +1,5 @@
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
-using MediatR;
 using Microsoft.AspNetCore.Routing;
 
 namespace Core.Infrastructure.Cores.Modules.Endpoints;

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Domain.Primitives;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
@@ -70,5 +71,21 @@ public sealed class User : AggregateRoot<UserId>
     {
         _activationCodes.ForEach(x => x.Deactivate());
         _activationCodes.Add(code);
+    }
+
+    public void ActivateAccount(Password password)
+    {
+        _activationCodes.ForEach(x => x.Deactivate());
+        State = UserState.Active;
+        Password = password;
+    }
+
+    [MemberNotNullWhen(true, nameof(CurrentActivationCode))]
+    public bool CanBeActivated()
+    {
+        if (State is UserState.Pending or UserState.Deleted)
+            return false;
+
+        return CurrentActivationCode is not null;
     }
 }

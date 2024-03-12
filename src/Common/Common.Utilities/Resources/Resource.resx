@@ -113,4 +113,10 @@
     <data name="EmailTaken" xml:space="preserve">
         <value>Email is already taken</value>
     </data>
+    <data name="UserNotFound" xml:space="preserve">
+        <value>User with given id '{0}' not found</value>
+    </data>
+    <data name="UserActivationError" xml:space="preserve">
+        <value>Error occurred during user activation</value>
+    </data>
 </root>

@@ -202,5 +202,23 @@ namespace Common.Utilities.Resources {
                 return ResourceManager.GetString("Unauthorized", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred during user activation.
+        /// </summary>
+        public static string UserActivationError {
+            get {
+                return ResourceManager.GetString("UserActivationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User with given id &apos;{0}&apos; not found.
+        /// </summary>
+        public static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
     }
 }
