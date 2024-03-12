@@ -7,13 +7,13 @@ namespace Services.Email;
 
 public sealed class EmailSenderBackgroundService : BackgroundService
 {
-    private readonly IServiceProvider _serviceProvider;
     private readonly IEmailQueue _emailQueue;
+    private readonly IEmailSender _emailSender;
 
-    public EmailSenderBackgroundService(IServiceProvider serviceProvider, IEmailQueue emailQueue)
+    public EmailSenderBackgroundService(IEmailQueue emailQueue, IEmailSender emailSender)
     {
-        _serviceProvider = serviceProvider;
         _emailQueue = emailQueue;
+        _emailSender = emailSender;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -21,10 +21,7 @@ public sealed class EmailSenderBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             if (_emailQueue.Dequeue(out var message))
-            {
-                var emailSender = _serviceProvider.GetRequiredService<IEmailSender>();
-                await emailSender.Send(message, stoppingToken);
-            }
+                await _emailSender.Send(message, stoppingToken);
 
             await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
         }

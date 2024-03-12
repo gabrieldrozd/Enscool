@@ -8,19 +8,15 @@ namespace Modules.Management.Api.Endpoints.Institutions;
 
 public class GetInstitutionEndpoint : EndpointBase
 {
-    public GetInstitutionEndpoint(ISender sender) : base(sender)
-    {
-    }
-
-    public override void AddRoutes(IEndpointRouteBuilder endpointRouteBuilder)
+    public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapGetEndpoint(
                 ManagementEndpointInfo.Institutions,
                 "{institutionId}",
-                async (Guid institutionId) =>
+                async (Guid institutionId, ISender sender) =>
                 {
-                    var result = await Sender.Send(new GetInstitutionQuery(institutionId));
+                    var result = await sender.Send(new GetInstitutionQuery(institutionId));
                     return BuildEnvelope(result);
                 })
             // .RequireRoles(UserRole.InstitutionAdmin)
@@ -28,8 +24,7 @@ public class GetInstitutionEndpoint : EndpointBase
             .WithDocumentation(
                 "GetInstitution",
                 "Get institution",
-                "Gets the institution by the specified identifier.",
-                "Institution");
+                "Gets the institution by the specified identifier.");
     }
 }
 

@@ -16,8 +16,8 @@ internal class ManagementModule : IModuleCore
     public void RegisterModule(IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddInfrastructure()
-            .AddApplication();
+            .AddInfrastructure(configuration)
+            .AddApplication(configuration);
     }
 
     public void UseModule(WebApplication app)

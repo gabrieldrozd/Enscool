@@ -1,5 +1,6 @@
 using Core.Application.Helpers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Management.Application.Abstractions.Settings;
 using Modules.Management.Application.Services;
@@ -9,11 +10,11 @@ namespace Modules.Management.Application;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterSettings<AccountActivationSettings>(AccountActivationSettings.SectionName);
-        services.AddSingleton<IActivationCodeService, ActivationCodeService>();
-        services.AddSingleton<IActivationLinkService, ActivationLinkService>();
+        services.RegisterSettings<AccountActivationSettings>(configuration, AccountActivationSettings.SectionName);
+        services.AddScoped<IActivationCodeService, ActivationCodeService>();
+        services.AddScoped<IActivationLinkService, ActivationLinkService>();
 
         return services;
     }

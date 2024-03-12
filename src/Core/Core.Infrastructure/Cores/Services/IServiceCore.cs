@@ -11,4 +11,9 @@ public interface IServiceCore
     void RegisterService(IServiceCollection services, IConfiguration configuration);
 
     void UseService(WebApplication app);
+
+    public void UseRegisteredService(WebApplication app)
+    {
+        UseService(app);
+    }
 }

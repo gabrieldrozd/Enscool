@@ -1,4 +1,3 @@
-using Carter;
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
 using MediatR;
@@ -9,20 +8,13 @@ namespace Core.Infrastructure.Cores.Modules.Endpoints;
 /// <summary>
 /// Represents an endpoint in the application.
 /// </summary>
-public abstract class EndpointBase : ICarterModule
+public abstract class EndpointBase
 {
-    protected ISender Sender { get; }
-
-    protected EndpointBase(ISender sender)
-    {
-        Sender = sender;
-    }
-
     /// <summary>
     /// Adds the routes to the specified <see cref="IEndpointRouteBuilder"/>.
     /// </summary>
     #pragma warning disable S927
-    public abstract void AddRoutes(IEndpointRouteBuilder endpointRouteBuilder);
+    public abstract void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder);
     #pragma warning restore S927
 
     /// <summary>

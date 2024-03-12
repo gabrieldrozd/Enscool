@@ -1,11 +1,17 @@
+using Common.Utilities.Primitives.Results.Extensions;
+using Modules.Management.Api.Endpoints.Users.Register;
 using Core.Infrastructure;
 using Core.Infrastructure.Communication.Internal;
 using Core.Infrastructure.Cores.Modules;
+using Core.Infrastructure.Cores.Modules.Endpoints;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity.Data;
+using Modules.Management.Api;
 using Serilog;
+using RegisterRequest = Modules.Management.Api.Endpoints.Users.Register.RegisterRequest;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
@@ -22,21 +28,25 @@ var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 
 #region services
 
+// TODO: Test whole setup thoroughly
+// TODO: Test whole setup thoroughly
+// TODO: Test whole setup thoroughly
+
 var services = builder.Services;
 
-services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Scoped);
-
 services.AddCoreInfrastructure(assemblies, builder.Configuration);
-appModules.ForEach(module => module.RegisterModule(services, builder.Configuration));
-appServices.ForEach(service => service.RegisterService(services, builder.Configuration));
+foreach (var module in appModules) module.RegisterModule(services, builder.Configuration);
+foreach (var service in appServices) service.RegisterService(services, builder.Configuration);
 
 services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
-    // cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-    // cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-    // cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 });
+
+services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
 
 #endregion
 
@@ -49,8 +59,8 @@ app.UseCoreInfrastructure();
 logger.LogInformation("Modules: [{ModuleNames}]", string.Join(", ", appModules.Select(x => $"{x.Name}Module")));
 logger.LogInformation("Services: [{ServiceNames}]", string.Join(", ", appServices.Select(x => $"{x.Name}Service")));
 
-appModules.ForEach(module => module.UseModule(app));
-appServices.ForEach(service => service.UseService(app));
+appModules.ForEach(x => x.UseRegisteredModule(app));
+appServices.ForEach(x => x.UseRegisteredService(app));
 
 app.MapGet("/", context
     => context.Response.WriteAsync(
@@ -59,6 +69,31 @@ app.MapGet("/", context
          Go to: {app.Urls.Select(x => x).First()}/docs
          """
     ));
+
+// app
+//     .MapPostEndpoint(
+//         ManagementEndpointInfo.Users,
+//         async (RegisterRequest request, ISender sender) =>
+//         {
+//             var result = await sender.Send(request.Map());
+//             var envelope = result.ToEnvelope();
+//             return new EnvelopeResult(envelope);
+//         })
+//     .AllowAnonymous()
+//     .ProducesEnvelope(StatusCodes.Status201Created)
+//     .WithDocumentation(
+//         "Register",
+//         "Register as Institution Admin",
+//         "Registers new InstitutionAdmin user with new InstitutionId",
+//         """
+//         {
+//             "Email": "example_email@email.com",
+//             "Phone": "+48512456456",
+//             "FirstName": "John",
+//             "MiddleName": null,
+//             "LastName": "Doe"
+//         }
+//         """);
 
 #endregion
 

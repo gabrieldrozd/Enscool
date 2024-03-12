@@ -11,18 +11,14 @@ namespace Modules.Management.Api.Endpoints.Users.Register;
 /// </summary>
 public sealed class RegisterEndpoint : EndpointBase
 {
-    public RegisterEndpoint(ISender sender) : base(sender)
-    {
-    }
-
-    public override void AddRoutes(IEndpointRouteBuilder endpointRouteBuilder)
+    public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapPostEndpoint(
                 ManagementEndpointInfo.Users,
-                async (RegisterRequest request) =>
+                async (RegisterRequest request, ISender sender) =>
                 {
-                    var result = await Sender.Send(request.Map());
+                    var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()

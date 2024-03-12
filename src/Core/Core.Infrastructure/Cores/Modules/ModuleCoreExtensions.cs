@@ -17,7 +17,7 @@ public static class ModuleCoreExtensions
     {
         services
             .AddSwaggerDocumentation(assemblies)
-            .AddEndpoints(assemblies);
+            .AddEndpoints();
 
         return services;
     }
