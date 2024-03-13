@@ -12,4 +12,4 @@ public interface ITransactionCommand : ICommand;
 /// <see cref="ITransactionCommand{TResponse}"/> - waits for all <see cref="IInternalCommand"/>s to be processed before committing.
 /// </summary>
 /// <returns>Generic <see cref="Result{T}"/>.</returns>
-public interface ITransactionCommand<TResponse> : ICommand<TResponse>, ITransactionCommand;
+public interface ITransactionCommand<TResponse> : ICommand<TResponse>;

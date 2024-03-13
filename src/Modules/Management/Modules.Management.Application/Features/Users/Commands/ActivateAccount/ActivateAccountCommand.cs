@@ -1,3 +1,4 @@
+using Core.Application.Auth;
 using Core.Application.Communication.Internal.Commands;
 using Modules.Management.Domain.Users;
 
@@ -10,4 +11,4 @@ public sealed record ActivateAccountCommand(
     Guid UserId,
     string Code,
     string Password
-) : ITransactionCommand;
+) : ITransactionCommand<AccessToken>;

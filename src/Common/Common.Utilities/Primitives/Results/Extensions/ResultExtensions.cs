@@ -42,4 +42,20 @@ public static class ResultExtensions
         var result = await resultTask;
         return result.IsFailure ? onFailure : onSuccess;
     }
+
+    public static async Task<Result> MatchOrBadRequest(this Task<Result> resultTask, Func<Result> onSuccess)
+    {
+        var result = await resultTask;
+        return result.IsFailure
+            ? Result.Failure.BadRequest(result.Status.Message!)
+            : onSuccess();
+    }
+
+    public static async Task<Result<T>> MatchOrBadRequest<T>(this Task<Result> resultTask, Result<T> onSuccess)
+    {
+        var result = await resultTask;
+        return result.IsFailure
+            ? Result.Failure.BadRequest<T>(result.Status.Message!)
+            : onSuccess;
+    }
 }

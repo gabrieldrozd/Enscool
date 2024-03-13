@@ -24,6 +24,8 @@ public sealed class Date : ValueObject
     public static Date FromUnixSeconds(long seconds)
         => new(DateTimeOffset.FromUnixTimeSeconds(seconds));
 
+    public long ToUnixSeconds() => Value.ToUnixTimeSeconds();
+
     public Date AddMinutes(int minutes) => Value.AddMinutes(minutes);
     public Date AddHours(int hours) => Value.AddHours(hours);
     public Date AddDays(int days) => new(Value.AddDays(days));

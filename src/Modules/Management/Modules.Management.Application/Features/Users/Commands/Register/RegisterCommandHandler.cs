@@ -1,5 +1,6 @@
 using Common.Utilities.Emails.Models;
 using Common.Utilities.Primitives.Results;
+using Common.Utilities.Primitives.Results.Extensions;
 using Common.Utilities.Resources;
 using Core.Application.Communication.External.Emails;
 using Core.Application.Communication.Internal.Commands;
@@ -45,13 +46,13 @@ internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
             _activationCodeService.Generate());
 
         _userRepository.Insert(user);
-        var result = await _unitOfWork.CommitAsync(cancellationToken);
-        if (result.IsFailure)
-            return result;
-
-        var template = InstitutionRegisteredEmailTemplate.Populate(user.FullName.First, _activationLinkService.Create(user));
-        var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);
-        _emailQueue.Enqueue(emailMessage);
-        return result;
+        return await _unitOfWork.CommitAsync(cancellationToken)
+            .MatchOrBadRequest(() =>
+            {
+                var template = InstitutionRegisteredEmailTemplate.Populate(user.FullName.First, _activationLinkService.Create(user));
+                var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);
+                _emailQueue.Enqueue(emailMessage);
+                return Result.Success.Ok();
+            });
     }
 }
