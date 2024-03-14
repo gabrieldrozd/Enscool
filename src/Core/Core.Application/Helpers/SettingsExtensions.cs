@@ -1,4 +1,5 @@
 using Common.Utilities.Abstractions;
+using Common.Utilities.Exceptions;
 using Common.Utilities.Primitives.Ensures;
 using Common.Utilities.Primitives.Ensures.EnsureNotExtensions;
 using Microsoft.Extensions.Configuration;
@@ -23,9 +24,12 @@ public static class SettingsExtensions
     {
         Ensure.Not.NullOrEmpty(sectionName);
 
-        var settings = services.GetSettings<TSettings>(sectionName);
-        services.AddSingleton(settings);
-        return settings;
+        var serviceProvider = services.BuildServiceProvider();
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        var section = configuration.GetSection(sectionName);
+        services.Configure<TSettings>(section);
+        var settings = section.Get<TSettings>();
+        return settings ?? throw new ConfigurationException($"Settings not found for section '{sectionName}'.");
     }
 
     public static TSettings GetSettings<TSettings>(this IServiceCollection services, string sectionName)

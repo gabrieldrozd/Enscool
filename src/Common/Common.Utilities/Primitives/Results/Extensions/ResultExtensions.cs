@@ -18,6 +18,7 @@ public static class ResultExtensions
             NotAuthenticatedException ex => Result.Failure.Unauthorized(ex.Message),
             NotAllowedException ex => Result.Failure.Forbidden(ex.Message),
             NotFoundException ex => Result.Failure.NotFound(ex.Message),
+            ConfigurationException ex => Result.Error.ServerError(ex.Message),
             _ => Result.Error.ServerError(exception.Message)
         };
 

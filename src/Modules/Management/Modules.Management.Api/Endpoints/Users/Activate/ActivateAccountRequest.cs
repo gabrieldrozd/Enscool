@@ -5,9 +5,9 @@ namespace Modules.Management.Api.Endpoints.Users.Activate;
 
 internal sealed class ActivateAccountRequest : IWithMapTo<ActivateAccountCommand>
 {
-    public Guid UserId { get; init; }
-    public string Code { get; init; } = null!;
-    public string Password { get; init; } = null!;
+    public required Guid UserId { get; init; }
+    public required string Code { get; init; }
+    public required string Password { get; init; }
 
     public ActivateAccountCommand Map() => new(UserId, Code, Password);
 }

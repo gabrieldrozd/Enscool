@@ -81,11 +81,7 @@ public sealed class User : AggregateRoot<UserId>
     }
 
     [MemberNotNullWhen(true, nameof(CurrentActivationCode))]
-    public bool CanBeActivated()
-    {
-        if (State is UserState.Pending or UserState.Deleted)
-            return false;
+    public bool CanBeActivated() => State is UserState.Pending && CurrentActivationCode is not null;
 
-        return CurrentActivationCode is not null;
-    }
+    public bool CanBeLoggedIn() => State is UserState.Active;
 }

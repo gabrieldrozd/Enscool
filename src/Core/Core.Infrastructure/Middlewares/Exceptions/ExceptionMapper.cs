@@ -16,6 +16,7 @@ internal sealed class ExceptionMapper : IExceptionMapper
             NotAuthenticatedException ex => new Envelope(false, ex.Message).WithCode(401),
             NotAllowedException ex => new Envelope(false, ex.Message).WithCode(403),
             NotFoundException ex => new Envelope(false, ex.Message).WithCode(404),
+            ConfigurationException ex => new Envelope(false, ex.Message).WithCode(500),
             _ => new Envelope(false, Resource.ServerError).WithCode(500)
         };
 }
