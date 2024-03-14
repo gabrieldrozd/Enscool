@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Routing;
 namespace Modules.Management.Api.Endpoints.Users.Activate;
 
 /// <summary>
-/// Register <see cref="EndpointBase"/>.
+/// Activate <see cref="EndpointBase"/>.
 /// </summary>
 internal sealed class ActivateAccountEndpoint : EndpointBase
 {

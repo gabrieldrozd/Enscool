@@ -11,6 +11,7 @@ public static class DatabaseExtensions
     public static IServiceCollection AddDatabase(this IServiceCollection services)
     {
         services.AddDatabaseContext<ManagementDbContext>();
+        services.AddScoped<IManagementDbContext, ManagementDbContext>();
 
         services.AddScoped<IUserRepository, UserRepository>();
 

@@ -1,3 +1,4 @@
+using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Routing;
 namespace Modules.Management.Api.Endpoints.Users.Login;
 
 /// <summary>
-/// Register <see cref="EndpointBase"/>.
+/// Login <see cref="EndpointBase"/>.
 /// </summary>
 internal sealed class LoginEndpoint : EndpointBase
 {
@@ -23,7 +24,7 @@ internal sealed class LoginEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope(StatusCodes.Status201Created)
+            .ProducesEnvelope<AccessToken>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "Login",
                 "Login to the system",

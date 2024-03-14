@@ -2,11 +2,12 @@ using Core.Application.Auth;
 using Core.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Modules.Management.Application.Abstractions;
 using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Infrastructure.Database;
 
-public class ManagementDbContext : ApplicationDbContext
+public class ManagementDbContext : ApplicationDbContext, IManagementDbContext
 {
     public override bool Enabled => true;
     protected override string Schema => "Management";

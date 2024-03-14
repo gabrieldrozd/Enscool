@@ -91,7 +91,7 @@ public abstract class ApplicationDbContext : DbContext
     {
         var aggregateRoots = ChangeTracker
             .Entries<IAggregateRoot>()
-            .Where(entityEntry => entityEntry.Entity.DomainEvents.Any())
+            .Where(entityEntry => entityEntry.Entity.DomainEvents.Count > 0)
             .ToList();
 
         var domainEvents = aggregateRoots.SelectMany(entityEntry => entityEntry.Entity.DomainEvents).ToList();
