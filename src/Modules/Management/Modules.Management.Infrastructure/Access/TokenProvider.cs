@@ -6,17 +6,17 @@ using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Auth;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Modules.Management.Application.Abstractions.Services;
+using Modules.Management.Application.Abstractions.Access;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Infrastructure.Services;
+namespace Modules.Management.Infrastructure.Access;
 
-internal sealed class TokenService : ITokenService
+internal sealed class TokenProvider : ITokenProvider
 {
     private readonly SigningCredentials _signingCredentials;
     private readonly JwtSettings _jwtSettings;
 
-    public TokenService(IOptions<AuthenticationSettings> settings)
+    public TokenProvider(IOptions<AccessSettings> settings)
     {
         var key = settings.Value.JwtSettings.IssuerSigningKey;
         _signingCredentials = new SigningCredentials(

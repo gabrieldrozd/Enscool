@@ -9,16 +9,6 @@ namespace Core.Application.Helpers;
 
 public static class SettingsExtensions
 {
-    public static IServiceCollection RegisterSettings<TSettings>(this IServiceCollection services, IConfiguration configuration, string sectionName)
-        where TSettings : class, ISettings, new()
-    {
-        Ensure.Not.NullOrEmpty(sectionName);
-
-        var section = configuration.GetSection(sectionName);
-        services.Configure<TSettings>(section);
-        return services;
-    }
-
     public static TSettings RegisterSettings<TSettings>(this IServiceCollection services, string sectionName)
         where TSettings : class, ISettings, new()
     {

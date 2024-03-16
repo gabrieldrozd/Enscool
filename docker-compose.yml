@@ -6,22 +6,22 @@ networks:
 
 services:
   # Can be commented out if API is not needed
-  enscool.bootstrapper:
-    container_name: Enscool.Bootstrapper
-    build:
-      context: .
-      dockerfile: src/Enscool.Bootstrapper/Dockerfile
-    environment:
-      - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_ENVIRONMENT=Development
-      - DatabaseSettings__ConnectionString=Host=enscool.postgres;Port=5432;Database=EnscoolDb;Username=postgres;Password=;
-    ports:
-      - "5000:8080"
-    depends_on:
-      - enscool.postgres
-      - enscool.seq
-    networks:
-      - Enscool.Network
+  # enscool.bootstrapper:
+  #   container_name: Enscool.Bootstrapper
+  #   build:
+  #     context: .
+  #     dockerfile: src/Enscool.Bootstrapper/Dockerfile
+  #   environment:
+  #     - ASPNETCORE_HTTP_PORTS=8080
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - DatabaseSettings__ConnectionString=Host=enscool.postgres;Port=5432;Database=EnscoolDb;Username=postgres;Password=;
+  #   ports:
+  #     - "5000:8080"
+  #   depends_on:
+  #     - enscool.postgres
+  #     - enscool.seq
+  #   networks:
+  #     - Enscool.Network
 
   enscool.postgres:
     image: postgres:latest
@@ -36,6 +36,18 @@ services:
       - ./.container/postgres:/var/lib/postgresql
       - ./.container/postgres:/var/log/postgresql
     command: -p 5432
+    networks:
+      - Enscool.Network
+
+  enscool.redis:
+    image: redis:latest
+    container_name: Enscool.Redis
+    hostname: Enscool.Redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.container/redis:/data
+      - ./.container/redis:/var/log/redis
     networks:
       - Enscool.Network
 

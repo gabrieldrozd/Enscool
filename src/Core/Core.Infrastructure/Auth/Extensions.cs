@@ -15,7 +15,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        var settings = services.RegisterSettings<AuthenticationSettings>(AuthenticationSettings.SectionName);
+        var settings = services.RegisterSettings<AccessSettings>(AccessSettings.SectionName);
         services
             .AddAuthentication(opt =>
             {

@@ -6,6 +6,7 @@ using Core.Infrastructure.Cores.Services;
 using Core.Infrastructure.Database;
 using Core.Infrastructure.Middlewares;
 using Core.Infrastructure.Security;
+using Core.Infrastructure.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +27,8 @@ internal static class Extensions
             .AddContexts()
             .AddModuleCores(assemblies)
             .AddServiceCores(assemblies)
-            .AddDatabase(assemblies);
+            .AddDatabase(assemblies)
+            .AddStorage();
 
         return services;
     }

@@ -4,8 +4,8 @@ using Common.Utilities.Resources;
 using Core.Application.Auth;
 using Core.Application.Communication.Internal.Commands;
 using Modules.Management.Application.Abstractions;
+using Modules.Management.Application.Abstractions.Access;
 using Modules.Management.Application.Abstractions.Repositories;
-using Modules.Management.Application.Abstractions.Services;
 using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Users.Commands.ActivateAccount;
@@ -13,16 +13,16 @@ namespace Modules.Management.Application.Features.Users.Commands.ActivateAccount
 internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAccountCommand, AccessModel>
 {
     private readonly IUserRepository _userRepository;
-    private readonly ITokenService _tokenService;
+    private readonly ITokenProvider _tokenProvider;
     private readonly IUnitOfWork _unitOfWork;
 
     public ActivateAccountCommandHandler(
         IUserRepository userRepository,
-        ITokenService tokenService,
+        ITokenProvider tokenProvider,
         IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
-        _tokenService = tokenService;
+        _tokenProvider = tokenProvider;
         _unitOfWork = unitOfWork;
     }
 
@@ -38,7 +38,7 @@ internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAc
         var password = Password.Create(request.Password);
         user.ActivateAccount(password);
 
-        var accessToken = _tokenService.Create(user);
+        var accessToken = _tokenProvider.Create(user);
         return await _unitOfWork.CommitAsync(cancellationToken)
             .MatchOrBadRequest(Result.Success.Ok(accessToken));
     }

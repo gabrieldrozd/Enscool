@@ -12,7 +12,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterSettings<AccountActivationSettings>(configuration, AccountActivationSettings.SectionName);
+        services.RegisterSettings<AccountActivationSettings>(AccountActivationSettings.SectionName);
         services.AddScoped<IActivationCodeService, ActivationCodeService>();
         services.AddScoped<IActivationLinkService, ActivationLinkService>();
 

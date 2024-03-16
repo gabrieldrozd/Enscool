@@ -4,20 +4,20 @@ using Core.Application.Communication.Internal.Queries;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
-using Modules.Management.Application.Abstractions.Services;
+using Modules.Management.Application.Abstractions.Access;
 
 namespace Modules.Management.Application.Features.Users.Queries;
 
 internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQuery, AccessModel>
 {
     private readonly IUserContext _userContext;
-    private readonly ITokenService _tokenService;
+    private readonly ITokenProvider _tokenProvider;
     private readonly IManagementDbContext _context;
 
-    public GetCurrentUserQueryHandler(IUserContext userContext, ITokenService tokenService, IManagementDbContext context)
+    public GetCurrentUserQueryHandler(IUserContext userContext, ITokenProvider tokenProvider, IManagementDbContext context)
     {
         _userContext = userContext;
-        _tokenService = tokenService;
+        _tokenProvider = tokenProvider;
         _context = context;
     }
 
@@ -32,7 +32,7 @@ internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQ
         if (user?.State is not UserState.Active)
             return Result.Failure.Unauthorized<AccessModel>();
 
-        var accessToken = _tokenService.Create(user);
+        var accessToken = _tokenProvider.Create(user);
         return Result.Success.Ok(accessToken);
     }
 }
