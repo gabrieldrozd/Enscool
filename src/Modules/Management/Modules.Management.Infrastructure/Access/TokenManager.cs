@@ -36,4 +36,10 @@ internal sealed class TokenManager : ITokenManager
             Role = user.Role
         };
     }
+
+    public async Task<bool> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
+        => await _refreshTokenStore.ValidateAsync(userId, refreshToken);
+
+    public async Task RevokeRefreshTokenAsync(Guid userId)
+        => await _refreshTokenStore.RevokeAsync(userId);
 }

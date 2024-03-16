@@ -46,7 +46,7 @@ internal sealed class RefreshTokenStore : IRefreshTokenStore
         if (value.IsNullOrEmpty)
             return false;
 
-        var storedToken = JsonSerializer.Deserialize<RefreshToken>(value!);
+        var storedToken = JsonSerializer.Deserialize<RefreshToken>(value.ToString());
         return storedToken is not null && storedToken.Value == token && !storedToken.IsExpired;
     }
 

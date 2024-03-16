@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;
 
@@ -8,11 +9,16 @@ namespace Core.Application.Auth;
 /// </summary>
 public sealed class RefreshToken
 {
-    public string Value { get; }
-    public Guid UserId { get; }
-    public DateTime Created { get; }
-    public DateTime Expires { get; }
+    public string Value { get; set; } = null!;
+    public Guid UserId { get; set; }
+    public DateTime Created { get; set; }
+    public DateTime Expires { get; set; }
     public bool IsExpired => Date.UtcNow >= Expires;
+
+    [JsonConstructor]
+    public RefreshToken()
+    {
+    }
 
     private RefreshToken(UserId userId, string value, int expiryInHours)
     {

@@ -1,4 +1,3 @@
-using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
