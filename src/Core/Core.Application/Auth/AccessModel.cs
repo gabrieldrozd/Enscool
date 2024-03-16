@@ -3,9 +3,10 @@ using Core.Domain.Shared.Enumerations.UserStates;
 
 namespace Core.Application.Auth;
 
-public sealed class AccessToken
+public sealed class AccessModel
 {
-    public string Token { get; init; } = string.Empty;
+    public string AccessToken { get; init; } = string.Empty;
+    public string RefreshToken { get; init; } = string.Empty;
     public long Expires { get; init; }
     public Guid UserId { get; init; }
     public Guid? InstitutionId { get; init; }

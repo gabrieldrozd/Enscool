@@ -10,4 +10,4 @@ namespace Modules.Management.Application.Features.Users.Commands.Login;
 public sealed record LoginCommand(
     string Email,
     string Password
-) : ITransactionCommand<AccessToken>;
+) : ITransactionCommand<AccessModel>;

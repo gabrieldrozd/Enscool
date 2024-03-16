@@ -6,7 +6,7 @@ using Modules.Management.Application.Abstractions.Services;
 
 namespace Modules.Management.Application.Features.Users.Commands.Login;
 
-internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, AccessToken>
+internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, AccessModel>
 {
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
@@ -17,14 +17,14 @@ internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, Access
         _tokenService = tokenService;
     }
 
-    public async Task<Result<AccessToken>> Handle(LoginCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AccessModel>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetAsync(request.Email, cancellationToken);
         if (user is null || !user.CanBeLoggedIn())
-            return Result.Failure.Unauthorized<AccessToken>();
+            return Result.Failure.Unauthorized<AccessModel>();
 
         if (user.Password is not null && !user.Password.Verify(request.Password))
-            return Result.Failure.Unauthorized<AccessToken>();
+            return Result.Failure.Unauthorized<AccessModel>();
 
         var token = _tokenService.Create(user);
         return Result.Success.Ok(token);

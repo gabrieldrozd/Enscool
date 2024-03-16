@@ -5,6 +5,6 @@ namespace Modules.Management.Application.Abstractions.Services;
 
 public interface ITokenService
 {
-    /// <summary>Creates a new <see cref="AccessToken"/> for the given <see cref="User"/>.</summary>
-    AccessToken Create(User user);
+    /// <summary>Creates a new <see cref="AccessModel"/> for the given <see cref="User"/>.</summary>
+    AccessModel Create(User user);
 }

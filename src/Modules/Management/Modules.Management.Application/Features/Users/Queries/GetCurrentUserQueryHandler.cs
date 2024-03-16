@@ -1,16 +1,14 @@
 using Common.Utilities.Primitives.Results;
-using Common.Utilities.Resources;
 using Core.Application.Auth;
 using Core.Application.Communication.Internal.Queries;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Services;
-using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Users.Queries;
 
-internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQuery, AccessToken>
+internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQuery, AccessModel>
 {
     private readonly IUserContext _userContext;
     private readonly ITokenService _tokenService;
@@ -23,7 +21,7 @@ internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQ
         _context = context;
     }
 
-    public async Task<Result<AccessToken>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<AccessModel>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
     {
         _userContext.EnsureInstitutionUserAuthenticated();
         var user = await _context.Users
@@ -32,7 +30,7 @@ internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQ
             .SingleOrDefaultAsync(cancellationToken);
 
         if (user?.State is not UserState.Active)
-            return Result.Failure.Unauthorized<AccessToken>();
+            return Result.Failure.Unauthorized<AccessModel>();
 
         var accessToken = _tokenService.Create(user);
         return Result.Success.Ok(accessToken);

@@ -26,7 +26,7 @@ internal sealed class TokenService : ITokenService
         _jwtSettings = settings.Value.JwtSettings;
     }
 
-    public AccessToken Create(User user)
+    public AccessModel Create(User user)
     {
         var expires = Date.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes);
 
@@ -51,9 +51,9 @@ internal sealed class TokenService : ITokenService
             signingCredentials: _signingCredentials);
 
         var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-        var accessToken = new AccessToken
+        var accessToken = new AccessModel
         {
-            Token = tokenValue,
+            AccessToken = tokenValue,
             Expires = expires.ToUnixSeconds(),
             UserId = user.Id.Value,
             InstitutionId = user.InstitutionId?.Value,

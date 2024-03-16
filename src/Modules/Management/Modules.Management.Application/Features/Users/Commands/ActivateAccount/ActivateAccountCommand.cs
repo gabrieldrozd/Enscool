@@ -11,4 +11,4 @@ public sealed record ActivateAccountCommand(
     Guid UserId,
     string Code,
     string Password
-) : ITransactionCommand<AccessToken>;
+) : ITransactionCommand<AccessModel>;

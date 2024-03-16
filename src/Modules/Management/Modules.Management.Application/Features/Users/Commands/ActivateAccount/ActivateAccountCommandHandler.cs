@@ -10,7 +10,7 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Users.Commands.ActivateAccount;
 
-internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAccountCommand, AccessToken>
+internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAccountCommand, AccessModel>
 {
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
@@ -26,14 +26,14 @@ internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAc
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<AccessToken>> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AccessModel>> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetAsync(request.UserId, cancellationToken);
         if (user is null || !user.CanBeActivated())
-            return Result.Failure.BadRequest<AccessToken>(Resource.UserActivationError);
+            return Result.Failure.BadRequest<AccessModel>(Resource.UserActivationError);
 
         if (!user.CurrentActivationCode.Verify(request.Code))
-            return Result.Failure.BadRequest<AccessToken>(Resource.UserActivationError);
+            return Result.Failure.BadRequest<AccessModel>(Resource.UserActivationError);
 
         var password = Password.Create(request.Password);
         user.ActivateAccount(password);

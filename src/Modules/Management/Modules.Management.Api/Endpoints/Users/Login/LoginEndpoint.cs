@@ -24,7 +24,7 @@ internal sealed class LoginEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope<AccessToken>(StatusCodes.Status200OK)
+            .ProducesEnvelope<AccessModel>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "Login",
                 "Login to the system",

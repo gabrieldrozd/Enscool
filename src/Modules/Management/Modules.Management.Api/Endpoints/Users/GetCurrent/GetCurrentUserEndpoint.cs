@@ -1,6 +1,5 @@
 using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
-using MailKit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +24,7 @@ internal sealed class GetCurrentUserEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .RequireAuthorization()
-            .ProducesEnvelope<AccessToken>(StatusCodes.Status200OK)
+            .ProducesEnvelope<AccessModel>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "GetCurrentUser",
                 "Get current user details",
