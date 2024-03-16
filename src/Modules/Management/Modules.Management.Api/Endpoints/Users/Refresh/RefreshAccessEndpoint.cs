@@ -31,8 +31,8 @@ internal sealed class RefreshAccessEndpoint : EndpointBase
                 "Refreshes access token and user data",
                 """
                 {
-                    "userId": "00000000-0000-0000-0000-000000000000",
-                    "refreshToken": "00000000-0000-0000-0000-000000000000"
+                    "userId": "8816c6f6-6eed-448c-8ebe-43c2a31849cf",
+                    "refreshToken": "8GAT9NI5vSyv7ZYBJfUptKrAxsHXUJ9id7Exejl3+iw="
                 }
                 """);
     }
