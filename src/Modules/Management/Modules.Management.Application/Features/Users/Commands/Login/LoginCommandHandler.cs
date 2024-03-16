@@ -9,12 +9,12 @@ namespace Modules.Management.Application.Features.Users.Commands.Login;
 internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, AccessModel>
 {
     private readonly IUserRepository _userRepository;
-    private readonly ITokenProvider _tokenProvider;
+    private readonly ITokenManager _tokenManager;
 
-    public LoginCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider)
+    public LoginCommandHandler(IUserRepository userRepository, ITokenManager tokenManager)
     {
         _userRepository = userRepository;
-        _tokenProvider = tokenProvider;
+        _tokenManager = tokenManager;
     }
 
     public async Task<Result<AccessModel>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, Access
         if (user.Password is not null && !user.Password.Verify(request.Password))
             return Result.Failure.Unauthorized<AccessModel>();
 
-        var token = _tokenProvider.Create(user);
-        return Result.Success.Ok(token);
+        var accessModel = await _tokenManager.GenerateAsync(user);
+        return Result.Success.Ok(accessModel);
     }
 }

@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.Users.Queries;
+using Modules.Management.Application.Features.Users.Queries.GetCurrentUser;
 
 namespace Modules.Management.Api.Endpoints.Users.GetCurrent;
 
@@ -24,7 +24,7 @@ internal sealed class GetCurrentUserEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .RequireAuthorization()
-            .ProducesEnvelope<AccessModel>(StatusCodes.Status200OK)
+            .ProducesEnvelope<UserDto>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "GetCurrentUser",
                 "Get current user details",

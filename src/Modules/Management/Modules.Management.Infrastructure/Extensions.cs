@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Management.Application.Abstractions.Access;
 using Modules.Management.Infrastructure.Access;
 using Modules.Management.Infrastructure.Database;
 

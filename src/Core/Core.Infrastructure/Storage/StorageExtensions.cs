@@ -1,5 +1,4 @@
 using Core.Application.Helpers;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 

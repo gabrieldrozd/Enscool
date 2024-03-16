@@ -11,13 +11,17 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Infrastructure.Access;
 
-internal sealed class TokenProvider : ITokenProvider
+internal sealed class AccessTokenProvider : IAccessTokenProvider
 {
+    private readonly IRefreshTokenStore _refreshTokenStore;
     private readonly SigningCredentials _signingCredentials;
     private readonly JwtSettings _jwtSettings;
 
-    public TokenProvider(IOptions<AccessSettings> settings)
+    public AccessTokenProvider(
+        IRefreshTokenStore refreshTokenStore,
+        IOptions<AccessSettings> settings)
     {
+        _refreshTokenStore = refreshTokenStore;
         var key = settings.Value.JwtSettings.IssuerSigningKey;
         _signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
@@ -26,7 +30,7 @@ internal sealed class TokenProvider : ITokenProvider
         _jwtSettings = settings.Value.JwtSettings;
     }
 
-    public AccessModel Create(User user)
+    public string Create(User user)
     {
         var expires = Date.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes);
 
@@ -50,21 +54,8 @@ internal sealed class TokenProvider : ITokenProvider
             expires: expires.DateTime,
             signingCredentials: _signingCredentials);
 
-        var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-        var accessToken = new AccessModel
-        {
-            AccessToken = tokenValue,
-            Expires = expires.ToUnixSeconds(),
-            UserId = user.Id.Value,
-            InstitutionId = user.InstitutionId?.Value,
-            FirstName = user.FullName.First,
-            MiddleName = user.FullName.Middle,
-            LastName = user.FullName.Last,
-            Email = user.Email.Value,
-            State = user.State,
-            Role = user.Role
-        };
-
-        return accessToken;
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenValue = tokenHandler.WriteToken(token);
+        return tokenValue;
     }
 }

@@ -3,8 +3,8 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Abstractions.Access;
 
-public interface ITokenProvider
+public interface IAccessTokenProvider
 {
     /// <summary>Creates a new <see cref="AccessModel"/> for the given <see cref="User"/>.</summary>
-    AccessModel Create(User user);
+    string Create(User user);
 }

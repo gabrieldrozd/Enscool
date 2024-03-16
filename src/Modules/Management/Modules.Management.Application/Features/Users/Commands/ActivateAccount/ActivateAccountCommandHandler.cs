@@ -13,16 +13,16 @@ namespace Modules.Management.Application.Features.Users.Commands.ActivateAccount
 internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAccountCommand, AccessModel>
 {
     private readonly IUserRepository _userRepository;
-    private readonly ITokenProvider _tokenProvider;
+    private readonly ITokenManager _tokenManager;
     private readonly IUnitOfWork _unitOfWork;
 
     public ActivateAccountCommandHandler(
         IUserRepository userRepository,
-        ITokenProvider tokenProvider,
+        ITokenManager tokenManager,
         IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
-        _tokenProvider = tokenProvider;
+        _tokenManager = tokenManager;
         _unitOfWork = unitOfWork;
     }
 
@@ -38,8 +38,8 @@ internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAc
         var password = Password.Create(request.Password);
         user.ActivateAccount(password);
 
-        var accessToken = _tokenProvider.Create(user);
+        var accessModel = await _tokenManager.GenerateAsync(user);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok(accessToken));
+            .MatchOrBadRequest(Result.Success.Ok(accessModel));
     }
 }

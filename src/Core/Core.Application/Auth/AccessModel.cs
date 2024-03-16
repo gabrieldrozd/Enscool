@@ -8,7 +8,6 @@ public sealed class AccessModel
     public string AccessToken { get; init; } = string.Empty;
     public string RefreshToken { get; init; } = string.Empty;
 
-    public long Expires { get; init; }
     public Guid UserId { get; init; }
     public Guid? InstitutionId { get; init; }
     public string FirstName { get; init; } = string.Empty;

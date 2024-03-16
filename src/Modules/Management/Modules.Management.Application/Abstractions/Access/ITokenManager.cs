@@ -1,12 +1,9 @@
 using Core.Application.Auth;
-using Core.Domain.Shared.EntityIds;
+using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Abstractions.Access;
 
 public interface ITokenManager
 {
-    RefreshToken GenerateRefreshToken(UserId userId);
-    Task StoreRefreshToken(RefreshToken refreshToken);
-    Task<bool> ValidateRefreshToken(Guid userId, string token);
-    Task RevokeRefreshTokenAsync(Guid userId);
+    Task<AccessModel> GenerateAsync(User user);
 }
