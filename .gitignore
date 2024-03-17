@@ -349,3 +349,4 @@ healthchecksdb
 MigrationBackup/
 .idea/
 src/Enscool.Bootstrapper/Logs/
+.container/

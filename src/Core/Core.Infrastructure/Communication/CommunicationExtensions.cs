@@ -15,7 +15,6 @@ public static class CommunicationExtensions
 
             cfg.AddOpenBehavior(typeof(LoggingBehavior<,>), ServiceLifetime.Scoped);
             cfg.AddOpenBehavior(typeof(ValidationBehavior<,>), ServiceLifetime.Scoped);
-            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>), ServiceLifetime.Scoped);
         });
 
         return services;

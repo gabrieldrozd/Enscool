@@ -22,10 +22,6 @@ var appServices = ProjectLoader.LoadProjects<IServiceCore>(assemblies);
 
 #region services
 
-// TODO: Test whole setup thoroughly
-// TODO: Test whole setup thoroughly
-// TODO: Test whole setup thoroughly
-
 var services = builder.Services;
 
 services.AddCoreInfrastructure(assemblies, builder.Configuration);
@@ -37,10 +33,10 @@ services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
     cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
     cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 });
 
 services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
+services.Decorate<IMediator, MediatorTransactionDecorator>();
 
 #endregion
 
@@ -63,31 +59,6 @@ app.MapGet("/", context
          Go to: {app.Urls.Select(x => x).First()}/docs
          """
     ));
-
-// app
-//     .MapPostEndpoint(
-//         ManagementEndpointInfo.Users,
-//         async (RegisterRequest request, ISender sender) =>
-//         {
-//             var result = await sender.Send(request.Map());
-//             var envelope = result.ToEnvelope();
-//             return new EnvelopeResult(envelope);
-//         })
-//     .AllowAnonymous()
-//     .ProducesEnvelope(StatusCodes.Status201Created)
-//     .WithDocumentation(
-//         "Register",
-//         "Register as Institution Admin",
-//         "Registers new InstitutionAdmin user with new InstitutionId",
-//         """
-//         {
-//             "Email": "example_email@email.com",
-//             "Phone": "+48512456456",
-//             "FirstName": "John",
-//             "MiddleName": null,
-//             "LastName": "Doe"
-//         }
-//         """);
 
 #endregion
 

@@ -66,16 +66,6 @@ public abstract class ApplicationDbContext : DbContext
         return await base.SaveChangesAsync(cancellationToken);
     }
 
-    // TODO: Think it through and decide whether to keep this method or not
-    // TODO: Incorporate this method into UnitOfWork (with option to pick whether to publish first and then save changes or vice versa)
-    public async Task<int> SaveChangesAndPublishDomainEventsAsync(CancellationToken cancellationToken = default)
-    {
-        var result = await base.SaveChangesAsync(cancellationToken);
-        if (result > 0) await PublishDomainEvents(cancellationToken);
-
-        return result;
-    }
-
     /// <summary>
     /// Updates the entities implementing <see cref="IEntity"/> interface.
     /// </summary>
