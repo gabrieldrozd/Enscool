@@ -4,6 +4,7 @@ using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
+using Modules.Management.Domain.Users.Events;
 
 namespace Modules.Management.Domain.Users;
 
@@ -60,6 +61,9 @@ public sealed class User : AggregateRoot<UserId>
     {
         var user = new User(UserId.New, email, phone, fullName, UserRole.InstitutionAdmin, InstitutionId.New);
         user.AddActivationCode(activationCode);
+
+        user.Raise(new InstitutionAdminRegisteredEvent(user.Id, user.Email, user.Phone, user.FullName, user.InstitutionId!));
+
         return user;
     }
 

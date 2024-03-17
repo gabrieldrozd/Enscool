@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Email", "src\Services\Services.Email\Services.Email.csproj", "{4C56375C-777C-45A2-A584-0CE22F63B4C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Messaging", "src\Core\Core.Messaging\Core.Messaging.csproj", "{B667125E-5E6A-48DC-A477-559CE18441AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Messaging", "src\Modules\Management\Modules.Management.Messaging\Modules.Management.Messaging.csproj", "{49236F19-796D-4D59-8ACC-E0EB729CB56F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{4C56375C-777C-45A2-A584-0CE22F63B4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C56375C-777C-45A2-A584-0CE22F63B4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C56375C-777C-45A2-A584-0CE22F63B4C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B667125E-5E6A-48DC-A477-559CE18441AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B667125E-5E6A-48DC-A477-559CE18441AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B667125E-5E6A-48DC-A477-559CE18441AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B667125E-5E6A-48DC-A477-559CE18441AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49236F19-796D-4D59-8ACC-E0EB729CB56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49236F19-796D-4D59-8ACC-E0EB729CB56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49236F19-796D-4D59-8ACC-E0EB729CB56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49236F19-796D-4D59-8ACC-E0EB729CB56F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +119,7 @@ Global
 		{366F1340-157D-4991-9522-C88082B20973} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
 		{47A59EF6-62E5-4718-9E78-1EF14C79B026} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
 		{4C56375C-777C-45A2-A584-0CE22F63B4C7} = {47A59EF6-62E5-4718-9E78-1EF14C79B026}
+		{B667125E-5E6A-48DC-A477-559CE18441AD} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
+		{49236F19-796D-4D59-8ACC-E0EB729CB56F} = {67BE1D8D-3D3C-43A0-9FCD-EB8F804508B2}
 	EndGlobalSection
 EndGlobal

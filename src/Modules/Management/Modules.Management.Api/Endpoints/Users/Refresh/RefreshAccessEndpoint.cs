@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Routing;
 namespace Modules.Management.Api.Endpoints.Users.Refresh;
 
 /// <summary>
-/// Login <see cref="EndpointBase"/>.
+/// Refresh access <see cref="EndpointBase"/>.
 /// </summary>
 internal sealed class RefreshAccessEndpoint : EndpointBase
 {
