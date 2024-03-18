@@ -13,6 +13,7 @@ public static class DatabaseExtensions
         services.AddDatabaseContext<ManagementDbContext>();
         services.AddScoped<IManagementDbContext, ManagementDbContext>();
 
+        services.AddScoped<IInstitutionRepository, InstitutionRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddUnitOfWork<IUnitOfWork, ManagementUnitOfWork>();

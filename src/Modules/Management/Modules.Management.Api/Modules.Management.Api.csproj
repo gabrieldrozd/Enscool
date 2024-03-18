@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Modules.Management.Infrastructure\Modules.Management.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules.Management.Messaging\Modules.Management.Messaging.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +23,10 @@
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Endpoints\Institutions\" />
     </ItemGroup>
 
 </Project>
