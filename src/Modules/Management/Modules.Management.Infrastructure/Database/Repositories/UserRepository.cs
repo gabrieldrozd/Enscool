@@ -16,12 +16,12 @@ public sealed class UserRepository : Repository<User, ManagementDbContext>, IUse
         _context = context;
     }
 
+    public async Task<bool> ExistsAsync(Email email, CancellationToken cancellationToken = default)
+        => await _context.Users.AnyAsync(x => x.Email == email, cancellationToken);
+
     public async Task<User?> GetAsync(UserId userId, CancellationToken cancellationToken = default)
         => await _context.Users.FindAsync([userId], cancellationToken);
 
     public async Task<User?> GetAsync(Email email, CancellationToken cancellationToken = default)
         => await _context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
-
-    public Task<bool> ExistsWithEmailAsync(Email email, CancellationToken cancellationToken = default)
-        => _context.Users.AnyAsync(x => x.Email == email, cancellationToken);
 }

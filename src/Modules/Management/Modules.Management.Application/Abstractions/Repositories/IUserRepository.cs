@@ -7,7 +7,7 @@ namespace Modules.Management.Application.Abstractions.Repositories;
 
 public interface IUserRepository : IRepository<User>
 {
+    Task<bool> ExistsAsync(Email email, CancellationToken cancellationToken = default);
     Task<User?> GetAsync(UserId userId, CancellationToken cancellationToken = default);
     Task<User?> GetAsync(Email email, CancellationToken cancellationToken = default);
-    Task<bool> ExistsWithEmailAsync(Email email, CancellationToken cancellationToken = default);
 }

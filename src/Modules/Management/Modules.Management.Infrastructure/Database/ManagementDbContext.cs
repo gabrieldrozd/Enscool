@@ -3,6 +3,7 @@ using Core.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
+using Modules.Management.Domain.Institutions;
 using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Infrastructure.Database;
@@ -14,6 +15,7 @@ public class ManagementDbContext : ApplicationDbContext, IManagementDbContext
 
     #region DbSets
 
+    public DbSet<Institution> Institutions => Set<Institution>();
     public DbSet<User> Users => Set<User>();
 
     #endregion

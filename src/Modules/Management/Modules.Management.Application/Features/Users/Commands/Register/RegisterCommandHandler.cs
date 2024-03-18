@@ -36,7 +36,7 @@ internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 
     public async Task<Result> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        if (await _userRepository.ExistsWithEmailAsync(request.Email, cancellationToken))
+        if (await _userRepository.ExistsAsync(request.Email, cancellationToken))
             return Result.Failure.BadRequest(Resource.EmailTaken);
 
         var user = User.CreateInitialInstitutionAdmin(

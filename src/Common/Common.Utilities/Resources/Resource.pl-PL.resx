@@ -119,4 +119,7 @@
     <data name="UserActivationError" xml:space="preserve">
         <value>Wystąpił błąd podczas aktywacji użytkownika</value>
     </data>
+    <data name="InstitutionAlreadyExists" xml:space="preserve">
+        <value>Instytucja o podanym id '{0}' już istnieje</value>
+    </data>
 </root>
