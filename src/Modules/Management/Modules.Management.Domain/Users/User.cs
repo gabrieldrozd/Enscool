@@ -88,4 +88,6 @@ public sealed class User : AggregateRoot<UserId>
     public bool CanBeActivated() => State is UserState.Pending && CurrentActivationCode is not null;
 
     public bool CanBeLoggedIn() => State is UserState.Active;
+
+    public void ChangePassword(Password password) => Password = password;
 }

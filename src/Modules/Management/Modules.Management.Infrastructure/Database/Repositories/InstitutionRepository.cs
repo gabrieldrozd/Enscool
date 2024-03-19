@@ -1,5 +1,4 @@
 using Core.Domain.Shared.EntityIds;
-using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions.Repositories;

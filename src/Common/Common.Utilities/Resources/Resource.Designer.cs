@@ -69,6 +69,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred during password change.
+        /// </summary>
+        public static string ChangePasswordError {
+            get {
+                return ResourceManager.GetString("ChangePasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database unexpected error occurred while processing the request.
         /// </summary>
         public static string DatabaseError {

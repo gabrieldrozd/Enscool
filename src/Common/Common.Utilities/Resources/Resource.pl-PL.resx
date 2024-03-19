@@ -122,4 +122,7 @@
     <data name="InstitutionAlreadyExists" xml:space="preserve">
         <value>Instytucja o podanym id '{0}' już istnieje</value>
     </data>
+    <data name="ChangePasswordError" xml:space="preserve">
+        <value>Wystąpił błąd podczas zmiany hasła</value>
+    </data>
 </root>
