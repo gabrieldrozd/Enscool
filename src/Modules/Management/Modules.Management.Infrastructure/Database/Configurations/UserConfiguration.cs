@@ -56,6 +56,27 @@ internal sealed class UserConfiguration : AggregateConfiguration<User>
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
         });
 
+        builder.OwnsMany(x => x.PasswordResetCodes, resetCode =>
+        {
+            resetCode.ToTable("UserPasswordResetCodes");
+            resetCode.Property(x => x.Value)
+                .IsRequired();
+
+            resetCode.Property(x => x.Expires)
+                .HasConversion<DateConverter>()
+                .IsRequired();
+
+            resetCode.Property(x => x.IsActive)
+                .IsRequired();
+
+            resetCode.Property(x => x.CreatedAt)
+                .HasConversion<DateConverter>()
+                .IsRequired();
+
+            builder.Metadata.FindNavigation(nameof(User.PasswordResetCodes))!
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+        });
+
         #region Indexes
 
         builder.HasIndex(x => x.Email).IsUnique();

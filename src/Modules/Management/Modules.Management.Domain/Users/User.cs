@@ -14,6 +14,7 @@ namespace Modules.Management.Domain.Users;
 public sealed class User : AggregateRoot<UserId>
 {
     private readonly List<ActivationCode> _activationCodes = [];
+    private readonly List<PasswordResetCode> _passwordResetCodes = [];
 
     public UserState State { get; private set; } = UserState.Pending;
     public Email Email { get; private set; } = default!;
@@ -23,8 +24,10 @@ public sealed class User : AggregateRoot<UserId>
     public UserRole Role { get; }
 
     public IReadOnlyList<ActivationCode> ActivationCodes => _activationCodes.AsReadOnly();
+    public IReadOnlyList<PasswordResetCode> PasswordResetCodes => _passwordResetCodes.AsReadOnly();
 
     public ActivationCode? CurrentActivationCode => _activationCodes.MaxBy(x => x.CreatedAt);
+    public PasswordResetCode? CurrentPasswordResetCode => _passwordResetCodes.MaxBy(x => x.CreatedAt);
 
     private User()
     {
@@ -84,10 +87,16 @@ public sealed class User : AggregateRoot<UserId>
         Password = password;
     }
 
+    public void AddPasswordResetCode(PasswordResetCode code)
+    {
+        _passwordResetCodes.ForEach(x => x.Deactivate());
+        _passwordResetCodes.Add(code);
+    }
+
+    public void ChangePassword(Password password) => Password = password;
+
     [MemberNotNullWhen(true, nameof(CurrentActivationCode))]
     public bool CanBeActivated() => State is UserState.Pending && CurrentActivationCode is not null;
 
     public bool CanBeLoggedIn() => State is UserState.Active;
-
-    public void ChangePassword(Password password) => Password = password;
 }
