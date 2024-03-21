@@ -52,6 +52,7 @@ internal static class SwaggerExtensions
 
                 swagger.OperationFilter<LanguageHeaderParameter>();
                 swagger.OperationFilter<RoleOperationFilter>();
+                swagger.DocumentFilter<EndpointsOrderFilter>();
             });
 
         return services;
@@ -67,7 +68,7 @@ internal static class SwaggerExtensions
 
             foreach (var group in ApiGroups.GetNameValueDictionary())
             {
-                options.SwaggerEndpoint($"/swagger/{group.Value}/swagger.json", $"{group.Key} API");
+                options.SwaggerEndpoint($"/swagger/{group.Value}/swagger.json", $"Enscool {group.Key} API");
             }
         });
 

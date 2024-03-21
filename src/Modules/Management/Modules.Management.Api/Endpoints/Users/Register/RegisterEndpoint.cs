@@ -15,6 +15,7 @@ internal sealed class RegisterEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapPostEndpoint(
+                "register",
                 ManagementEndpointInfo.Access,
                 async (RegisterRequest request, ISender sender) =>
                 {

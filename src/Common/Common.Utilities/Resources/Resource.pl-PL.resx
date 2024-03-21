@@ -128,4 +128,7 @@
     <data name="GeneratePasswordResetCodeError" xml:space="preserve">
         <value>Wystąpił błąd podczas generowania kodu resetującego hasło</value>
     </data>
+    <data name="PasswordResetError" xml:space="preserve">
+        <value>Wystąpił błąd podczas resetowania hasła</value>
+    </data>
 </root>

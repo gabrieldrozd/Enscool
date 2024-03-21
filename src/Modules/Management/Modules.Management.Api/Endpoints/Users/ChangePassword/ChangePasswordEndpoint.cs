@@ -15,7 +15,7 @@ internal sealed class ChangePasswordEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapPostEndpoint(
-                "change-password",
+                "password/change",
                 ManagementEndpointInfo.Access,
                 async (ChangePasswordRequest request, ISender sender) =>
                 {

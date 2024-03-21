@@ -4,7 +4,6 @@ using Common.Utilities.Resources;
 using Core.Application.Auth;
 using Core.Application.Communication.Internal.Commands;
 using Modules.Management.Application.Abstractions;
-using Modules.Management.Application.Abstractions.Access;
 using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Users;
 

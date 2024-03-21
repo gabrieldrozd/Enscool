@@ -204,6 +204,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred during password reset.
+        /// </summary>
+        public static string PasswordResetError {
+            get {
+                return ResourceManager.GetString("PasswordResetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object cannot be restored.
         /// </summary>
         public static string RestorationError {

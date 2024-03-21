@@ -128,4 +128,7 @@
     <data name="GeneratePasswordResetCodeError" xml:space="preserve">
         <value>Error occurred during password reset code generation</value>
     </data>
+    <data name="PasswordResetError" xml:space="preserve">
+        <value>Error occurred during password reset</value>
+    </data>
 </root>

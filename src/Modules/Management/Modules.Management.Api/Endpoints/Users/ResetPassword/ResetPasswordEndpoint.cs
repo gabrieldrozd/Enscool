@@ -4,20 +4,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.GeneratePasswordResetCode;
+namespace Modules.Management.Api.Endpoints.Users.ResetPassword;
 
 /// <summary>
-/// Generate password reset code <see cref="EndpointBase"/>.
+/// Register <see cref="EndpointBase"/>.
 /// </summary>
-internal sealed class GeneratePasswordResetCodeEndpoint : EndpointBase
+internal sealed class ResetPasswordEndpoint : EndpointBase
 {
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapPostEndpoint(
-                "password/reset-code",
+                "password/reset",
                 ManagementEndpointInfo.Access,
-                async (GeneratePasswordResetCodeRequest request, ISender sender) =>
+                async (ResetPasswordRequest request, ISender sender) =>
                 {
                     var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
@@ -25,12 +25,14 @@ internal sealed class GeneratePasswordResetCodeEndpoint : EndpointBase
             .AllowAnonymous()
             .ProducesEnvelope(StatusCodes.Status200OK)
             .WithDocumentation(
-                "GeneratePasswordResetCode",
-                "Generate password reset code",
-                "Generates a password reset code for the user with the specified email.",
+                "ResetPassword",
+                "Reset Password",
+                "Resets the password.",
                 """
                 {
-                    "email": "email@email.com"
+                    "email": "example_email@email.com",
+                    "code": "1234-5678",
+                    "newPassword": "newPassword123!"
                 }
                 """);
     }

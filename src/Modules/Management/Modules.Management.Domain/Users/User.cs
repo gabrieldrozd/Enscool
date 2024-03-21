@@ -70,6 +70,8 @@ public sealed class User : AggregateRoot<UserId>
         return user;
     }
 
+    #region Activation
+
     /// <summary>
     /// Adds activation code to the <see cref="User"/>.
     /// Deactivates all previous activation codes.
@@ -87,16 +89,35 @@ public sealed class User : AggregateRoot<UserId>
         Password = password;
     }
 
+    #endregion
+
+    #region Password
+
+    public void ChangePassword(Password password)
+        => Password = password;
+
     public void AddPasswordResetCode(PasswordResetCode code)
     {
         _passwordResetCodes.ForEach(x => x.Deactivate());
         _passwordResetCodes.Add(code);
     }
 
-    public void ChangePassword(Password password) => Password = password;
+    public void ResetPassword(Password create)
+    {
+        _passwordResetCodes.ForEach(x => x.Deactivate());
+        Password = create;
+    }
+
+    #endregion
+
+    [MemberNotNullWhen(true, nameof(CurrentPasswordResetCode))]
+    public bool CanResetPassword()
+        => State is UserState.Active && CurrentPasswordResetCode is not null;
 
     [MemberNotNullWhen(true, nameof(CurrentActivationCode))]
-    public bool CanBeActivated() => State is UserState.Pending && CurrentActivationCode is not null;
+    public bool CanBeActivated()
+        => State is UserState.Pending && CurrentActivationCode is not null;
 
-    public bool CanBeLoggedIn() => State is UserState.Active;
+    public bool CanBeLoggedIn()
+        => State is UserState.Active;
 }
