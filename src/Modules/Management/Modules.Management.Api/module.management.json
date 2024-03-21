@@ -7,5 +7,8 @@
         "BaseUrl": "http://localhost:3000",
         "ActivationLinkFormat": "{0}/activate?userId={1}&code={2}",
         "CodeExpiryInHours": 24
+    },
+    "PasswordResetSettings": {
+        "CodeExpiryInHours": 1
     }
 }

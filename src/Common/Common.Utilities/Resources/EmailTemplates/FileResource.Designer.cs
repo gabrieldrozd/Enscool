@@ -67,7 +67,7 @@ namespace Common.Utilities.Resources.EmailTemplates {
         ///    Thank you for choosing Enscool. We are happy to have you on board! 😊🎉&lt;br&gt;
         ///    You have successfully registered your institution on our website.&lt;br&gt;
         ///    &lt;br&gt;
-        ///    Your account and school are not yet activated&lt;br&gt;
+        ///    Your account and institution are not yet activated&lt;br&gt;
         ///    Please click on the link below to activate them ⬇️&lt;br&gt;
         ///    &lt;a href=&quot;{{activation_link}}&quot;&gt;Activate! 🚀&lt;/a&gt;&lt;br&gt;
         ///
@@ -75,12 +75,31 @@ namespace Common.Utilities.Resources.EmailTemplates {
         ///
         ///    &lt;div&gt;
         ///        Best regards 💜 &lt;br&gt;
-        ///        Enscool
-        ///   [rest of string was truncated]&quot;;.
+        ///        Enscoo [rest of string was truncated]&quot;;.
         /// </summary>
         public static string InstitutionRegisteredEmailTemplate {
             get {
                 return ResourceManager.GetString("InstitutionRegisteredEmailTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wisse - Reset Password Code 🔒🗝️
+        ///&lt;div&gt;
+        ///    &lt;p&gt;Hello, {{user_name}} 👋🏽&lt;/p&gt;
+        ///
+        ///    It seems that you forgot or lost your password. No worries, we got you covered! 😎
+        ///    &lt;br&gt;&lt;br&gt;
+        ///    Here is your password reset code:
+        ///    &lt;span style=&quot;background-color: #6366f1; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; -webkit-user-select: all; -moz-user-select: all; -ms-user-select: all; user-select: all; cursor: pointer;&quot;&gt;
+        ///        {{reset_code}}
+        ///    &lt;/span&gt;
+        ///    &lt;br&gt;&lt;br&gt;
+        ///    &lt;strong&gt;I [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PasswordResetCodeEmailTemplate {
+            get {
+                return ResourceManager.GetString("PasswordResetCodeEmailTemplate", resourceCulture);
             }
         }
         

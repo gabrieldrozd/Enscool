@@ -114,6 +114,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred during password reset code generation.
+        /// </summary>
+        public static string GeneratePasswordResetCodeError {
+            get {
+                return ResourceManager.GetString("GeneratePasswordResetCodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Institution with given id &apos;{0}&apos; already exists.
         /// </summary>
         public static string InstitutionAlreadyExists {

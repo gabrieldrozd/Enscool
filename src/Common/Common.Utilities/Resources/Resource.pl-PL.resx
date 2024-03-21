@@ -125,4 +125,7 @@
     <data name="ChangePasswordError" xml:space="preserve">
         <value>Wystąpił błąd podczas zmiany hasła</value>
     </data>
+    <data name="GeneratePasswordResetCodeError" xml:space="preserve">
+        <value>Wystąpił błąd podczas generowania kodu resetującego hasło</value>
+    </data>
 </root>

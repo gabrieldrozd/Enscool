@@ -5,7 +5,7 @@ using Modules.Management.Domain.Users;
 namespace Modules.Management.Application.Features.Users.Commands.ChangePassword;
 
 /// <summary>
-/// Activates <see cref="User"/> account.
+/// Changes <see cref="User"/> password.
 /// </summary>
 public sealed record ChangePasswordCommand(
     string OldPassword,
