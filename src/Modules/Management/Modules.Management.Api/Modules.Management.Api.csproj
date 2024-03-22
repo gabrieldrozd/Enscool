@@ -27,7 +27,6 @@
 
     <ItemGroup>
       <Folder Include="Endpoints\Institutions\" />
-      <Folder Include="Endpoints\Users\Logout\" />
     </ItemGroup>
 
 </Project>
