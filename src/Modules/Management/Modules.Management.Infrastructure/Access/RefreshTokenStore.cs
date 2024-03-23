@@ -27,7 +27,7 @@ internal sealed class RefreshTokenStore : IRefreshTokenStore
     public RefreshToken Generate(UserId userId)
     {
         var tokenValue = GenerateRandomTokenString();
-        return RefreshToken.Create(userId, tokenValue, _settings.ExpiryInHours);
+        return RefreshToken.Create(userId, tokenValue, _settings.ExpiryInMinutes);
     }
 
     public async Task StoreAsync(RefreshToken refreshToken)

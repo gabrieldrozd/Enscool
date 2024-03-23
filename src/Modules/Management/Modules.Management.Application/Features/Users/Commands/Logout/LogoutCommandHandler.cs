@@ -28,6 +28,8 @@ internal sealed class LogoutCommandHandler : ICommandHandler<LogoutCommand>
         var user = await _userRepository.GetAsync(_userContext.UserId, cancellationToken);
         if (user is null) return Result.Failure.NotFound();
 
+        // TODO: Block access token
+
         await _tokenManager.RevokeRefreshTokenAsync(user.Id);
         return Result.Success.Ok();
     }

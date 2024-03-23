@@ -8,25 +8,20 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Modules.Management.Application.Abstractions.Access;
 using Modules.Management.Domain.Users;
+using StackExchange.Redis;
 
 namespace Modules.Management.Infrastructure.Access;
 
-internal sealed class AccessTokenProvider : IAccessTokenProvider
+internal sealed class AccessTokenStore : IAccessTokenStore
 {
-    private readonly IRefreshTokenStore _refreshTokenStore;
-    private readonly SigningCredentials _signingCredentials;
+    private const string BlockedTokensKey = "BlockedTokens";
+
+    private readonly IDatabase _redisDatabase;
     private readonly JwtSettings _jwtSettings;
 
-    public AccessTokenProvider(
-        IRefreshTokenStore refreshTokenStore,
-        IOptions<AccessSettings> settings)
+    public AccessTokenStore(IConnectionMultiplexer connectionMultiplexer, IOptions<AccessSettings> settings)
     {
-        _refreshTokenStore = refreshTokenStore;
-        var key = settings.Value.JwtSettings.IssuerSigningKey;
-        _signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
-            SecurityAlgorithms.HmacSha256);
-
+        _redisDatabase = connectionMultiplexer.GetDatabase();
         _jwtSettings = settings.Value.JwtSettings;
     }
 
@@ -52,10 +47,17 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
             issuer: _jwtSettings.Issuer,
             audience: _jwtSettings.Audience,
             expires: expires.DateTime,
-            signingCredentials: _signingCredentials);
+            signingCredentials: new SigningCredentials(
+                key: new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.IssuerSigningKey)),
+                algorithm: SecurityAlgorithms.HmacSha256));
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var tokenValue = tokenHandler.WriteToken(token);
-        return tokenValue;
+        return tokenHandler.WriteToken(token);
     }
+
+    public async Task BlockAsync(Guid userId, string accessToken)
+        => await _redisDatabase.SetAddAsync(BlockedTokensKey, accessToken);
+
+    public async Task<bool> IsBlockedAsync(Guid userId, string accessToken)
+        => await _redisDatabase.SetContainsAsync(BlockedTokensKey, accessToken);
 }

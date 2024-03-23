@@ -20,18 +20,18 @@ public sealed class RefreshToken
     {
     }
 
-    private RefreshToken(UserId userId, string value, int expiryInHours)
+    private RefreshToken(UserId userId, string value, int expiryInMinutes)
     {
         UserId = userId;
         Value = value;
 
         Created = Date.UtcNow;
-        Expires = Created.AddHours(expiryInHours);
+        Expires = Created.AddMinutes(expiryInMinutes);
     }
 
     /// <summary>
     /// Creates new instance of <see cref="RefreshToken"/>.
     /// </summary>
-    public static RefreshToken Create(UserId userId, string value, int expiryInHours)
-        => new(userId, value, expiryInHours);
+    public static RefreshToken Create(UserId userId, string value, int expiryInMinutes)
+        => new(userId, value, expiryInMinutes);
 }

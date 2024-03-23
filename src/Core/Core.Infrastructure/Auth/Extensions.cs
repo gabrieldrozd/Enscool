@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Core.Application.Helpers;
 using Core.Infrastructure.Auth.Api;
@@ -25,6 +26,9 @@ internal static class Extensions
             })
             .AddJwtBearer(opt =>
             {
+                opt.SaveToken = true;
+                opt.IncludeErrorDetails = true;
+                opt.RequireHttpsMetadata = false;
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -33,11 +37,17 @@ internal static class Extensions
                     ValidateLifetime = true,
                     ValidIssuer = settings.JwtSettings.Issuer,
                     ValidAudience = settings.JwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSettings.IssuerSigningKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSettings.IssuerSigningKey)),
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
-        services.AddAuthorization();
+        services.AddAuthorizationBuilder()
+            .SetDefaultPolicy(new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .Build());
+
         services.AddSingleton<IAuthorizationHandler, AuthenticatedRequirementHandler>();
         services.AddSingleton<IAuthorizationHandler, RoleRequirementHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();

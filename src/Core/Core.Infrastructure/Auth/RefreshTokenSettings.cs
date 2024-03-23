@@ -4,6 +4,6 @@ namespace Core.Infrastructure.Auth;
 
 public class RefreshTokenSettings : ISettings
 {
-    public int ExpiryInHours { get; set; }
+    public int ExpiryInMinutes { get; set; }
     public int Length { get; set; }
 }
