@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Core.Infrastructure.Middlewares.Http;
 
-public sealed class HttpRequestMiddleware : IMiddleware
+internal sealed class HttpRequestMiddleware : IMiddleware
 {
     private readonly ILogger<HttpRequestMiddleware> _logger;
     private readonly Stopwatch _timer;

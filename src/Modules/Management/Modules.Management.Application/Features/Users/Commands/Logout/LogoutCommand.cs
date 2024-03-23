@@ -1,4 +1,3 @@
-using Core.Application.Auth;
 using Core.Application.Communication.Internal.Commands;
 using Modules.Management.Domain.Users;
 

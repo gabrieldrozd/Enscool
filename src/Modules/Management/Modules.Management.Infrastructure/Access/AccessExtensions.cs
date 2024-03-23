@@ -8,7 +8,7 @@ internal static class AccessExtensions
     public static IServiceCollection AddAccess(this IServiceCollection services)
     {
         services.AddSingleton<IRefreshTokenStore, RefreshTokenStore>();
-        services.AddScoped<IAccessTokenStore, AccessTokenStore>();
+        services.AddScoped<IAccessTokenProvider, AccessTokenProvider>();
         services.AddScoped<ITokenManager, TokenManager>();
 
         return services;

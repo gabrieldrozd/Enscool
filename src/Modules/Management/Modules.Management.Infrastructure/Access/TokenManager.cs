@@ -6,18 +6,26 @@ namespace Modules.Management.Infrastructure.Access;
 
 internal sealed class TokenManager : ITokenManager
 {
-    private readonly IAccessTokenStore _accessTokenStore;
+    private readonly IUserContext _userContext;
+    private readonly IAccessTokenProvider _accessTokenProvider;
+    private readonly IBlockedTokenStore _blockedTokenStore;
     private readonly IRefreshTokenStore _refreshTokenStore;
 
-    public TokenManager(IAccessTokenStore accessTokenStore, IRefreshTokenStore refreshTokenStore)
+    public TokenManager(
+        IUserContext userContext,
+        IAccessTokenProvider accessTokenProvider,
+        IBlockedTokenStore blockedTokenStore,
+        IRefreshTokenStore refreshTokenStore)
     {
-        _accessTokenStore = accessTokenStore;
+        _userContext = userContext;
+        _accessTokenProvider = accessTokenProvider;
+        _blockedTokenStore = blockedTokenStore;
         _refreshTokenStore = refreshTokenStore;
     }
 
     public async Task<AccessModel> GenerateAsync(User user)
     {
-        var accessToken = _accessTokenStore.Create(user);
+        var accessToken = _accessTokenProvider.Create(user);
         var refreshToken = _refreshTokenStore.Generate(user.Id);
         await _refreshTokenStore.StoreAsync(refreshToken);
 
@@ -43,7 +51,9 @@ internal sealed class TokenManager : ITokenManager
     public async Task RevokeRefreshTokenAsync(Guid userId)
         => await _refreshTokenStore.RevokeAsync(userId);
 
-    // block access token
-    public async Task BlockAccessTokenAsync(Guid userId, string accessToken)
-        => await _accessTokenStore.BlockAsync(userId, accessToken);
+    public async Task BlockAccessTokenAsync(Guid userId)
+    {
+        _userContext.EnsureAuthenticated();
+        await _blockedTokenStore.BlockAsync(userId, _userContext.Token);
+    }
 }

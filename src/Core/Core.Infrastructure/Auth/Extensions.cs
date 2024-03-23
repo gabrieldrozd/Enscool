@@ -1,9 +1,10 @@
-using System.Security.Claims;
 using System.Text;
+using Core.Application.Auth;
 using Core.Application.Helpers;
 using Core.Infrastructure.Auth.Api;
 using Core.Infrastructure.Auth.Api.Authenticated;
 using Core.Infrastructure.Auth.Api.Roles;
+using Core.Infrastructure.Auth.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +41,11 @@ internal static class Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSettings.IssuerSigningKey)),
                     ClockSkew = TimeSpan.Zero
                 };
+                opt.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = JwtBearerEventHandlers.OnTokenReceived,
+                    OnChallenge = JwtBearerEventHandlers.OnAuthenticationChallenge
+                };
             });
 
         services.AddAuthorizationBuilder()
@@ -51,6 +57,8 @@ internal static class Extensions
         services.AddSingleton<IAuthorizationHandler, AuthenticatedRequirementHandler>();
         services.AddSingleton<IAuthorizationHandler, RoleRequirementHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
+
+        services.AddSingleton<IBlockedTokenStore, BlockedTokenStore>();
 
         return services;
     }

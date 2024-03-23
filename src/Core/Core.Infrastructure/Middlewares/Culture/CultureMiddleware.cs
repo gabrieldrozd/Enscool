@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Core.Infrastructure.Middlewares.Culture;
 
-public sealed class CultureMiddleware : IMiddleware
+internal sealed class CultureMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {

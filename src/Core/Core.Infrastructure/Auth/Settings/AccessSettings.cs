@@ -1,6 +1,6 @@
 using Common.Utilities.Abstractions;
 
-namespace Core.Infrastructure.Auth;
+namespace Core.Infrastructure.Auth.Settings;
 
 public sealed class AccessSettings : ISettings
 {
