@@ -28,7 +28,7 @@ internal sealed class GetInstitutionDetailsEndpoint : EndpointBase
             .ProducesEnvelope<GetInstitutionDetailsQueryDto>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "GetInstitutionDetails",
-                "Get institution details.",
+                "Get institution details",
                 "Gets details of the institution by its id.");
     }
 }
