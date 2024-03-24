@@ -23,5 +23,7 @@ public sealed class UserRepository : Repository<User, ManagementDbContext>, IUse
         => await _context.Users.FindAsync([userId], cancellationToken);
 
     public async Task<User?> GetAsync(Email email, CancellationToken cancellationToken = default)
-        => await _context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+        => await _context.Users
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
 }

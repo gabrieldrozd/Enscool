@@ -18,6 +18,18 @@ public static class EndpointBaseConfigurationExtensions
     ) => builder.RequireAuthorization(new RoleRequirementAttribute(roles));
 
     /// <summary>
+    /// Specifies that the endpoint requires <see cref="UserRole.Student"/>, <see cref="UserRole.Teacher"/>, <see cref="UserRole.Secretary"/>, <see cref="UserRole.InstitutionAdmin"/> roles.
+    /// </summary>
+    public static RouteHandlerBuilder RequireInstitutionRoles(this RouteHandlerBuilder builder)
+        => builder.RequireAuthorization(new RoleRequirementAttribute(UserRole.Student, UserRole.Teacher, UserRole.Secretary, UserRole.InstitutionAdmin));
+
+    /// <summary>
+    /// Specifies that the endpoint requires <see cref="UserRole.Support"/>, <see cref="UserRole.BackOfficeAdmin"/>, <see cref="UserRole.GlobalAdmin"/> roles.
+    /// </summary>
+    public static RouteHandlerBuilder RequireBackOfficeRoles(this RouteHandlerBuilder builder)
+        => builder.RequireAuthorization(new RoleRequirementAttribute(UserRole.Support, UserRole.BackOfficeAdmin, UserRole.GlobalAdmin));
+
+    /// <summary>
     /// Adds the produces configuration.
     /// </summary>
     public static RouteHandlerBuilder ProducesEnvelope(this RouteHandlerBuilder routeHandlerBuilder, int statusCode)

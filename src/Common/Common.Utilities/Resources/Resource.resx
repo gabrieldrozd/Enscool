@@ -131,4 +131,7 @@
     <data name="PasswordResetError" xml:space="preserve">
         <value>Error occurred during password reset</value>
     </data>
+    <data name="InstitutionNotFound" xml:space="preserve">
+        <value>Institution with given id '{0}' not found</value>
+    </data>
 </root>

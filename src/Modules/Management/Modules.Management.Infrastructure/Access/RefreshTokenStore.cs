@@ -2,7 +2,6 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using Core.Application.Auth;
 using Core.Domain.Shared.EntityIds;
-using Core.Infrastructure.Auth;
 using Core.Infrastructure.Auth.Settings;
 using Microsoft.Extensions.Options;
 using Modules.Management.Application.Abstractions.Access;

@@ -3,12 +3,12 @@ namespace Core.Application.Auth;
 public static class ClaimConsts
 {
     public const string Expires = "exp";
-    public const string UserId = "user_Id";
-    public const string InstitutionId = "user_institutionId";
-    public const string InstitutionIds = "user_institutionIds";
-    public const string FullName = "user_fullName";
-    public const string Email = "user_email";
-    public const string Phone = "user_phone";
-    public const string UserState = "user_state";
-    public const string UserRole = "user_role";
+    public const string UserId = "_userId";
+    public const string InstitutionId = "_institutionId";
+    public const string InstitutionIds = "_institutionIds";
+    public const string FullName = "_fullName";
+    public const string Email = "_email";
+    public const string Phone = "_phone";
+    public const string UserState = "_state";
+    public const string UserRole = "_role";
 }

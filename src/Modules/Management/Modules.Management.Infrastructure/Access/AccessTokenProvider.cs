@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Core.Application.Auth;
 using Core.Domain.Shared.ValueObjects;
-using Core.Infrastructure.Auth;
 using Core.Infrastructure.Auth.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -32,8 +31,10 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimConsts.UserId, user.Id.ToString()),
             new Claim(ClaimConsts.InstitutionId, user.InstitutionId?.ToString() ?? string.Empty),
+            new Claim(ClaimConsts.InstitutionIds, /* TODO: Add user.InstitutionIds */ string.Empty),
             new Claim(ClaimConsts.FullName, user.FullName.ToString()),
             new Claim(ClaimConsts.Email, user.Email.Value),
+            new Claim(ClaimConsts.Phone, user.Phone.Value),
             new Claim(ClaimConsts.UserState, $"{(int) user.State}"),
             new Claim(ClaimConsts.UserRole, $"{(int) user.Role}")
         ];

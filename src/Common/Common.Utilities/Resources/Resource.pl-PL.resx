@@ -131,4 +131,7 @@
     <data name="PasswordResetError" xml:space="preserve">
         <value>Wystąpił błąd podczas resetowania hasła</value>
     </data>
+    <data name="InstitutionNotFound" xml:space="preserve">
+        <value>Instytucja o podanym id '{0}' nie została znaleziona</value>
+    </data>
 </root>
