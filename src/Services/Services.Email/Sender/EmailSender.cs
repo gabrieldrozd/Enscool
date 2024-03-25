@@ -36,10 +36,8 @@ public sealed class EmailSender : IEmailSender
                 .Build();
 
             using var client = new SmtpClient();
-            await _emailSettings.UseSsl.IfElse(
-                ifTrue: client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SslSmtpPort, SecureSocketOptions.SslOnConnect, cancellationToken),
-                ifFalse: client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.TlsSmtpPort, SecureSocketOptions.StartTls, cancellationToken));
 
+            await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SmtpPort, SecureSocketOptions.StartTls, cancellationToken);
             await client.AuthenticateAsync(_emailSettings.Username, _emailSettings.Password, cancellationToken);
 
             _logger.LogInformation("[EmailService]: Sending email to '{ToAddress}'", emailMessage.Recipient.ToAddress);

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Management.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 name: "Management");
 
             migrationBuilder.CreateTable(
-                name: "Institution",
+                name: "Institutions",
                 schema: "Management",
                 columns: table => new
                 {
@@ -42,7 +42,7 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Institution", x => x.Id);
+                    table.PrimaryKey("PK_Institutions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,6 +57,7 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     Password = table.Column<string>(type: "text", nullable: true),
                     FullName = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<int>(type: "integer", nullable: false),
+                    Type = table.Column<string>(type: "character varying(21)", maxLength: 21, nullable: false),
                     InstitutionId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -86,10 +87,10 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 {
                     table.PrimaryKey("PK_InstitutionAdministratorIds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InstitutionAdministratorIds_Institution_InstitutionId",
+                        name: "FK_InstitutionAdministratorIds_Institutions_InstitutionId",
                         column: x => x.InstitutionId,
                         principalSchema: "Management",
-                        principalTable: "Institution",
+                        principalTable: "Institutions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -112,6 +113,31 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     table.PrimaryKey("PK_UserActivationCodes", x => new { x.UserId, x.Id });
                     table.ForeignKey(
                         name: "FK_UserActivationCodes_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Management",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserPasswordResetCodes",
+                schema: "Management",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Value = table.Column<string>(type: "text", nullable: false),
+                    Expires = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPasswordResetCodes", x => new { x.UserId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_UserPasswordResetCodes_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "Management",
                         principalTable: "Users",
@@ -145,7 +171,11 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 schema: "Management");
 
             migrationBuilder.DropTable(
-                name: "Institution",
+                name: "UserPasswordResetCodes",
+                schema: "Management");
+
+            migrationBuilder.DropTable(
+                name: "Institutions",
                 schema: "Management");
 
             migrationBuilder.DropTable(

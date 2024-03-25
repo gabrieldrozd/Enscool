@@ -77,6 +77,10 @@ internal sealed class UserConfiguration : AggregateConfiguration<User>
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
         });
 
+        builder.HasDiscriminator<string>("Type")
+            .HasValue<InstitutionUser>(nameof(InstitutionUser))
+            .HasValue<BackOfficeUser>(nameof(BackOfficeUser));
+
         #region Indexes
 
         builder.HasIndex(x => x.Email).IsUnique();

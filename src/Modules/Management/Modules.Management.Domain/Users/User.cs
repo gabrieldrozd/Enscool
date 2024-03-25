@@ -11,7 +11,7 @@ namespace Modules.Management.Domain.Users;
 /// <summary>
 /// Represents user in the system.
 /// </summary>
-public sealed class User : AggregateRoot<UserId>
+public class User : AggregateRoot<UserId>
 {
     private readonly List<ActivationCode> _activationCodes = [];
     private readonly List<PasswordResetCode> _passwordResetCodes = [];
@@ -29,11 +29,11 @@ public sealed class User : AggregateRoot<UserId>
     public ActivationCode? CurrentActivationCode => _activationCodes.MaxBy(x => x.CreatedAt);
     public PasswordResetCode? CurrentPasswordResetCode => _passwordResetCodes.MaxBy(x => x.CreatedAt);
 
-    private User()
+    protected User()
     {
     }
 
-    private User(
+    protected User(
         UserId id,
         Email email,
         Phone phone,
@@ -51,32 +51,13 @@ public sealed class User : AggregateRoot<UserId>
         Role = role;
     }
 
-    /// <summary>
-    /// Creates new <see cref="User"/>.
-    /// </summary>
-    public static User Create(UserId id, Email email, Phone phone, FullName fullName, UserRole role, InstitutionId? institutionId)
-        => new(id, email, phone, fullName, role, institutionId);
-
-    /// <summary>
-    /// Creates initial <see cref="UserRole.InstitutionAdmin"/> user.
-    /// </summary>
-    public static User CreateInitialInstitutionAdmin(Email email, Phone phone, FullName fullName, ActivationCode activationCode)
-    {
-        var user = new User(UserId.New, email, phone, fullName, UserRole.InstitutionAdmin, InstitutionId.New);
-        user.AddActivationCode(activationCode);
-
-        user.Raise(new InstitutionAdminRegisteredEvent(user.Id, user.Email, user.Phone, user.FullName, user.InstitutionId!));
-
-        return user;
-    }
-
     #region Activation
 
     /// <summary>
     /// Adds activation code to the <see cref="User"/>.
     /// Deactivates all previous activation codes.
     /// </summary>
-    private void AddActivationCode(ActivationCode code)
+    protected void AddActivationCode(ActivationCode code)
     {
         _activationCodes.ForEach(x => x.Deactivate());
         _activationCodes.Add(code);

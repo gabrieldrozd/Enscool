@@ -126,6 +126,11 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("character varying(21)");
+
                     b.Property<uint>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -138,6 +143,24 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", "Management");
+
+                    b.HasDiscriminator<string>("Type").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.BackOfficeUser", b =>
+                {
+                    b.HasBaseType("Modules.Management.Domain.Users.User");
+
+                    b.HasDiscriminator().HasValue("BackOfficeUser");
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.InstitutionUser", b =>
+                {
+                    b.HasBaseType("Modules.Management.Domain.Users.User");
+
+                    b.HasDiscriminator().HasValue("InstitutionUser");
                 });
 
             modelBuilder.Entity("Modules.Management.Domain.Institutions.Institution", b =>

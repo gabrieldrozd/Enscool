@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Management.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    [Migration("20240318192423_InstitutionModifications")]
-    partial class InstitutionModifications
+    [Migration("20240325185918_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,11 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("character varying(21)");
+
                     b.Property<uint>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
@@ -141,6 +146,24 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", "Management");
+
+                    b.HasDiscriminator<string>("Type").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.BackOfficeUser", b =>
+                {
+                    b.HasBaseType("Modules.Management.Domain.Users.User");
+
+                    b.HasDiscriminator().HasValue("BackOfficeUser");
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.InstitutionUser", b =>
+                {
+                    b.HasBaseType("Modules.Management.Domain.Users.User");
+
+                    b.HasDiscriminator().HasValue("InstitutionUser");
                 });
 
             modelBuilder.Entity("Modules.Management.Domain.Institutions.Institution", b =>
@@ -244,7 +267,41 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                                 .HasForeignKey("UserId");
                         });
 
+                    b.OwnsMany("Modules.Management.Domain.Users.PasswordResetCode", "PasswordResetCodes", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTimeOffset>("CreatedAt")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<DateTimeOffset>("Expires")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("UserPasswordResetCodes", "Management");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
                     b.Navigation("ActivationCodes");
+
+                    b.Navigation("PasswordResetCodes");
                 });
 #pragma warning restore 612, 618
         }
