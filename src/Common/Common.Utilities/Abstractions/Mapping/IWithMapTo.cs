@@ -1,4 +1,4 @@
-namespace Common.Utilities.Models;
+namespace Common.Utilities.Abstractions.Mapping;
 
 /// <summary>
 /// Represents an interface that provides mapping functionality to a specific <typeparamref name="TDestination"/> type.

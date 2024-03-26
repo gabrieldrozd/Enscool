@@ -1,4 +1,4 @@
-using Common.Utilities.Models;
+using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.ActivateAccount;
 
 namespace Modules.Management.Api.Endpoints.Users.Activate;

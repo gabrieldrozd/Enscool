@@ -1,4 +1,4 @@
-namespace Common.Utilities.Models;
+namespace Common.Utilities.Abstractions.Mapping;
 
 /// <summary>
 /// Represents an interface that provides mapping functionality from a specific <typeparamref name="TSource"/> type to the <typeparamref name="TSelf"/> type.

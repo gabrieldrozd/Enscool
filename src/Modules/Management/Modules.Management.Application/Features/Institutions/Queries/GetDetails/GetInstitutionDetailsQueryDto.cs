@@ -1,4 +1,4 @@
-using Common.Utilities.Models;
+using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Domain.Institutions;
 
 namespace Modules.Management.Application.Features.Institutions.Queries.GetDetails;

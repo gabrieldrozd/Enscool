@@ -1,4 +1,4 @@
-using Common.Utilities.Models;
+using Common.Utilities.Abstractions.Mapping;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Modules.Management.Domain.Users;

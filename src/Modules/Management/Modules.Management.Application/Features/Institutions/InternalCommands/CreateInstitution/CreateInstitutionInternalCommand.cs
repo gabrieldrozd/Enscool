@@ -1,4 +1,4 @@
-using Common.Utilities.Models;
+using Common.Utilities.Abstractions.Mapping;
 using Core.Application.Communication.Internal.Commands;
 using Modules.Management.Domain.Institutions;
 using Modules.Management.Domain.Users.Events;
