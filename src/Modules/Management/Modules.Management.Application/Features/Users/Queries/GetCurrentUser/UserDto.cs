@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Common.Utilities.Abstractions.Mapping;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
@@ -5,7 +6,7 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Users.Queries.GetCurrentUser;
 
-public class UserDto : IWithMapFrom<User, UserDto>
+public class UserDto : IWithExpressionMapFrom<User, UserDto>
 {
     public Guid UserId { get; private init; }
     public Guid? InstitutionId { get; private init; }
@@ -17,19 +18,17 @@ public class UserDto : IWithMapFrom<User, UserDto>
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
 
-    public static UserDto From(User source)
-    {
-        return new UserDto
+    public static Expression<Func<User, UserDto>> Mapper =>
+        user => new UserDto
         {
-            UserId = source.Id,
-            InstitutionId = source.InstitutionId,
-            FirstName = source.FullName.First,
-            MiddleName = source.FullName.Middle,
-            LastName = source.FullName.Last,
-            Email = source.Email,
-            Phone = source.Phone,
-            State = source.State,
-            Role = source.Role
+            UserId = user.Id,
+            InstitutionId = user.InstitutionId,
+            FirstName = user.FullName.First,
+            MiddleName = user.FullName.Middle,
+            LastName = user.FullName.Last,
+            Email = user.Email,
+            Phone = user.Phone,
+            State = user.State,
+            Role = user.Role
         };
-    }
 }

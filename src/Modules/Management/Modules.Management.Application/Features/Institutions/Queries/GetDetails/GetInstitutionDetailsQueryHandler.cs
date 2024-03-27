@@ -21,10 +21,9 @@ internal sealed class GetInstitutionDetailsQueryHandler : IQueryHandler<GetInsti
         var institution = await _context.Institutions
             .Where(x => x.Id == request.InstitutionId)
             .AsNoTracking()
+            .Select(GetInstitutionDetailsQueryDto.Mapper)
             .SingleOrDefaultAsync(cancellationToken);
 
-        return institution is null
-            ? Result.Failure.NotFound<GetInstitutionDetailsQueryDto>(Resource.InstitutionNotFound, request.InstitutionId)
-            : GetInstitutionDetailsQueryDto.From(institution);
+        return institution ?? Result.Failure.NotFound<GetInstitutionDetailsQueryDto>(Resource.InstitutionNotFound, request.InstitutionId);
     }
 }

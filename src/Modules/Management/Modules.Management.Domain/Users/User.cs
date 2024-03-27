@@ -4,7 +4,6 @@ using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
-using Modules.Management.Domain.Users.Events;
 
 namespace Modules.Management.Domain.Users;
 

@@ -1,5 +1,4 @@
-﻿using Common.Utilities.Extensions;
-using Core.Application.Communication.External.Emails;
+﻿using Core.Application.Communication.External.Emails;
 using Core.Application.Helpers;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;
