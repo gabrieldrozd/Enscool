@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.ChangePassword;
+namespace Modules.Management.Api.Endpoints.Access.ChangePassword;
 
 /// <summary>
 /// Change password <see cref="EndpointBase"/>.

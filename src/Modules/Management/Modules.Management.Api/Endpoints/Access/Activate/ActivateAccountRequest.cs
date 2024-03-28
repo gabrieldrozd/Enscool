@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.ActivateAccount;
 
-namespace Modules.Management.Api.Endpoints.Users.Activate;
+namespace Modules.Management.Api.Endpoints.Access.Activate;
 
 internal sealed class ActivateAccountRequest : IWithMapTo<ActivateAccountCommand>
 {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Management.Application.Features.Users.Queries.GetCurrentUser;
 
-namespace Modules.Management.Api.Endpoints.Users.GetCurrent;
+namespace Modules.Management.Api.Endpoints.Access.GetCurrent;
 
 /// <summary>
 /// Get current user <see cref="EndpointBase"/>.

@@ -1,6 +1,6 @@
 using Core.Domain.Primitives.Enumerations;
 
-namespace Modules.Management.Api.Endpoints.Users;
+namespace Modules.Management.Api.Endpoints.Access;
 
 public sealed record AccessEndpointsOrder : Enumeration<AccessEndpointsOrder>
 {

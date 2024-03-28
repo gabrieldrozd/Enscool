@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.RefreshAccess;
 
-namespace Modules.Management.Api.Endpoints.Users.Refresh;
+namespace Modules.Management.Api.Endpoints.Access.Refresh;
 
 internal sealed class RefreshAccessRequest : IWithMapTo<RefreshAccessCommand>
 {

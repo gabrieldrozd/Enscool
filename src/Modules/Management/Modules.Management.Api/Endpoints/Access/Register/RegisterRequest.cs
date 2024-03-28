@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.Register;
 
-namespace Modules.Management.Api.Endpoints.Users.Register;
+namespace Modules.Management.Api.Endpoints.Access.Register;
 
 internal sealed class RegisterRequest : IWithMapTo<RegisterCommand>
 {

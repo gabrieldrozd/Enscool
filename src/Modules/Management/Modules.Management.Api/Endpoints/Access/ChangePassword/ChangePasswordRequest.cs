@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.ChangePassword;
 
-namespace Modules.Management.Api.Endpoints.Users.ChangePassword;
+namespace Modules.Management.Api.Endpoints.Access.ChangePassword;
 
 internal sealed class ChangePasswordRequest : IWithMapTo<ChangePasswordCommand>
 {

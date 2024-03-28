@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.GeneratePasswordResetCode;
 
-namespace Modules.Management.Api.Endpoints.Users.GeneratePasswordResetCode;
+namespace Modules.Management.Api.Endpoints.Access.GeneratePasswordResetCode;
 
 internal sealed class GeneratePasswordResetCodeRequest : IWithMapTo<GeneratePasswordResetCodeCommand>
 {

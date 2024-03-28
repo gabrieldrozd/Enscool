@@ -1,38 +1,38 @@
+using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.ResetPassword;
+namespace Modules.Management.Api.Endpoints.Access.Login;
 
 /// <summary>
-/// Register <see cref="EndpointBase"/>.
+/// Login <see cref="EndpointBase"/>.
 /// </summary>
-internal sealed class ResetPasswordEndpoint : EndpointBase
+internal sealed class LoginEndpoint : EndpointBase
 {
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapPostEndpoint(
-                "password/reset",
+                "login",
                 ManagementEndpointInfo.Access,
-                async (ResetPasswordRequest request, ISender sender) =>
+                async (LoginRequest request, ISender sender) =>
                 {
                     var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope(StatusCodes.Status200OK)
+            .ProducesEnvelope<AccessModel>(StatusCodes.Status200OK)
             .WithDocumentation(
-                "ResetPassword",
-                "Reset Password",
-                "Resets the password.",
+                "Login",
+                "Login to the system",
+                "Logs in to the system with the specified credentials.",
                 """
                 {
                     "email": "example_email@email.com",
-                    "code": "1234-5678",
-                    "newPassword": "newPassword123!"
+                    "password": "SomePassword123!@#"
                 }
                 """);
     }

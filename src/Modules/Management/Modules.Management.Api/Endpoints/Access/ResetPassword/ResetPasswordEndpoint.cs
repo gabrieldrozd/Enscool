@@ -4,37 +4,35 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.Register;
+namespace Modules.Management.Api.Endpoints.Access.ResetPassword;
 
 /// <summary>
 /// Register <see cref="EndpointBase"/>.
 /// </summary>
-internal sealed class RegisterEndpoint : EndpointBase
+internal sealed class ResetPasswordEndpoint : EndpointBase
 {
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapPostEndpoint(
-                "register",
+                "password/reset",
                 ManagementEndpointInfo.Access,
-                async (RegisterRequest request, ISender sender) =>
+                async (ResetPasswordRequest request, ISender sender) =>
                 {
                     var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope(StatusCodes.Status201Created)
+            .ProducesEnvelope(StatusCodes.Status200OK)
             .WithDocumentation(
-                "Register",
-                "Register as Institution Admin",
-                "Registers new InstitutionAdmin user with new InstitutionId",
+                "ResetPassword",
+                "Reset Password",
+                "Resets the password.",
                 """
                 {
                     "email": "example_email@email.com",
-                    "phone": "+48512456456",
-                    "firstName": "John",
-                    "middleName": null,
-                    "lastName": "Doe"
+                    "code": "1234-5678",
+                    "newPassword": "newPassword123!"
                 }
                 """);
     }

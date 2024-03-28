@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.Login;
 
-namespace Modules.Management.Api.Endpoints.Users.Login;
+namespace Modules.Management.Api.Endpoints.Access.Login;
 
 internal sealed class LoginRequest : IWithMapTo<LoginCommand>
 {

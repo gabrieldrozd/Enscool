@@ -1,7 +1,7 @@
 using Common.Utilities.Abstractions.Mapping;
 using Modules.Management.Application.Features.Users.Commands.ResetPassword;
 
-namespace Modules.Management.Api.Endpoints.Users.ResetPassword;
+namespace Modules.Management.Api.Endpoints.Access.ResetPassword;
 
 internal sealed class ResetPasswordRequest : IWithMapTo<ResetPasswordCommand>
 {

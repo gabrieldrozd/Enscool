@@ -1,6 +1,5 @@
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Resources;
-using Core.Application.Auth;
 using Core.Application.Communication.Internal.Queries;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
@@ -11,7 +10,7 @@ internal sealed class GetInstitutionDetailsQueryHandler : IQueryHandler<GetInsti
 {
     private readonly IManagementDbContext _context;
 
-    public GetInstitutionDetailsQueryHandler(IUserContext userContext, IManagementDbContext context)
+    public GetInstitutionDetailsQueryHandler(IManagementDbContext context)
     {
         _context = context;
     }

@@ -1,38 +1,40 @@
-using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Modules.Management.Api.Endpoints.Users.Refresh;
+namespace Modules.Management.Api.Endpoints.Access.Register;
 
 /// <summary>
-/// Refresh access <see cref="EndpointBase"/>.
+/// Register <see cref="EndpointBase"/>.
 /// </summary>
-internal sealed class RefreshAccessEndpoint : EndpointBase
+internal sealed class RegisterEndpoint : EndpointBase
 {
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
             .MapPostEndpoint(
-                "refresh",
+                "register",
                 ManagementEndpointInfo.Access,
-                async (RefreshAccessRequest request, ISender sender) =>
+                async (RegisterRequest request, ISender sender) =>
                 {
                     var result = await sender.Send(request.Map());
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope<AccessModel>(StatusCodes.Status200OK)
+            .ProducesEnvelope(StatusCodes.Status201Created)
             .WithDocumentation(
-                "RefreshAccess",
-                "Refresh Access",
-                "Refreshes access token and user data",
+                "Register",
+                "Register as Institution Admin",
+                "Registers new InstitutionAdmin user with new InstitutionId",
                 """
                 {
-                    "userId": "8816c6f6-6eed-448c-8ebe-43c2a31849cf",
-                    "refreshToken": "8GAT9NI5vSyv7ZYBJfUptKrAxsHXUJ9id7Exejl3+iw="
+                    "email": "example_email@email.com",
+                    "phone": "+48512456456",
+                    "firstName": "John",
+                    "middleName": null,
+                    "lastName": "Doe"
                 }
                 """);
     }

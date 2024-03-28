@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Management.Application.Features.Users.Commands.Logout;
 
-namespace Modules.Management.Api.Endpoints.Users.Logout;
+namespace Modules.Management.Api.Endpoints.Access.Logout;
 
 /// <summary>
 /// Logout <see cref="EndpointBase"/>.
