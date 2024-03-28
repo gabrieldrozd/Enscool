@@ -134,4 +134,28 @@
     <data name="InstitutionNotFound" xml:space="preserve">
         <value>Institution with given id '{0}' not found</value>
     </data>
+    <data name="LanguageLevelNone" xml:space="preserve">
+        <value>None</value>
+    </data>
+    <data name="LanguageLevelA0" xml:space="preserve">
+        <value>Beginner Level (A0)</value>
+    </data>
+    <data name="LanguageLevelA1" xml:space="preserve">
+        <value>Elementary Level (A1)</value>
+    </data>
+    <data name="LanguageLevelA2" xml:space="preserve">
+        <value>Pre-Intermediate Level (A2)</value>
+    </data>
+    <data name="LanguageLevelB1" xml:space="preserve">
+        <value>Intermediate Level (B1)</value>
+    </data>
+    <data name="LanguageLevelB2" xml:space="preserve">
+        <value>Upper-Intermediate Level (B2)</value>
+    </data>
+    <data name="LanguageLevelC1" xml:space="preserve">
+        <value>Advanced Level (C1)</value>
+    </data>
+    <data name="LanguageLevelC2" xml:space="preserve">
+        <value>Proficiency Level (C2)</value>
+    </data>
 </root>

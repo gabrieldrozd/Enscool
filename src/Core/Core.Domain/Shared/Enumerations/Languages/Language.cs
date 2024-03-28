@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using Core.Domain.Primitives.Enumerations;
 
-namespace Core.Domain.Shared.Enumerations;
+namespace Core.Domain.Shared.Enumerations.Languages;
 
 public sealed record Language : Enumeration<Language>
 {

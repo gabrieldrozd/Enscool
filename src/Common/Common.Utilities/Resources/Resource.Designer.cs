@@ -195,6 +195,78 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Beginner Level (A0).
+        /// </summary>
+        public static string LanguageLevelA0 {
+            get {
+                return ResourceManager.GetString("LanguageLevelA0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elementary Level (A1).
+        /// </summary>
+        public static string LanguageLevelA1 {
+            get {
+                return ResourceManager.GetString("LanguageLevelA1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pre-Intermediate Level (A2).
+        /// </summary>
+        public static string LanguageLevelA2 {
+            get {
+                return ResourceManager.GetString("LanguageLevelA2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intermediate Level (B1).
+        /// </summary>
+        public static string LanguageLevelB1 {
+            get {
+                return ResourceManager.GetString("LanguageLevelB1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upper-Intermediate Level (B2).
+        /// </summary>
+        public static string LanguageLevelB2 {
+            get {
+                return ResourceManager.GetString("LanguageLevelB2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Level (C1).
+        /// </summary>
+        public static string LanguageLevelC1 {
+            get {
+                return ResourceManager.GetString("LanguageLevelC1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proficiency Level (C2).
+        /// </summary>
+        public static string LanguageLevelC2 {
+            get {
+                return ResourceManager.GetString("LanguageLevelC2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string LanguageLevelNone {
+            get {
+                return ResourceManager.GetString("LanguageLevelNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; not found.
         /// </summary>
         public static string NotFound {

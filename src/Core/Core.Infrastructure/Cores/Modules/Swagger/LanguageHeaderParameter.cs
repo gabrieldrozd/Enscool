@@ -1,4 +1,4 @@
-﻿using Core.Domain.Shared.Enumerations;
+﻿using Core.Domain.Shared.Enumerations.Languages;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using IOpenApiAny = Microsoft.OpenApi.Any.IOpenApiAny;

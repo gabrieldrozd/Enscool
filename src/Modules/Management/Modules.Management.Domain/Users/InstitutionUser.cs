@@ -1,4 +1,5 @@
 using Core.Domain.Shared.EntityIds;
+using Core.Domain.Shared.Enumerations.Languages;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.ValueObjects;
 using Modules.Management.Domain.Users.Events;
@@ -7,6 +8,15 @@ namespace Modules.Management.Domain.Users;
 
 public class InstitutionUser : User
 {
+    public Date? BirthDate { get; private set; }
+    public Address? Address { get; private set; }
+
+    // TODO: LanguageLevel non-nullable for Students (Role == UserRole.Student)
+    public LanguageLevel? LanguageLevel { get; private set; }
+
+    // TODO: Add EducationDetails ValueObject
+    // public EducationDetails? Education { get; private set; }
+
     private InstitutionUser()
     {
     }

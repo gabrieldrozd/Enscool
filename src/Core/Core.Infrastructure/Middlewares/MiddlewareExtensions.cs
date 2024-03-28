@@ -1,5 +1,5 @@
 using Core.Application.Exceptions;
-using Core.Domain.Shared.Enumerations;
+using Core.Domain.Shared.Enumerations.Languages;
 using Core.Infrastructure.Middlewares.Culture;
 using Core.Infrastructure.Middlewares.Exceptions;
 using Core.Infrastructure.Middlewares.Http;

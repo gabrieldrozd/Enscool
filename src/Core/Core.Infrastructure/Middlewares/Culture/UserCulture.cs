@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using Core.Domain.Primitives;
-using Core.Domain.Shared.Enumerations;
+using Core.Domain.Shared.Enumerations.Languages;
 
 namespace Core.Infrastructure.Middlewares.Culture;
 

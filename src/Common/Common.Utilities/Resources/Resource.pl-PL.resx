@@ -134,4 +134,28 @@
     <data name="InstitutionNotFound" xml:space="preserve">
         <value>Instytucja o podanym id '{0}' nie została znaleziona</value>
     </data>
+    <data name="LanguageLevelNone" xml:space="preserve">
+        <value>Brak</value>
+    </data>
+    <data name="LanguageLevelA0" xml:space="preserve">
+        <value>Poziom początkujący (A0)</value>
+    </data>
+    <data name="LanguageLevelA1" xml:space="preserve">
+        <value>Poziom podstawowy (A1)</value>
+    </data>
+    <data name="LanguageLevelA2" xml:space="preserve">
+        <value>Poziom wstępnie średniozaawansowany (A2)</value>
+    </data>
+    <data name="LanguageLevelB1" xml:space="preserve">
+        <value>Poziom średniozaawansowany (B1)</value>
+    </data>
+    <data name="LanguageLevelB2" xml:space="preserve">
+        <value>Poziom wyższy średniozaawansowany (B2)</value>
+    </data>
+    <data name="LanguageLevelC1" xml:space="preserve">
+        <value>Poziom zaawansowany (C1)</value>
+    </data>
+    <data name="LanguageLevelC2" xml:space="preserve">
+        <value>Poziom biegły (C2)</value>
+    </data>
 </root>
