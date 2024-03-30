@@ -177,6 +177,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Institution user address is required.
+        /// </summary>
+        public static string InstitutionUserAddressRequired {
+            get {
+                return ResourceManager.GetString("InstitutionUserAddressRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid full name.
         /// </summary>
         public static string InvalidFullName {
@@ -308,6 +317,24 @@ namespace Common.Utilities.Resources {
         public static string ServerError {
             get {
                 return ResourceManager.GetString("ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Student birth date is required.
+        /// </summary>
+        public static string StudentBirthDateRequired {
+            get {
+                return ResourceManager.GetString("StudentBirthDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Student language level is required.
+        /// </summary>
+        public static string StudentLanguageLevelRequired {
+            get {
+                return ResourceManager.GetString("StudentLanguageLevelRequired", resourceCulture);
             }
         }
         

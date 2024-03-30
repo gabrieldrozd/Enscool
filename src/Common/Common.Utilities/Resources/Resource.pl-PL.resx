@@ -158,4 +158,13 @@
     <data name="LanguageLevelC2" xml:space="preserve">
         <value>Poziom biegły (C2)</value>
     </data>
+    <data name="StudentBirthDateRequired" xml:space="preserve">
+        <value>Data urodzenia ucznia jest wymagana</value>
+    </data>
+    <data name="StudentLanguageLevelRequired" xml:space="preserve">
+        <value>Poziom językowy ucznia jest wymagany</value>
+    </data>
+    <data name="InstitutionUserAddressRequired" xml:space="preserve">
+        <value>Adres użytkownika jest wymagany</value>
+    </data>
 </root>

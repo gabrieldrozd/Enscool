@@ -158,4 +158,13 @@
     <data name="LanguageLevelC2" xml:space="preserve">
         <value>Proficiency Level (C2)</value>
     </data>
+    <data name="StudentBirthDateRequired" xml:space="preserve">
+        <value>Student birth date is required</value>
+    </data>
+    <data name="StudentLanguageLevelRequired" xml:space="preserve">
+        <value>Student language level is required</value>
+    </data>
+    <data name="InstitutionUserAddressRequired" xml:space="preserve">
+        <value>Institution user address is required</value>
+    </data>
 </root>

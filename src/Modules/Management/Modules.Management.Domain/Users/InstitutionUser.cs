@@ -3,6 +3,7 @@ using Core.Domain.Shared.Enumerations.Languages;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.ValueObjects;
 using Modules.Management.Domain.Users.Events;
+using Modules.Management.Domain.Users.Rules;
 
 namespace Modules.Management.Domain.Users;
 
@@ -60,8 +61,9 @@ public class InstitutionUser : User
         LanguageLevel? languageLevel,
         InstitutionId institutionId)
     {
-        // TODO: Add Rule - Each role except admin should have BirthDate and Address
-        // TODO: Add Rule - Student role should have also LanguageLevel
+        Validate(new StudentBirthDateRequiredRule(role, birthDate));
+        Validate(new StudentLanguageLevelRequiredRule(role, languageLevel));
+        Validate(new InstitutionUserAddressRequiredRule(role, address));
 
         var user = new InstitutionUser(UserId.New, email, phone, fullName, role, institutionId, birthDate, address, languageLevel);
 
