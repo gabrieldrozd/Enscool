@@ -1,8 +1,8 @@
 using MediatR;
 
-namespace Core.Domain.Events;
+namespace Core.Domain.DomainEvents;
 
 /// <summary>
 /// Marker interface for domain events.
 /// </summary>
-public interface IEvent : INotification;
+public interface IDomainEvent : INotification;

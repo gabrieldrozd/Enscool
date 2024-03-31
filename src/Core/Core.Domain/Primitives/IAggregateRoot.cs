@@ -1,4 +1,4 @@
-using Core.Domain.Events;
+using Core.Domain.DomainEvents;
 
 namespace Core.Domain.Primitives;
 
@@ -7,11 +7,11 @@ public interface IAggregateRoot : IEntity
     /// <summary>
     /// Gets the domain events read-only collection.
     /// </summary>
-    IReadOnlyList<IEvent> DomainEvents { get; }
+    IReadOnlyList<IDomainEvent> DomainEvents { get; }
 
     uint Version { get; }
 
-    void Raise(IEvent @event);
+    void RaiseDomainEvent(IDomainEvent domainEvent);
 
     void ClearDomainEvents();
 }

@@ -1,10 +1,10 @@
 using MediatR;
 
-namespace Core.Domain.Events;
+namespace Core.Domain.DomainEvents;
 
 /// <summary>
 /// Represents a domain event handler interface.
 /// </summary>
 /// <typeparam name="TDomainEvent">The domain event type.</typeparam>
-public interface IEventHandler<in TDomainEvent> : INotificationHandler<TDomainEvent>
-    where TDomainEvent : IEvent;
+public interface IDomainEventHandler<in TDomainEvent> : INotificationHandler<TDomainEvent>
+    where TDomainEvent : IDomainEvent;

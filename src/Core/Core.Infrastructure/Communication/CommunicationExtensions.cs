@@ -1,5 +1,8 @@
 using System.Reflection;
+using Core.Application.Communication.External.Messages;
+using Core.Infrastructure.Communication.External.Messages;
 using Core.Infrastructure.Communication.Internal;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,9 +16,17 @@ public static class CommunicationExtensions
         {
             cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
 
-            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>), ServiceLifetime.Scoped);
-            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>), ServiceLifetime.Scoped);
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
+
+        services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
+        // services.Decorate<IMediator, MediatorTransactionDecorator>();
+
+        services.AddSingleton<InMemoryMessageQueue>();
+        services.AddSingleton<IMessageBus, MessageBus>();
+        services.AddHostedService<MessageProcessorJob>();
 
         return services;
     }

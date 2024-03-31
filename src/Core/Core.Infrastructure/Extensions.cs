@@ -1,6 +1,7 @@
 using System.Reflection;
 using Core.Infrastructure.Auth;
 using Core.Infrastructure.Auth.Contexts;
+using Core.Infrastructure.Communication;
 using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Core.Infrastructure.Database;
@@ -28,6 +29,7 @@ internal static class Extensions
             .AddModuleCores(assemblies)
             .AddServiceCores(assemblies)
             .AddDatabase(assemblies)
+            .AddCommunication(assemblies)
             .AddStorage();
 
         return services;
@@ -42,6 +44,7 @@ internal static class Extensions
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseCommunication();
 
         return app;
     }

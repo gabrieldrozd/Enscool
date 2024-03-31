@@ -23,6 +23,20 @@ public sealed record LanguageLevel : Enumeration<LanguageLevel>
         ResourceKey = $"LanguageLevel{value}";
     }
 
+    public static LanguageLevel From(int id)
+        => id switch
+        {
+            0 => None,
+            1 => A0,
+            2 => A1,
+            3 => A2,
+            4 => B1,
+            5 => B2,
+            6 => C1,
+            7 => C2,
+            _ => None
+        };
+
     public static implicit operator LanguageLevel(int level) => FromId(level) ?? None;
     public static implicit operator int(LanguageLevel level) => level.Id;
 

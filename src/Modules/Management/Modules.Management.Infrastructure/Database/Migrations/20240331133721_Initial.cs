@@ -58,6 +58,15 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     FullName = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<string>(type: "character varying(21)", maxLength: 21, nullable: false),
+                    Address_ZipCode = table.Column<string>(type: "text", nullable: true),
+                    Address_ZipCodeCity = table.Column<string>(type: "text", nullable: true),
+                    Address_City = table.Column<string>(type: "text", nullable: true),
+                    Address_HouseNumber = table.Column<string>(type: "text", nullable: true),
+                    Address_State = table.Column<string>(type: "text", nullable: true),
+                    Address_Street = table.Column<string>(type: "text", nullable: true),
+                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false),
+                    LanguageLevel = table.Column<int>(type: "integer", nullable: true),
+                    BirthDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     InstitutionId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -65,8 +74,7 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     DeletedOnUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    Deleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false)
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {

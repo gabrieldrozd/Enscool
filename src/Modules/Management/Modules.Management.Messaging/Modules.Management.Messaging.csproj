@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Messaging\Core.Messaging.csproj" />
       <ProjectReference Include="..\Modules.Management.Application\Modules.Management.Application.csproj" />
     </ItemGroup>
 

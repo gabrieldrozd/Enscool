@@ -2,16 +2,16 @@ using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Languages;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.ValueObjects;
-using Modules.Management.Domain.Users.Events;
+using Modules.Management.Domain.Users.DomainEvents;
 using Modules.Management.Domain.Users.Rules;
 
 namespace Modules.Management.Domain.Users;
 
 public class InstitutionUser : User
 {
-    public Date? BirthDate { get; private set; }
     public Address? Address { get; private set; }
     public LanguageLevel? LanguageLevel { get; private set; }
+    public Date? BirthDate { get; private set; }
 
     private InstitutionUser()
     {
@@ -24,9 +24,9 @@ public class InstitutionUser : User
         FullName fullName,
         InstitutionUserRole role,
         InstitutionId institutionId,
-        Date? birthDate = null,
         Address? address = null,
-        LanguageLevel? languageLevel = null
+        LanguageLevel? languageLevel = null,
+        Date? birthDate = null
     )
         : base(id, email, phone, fullName, role.ToUserRole(), institutionId)
     {
@@ -43,7 +43,7 @@ public class InstitutionUser : User
         var user = new InstitutionUser(UserId.New, email, phone, fullName, InstitutionUserRole.InstitutionAdmin, InstitutionId.New);
         user.AddActivationCode(activationCode);
 
-        user.Raise(new InstitutionAdminRegisteredEvent(user.Id, user.Email, user.Phone, user.FullName, user.InstitutionId!));
+        user.RaiseDomainEvent(new InstitutionAdminRegisteredDomainEvent(user.Id, user.Email, user.Phone, user.FullName, user.InstitutionId!));
 
         return user;
     }
@@ -56,19 +56,20 @@ public class InstitutionUser : User
         Phone phone,
         FullName fullName,
         InstitutionUserRole role,
-        Date? birthDate,
         Address? address,
         LanguageLevel? languageLevel,
+        Date? birthDate,
         InstitutionId institutionId)
     {
-        Validate(new StudentBirthDateRequiredRule(role, birthDate));
-        Validate(new StudentLanguageLevelRequiredRule(role, languageLevel));
         Validate(new InstitutionUserAddressRequiredRule(role, address));
+        Validate(new StudentLanguageLevelRequiredRule(role, languageLevel));
+        Validate(new StudentBirthDateRequiredRule(role, birthDate));
 
-        var user = new InstitutionUser(UserId.New, email, phone, fullName, role, institutionId, birthDate, address, languageLevel);
+        var user = new InstitutionUser(UserId.New, email, phone, fullName, role, institutionId, address, languageLevel, birthDate);
 
-        user.Raise(new InstitutionUserCreatedEvent(
+        user.RaiseDomainEvent(new InstitutionUserCreatedDomainEvent(
             user.Id,
+            user.State,
             user.Email,
             user.Phone,
             user.FullName,

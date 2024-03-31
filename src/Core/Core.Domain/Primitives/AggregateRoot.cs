@@ -1,4 +1,4 @@
-using Core.Domain.Events;
+using Core.Domain.DomainEvents;
 
 namespace Core.Domain.Primitives;
 
@@ -11,12 +11,12 @@ namespace Core.Domain.Primitives;
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     where TId : EntityId
 {
-    private readonly List<IEvent> _domainEvents = [];
+    private readonly List<IDomainEvent> _domainEvents = [];
 
     /// <summary>
     /// Gets the domain events read-only collection.
     /// </summary>
-    public IReadOnlyList<IEvent> DomainEvents => _domainEvents.AsReadOnly();
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     public uint Version { get; set; } = default;
 
@@ -39,6 +39,6 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     {
     }
 
-    public void Raise(IEvent @event) => _domainEvents.Add(@event);
+    public void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
     public void ClearDomainEvents() => _domainEvents.Clear();
 }

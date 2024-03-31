@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Management.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    [Migration("20240325185918_Initial")]
+    [Migration("20240331133721_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -163,6 +163,12 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 {
                     b.HasBaseType("Modules.Management.Domain.Users.User");
 
+                    b.Property<DateTimeOffset?>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("LanguageLevel")
+                        .HasColumnType("integer");
+
                     b.HasDiscriminator().HasValue("InstitutionUser");
                 });
 
@@ -302,6 +308,52 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     b.Navigation("ActivationCodes");
 
                     b.Navigation("PasswordResetCodes");
+                });
+
+            modelBuilder.Entity("Modules.Management.Domain.Users.InstitutionUser", b =>
+                {
+                    b.OwnsOne("Core.Domain.Shared.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<Guid>("InstitutionUserId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("HouseNumber")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("ZipCodeCity")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<uint>("_TableSharingConcurrencyTokenConvention_Version")
+                                .IsConcurrencyToken()
+                                .ValueGeneratedOnAddOrUpdate()
+                                .HasColumnType("xid")
+                                .HasColumnName("xmin");
+
+                            b1.HasKey("InstitutionUserId");
+
+                            b1.ToTable("Users", "Management");
+
+                            b1.WithOwner()
+                                .HasForeignKey("InstitutionUserId");
+                        });
+
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }
