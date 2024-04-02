@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.ResetPassword;
+using Modules.Management.Application.Features.Access.Commands.ResetPassword;
 
 namespace Modules.Management.Api.Endpoints.Access.ResetPassword;
 

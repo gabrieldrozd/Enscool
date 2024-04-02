@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.ActivateAccount;
+using Modules.Management.Application.Features.Access.Commands.ActivateAccount;
 
 namespace Modules.Management.Api.Endpoints.Access.Activate;
 

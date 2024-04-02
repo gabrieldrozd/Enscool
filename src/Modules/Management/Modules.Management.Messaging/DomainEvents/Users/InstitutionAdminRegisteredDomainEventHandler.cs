@@ -3,7 +3,7 @@ using MediatR;
 using Modules.Management.Application.Features.Institutions.InternalCommands.CreateInstitution;
 using Modules.Management.Domain.Users.DomainEvents;
 
-namespace Modules.Management.Messaging.DomainEventHandlers.Users;
+namespace Modules.Management.Messaging.DomainEvents.Users;
 
 internal sealed class InstitutionAdminRegisteredDomainEventHandler(ISender sender)
     : IDomainEventHandler<InstitutionAdminRegisteredDomainEvent>

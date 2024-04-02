@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.Login;
+using Modules.Management.Application.Features.Access.Commands.Login;
 
 namespace Modules.Management.Api.Endpoints.Access.Login;
 

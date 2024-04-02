@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.Users.Queries.GetCurrentUser;
+using Modules.Management.Application.Features.Access.Queries.GetCurrentUser;
 
 namespace Modules.Management.Api.Endpoints.Access.GetCurrent;
 

@@ -5,7 +5,7 @@ using Core.Messaging.Users;
 using MediatR;
 using Modules.Management.Domain.Users.DomainEvents;
 
-namespace Modules.Management.Messaging.DomainEventHandlers.Users;
+namespace Modules.Management.Messaging.DomainEvents.Users;
 
 internal sealed class InstitutionUserCreatedDomainEventHandler(ISender sender, IMessageBus messageBus)
     : IDomainEventHandler<InstitutionUserCreatedDomainEvent>
@@ -27,6 +27,11 @@ internal sealed class InstitutionUserCreatedDomainEventHandler(ISender sender, I
                     LanguageLevel = notification.LanguageLevel!,
                     InstitutionId = notification.InstitutionId
                 }), cancellationToken);
+        }
+
+        if (notification.Role is UserRole.Teacher)
+        {
+            // TODO: Publish message for teacher user
         }
     }
 }

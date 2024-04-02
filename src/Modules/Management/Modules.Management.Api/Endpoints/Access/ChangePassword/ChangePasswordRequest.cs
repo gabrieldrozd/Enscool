@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.ChangePassword;
+using Modules.Management.Application.Features.Access.Commands.ChangePassword;
 
 namespace Modules.Management.Api.Endpoints.Access.ChangePassword;
 

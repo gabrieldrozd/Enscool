@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.Register;
+using Modules.Management.Application.Features.Access.Commands.Register;
 
 namespace Modules.Management.Api.Endpoints.Access.Register;
 

@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.GeneratePasswordResetCode;
+using Modules.Management.Application.Features.Access.Commands.GeneratePasswordResetCode;
 
 namespace Modules.Management.Api.Endpoints.Access.GeneratePasswordResetCode;
 

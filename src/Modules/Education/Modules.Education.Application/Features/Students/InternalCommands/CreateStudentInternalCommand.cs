@@ -1,7 +1,6 @@
 using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Languages;
-using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
 

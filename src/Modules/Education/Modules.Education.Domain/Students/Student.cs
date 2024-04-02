@@ -20,9 +20,21 @@ public sealed class Student : AggregateRoot<UserId>
     {
     }
 
-    private Student(UserId id, UserState state, Email email, Phone phone, FullName fullName, Address address, LanguageLevel languageLevel, Date birthDate)
+    private Student(
+        UserId id,
+        UserState state,
+        Email email,
+        Phone phone,
+        FullName fullName,
+        Address address,
+        LanguageLevel languageLevel,
+        Date birthDate,
+        InstitutionId institutionId
+    )
         : base(id)
     {
+        SetInstitutionId(institutionId);
+
         State = state;
         Email = email;
         Phone = phone;
@@ -32,9 +44,15 @@ public sealed class Student : AggregateRoot<UserId>
         LanguageLevel = languageLevel;
     }
 
-    public static Student Create(UserId id, UserState state, Email email, Phone phone, FullName fullName, Address address, LanguageLevel languageLevel, Date birthDate)
-    {
-        var student = new Student(id, state, email, phone, fullName, address, languageLevel, birthDate);
-        return student;
-    }
+    public static Student Create(
+        UserId id,
+        UserState state,
+        Email email,
+        Phone phone,
+        FullName fullName,
+        Address address,
+        LanguageLevel languageLevel,
+        Date birthDate,
+        InstitutionId institutionId
+    ) => new(id, state, email, phone, fullName, address, languageLevel, birthDate, institutionId);
 }

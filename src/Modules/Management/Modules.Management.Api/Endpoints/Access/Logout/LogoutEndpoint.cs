@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.Users.Commands.Logout;
+using Modules.Management.Application.Features.Access.Commands.Logout;
 
 namespace Modules.Management.Api.Endpoints.Access.Logout;
 

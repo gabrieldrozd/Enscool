@@ -1,5 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
-using Modules.Management.Application.Features.Users.Commands.RefreshAccess;
+using Modules.Management.Application.Features.Access.Commands.RefreshAccess;
 
 namespace Modules.Management.Api.Endpoints.Access.Refresh;
 

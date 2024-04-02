@@ -16,14 +16,13 @@ internal sealed class InstitutionUserConfiguration : IEntityTypeConfiguration<In
         {
             ownedBuilder.Property(x => x.ZipCode).IsRequired();
             ownedBuilder.Property(x => x.ZipCodeCity).IsRequired();
-            ownedBuilder.Property(x => x.State);
             ownedBuilder.Property(x => x.City).IsRequired();
-            ownedBuilder.Property(x => x.Street);
             ownedBuilder.Property(x => x.HouseNumber).IsRequired();
+            ownedBuilder.Property(x => x.State);
+            ownedBuilder.Property(x => x.Street);
         });
 
         builder.Property(x => x.LanguageLevel)
-            .HasConversion<LanguageLevelConverter>()
-            .IsRequired();
+            .HasConversion<LanguageLevelConverter>();
     }
 }
