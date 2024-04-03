@@ -37,6 +37,6 @@ internal sealed class ChangePasswordCommandHandler : ICommandHandler<ChangePassw
         user.ChangePassword(Password.Create(request.NewPassword));
 
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok);
+            .Map(Result.Success.Ok);
     }
 }

@@ -28,6 +28,6 @@ internal sealed class CreateInstitutionInternalCommandHandler : ICommandHandler<
 
         _institutionRepository.Insert(institution);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok);
+            .Map(Result.Success.Ok);
     }
 }

@@ -32,6 +32,6 @@ internal sealed class ResetPasswordCommandHandler : ICommandHandler<ResetPasswor
         user.ResetPassword(Password.Create(request.NewPassword));
 
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok);
+            .Map(Result.Success.Ok);
     }
 }

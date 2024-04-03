@@ -66,6 +66,9 @@
     <data name="InstitutionRegisteredEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>en-US\InstitutionRegisteredEmailTemplate.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
     </data>
+    <data name="InstitutionUserCreatedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>en-US\InstitutionUserCreatedEmailTemplate.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    </data>
     <data name="PasswordResetCodeEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>en-US\PasswordResetCodeEmailTemplate.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
     </data>

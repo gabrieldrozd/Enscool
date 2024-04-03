@@ -43,7 +43,7 @@ internal sealed class GeneratePasswordResetCodeCommandHandler : ICommandHandler<
         user.AddPasswordResetCode(passwordResetCode);
 
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(() =>
+            .Map(() =>
             {
                 var template = PasswordResetCodeEmailTemplate.Populate(user.FullName.First, passwordResetCode.Value, _passwordResetSettings.CodeExpiryInHours);
                 var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);

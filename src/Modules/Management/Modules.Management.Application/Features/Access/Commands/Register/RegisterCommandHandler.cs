@@ -39,19 +39,23 @@ internal sealed class RegisterCommandHandler : ICommandHandler<RegisterCommand>
         if (await _userRepository.ExistsAsync(request.Email, cancellationToken))
             return Result.Failure.BadRequest(Resource.EmailTaken);
 
-        var user = InstitutionUser.CreateInitialInstitutionAdmin(
+        var institutionUser = InstitutionUser.CreateInitialInstitutionAdmin(
             Email.Parse(request.Email),
             Phone.Parse(request.Phone),
             FullName.Create(request.FirstName, request.MiddleName, request.LastName),
             _activationCodeService.Generate());
 
-        _userRepository.Insert(user);
+        _userRepository.Insert(institutionUser);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(() =>
+            .Map(() =>
             {
-                var template = InstitutionRegisteredEmailTemplate.Populate(user.FullName.First, _activationLinkService.Create(user));
-                var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);
+                var template = InstitutionRegisteredEmailTemplate.Populate(
+                    institutionUser.FullName.First,
+                    _activationLinkService.Create(institutionUser));
+
+                var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FullName, template);
                 _emailQueue.Enqueue(emailMessage);
+
                 return Result.Success.Ok();
             });
     }

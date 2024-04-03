@@ -40,6 +40,6 @@ internal sealed class ActivateAccountCommandHandler : ICommandHandler<ActivateAc
 
         var accessModel = await _tokenManager.GenerateAsync(user);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok(accessModel));
+            .Map(Result.Success.Ok(accessModel));
     }
 }

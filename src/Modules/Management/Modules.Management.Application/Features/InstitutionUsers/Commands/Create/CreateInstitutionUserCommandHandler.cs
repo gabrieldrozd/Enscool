@@ -1,25 +1,37 @@
+using Common.Utilities.Emails.Models;
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
 using Common.Utilities.Resources;
+using Core.Application.Communication.External.Emails;
 using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.ValueObjects;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;
+using Modules.Management.Domain.Abstractions;
 using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Create;
 
 internal sealed class CreateInstitutionUserCommandHandler : ICommandHandler<CreateInstitutionUserCommand, Guid>
 {
+    private readonly IEmailQueue _emailQueue;
+    private readonly IActivationLinkService _activationLinkService;
+    private readonly IActivationCodeService _activationCodeService;
     private readonly IInstitutionRepository _institutionRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateInstitutionUserCommandHandler(
+        IEmailQueue emailQueue,
+        IActivationLinkService activationLinkService,
+        IActivationCodeService activationCodeService,
         IInstitutionRepository institutionRepository,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
+        _emailQueue = emailQueue;
+        _activationLinkService = activationLinkService;
+        _activationCodeService = activationCodeService;
         _institutionRepository = institutionRepository;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -41,10 +53,22 @@ internal sealed class CreateInstitutionUserCommandHandler : ICommandHandler<Crea
             request.Address?.Map(),
             request.LanguageLevel,
             Date.Create(request.BirthDate),
-            request.InstitutionId);
+            request.InstitutionId,
+            _activationCodeService.Generate());
 
         _userRepository.Insert(institutionUser);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok(institutionUser.Id.Value));
+            .Map(() =>
+            {
+                var template = InstitutionUserCreatedEmailTemplate.Populate(
+                    institutionUser.FullName.First,
+                    institutionUser.Role.ToString(),
+                    _activationLinkService.Create(institutionUser));
+
+                var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FullName, template);
+                _emailQueue.Enqueue(emailMessage);
+
+                return Result.Success.Ok(institutionUser.Id.Value);
+            });
     }
 }

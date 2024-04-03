@@ -37,6 +37,6 @@ internal sealed class CreateStudentInternalCommandHandler : ICommandHandler<Crea
 
         _studentRepository.Insert(student);
         return await _unitOfWork.CommitAsync(cancellationToken)
-            .MatchOrBadRequest(Result.Success.Ok);
+            .Map(Result.Success.Ok);
     }
 }

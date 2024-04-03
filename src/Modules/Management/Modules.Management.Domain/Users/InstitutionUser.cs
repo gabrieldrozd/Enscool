@@ -59,13 +59,15 @@ public class InstitutionUser : User
         Address? address,
         LanguageLevel? languageLevel,
         Date? birthDate,
-        InstitutionId institutionId)
+        InstitutionId institutionId,
+        ActivationCode activationCode)
     {
         Validate(new InstitutionUserAddressRequiredRule(role, address));
         Validate(new StudentLanguageLevelRequiredRule(role, languageLevel));
         Validate(new StudentBirthDateRequiredRule(role, birthDate));
 
         var user = new InstitutionUser(UserId.New, email, phone, fullName, role, institutionId, address, languageLevel, birthDate);
+        user.AddActivationCode(activationCode);
 
         user.RaiseDomainEvent(new InstitutionUserCreatedDomainEvent(
             user.Id,

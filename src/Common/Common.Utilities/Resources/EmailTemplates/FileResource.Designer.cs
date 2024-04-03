@@ -84,7 +84,32 @@ namespace Common.Utilities.Resources.EmailTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wisse - Reset Password Code 🔒🗝️
+        ///   Looks up a localized string similar to Enscool - Account activation ⏱️✅
+        ///&lt;div&gt;
+        ///    &lt;p&gt;Hello, {{user_name}} 👋🏽&lt;/p&gt;
+        ///
+        ///    You have been added to Enscool as &lt;strong&gt;{{role}}&lt;/strong&gt;! We are happy to have you on board! 😊🎉&lt;br&gt;
+        ///    Your account has been created, but you still need to activate it.
+        ///    &lt;br&gt;
+        ///    Please click on the link below to activate your account ⬇️&lt;br&gt;
+        ///    &lt;a href=&quot;{{activation_link}}&quot;&gt;Activate! 🚀&lt;/a&gt;&lt;br&gt;
+        ///
+        ///    &lt;br&gt;&lt;br&gt;
+        ///
+        ///    &lt;div&gt;
+        ///        Best regards 💜 &lt;br&gt;
+        ///        Enscool
+        ///    &lt;/div&gt;
+        ///&lt;/div&gt;.
+        /// </summary>
+        public static string InstitutionUserCreatedEmailTemplate {
+            get {
+                return ResourceManager.GetString("InstitutionUserCreatedEmailTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enscool - Reset Password Code 🔒🗝️
         ///&lt;div&gt;
         ///    &lt;p&gt;Hello, {{user_name}} 👋🏽&lt;/p&gt;
         ///
@@ -95,7 +120,7 @@ namespace Common.Utilities.Resources.EmailTemplates {
         ///        {{reset_code}}
         ///    &lt;/span&gt;
         ///    &lt;br&gt;&lt;br&gt;
-        ///    &lt;strong&gt;I [rest of string was truncated]&quot;;.
+        ///    &lt;strong [rest of string was truncated]&quot;;.
         /// </summary>
         public static string PasswordResetCodeEmailTemplate {
             get {
