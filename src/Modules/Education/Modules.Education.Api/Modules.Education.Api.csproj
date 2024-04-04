@@ -7,8 +7,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Modules.Education.Infrastructure\Modules.Education.Infrastructure.csproj" />
-      <ProjectReference Include="..\Modules.Education.Messaging\Modules.Education.Messaging.csproj" />
+        <ProjectReference Include="..\Modules.Education.Infrastructure\Modules.Education.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules.Education.Messaging\Modules.Education.Messaging.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="module.education.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="module.education.development.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Endpoints\"/>
     </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ namespace Core.Infrastructure.Cores.Modules.Swagger.Settings;
 public static class ApiGroups
 {
     public const string Management = "management-module";
+    public const string Education = "education-module";
 
     public static IDictionary<string, string> GetNameValueDictionary()
     {

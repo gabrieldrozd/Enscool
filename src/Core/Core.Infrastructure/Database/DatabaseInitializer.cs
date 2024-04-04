@@ -33,7 +33,20 @@ internal sealed class DatabaseInitializer : IHostedService
 
             try
             {
+                var pendingMigrations = await context.Database.GetPendingMigrationsAsync(cancellationToken);
                 _logger.LogInformation("Applying migrations for '{DbContextName}'", contextType.Name);
+
+                if (pendingMigrations.Any())
+                {
+                    _logger.LogInformation("Migration(s) to apply:");
+                    var migrations = pendingMigrations.Select(x => $"- '{x}',").Aggregate((x, y) => $"{x}{Environment.NewLine}{y}").TrimEnd(',');
+                    _logger.LogInformation("{Migrations}", migrations);
+                }
+                else
+                {
+                    _logger.LogInformation("No migration(s) to apply");
+                }
+
                 await context.Database.MigrateAsync(cancellationToken);
 
                 _logger.LogInformation("Initializing database for '{DbContextName}'", contextType.Name);

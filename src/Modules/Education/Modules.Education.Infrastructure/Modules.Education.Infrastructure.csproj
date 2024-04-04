@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
-      <ProjectReference Include="..\Modules.Education.Application\Modules.Education.Application.csproj" />
+        <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules.Education.Application\Modules.Education.Application.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Modules.Education.Api"/>
     </ItemGroup>
 
 </Project>
