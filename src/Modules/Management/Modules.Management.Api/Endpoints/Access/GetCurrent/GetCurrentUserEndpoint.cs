@@ -23,7 +23,7 @@ internal sealed class GetCurrentUserEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .RequireAuthorization()
-            .ProducesEnvelope<UserDto>(StatusCodes.Status200OK)
+            .ProducesEnvelope<GetCurrentUserQueryDto>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "GetCurrentUser",
                 "Get current user details",

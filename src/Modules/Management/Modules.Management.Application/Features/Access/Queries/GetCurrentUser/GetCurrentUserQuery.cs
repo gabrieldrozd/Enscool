@@ -6,4 +6,4 @@ namespace Modules.Management.Application.Features.Access.Queries.GetCurrentUser;
 /// <summary>
 /// Gets currently logged in <see cref="User"/>
 /// </summary>
-public sealed record GetCurrentUserQuery : IQuery<UserDto>;
+public sealed record GetCurrentUserQuery : IQuery<GetCurrentUserQueryDto>;

@@ -4,7 +4,7 @@ using Core.Domain.Shared.Enumerations.Languages;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
 
-namespace Modules.Education.Application.Features.Students.InternalCommands;
+namespace Modules.Education.Application.Features.Students.InternalCommands.CreateStudent;
 
 public sealed record CreateStudentInternalCommand(
     UserId UserId,

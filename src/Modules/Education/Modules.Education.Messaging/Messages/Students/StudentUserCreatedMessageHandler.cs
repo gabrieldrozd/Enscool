@@ -2,6 +2,7 @@ using Core.Application.Communication.External.Messages;
 using Core.Messaging.Users;
 using MediatR;
 using Modules.Education.Application.Features.Students.InternalCommands;
+using Modules.Education.Application.Features.Students.InternalCommands.CreateStudent;
 
 namespace Modules.Education.Messaging.Messages.Students;
 

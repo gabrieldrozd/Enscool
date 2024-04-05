@@ -6,7 +6,7 @@ using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Access.Queries.GetCurrentUser;
 
-public class UserDto : IWithExpressionMapFrom<User, UserDto>
+public class GetCurrentUserQueryDto : IWithExpressionMapFrom<User, GetCurrentUserQueryDto>
 {
     public Guid UserId { get; private init; }
     public Guid? InstitutionId { get; private init; }
@@ -18,8 +18,8 @@ public class UserDto : IWithExpressionMapFrom<User, UserDto>
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
 
-    public static Expression<Func<User, UserDto>> Mapper =>
-        user => new UserDto
+    public static Expression<Func<User, GetCurrentUserQueryDto>> Mapper =>
+        user => new GetCurrentUserQueryDto
         {
             UserId = user.Id,
             InstitutionId = user.InstitutionId,

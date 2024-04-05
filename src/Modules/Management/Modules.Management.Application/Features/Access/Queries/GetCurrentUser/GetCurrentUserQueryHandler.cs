@@ -7,7 +7,7 @@ using Modules.Management.Application.Abstractions;
 
 namespace Modules.Management.Application.Features.Access.Queries.GetCurrentUser;
 
-internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQuery, UserDto>
+internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQuery, GetCurrentUserQueryDto>
 {
     private readonly IUserContext _userContext;
     private readonly IManagementDbContext _context;
@@ -18,18 +18,18 @@ internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQ
         _context = context;
     }
 
-    public async Task<Result<UserDto>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GetCurrentUserQueryDto>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
     {
         _userContext.EnsureInstitutionUserAuthenticated();
 
         var user = await _context.Users
             .Where(x => x.Id == _userContext.UserId)
             .AsNoTracking()
-            .Select(UserDto.Mapper)
+            .Select(GetCurrentUserQueryDto.Mapper)
             .SingleOrDefaultAsync(cancellationToken);
 
         return user?.State is not UserState.Active
-            ? Result.Failure.Unauthorized<UserDto>()
+            ? Result.Failure.Unauthorized<GetCurrentUserQueryDto>()
             : Result.Success.Ok(user);
     }
 }

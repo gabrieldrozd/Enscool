@@ -6,7 +6,7 @@ using Modules.Education.Application.Abstractions;
 using Modules.Education.Application.Abstractions.Repositories;
 using Modules.Education.Domain.Students;
 
-namespace Modules.Education.Application.Features.Students.InternalCommands;
+namespace Modules.Education.Application.Features.Students.InternalCommands.CreateStudent;
 
 internal sealed class CreateStudentInternalCommandHandler : ICommandHandler<CreateStudentInternalCommand>
 {
