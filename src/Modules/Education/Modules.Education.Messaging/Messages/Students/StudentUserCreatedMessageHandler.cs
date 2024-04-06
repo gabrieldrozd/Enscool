@@ -5,12 +5,19 @@ using Modules.Education.Application.Features.Students.InternalCommands.CreateStu
 
 namespace Modules.Education.Messaging.Messages.Students;
 
-internal sealed class StudentUserCreatedMessageHandler(ISender sender)
+internal sealed class StudentUserCreatedMessageHandler
     : IMessageHandler<StudentUserCreatedMessage>
 {
+    private readonly ISender _sender;
+
+    public StudentUserCreatedMessageHandler(ISender sender)
+    {
+        _sender = sender;
+    }
+
     public async Task Handle(StudentUserCreatedMessage notification, CancellationToken cancellationToken)
     {
-        await sender.Send(new CreateStudentInternalCommand(
+        await _sender.Send(new CreateStudentInternalCommand(
             notification.Payload.UserId,
             notification.Payload.State,
             notification.Payload.Email,

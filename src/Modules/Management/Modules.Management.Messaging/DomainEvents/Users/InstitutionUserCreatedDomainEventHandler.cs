@@ -7,14 +7,22 @@ using Modules.Management.Domain.Users.DomainEvents;
 
 namespace Modules.Management.Messaging.DomainEvents.Users;
 
-internal sealed class InstitutionUserCreatedDomainEventHandler(ISender sender, IMessageBus messageBus)
-    : IDomainEventHandler<InstitutionUserCreatedDomainEvent>
+internal sealed class InstitutionUserCreatedDomainEventHandler : IDomainEventHandler<InstitutionUserCreatedDomainEvent>
 {
+    private readonly ISender _sender;
+    private readonly IMessageBus _messageBus;
+
+    public InstitutionUserCreatedDomainEventHandler(ISender sender, IMessageBus messageBus)
+    {
+        _sender = sender;
+        _messageBus = messageBus;
+    }
+
     public async Task Handle(InstitutionUserCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
         if (notification.Role is UserRole.Student)
         {
-            await messageBus.PublishAsync(new StudentUserCreatedMessage(
+            await _messageBus.PublishAsync(new StudentUserCreatedMessage(
                 new StudentUserCreatedMessagePayload
                 {
                     UserId = notification.UserId,
