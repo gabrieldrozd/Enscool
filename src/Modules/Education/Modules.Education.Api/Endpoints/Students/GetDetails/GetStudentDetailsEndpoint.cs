@@ -16,11 +16,11 @@ internal sealed class GetStudentDetailsEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapGetEndpoint(
-                "{institutionId:guid}",
+                "{studentId:guid}",
                 EducationEndpointInfo.Students,
-                async (Guid institutionId, ISender sender) =>
+                async (Guid studentId, ISender sender) =>
                 {
-                    var result = await sender.Send(new GetStudentDetailsQuery(institutionId));
+                    var result = await sender.Send(new GetStudentDetailsQuery(studentId));
                     return BuildEnvelope(result);
                 })
             .RequireAuthorization()

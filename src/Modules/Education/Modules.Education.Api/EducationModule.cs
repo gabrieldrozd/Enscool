@@ -10,8 +10,8 @@ namespace Modules.Education.Api;
 
 internal class EducationModule : IModuleCore
 {
-    public string Name => ApiSettings.Management;
-    public string Path => ApiGroups.Management;
+    public string Name => ApiSettings.Education;
+    public string Path => ApiGroups.Education;
 
     public void RegisterModule(IServiceCollection services, IConfiguration configuration)
     {

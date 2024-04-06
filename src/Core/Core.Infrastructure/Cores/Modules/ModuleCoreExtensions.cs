@@ -16,7 +16,7 @@ public static class ModuleCoreExtensions
     internal static IServiceCollection AddModuleCores(this IServiceCollection services, IList<Assembly> assemblies)
     {
         services
-            .AddSwaggerDocumentation(assemblies)
+            .AddSwaggerDocumentation()
             .AddEndpoints();
 
         return services;

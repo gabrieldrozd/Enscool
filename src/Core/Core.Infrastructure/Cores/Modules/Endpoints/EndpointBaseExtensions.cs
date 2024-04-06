@@ -12,20 +12,20 @@ public static class EndpointBaseExtensions
 
     public static RouteHandlerBuilder MapGetEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapGet(CreateEndpointPath(info), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapGet(CreateEndpointPath(endpointInfo), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     public static RouteHandlerBuilder MapGetEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         [RouteTemplate, StringSyntax("Route")] string pattern,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapGet(CreateEndpointPath(info, pattern), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapGet(CreateEndpointPath(endpointInfo, pattern), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     #endregion
 
@@ -33,20 +33,20 @@ public static class EndpointBaseExtensions
 
     public static RouteHandlerBuilder MapPostEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPost(CreateEndpointPath(info), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPost(CreateEndpointPath(endpointInfo), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     public static RouteHandlerBuilder MapPostEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         [RouteTemplate, StringSyntax("Route")] string pattern,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPost(CreateEndpointPath(info, pattern), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPost(CreateEndpointPath(endpointInfo, pattern), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     #endregion
 
@@ -54,20 +54,20 @@ public static class EndpointBaseExtensions
 
     public static RouteHandlerBuilder MapPutEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPut(CreateEndpointPath(info), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPut(CreateEndpointPath(endpointInfo), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     public static RouteHandlerBuilder MapPutEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         [RouteTemplate, StringSyntax("Route")] string pattern,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPut(CreateEndpointPath(info, pattern), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPut(CreateEndpointPath(endpointInfo, pattern), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     #endregion
 
@@ -75,20 +75,20 @@ public static class EndpointBaseExtensions
 
     public static RouteHandlerBuilder MapPatchEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPatch(CreateEndpointPath(info), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPatch(CreateEndpointPath(endpointInfo), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     public static RouteHandlerBuilder MapPatchEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         [RouteTemplate, StringSyntax("Route")] string pattern,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapPatch(CreateEndpointPath(info, pattern), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapPatch(CreateEndpointPath(endpointInfo, pattern), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     #endregion
 
@@ -96,32 +96,33 @@ public static class EndpointBaseExtensions
 
     public static RouteHandlerBuilder MapDeleteEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapDelete(CreateEndpointPath(info), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapDelete(CreateEndpointPath(endpointInfo), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     public static RouteHandlerBuilder MapDeleteEndpoint(
         this IEndpointRouteBuilder endpointRouteBuilder,
         [RouteTemplate, StringSyntax("Route")] string pattern,
-        EndpointInfo info,
+        EndpointInfo endpointInfo,
         [AspMinimalApiHandler] Delegate handler
     ) => endpointRouteBuilder
-        .MapDelete(CreateEndpointPath(info, pattern), handler)
-        .ConfigureEndpoint(info.Value);
+        .MapDelete(CreateEndpointPath(endpointInfo, pattern), handler)
+        .ConfigureEndpoint(endpointInfo);
 
     #endregion
 
     /// <summary>
-    /// Configures the endpoint info and open api.
+    /// Configures the endpoint endpointInfo and open api.
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="tag">The <see cref="EndpointInfo"/> tag.</param>
     /// <returns>The <see cref="RouteHandlerBuilder"/> with configuration applied.</returns>
-    private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, string tag)
+    private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, EndpointInfo endpointInfo)
     {
-        builder.WithTags(tag);
+        builder.WithGroupName(endpointInfo.ModulePath);
+        builder.WithTags(endpointInfo.Value);
         builder.WithOpenApi();
         return builder;
     }
@@ -131,19 +132,19 @@ public static class EndpointBaseExtensions
     /// <summary>
     /// Creates the endpoint path from the <see cref="EndpointInfo"/>.
     /// </summary>
-    /// <param name="info">The <see cref="EndpointInfo"/>.</param>
+    /// <param name="endpointInfo">The <see cref="EndpointInfo"/>.</param>
     /// <returns>The full, combined endpoint path.</returns>
-    private static string CreateEndpointPath(EndpointInfo info)
-        => $"{info.ModulePath.TrimEnd('/')}/{info.Route.TrimEnd('/').TrimStart('/')}";
+    private static string CreateEndpointPath(EndpointInfo endpointInfo)
+        => $"{endpointInfo.ModulePath.TrimEnd('/')}/{endpointInfo.Route.TrimEnd('/').TrimStart('/')}";
 
     /// <summary>
     /// Creates the endpoint path from the <see cref="EndpointInfo"/> and pattern.
     /// </summary>
-    /// <param name="info">The <see cref="EndpointInfo"/>.</param>
+    /// <param name="endpointInfo">The <see cref="EndpointInfo"/>.</param>
     /// <param name="pattern">The pattern.</param>
     /// <returns>The full, combined endpoint path.</returns>
-    private static string CreateEndpointPath(EndpointInfo info, string pattern)
-        => $"{info.ModulePath.TrimEnd('/')}/{info.Route.TrimEnd('/').TrimStart('/')}/{pattern.TrimStart('/')}";
+    private static string CreateEndpointPath(EndpointInfo endpointInfo, string pattern)
+        => $"{endpointInfo.ModulePath.TrimEnd('/')}/{endpointInfo.Route.TrimEnd('/').TrimStart('/')}/{pattern.TrimStart('/')}";
 
     #endregion
 }

@@ -1,4 +1,3 @@
-using System.Reflection;
 using Core.Infrastructure.Cores.Modules.Swagger.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -7,14 +6,11 @@ using Microsoft.OpenApi.Models;
 
 namespace Core.Infrastructure.Cores.Modules.Swagger;
 
-public sealed record XmlComments(List<string> Comments);
-
 internal static class SwaggerExtensions
 {
-    public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services, IList<Assembly> assemblies)
+    public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
     {
         services
-            .RegisterXmlComments(assemblies)
             .AddSwaggerGen(swagger =>
             {
                 foreach (var group in ApiGroups.GetNameValueDictionary())
@@ -46,13 +42,8 @@ internal static class SwaggerExtensions
                 var requirement = new OpenApiSecurityRequirement { { securityScheme, new List<string>() } };
                 swagger.AddSecurityRequirement(requirement);
 
-                using var serviceProvider = services.BuildServiceProvider();
-                var xmlComments = serviceProvider.GetRequiredService<XmlComments>();
-                xmlComments.Comments.ForEach(xmlFile => swagger.IncludeXmlComments(xmlFile));
-
                 swagger.OperationFilter<LanguageHeaderParameter>();
                 swagger.OperationFilter<RoleOperationFilter>();
-                swagger.DocumentFilter<EndpointsOrderFilter>();
             });
 
         return services;
@@ -73,28 +64,5 @@ internal static class SwaggerExtensions
         });
 
         return app;
-    }
-
-    private static IServiceCollection RegisterXmlComments(this IServiceCollection services, IList<Assembly> assemblies)
-    {
-        const string modulePart = "Modules.";
-        const string commonPart = "Core.Domain";
-        const string searchPattern = "*.xml";
-
-        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        var xmlFilesInDirectory = Directory.GetFiles(baseDirectory, searchPattern);
-
-        var moduleXmlFiles = assemblies
-            .Where(a => a.GetName().Name!.Contains(modulePart))
-            .Select(a => xmlFilesInDirectory.FirstOrDefault(file => file.Contains($"{a.GetName().Name}.xml")))
-            .Where(path => path != null);
-
-        var commonXmlFile = xmlFilesInDirectory.FirstOrDefault(file => file.Contains($"{commonPart}.xml"));
-
-        var xmlFiles = new List<string>(moduleXmlFiles!);
-        if (commonXmlFile != null) xmlFiles.Add(commonXmlFile);
-        services.AddSingleton(new XmlComments(xmlFiles));
-
-        return services;
     }
 }
