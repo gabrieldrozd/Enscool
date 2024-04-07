@@ -55,4 +55,6 @@ public static class Functional
             ifFalse();
         }
     }
+
+    // TODO: Create method for Pattern Matching (for exampel: x is y)
 }

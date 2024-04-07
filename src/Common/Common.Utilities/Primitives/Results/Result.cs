@@ -5,7 +5,7 @@ namespace Common.Utilities.Primitives.Results;
 /// <summary>
 /// Represents the result of an operation
 /// </summary>
-public class Result
+public class Result : IResult
 {
     public ResultStatus Status { get; }
     public bool IsSuccess => Status.State is State.Ok or State.Accepted or State.NoContent;
