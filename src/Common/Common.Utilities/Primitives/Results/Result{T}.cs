@@ -13,7 +13,7 @@ public sealed class Result<T> : Result
     /// </summary>
     public T? Value => IsSuccess ? _value : default;
 
-    internal Result(ResultStatus status, T? value) : base(status)
+    internal Result(ResultState state, T? value) : base(state)
         => _value = value;
 
     public static implicit operator Result<T>(T value) => Success.Ok(value);

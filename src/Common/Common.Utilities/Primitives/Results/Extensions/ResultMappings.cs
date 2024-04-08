@@ -13,14 +13,14 @@ public static class ResultMappings
     {
         var envelope = result.Status.State switch
         {
-            State.Ok when result.IsSuccess => new EmptyEnvelope(),
-            State.Accepted when result.IsSuccess => new EmptyEnvelope(),
-            State.NoContent when result.IsSuccess => new EmptyEnvelope(),
-            State.BadRequest when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            State.Unauthorized when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            State.Forbidden when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            State.NotFound when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            State.ServerError when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
+            ResultState.Ok when result.IsSuccess => new EmptyEnvelope(),
+            ResultState.Accepted when result.IsSuccess => new EmptyEnvelope(),
+            ResultState.NoContent when result.IsSuccess => new EmptyEnvelope(),
+            ResultState.BadRequest when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
+            ResultState.Forbidden when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
+            ResultState.NotFound when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
+            ResultState.ServerError when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
             _ => new EmptyEnvelope(result.Status.Message)
         };
 
@@ -37,14 +37,14 @@ public static class ResultMappings
     {
         var envelope = result.Status.State switch
         {
-            State.Ok when result.IsSuccess => new Envelope<T>(result.Value!),
-            State.Accepted when result.IsSuccess => new Envelope<T>(result.Value!),
-            State.NoContent when result.IsSuccess => new Envelope<T>(result.Value!),
-            State.BadRequest when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            State.Unauthorized when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            State.Forbidden when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            State.NotFound when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            State.ServerError when !result.IsSuccess => new Envelope<T>(result.Status.Message),
+            ResultState.Ok when result.IsSuccess => new Envelope<T>(result.Value!),
+            ResultState.Accepted when result.IsSuccess => new Envelope<T>(result.Value!),
+            ResultState.NoContent when result.IsSuccess => new Envelope<T>(result.Value!),
+            ResultState.BadRequest when !result.IsSuccess => new Envelope<T>(result.Status.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new Envelope<T>(result.Status.Message),
+            ResultState.Forbidden when !result.IsSuccess => new Envelope<T>(result.Status.Message),
+            ResultState.NotFound when !result.IsSuccess => new Envelope<T>(result.Status.Message),
+            ResultState.ServerError when !result.IsSuccess => new Envelope<T>(result.Status.Message),
             _ => new Envelope<T>(result.Status.Message)
         };
 

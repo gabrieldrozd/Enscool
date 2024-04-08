@@ -1,6 +1,6 @@
 namespace Common.Utilities.Primitives.Results;
 
-public enum State
+public enum ResultState
 {
     /// <summary>
     /// 200 OK / 201 Created

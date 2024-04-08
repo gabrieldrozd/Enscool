@@ -2,7 +2,8 @@ namespace Common.Utilities.Primitives.Results;
 
 public interface IResult
 {
-    ResultStatus Status { get; }
+    ResultState State { get; }
     bool IsSuccess { get; }
     bool IsFailure { get; }
+    string? Message { get; }
 }
