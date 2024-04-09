@@ -117,7 +117,7 @@ public static class EndpointBaseExtensions
     /// Configures the endpoint endpointInfo and open api.
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
-    /// <param name="tag">The <see cref="EndpointInfo"/> tag.</param>
+    /// <param name="endpointInfo">The <see cref="EndpointInfo"/>.</param>
     /// <returns>The <see cref="RouteHandlerBuilder"/> with configuration applied.</returns>
     private static RouteHandlerBuilder ConfigureEndpoint(this RouteHandlerBuilder builder, EndpointInfo endpointInfo)
     {

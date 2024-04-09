@@ -48,7 +48,7 @@ public sealed class MediatorTransactionDecorator : IMediator
 
         var sendResult = await _mediator.Send(request, cancellationToken);
         return sendResult is Result<TResponse> { IsFailure: true } result
-            ? throw new ApplicationLayerException(result.Status.Message)
+            ? throw new ApplicationLayerException(result.Message)
             : sendResult!;
     }
 
@@ -59,7 +59,7 @@ public sealed class MediatorTransactionDecorator : IMediator
 
         var sendResult = await _mediator.Send(request, cancellationToken);
         return sendResult is Result { IsFailure: true } result
-            ? throw new ApplicationLayerException(result.Status.Message)
+            ? throw new ApplicationLayerException(result.Message)
             : sendResult;
     }
 

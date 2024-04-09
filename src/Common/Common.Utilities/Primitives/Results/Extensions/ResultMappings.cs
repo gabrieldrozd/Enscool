@@ -11,20 +11,20 @@ public static class ResultMappings
     /// <returns><see cref="EmptyEnvelope"/> based on the given <paramref name="result"/>.</returns>
     public static EmptyEnvelope ToEnvelope(this Result result)
     {
-        var envelope = result.Status.State switch
+        var envelope = result.State switch
         {
             ResultState.Ok when result.IsSuccess => new EmptyEnvelope(),
             ResultState.Accepted when result.IsSuccess => new EmptyEnvelope(),
             ResultState.NoContent when result.IsSuccess => new EmptyEnvelope(),
-            ResultState.BadRequest when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            ResultState.Unauthorized when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            ResultState.Forbidden when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            ResultState.NotFound when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            ResultState.ServerError when !result.IsSuccess => new EmptyEnvelope(result.Status.Message),
-            _ => new EmptyEnvelope(result.Status.Message)
+            ResultState.BadRequest when !result.IsSuccess => new EmptyEnvelope(result.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new EmptyEnvelope(result.Message),
+            ResultState.Forbidden when !result.IsSuccess => new EmptyEnvelope(result.Message),
+            ResultState.NotFound when !result.IsSuccess => new EmptyEnvelope(result.Message),
+            ResultState.ServerError when !result.IsSuccess => new EmptyEnvelope(result.Message),
+            _ => new EmptyEnvelope(result.Message)
         };
 
-        return envelope.WithCode((int) result.Status.Code);
+        return envelope.WithCode(result.State.ToHttpCode());
     }
 
     /// <summary>
@@ -35,19 +35,19 @@ public static class ResultMappings
     /// <returns><see cref="Envelope{T}"/> based on the given <paramref name="result"/>.</returns>
     public static Envelope<T> ToEnvelope<T>(this Result<T> result)
     {
-        var envelope = result.Status.State switch
+        var envelope = result.State switch
         {
             ResultState.Ok when result.IsSuccess => new Envelope<T>(result.Value!),
             ResultState.Accepted when result.IsSuccess => new Envelope<T>(result.Value!),
             ResultState.NoContent when result.IsSuccess => new Envelope<T>(result.Value!),
-            ResultState.BadRequest when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            ResultState.Unauthorized when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            ResultState.Forbidden when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            ResultState.NotFound when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            ResultState.ServerError when !result.IsSuccess => new Envelope<T>(result.Status.Message),
-            _ => new Envelope<T>(result.Status.Message)
+            ResultState.BadRequest when !result.IsSuccess => new Envelope<T>(result.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new Envelope<T>(result.Message),
+            ResultState.Forbidden when !result.IsSuccess => new Envelope<T>(result.Message),
+            ResultState.NotFound when !result.IsSuccess => new Envelope<T>(result.Message),
+            ResultState.ServerError when !result.IsSuccess => new Envelope<T>(result.Message),
+            _ => new Envelope<T>(result.Message)
         };
 
-        return envelope.WithCode((int) result.Status.Code);
+        return envelope.WithCode(result.State.ToHttpCode());
     }
 }

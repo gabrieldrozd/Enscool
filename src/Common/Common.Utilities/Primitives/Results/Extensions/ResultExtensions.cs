@@ -22,11 +22,32 @@ public static class ResultExtensions
             _ => Result.Error.ServerError(exception.Message)
         };
 
+    /// <summary>
+    /// Maps the <see cref="ResultState"/> <paramref name="state" /> to an HTTP status code.
+    /// </summary>
+    /// <param name="state">State to map to an HTTP status code.</param>
+    /// <returns>HTTP status code based on the given <paramref name="state" />.</returns>
+    public static int ToHttpCode(this ResultState state)
+    {
+        return state switch
+        {
+            ResultState.Ok => 200,
+            ResultState.Accepted => 202,
+            ResultState.NoContent => 204,
+            ResultState.BadRequest => 400,
+            ResultState.Unauthorized => 401,
+            ResultState.Forbidden => 403,
+            ResultState.NotFound => 404,
+            ResultState.ServerError => 500,
+            _ => 500
+        };
+    }
+
     public static async Task<T> Match<T>(this Task<Result> resultTask, Func<T> onSuccess, Func<string, object[], T> onFailure)
     {
         var result = await resultTask;
         return result.IsFailure
-            ? onFailure(result.Status.Message!, [])
+            ? onFailure(result.Message!, [])
             : onSuccess();
     }
 
@@ -48,7 +69,7 @@ public static class ResultExtensions
     {
         var result = await resultTask;
         return result.IsFailure
-            ? Result.Failure.BadRequest(result.Status.Message!)
+            ? Result.Failure.BadRequest(result.Message!)
             : onSuccess;
     }
 
@@ -56,7 +77,7 @@ public static class ResultExtensions
     {
         var result = await resultTask;
         return result.IsFailure
-            ? Result.Failure.BadRequest(result.Status.Message!)
+            ? Result.Failure.BadRequest(result.Message!)
             : onSuccess();
     }
 
@@ -64,7 +85,7 @@ public static class ResultExtensions
     {
         var result = await resultTask;
         return result.IsFailure
-            ? Result.Failure.BadRequest<T>(result.Status.Message!)
+            ? Result.Failure.BadRequest<T>(result.Message!)
             : onSuccess;
     }
 
@@ -72,7 +93,7 @@ public static class ResultExtensions
     {
         var result = await resultTask;
         return result.IsFailure
-            ? Result.Failure.BadRequest<T>(result.Status.Message!)
+            ? Result.Failure.BadRequest<T>(result.Message!)
             : onSuccess();
     }
 }

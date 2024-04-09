@@ -25,10 +25,7 @@ internal sealed class DatabaseInitializer : IHostedService
         using var scope = _serviceProvider.CreateScope();
         foreach (var contextType in contextTypes)
         {
-            if (scope.ServiceProvider.GetService(contextType) is not ApplicationDbContext context)
-                continue;
-
-            if (!context.Enabled)
+            if (scope.ServiceProvider.GetService(contextType) is not ApplicationDbContext { Enabled: true } context)
                 continue;
 
             try

@@ -1,5 +1,6 @@
 using System.Reflection;
 using Common.Utilities.Primitives.Results;
+using Common.Utilities.Primitives.Results.Extensions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -33,16 +34,16 @@ public sealed class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRe
             _logger.LogInformation("[{@Timestamp} | {@RequestType}({@RequestCode})]: Completed successfully '{@Request}'",
                 DateTime.UtcNow.ToString("s"),
                 requestType,
-                (int) result.Status.Code,
+                result.State.ToHttpCode(),
                 typeof(TRequest).Name);
 
         else if (!result.IsSuccess)
             _logger.LogError("[{@Timestamp} | {@RequestType}({@RequestCode})]: Completed '{@Request}' with error '{@ResultMessage}'",
                 DateTime.UtcNow.ToString("s"),
                 requestType,
-                (int) result.Status.Code,
+                result.State.ToHttpCode(),
                 typeof(TRequest).Name,
-                result.Status.Message);
+                result.Message);
 
         return result;
     }

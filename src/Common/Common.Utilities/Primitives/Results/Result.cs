@@ -1,3 +1,4 @@
+using Common.Utilities.Resources;
 using FluentValidation.Results;
 
 namespace Common.Utilities.Primitives.Results;
@@ -42,16 +43,13 @@ public class Result : IResult
                 .AsResult(value);
     }
 
-    // TODO: Adjust messages as in ResultStatus
-    // TODO: Then remove ResultStatus completely and fix errors
-
     public static class Failure
     {
         public static Result BadRequest(string? message = null, params object[] args)
-            => new(ResultState.BadRequest, message is not null ? string.Format(message, args) : message);
+            => new(ResultState.BadRequest, message is not null ? string.Format(message, args) : Resource.BadRequest);
 
         public static Result<T> BadRequest<T>(string? message = null, params object[] args)
-            => new Result(ResultState.BadRequest, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.BadRequest, message is not null ? string.Format(message, args) : Resource.BadRequest)
                 .AsResult<T>();
 
         public static Result Validation(ValidationResult validationResult)
@@ -62,38 +60,38 @@ public class Result : IResult
                 .AsResult<T>();
 
         public static Result NotFound(string? message = null, params object[] args)
-            => new(ResultState.NotFound, message is not null ? string.Format(message, args) : message);
+            => new(ResultState.NotFound, message is not null ? string.Format(message, args) : Resource.ObjectNotFound);
 
         public static Result<T> NotFound<T>(string? message = null, params object[] args)
-            => new Result(ResultState.NotFound, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.NotFound, message is not null ? string.Format(message, args) : Resource.ObjectNotFound)
                 .AsResult<T>();
 
         public static Result<T> NotFound<T, TNotFound>(string? message = null, params object[] args)
-            => new Result(ResultState.NotFound, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.NotFound, message is not null ? string.Format(message, args) : string.Format(Resource.NotFound, typeof(TNotFound).Name))
                 .AsResult<T>();
 
         public static Result Unauthorized(string? message = null, params object[] args)
-            => new(ResultState.Unauthorized, message is not null ? string.Format(message, args) : message);
+            => new(ResultState.Unauthorized, message is not null ? string.Format(message, args) : Resource.Unauthorized);
 
         public static Result<T> Unauthorized<T>(string? message = null, params object[] args)
-            => new Result(ResultState.Unauthorized, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.Unauthorized, message is not null ? string.Format(message, args) : Resource.Unauthorized)
                 .AsResult<T>();
 
         public static Result Forbidden(string? message = null, params object[] args)
-            => new(ResultState.Forbidden, message is not null ? string.Format(message, args) : message);
+            => new(ResultState.Forbidden, message is not null ? string.Format(message, args) : Resource.Forbidden);
 
         public static Result<T> Forbidden<T>(string? message = null, params object[] args)
-            => new Result(ResultState.Forbidden, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.Forbidden, message is not null ? string.Format(message, args) : Resource.Forbidden)
                 .AsResult<T>();
     }
 
     public static class Error
     {
         public static Result ServerError(string? message = null, params object[] args)
-            => new(ResultState.ServerError, message is not null ? string.Format(message, args) : message);
+            => new(ResultState.ServerError, message is not null ? string.Format(message, args) : Resource.ServerError);
 
         public static Result<T> ServerError<T>(string? message = null, params object[] args)
-            => new Result(ResultState.ServerError, message is not null ? string.Format(message, args) : message)
+            => new Result(ResultState.ServerError, message is not null ? string.Format(message, args) : Resource.ServerError)
                 .AsResult<T>();
     }
 

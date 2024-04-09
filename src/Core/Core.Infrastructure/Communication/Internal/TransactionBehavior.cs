@@ -44,7 +44,7 @@ public sealed class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior
         if (!result.IsSuccess)
         {
             LogHandleFailure(result);
-            throw new ApplicationLayerException(result.Status.Message);
+            throw new ApplicationLayerException(result.Message);
         }
 
         LogHandleSuccess();
@@ -58,7 +58,7 @@ public sealed class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior
         if (!result.IsSuccess)
         {
             LogHandleFailure(result);
-            throw new ApplicationLayerException(result.Status.Message);
+            throw new ApplicationLayerException(result.Message);
         }
 
         LogHandleSuccess();
@@ -70,7 +70,7 @@ public sealed class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior
         _logger.LogError("[{@Timestamp} | InTransaction]: Failed to handle '{@Request}' with: '{FailureMessage}'",
             DateTime.UtcNow.ToString("s"),
             typeof(TRequest).Name,
-            result.Status.Message);
+            result.Message);
     }
 
     private void LogHandleSuccess()
