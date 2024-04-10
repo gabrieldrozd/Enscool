@@ -14,6 +14,7 @@ public class User : AggregateRoot<UserId>
 {
     private readonly List<ActivationCode> _activationCodes = [];
     private readonly List<PasswordResetCode> _passwordResetCodes = [];
+    private readonly List<InstitutionId> _institutionIds = [];
 
     public UserState State { get; private set; } = UserState.Pending;
     public Email Email { get; private set; } = default!;
@@ -24,6 +25,7 @@ public class User : AggregateRoot<UserId>
 
     public IReadOnlyList<ActivationCode> ActivationCodes => _activationCodes.AsReadOnly();
     public IReadOnlyList<PasswordResetCode> PasswordResetCodes => _passwordResetCodes.AsReadOnly();
+    public IReadOnlyList<InstitutionId> InstitutionIds => _institutionIds.AsReadOnly();
 
     public ActivationCode? CurrentActivationCode => _activationCodes.MaxBy(x => x.CreatedAt);
     public PasswordResetCode? CurrentPasswordResetCode => _passwordResetCodes.MaxBy(x => x.CreatedAt);
@@ -38,7 +40,8 @@ public class User : AggregateRoot<UserId>
         Phone phone,
         FullName fullName,
         UserRole role,
-        InstitutionId? institutionId
+        InstitutionId? institutionId,
+        List<InstitutionId> institutionIds
     )
         : base(id)
     {
@@ -48,6 +51,8 @@ public class User : AggregateRoot<UserId>
         Phone = phone;
         FullName = fullName;
         Role = role;
+
+        _institutionIds.AddRange(institutionIds);
     }
 
     #region Activation

@@ -28,7 +28,7 @@ public class InstitutionUser : User
         LanguageLevel? languageLevel = null,
         Date? birthDate = null
     )
-        : base(id, email, phone, fullName, role.ToUserRole(), institutionId)
+        : base(id, email, phone, fullName, role.ToUserRole(), institutionId, [])
     {
         BirthDate = birthDate;
         Address = address;
