@@ -8,7 +8,7 @@ namespace Modules.Education.Domain.Students;
 
 public sealed class Student : AggregateRoot<UserId>
 {
-    public UserState State { get; private set; } = UserState.Pending;
+    public UserState State { get; private set; }
     public Email Email { get; private set; } = null!;
     public Phone Phone { get; private set; } = null!;
     public FullName FullName { get; private set; } = null!;
