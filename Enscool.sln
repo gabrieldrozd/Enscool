@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Api", "src\Modules\Education\Modules.Education.Api\Modules.Education.Api.csproj", "{37FEC2E6-2194-42FB-93BC-62F89B1A9464}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Outbox", "src\Services\Services.Outbox\Services.Outbox.csproj", "{9AD785FB-7EB4-43FE-A200-C13777FC29BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{37FEC2E6-2194-42FB-93BC-62F89B1A9464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37FEC2E6-2194-42FB-93BC-62F89B1A9464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37FEC2E6-2194-42FB-93BC-62F89B1A9464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,5 +165,6 @@ Global
 		{2C184659-D82A-414F-AEE0-89B0F0E41E49} = {6459CE29-C676-4210-B63C-59E97474E945}
 		{F46EB406-536B-4DD1-BE2E-51C98CA6B99C} = {6459CE29-C676-4210-B63C-59E97474E945}
 		{37FEC2E6-2194-42FB-93BC-62F89B1A9464} = {6459CE29-C676-4210-B63C-59E97474E945}
+		{9AD785FB-7EB4-43FE-A200-C13777FC29BA} = {47A59EF6-62E5-4718-9E78-1EF14C79B026}
 	EndGlobalSection
 EndGlobal

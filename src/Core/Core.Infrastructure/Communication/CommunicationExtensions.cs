@@ -22,11 +22,8 @@ public static class CommunicationExtensions
         });
 
         services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
-        // services.Decorate<IMediator, MediatorTransactionDecorator>();
 
-        services.AddSingleton<InMemoryMessageQueue>();
         services.AddSingleton<IMessageBus, MessageBus>();
-        services.AddHostedService<MessageProcessorJob>();
 
         return services;
     }

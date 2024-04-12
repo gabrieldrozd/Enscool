@@ -4,10 +4,17 @@ namespace Core.Infrastructure.Communication.External.Messages;
 
 internal sealed class MessageBus : IMessageBus
 {
-    private readonly InMemoryMessageQueue _queue;
+    private readonly IOutboxWriter _outboxWriter;
 
-    public MessageBus(InMemoryMessageQueue queue) => _queue = queue;
+    public MessageBus(IOutboxWriter outboxWriter)
+    {
+        _outboxWriter = outboxWriter;
+    }
 
-    public async Task PublishAsync<TMessage>(TMessage message, CancellationToken cancellationToken = default) where TMessage : IMessage
-        => await _queue.Writer.WriteAsync(message, cancellationToken);
+    public async Task PublishAsync<TMessage>(TMessage message, CancellationToken cancellationToken = default)
+        where TMessage : IMessage
+    {
+        var inserted = await _outboxWriter.InsertMessageAsync(message, cancellationToken);
+        if (!inserted) throw new InvalidOperationException($"Failed to insert '{typeof(TMessage).FullName}' message into outbox");
+    }
 }
