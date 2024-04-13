@@ -81,6 +81,9 @@ internal sealed class UserConfiguration : AggregateConfiguration<User>
             .HasValue<InstitutionUser>(nameof(InstitutionUser))
             .HasValue<BackOfficeUser>(nameof(BackOfficeUser));
 
+        // TODO: Add missing configuration for IReadOnlyList<InstitutionId> InstitutionIds
+        @@@ missing ⬆️
+
         #region Indexes
 
         builder.HasIndex(x => x.Email).IsUnique();

@@ -1,10 +1,11 @@
 using Core.Application.Auth;
 using Core.Infrastructure.Database;
+using Core.Infrastructure.Database.Converters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Services.Outbox.OutboxMessages;
 
-namespace Services.Outbox;
+namespace Services.Outbox.Database;
 
 public sealed class OutboxDbContext : ApplicationDbContext
 {
@@ -17,8 +18,6 @@ public sealed class OutboxDbContext : ApplicationDbContext
         : base(options, userContext, mediator)
     {
     }
-
-    // TODO: Add migrations for OutboxDbContext
 
     public override Task InitializeDataAsync(CancellationToken cancellationToken = default)
         => Task.CompletedTask;

@@ -7,6 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="service.outbox.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\..\Modules\Management\Modules.Management.Infrastructure\Modules.Management.Infrastructure.csproj"/>
     </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ public static class CommunicationExtensions
 
         services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
 
-        services.AddSingleton<IMessageBus, MessageBus>();
+        services.AddTransient<IMessageBus, MessageBus>();
 
         return services;
     }

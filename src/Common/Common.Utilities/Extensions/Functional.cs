@@ -56,5 +56,44 @@ public static class Functional
         }
     }
 
-    // TODO: Create method for Pattern Matching (for exampel: x is y)
+    // TODO: method to imitate switch statement
+    public static void Switch(this string value, Dictionary<string, Action> cases)
+    {
+        if (cases.ContainsKey(value))
+        {
+            cases[value]();
+        }
+    }
+
+    public static Switch<T> Switch<T>(this T value) => new(value);
+}
+
+public class Switch<T>
+{
+    private readonly T _value;
+    private bool _caseExecuted;
+
+    public Switch(T value)
+    {
+        _value = value;
+    }
+
+    public Switch<T> CaseWhen(Func<T, bool> condition, Action action)
+    {
+        if (!_caseExecuted && condition(_value))
+        {
+            action();
+            _caseExecuted = true;
+        }
+
+        return this;
+    }
+
+    public void Default(Action action)
+    {
+        if (!_caseExecuted)
+        {
+            action();
+        }
+    }
 }

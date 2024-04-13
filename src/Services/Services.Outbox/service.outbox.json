@@ -1,0 +1,6 @@
+{
+    "OutboxService": {
+        "Name": "OutboxService",
+        "Enabled": true
+    }
+}

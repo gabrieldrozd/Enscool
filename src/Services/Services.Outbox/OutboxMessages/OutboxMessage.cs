@@ -11,6 +11,7 @@ public sealed class OutboxMessage
     public Date CreatedOnUtc { get; } = Date.UtcNow;
     public Date? ProcessedOnUtc { get; private set; }
     public string? Error { get; private set; }
+    public int Attempts { get; private set; }
 
     private OutboxMessage()
     {
@@ -25,6 +26,8 @@ public sealed class OutboxMessage
         CreatedOnUtc = Date.UtcNow;
         ProcessedOnUtc = null;
         Error = null;
+
+        Attempts = 0;
     }
 
     public static OutboxMessage Create(Guid id, Type type, object payload)
@@ -34,6 +37,8 @@ public sealed class OutboxMessage
     {
         State = MessageState.Processed;
         ProcessedOnUtc = Date.UtcNow;
+
+        Attempts++;
     }
 
     public void SetFailed(string error)
@@ -41,5 +46,7 @@ public sealed class OutboxMessage
         State = MessageState.Failed;
         ProcessedOnUtc = Date.UtcNow;
         Error = error;
+
+        Attempts++;
     }
 }
