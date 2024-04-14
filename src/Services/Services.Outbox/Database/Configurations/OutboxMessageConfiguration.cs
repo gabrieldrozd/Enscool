@@ -23,7 +23,8 @@ internal sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outb
         var settings = new JsonSerializerSettings
         {
             ContractResolver = contractResolver,
-            TypeNameHandling = TypeNameHandling.All
+            TypeNameHandling = TypeNameHandling.All,
+            NullValueHandling = NullValueHandling.Include
         };
         settings.Converters.Add(new StringEnumConverter { NamingStrategy = new CamelCaseNamingStrategy() });
 

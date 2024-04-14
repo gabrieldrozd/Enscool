@@ -11,13 +11,30 @@ public record StudentUserCreatedMessage(StudentUserCreatedMessagePayload Payload
 
 public sealed class StudentUserCreatedMessagePayload
 {
-    public required UserId UserId { get; init; }
+    public required Guid UserId { get; init; }
     public required UserState State { get; init; }
-    public required Email Email { get; init; }
-    public required Phone Phone { get; init; }
-    public required FullName FullName { get; init; }
-    public required Date BirthDate { get; init; }
-    public required Address Address { get; init; }
-    public required LanguageLevel LanguageLevel { get; init; }
-    public required InstitutionId InstitutionId { get; init; }
+    public required string Email { get; init; }
+    public required string Phone { get; init; }
+    public required FullNamePayload FullName { get; init; }
+    public required DateTime BirthDate { get; init; }
+    public required AddressPayload Address { get; init; }
+    public required string LanguageLevel { get; init; }
+    public required Guid InstitutionId { get; init; }
+}
+
+public sealed class AddressPayload
+{
+    public required string ZipCode { get; init; }
+    public required string ZipCodeCity { get; init; }
+    public required string City { get; init; }
+    public required string HouseNumber { get; init; }
+    public required string? State { get; init; }
+    public required string? Street { get; init; }
+}
+
+public sealed class FullNamePayload
+{
+    public required string First { get; init; }
+    public required string? Middle { get; init; }
+    public required string Last { get; init; }
 }

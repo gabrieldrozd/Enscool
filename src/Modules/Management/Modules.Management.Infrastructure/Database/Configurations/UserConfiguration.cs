@@ -81,8 +81,19 @@ internal sealed class UserConfiguration : AggregateConfiguration<User>
             .HasValue<InstitutionUser>(nameof(InstitutionUser))
             .HasValue<BackOfficeUser>(nameof(BackOfficeUser));
 
-        // TODO: Add missing configuration for IReadOnlyList<InstitutionId> InstitutionIds
-        @@@ missing ⬆️
+        builder.OwnsMany(x => x.InstitutionIds, ownedBuilder =>
+        {
+            ownedBuilder.WithOwner().HasForeignKey("UserId");
+            ownedBuilder.ToTable("BackOfficeUserInstitutionIds");
+            ownedBuilder.HasKey("Id");
+
+            ownedBuilder.Property(x => x.Value)
+                .ValueGeneratedNever()
+                .HasColumnName("InstitutionId");
+
+            builder.Metadata.FindNavigation(nameof(BackOfficeUser.InstitutionIds))!
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+        });
 
         #region Indexes
 

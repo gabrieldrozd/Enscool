@@ -1,6 +1,4 @@
 using System.Reflection;
-using Core.Application.Communication.External.Messages;
-using Core.Infrastructure.Communication.External.Messages;
 using Core.Infrastructure.Communication.Internal;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
@@ -22,8 +20,6 @@ public static class CommunicationExtensions
         });
 
         services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true, lifetime: ServiceLifetime.Transient);
-
-        services.AddTransient<IMessageBus, MessageBus>();
 
         return services;
     }

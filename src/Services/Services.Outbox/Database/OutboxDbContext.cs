@@ -1,6 +1,5 @@
 using Core.Application.Auth;
 using Core.Infrastructure.Database;
-using Core.Infrastructure.Database.Converters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Services.Outbox.OutboxMessages;

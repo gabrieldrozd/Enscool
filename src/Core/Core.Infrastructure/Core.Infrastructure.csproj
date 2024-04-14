@@ -29,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Communication\External\Messages\" />
         <Folder Include="Cores\"/>
     </ItemGroup>
 

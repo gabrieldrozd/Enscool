@@ -9,11 +9,11 @@ namespace Services.Outbox;
 
 public class OutboxMessageProcessorJob : BackgroundService
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public OutboxMessageProcessorJob(IServiceProvider serviceProvider)
+    public OutboxMessageProcessorJob(IServiceProvider serviceProvider, IServiceScopeFactory scopeFactory)
     {
-        _serviceProvider = serviceProvider;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -21,17 +21,16 @@ public class OutboxMessageProcessorJob : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             await ProcessMessagesAsync(stoppingToken);
-            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
         }
     }
 
     private async Task ProcessMessagesAsync(CancellationToken cancellationToken)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<OutboxDbContext>();
-
+        using var contextScope = _scopeFactory.CreateScope();
+        var context = contextScope.ServiceProvider.GetRequiredService<OutboxDbContext>();
         var outboxMessages = await context.OutboxMessages
-            .Where(x => x.State == MessageState.Pending && x.ProcessedOnUtc == null)
+            .Where(x => x.State == MessageState.Pending || x.State == MessageState.Failed)
             .OrderBy(x => x.CreatedOnUtc)
             .Take(20)
             .ToListAsync(cancellationToken);
@@ -39,11 +38,12 @@ public class OutboxMessageProcessorJob : BackgroundService
         if (outboxMessages.Count == 0)
             return;
 
-        var publisher = _serviceProvider.GetRequiredService<IPublisher>();
         foreach (var outboxMessage in outboxMessages)
         {
             try
             {
+                using var publisherScope = _scopeFactory.CreateScope();
+                var publisher = publisherScope.ServiceProvider.GetRequiredService<IPublisher>();
                 await publisher.Publish(outboxMessage.Payload, cancellationToken);
             }
             catch (Exception ex)

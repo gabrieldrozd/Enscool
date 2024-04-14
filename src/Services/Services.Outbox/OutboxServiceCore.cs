@@ -1,5 +1,3 @@
-using Common.Utilities.Extensions;
-using Core.Application.Communication.External.Emails;
 using Core.Application.Communication.External.Messages;
 using Core.Infrastructure.Cores.Services;
 using Core.Infrastructure.Database;
@@ -19,7 +17,7 @@ public class OutboxServiceCore : IServiceCore
         services.AddDatabaseContext<OutboxDbContext>();
 
         services.AddHostedService<OutboxMessageProcessorJob>();
-        services.AddTransient<IOutboxWriter, OutboxWriter>();
+        services.AddScoped<IMessageBus, MessageBus>();
     }
 
     public void UseService(WebApplication app)

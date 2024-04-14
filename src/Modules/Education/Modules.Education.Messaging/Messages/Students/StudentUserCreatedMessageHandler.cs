@@ -1,4 +1,5 @@
 using Core.Application.Communication.External.Messages;
+using Core.Domain.Shared.ValueObjects;
 using Core.Messaging.Users;
 using MediatR;
 using Modules.Education.Application.Features.Students.InternalCommands.CreateStudent;
@@ -22,9 +23,15 @@ internal sealed class StudentUserCreatedMessageHandler
             notification.Payload.State,
             notification.Payload.Email,
             notification.Payload.Phone,
-            notification.Payload.FullName,
-            notification.Payload.BirthDate,
-            notification.Payload.Address,
+            FullName.Create(notification.Payload.FullName.First, notification.Payload.FullName.Middle, notification.Payload.FullName.Last),
+            Date.Create(notification.Payload.BirthDate),
+            Address.Create(
+                notification.Payload.Address.ZipCode,
+                notification.Payload.Address.ZipCodeCity,
+                notification.Payload.Address.City,
+                notification.Payload.Address.HouseNumber,
+                notification.Payload.Address.State,
+                notification.Payload.Address.Street),
             notification.Payload.LanguageLevel,
             notification.Payload.InstitutionId
         ), cancellationToken);
