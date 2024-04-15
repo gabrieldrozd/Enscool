@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Common.Utilities.Extensions;
 using Core.Application.Auth;
 using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Auth.Settings;
@@ -31,7 +32,7 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimConsts.UserId, user.Id.ToString()),
             new Claim(ClaimConsts.InstitutionId, user.InstitutionId?.ToString() ?? string.Empty),
-            new Claim(ClaimConsts.InstitutionIds, /* TODO: Add user.InstitutionIds */ string.Empty),
+            new Claim(ClaimConsts.InstitutionIds, user.InstitutionIds.Join()),
             new Claim(ClaimConsts.FullName, user.FullName.ToString()),
             new Claim(ClaimConsts.Email, user.Email.Value),
             new Claim(ClaimConsts.Phone, user.Phone.Value),

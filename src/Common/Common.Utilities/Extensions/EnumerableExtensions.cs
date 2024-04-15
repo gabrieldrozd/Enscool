@@ -49,13 +49,18 @@ public static class EnumerableExtensions
     public static List<T> Disorder<T>(this IEnumerable<T> source)
     {
         var sourceArray = source as T[] ?? source.ToArray();
-        if (sourceArray.Length == 0)
-        {
-            return [];
-        }
-
-        var random = new Random();
-        var result = sourceArray.OrderBy(_ => random.Next());
-        return result.ToList();
+        return sourceArray.Length != 0
+            ? sourceArray.OrderBy(_ => Random.Shared.Next()).ToList()
+            : [];
     }
+
+    /// <summary>
+    /// Joins the elements of a sequence into a string using a separator.
+    /// </summary>
+    /// <param name="source">The sequence to join.</param>
+    /// <param name="separator">The separator to use. Default is <c>;</c>.</param>
+    /// <typeparam name="T">The type of the elements of <paramref name="source" />.</typeparam>
+    /// <returns>A string that consists of the elements of <paramref name="source" /> delimited by the <paramref name="separator" /> string.</returns>
+    public static string Join<T>(this IEnumerable<T> source, string separator = ";")
+        => string.Join(separator, source.Select(x => x?.ToString()));
 }
