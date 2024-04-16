@@ -2,8 +2,8 @@ namespace Core.Domain.Primitives;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-    protected abstract IEnumerable<object> GetAtomicValues();
     public abstract override string ToString();
+    protected abstract IEnumerable<object> GetAtomicValues();
 
     public bool Equals(ValueObject? other)
     {
