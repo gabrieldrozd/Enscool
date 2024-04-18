@@ -16,8 +16,8 @@ public sealed class Course : AggregateRoot<CourseId>
     public string? Name { get; private set; }
     public string? Description { get; private set; }
 
-    public Date? StartDate { get; private set; }
-    public Date? EndDate { get; private set; }
+    public Date? PlannedStart { get; private set; }
+    public Date? PlannedEnd { get; private set; }
 
     public UserId MainTeacherId { get; private set; } = default!;
 
