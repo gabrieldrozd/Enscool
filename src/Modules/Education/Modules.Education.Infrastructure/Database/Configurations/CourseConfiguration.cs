@@ -66,6 +66,12 @@ internal sealed class CourseConfiguration : AggregateConfiguration<Course>
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
         });
 
+        builder
+            .HasMany(x => x.Lessons)
+            .WithOne()
+            .HasForeignKey(x => x.CourseId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         #region Indexes
 
         builder.HasIndex(x => x.Code).IsUnique();

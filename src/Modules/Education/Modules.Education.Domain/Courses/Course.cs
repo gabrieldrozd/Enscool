@@ -7,10 +7,12 @@ namespace Modules.Education.Domain.Courses;
 
 public sealed class Course : AggregateRoot<CourseId>
 {
+    private readonly List<CourseLesson> _lessons = [];
+
     private readonly List<UserId> _studentIds = [];
     private readonly List<UserId> _teacherIds = [];
 
-    public CourseCode Code { get; set; } = null!;
+    public CourseCode Code { get; private set; } = null!;
     public LanguageLevel Level { get; private set; } = null!;
 
     public string? Name { get; private set; }
@@ -19,8 +21,9 @@ public sealed class Course : AggregateRoot<CourseId>
     public Date? PlannedStart { get; private set; }
     public Date? PlannedEnd { get; private set; }
 
-    public UserId MainTeacherId { get; private set; } = default!;
+    public IReadOnlyList<CourseLesson> Lessons => _lessons.AsReadOnly();
 
+    public UserId MainTeacherId { get; private set; } = default!;
     public IReadOnlyList<UserId> TeacherIds => _teacherIds.AsReadOnly();
     public IReadOnlyList<UserId> StudentIds => _studentIds.AsReadOnly();
 
