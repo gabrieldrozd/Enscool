@@ -8,11 +8,25 @@ public sealed class CourseLesson : Entity<Guid>
     public string Subject { get; private set; }
     public string Description { get; private set; }
 
-    public Date Date { get; set; }
-    // TODO: Start time
-    // TODO: End time
-    // TODO: lesson materials - information about the files uploaded to some provider
-    // TODO: lesson attendance - information about the students who attended the lesson
+    public Date Date { get; private set; }
+
+    public Date StartTime { get; private set; }
+    public Date EndTime { get; private set; }
 
     public CourseId CourseId { get; private set; }
+
+    private CourseLesson()
+    {
+    }
+
+    private CourseLesson(Guid courseLessonId, string subject, string description, Date date, Date startTime, Date endTime, CourseId courseId)
+        : base(courseLessonId)
+    {
+        Subject = subject;
+        Description = description;
+        Date = date;
+        StartTime = startTime;
+        EndTime = endTime;
+        CourseId = courseId;
+    }
 }
