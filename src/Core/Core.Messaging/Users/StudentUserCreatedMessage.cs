@@ -1,8 +1,5 @@
 using Core.Application.Communication.External.Messages;
-using Core.Domain.Shared.EntityIds;
-using Core.Domain.Shared.Enumerations.Languages;
 using Core.Domain.Shared.Enumerations.UserStates;
-using Core.Domain.Shared.ValueObjects;
 
 namespace Core.Messaging.Users;
 

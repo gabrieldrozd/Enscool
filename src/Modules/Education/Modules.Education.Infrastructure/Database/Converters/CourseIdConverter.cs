@@ -1,4 +1,3 @@
-using Core.Domain.Shared.EntityIds;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modules.Education.Domain.Courses;
 
