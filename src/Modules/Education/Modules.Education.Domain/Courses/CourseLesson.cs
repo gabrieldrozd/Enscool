@@ -1,4 +1,5 @@
 using Core.Domain.Primitives;
+using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;
 
 namespace Modules.Education.Domain.Courses;
@@ -19,7 +20,7 @@ public sealed class CourseLesson : Entity<Guid>
     {
     }
 
-    private CourseLesson(Guid courseLessonId, string subject, string description, Date date, Date startTime, Date endTime, CourseId courseId)
+    private CourseLesson(Guid courseLessonId, string subject, string description, Date date, Date startTime, Date endTime, CourseId courseId, InstitutionId institutionId)
         : base(courseLessonId)
     {
         Subject = subject;
@@ -28,5 +29,10 @@ public sealed class CourseLesson : Entity<Guid>
         StartTime = startTime;
         EndTime = endTime;
         CourseId = courseId;
+
+        SetInstitutionId(institutionId);
     }
+
+    public static CourseLesson Create(string subject, string description, Date date, Date startTime, Date endTime, CourseId courseId, InstitutionId institutionId)
+        => new(Guid.NewGuid(), subject, description, date, startTime, endTime, courseId, institutionId);
 }
