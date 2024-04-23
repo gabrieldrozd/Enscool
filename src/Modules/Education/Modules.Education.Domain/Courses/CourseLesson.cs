@@ -6,15 +6,15 @@ namespace Modules.Education.Domain.Courses;
 
 public sealed class CourseLesson : Entity<Guid>
 {
-    public string Subject { get; private set; }
-    public string Description { get; private set; }
+    public string Subject { get; private set; } = null!;
+    public string Description { get; private set; } = null!;
 
-    public Date Date { get; private set; }
+    public Date Date { get; private set; } = null!;
 
-    public Date StartTime { get; private set; }
-    public Date EndTime { get; private set; }
+    public Date StartTime { get; private set; } = null!;
+    public Date EndTime { get; private set; } = null!;
 
-    public CourseId CourseId { get; private set; }
+    public CourseId CourseId { get; private set; } = null!;
 
     private CourseLesson()
     {
