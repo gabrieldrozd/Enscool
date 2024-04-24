@@ -1,6 +1,6 @@
 namespace Common.Utilities.Extensions;
 
-public static class Functional
+public static class FunctionalExtensions
 {
     /// <summary>
     /// Executes a given action depending on a specified condition.
@@ -95,5 +95,25 @@ public class Switch<T>
         {
             action();
         }
+    }
+}
+
+public static class Functional
+{
+    public static void IfElse(bool condition, Action ifTrue, Action ifFalse)
+    {
+        if (condition)
+        {
+            ifTrue();
+        }
+        else
+        {
+            ifFalse();
+        }
+    }
+
+    public static T IfElse<T>(bool condition, Func<T> ifTrue, Func<T> ifFalse)
+    {
+        return condition ? ifTrue() : ifFalse();
     }
 }

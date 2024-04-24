@@ -3,6 +3,7 @@ using Core.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Modules.Education.Application.Abstractions;
+using Modules.Education.Domain.Courses;
 using Modules.Education.Domain.Students;
 
 namespace Modules.Education.Infrastructure.Database;
@@ -14,6 +15,7 @@ public class EducationDbContext : ApplicationDbContext, IEducationDbContext
 
     #region DbSets
 
+    public DbSet<Course> Courses => Set<Course>();
     public DbSet<Student> Students => Set<Student>();
 
     #endregion
