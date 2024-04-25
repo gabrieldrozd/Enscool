@@ -20,6 +20,11 @@ public static class FunctionalExtensions
         }
     }
 
+    public static T IfElse<T>(this bool condition, Func<T> ifTrue, Func<T> ifFalse)
+    {
+        return condition ? ifTrue() : ifFalse();
+    }
+
     /// <summary>
     /// Executes a given action depending on a specified condition.
     /// </summary>
