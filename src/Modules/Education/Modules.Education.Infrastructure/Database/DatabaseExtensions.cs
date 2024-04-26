@@ -13,6 +13,7 @@ public static class DatabaseExtensions
         services.AddDatabaseContext<EducationDbContext>();
         services.AddScoped<IEducationDbContext, EducationDbContext>();
 
+        services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<IStudentRepository, StudentRepository>();
 
         services.AddUnitOfWork<IUnitOfWork, EducationUnitOfWork>();

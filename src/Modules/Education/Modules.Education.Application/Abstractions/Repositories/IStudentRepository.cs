@@ -9,6 +9,8 @@ public interface IStudentRepository : IRepository<Student>
 {
     Task<bool> ExistsAsync(Email email, CancellationToken cancellationToken = default);
     Task<bool> ExistsWithinInstitutionAsync(Email email, InstitutionId institutionId, CancellationToken cancellationToken = default);
+    Task<bool> ExistAsync(IEnumerable<UserId> userIds, CancellationToken cancellationToken = default);
+
     Task<Student?> GetAsync(UserId userId, CancellationToken cancellationToken = default);
     Task<Student?> GetAsync(Email email, CancellationToken cancellationToken = default);
 }

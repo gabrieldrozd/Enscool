@@ -22,6 +22,9 @@ public sealed class StudentRepository : Repository<Student, EducationDbContext>,
     public async Task<bool> ExistsWithinInstitutionAsync(Email email, InstitutionId institutionId, CancellationToken cancellationToken = default)
         => await _context.Students.AnyAsync(x => x.Email == email && x.InstitutionId == institutionId, cancellationToken);
 
+    public async Task<bool> ExistAsync(IEnumerable<UserId> userIds, CancellationToken cancellationToken = default)
+        => await _context.Students.AnyAsync(x => userIds.Contains(x.Id), cancellationToken);
+
     public async Task<Student?> GetAsync(UserId userId, CancellationToken cancellationToken = default)
         => await _context.Students.FindAsync([userId], cancellationToken);
 

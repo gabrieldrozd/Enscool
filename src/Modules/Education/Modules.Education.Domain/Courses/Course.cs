@@ -31,11 +31,27 @@ public sealed class Course : AggregateRoot<CourseId>
     {
     }
 
-    private Course(CourseId courseId, CourseCode code, LanguageLevel level, UserId mainTeacherId, List<UserId> studentIds, List<UserId> teacherIds, InstitutionId institutionId)
+    private Course(
+        CourseId courseId,
+        CourseCode code,
+        LanguageLevel level,
+        string? name,
+        string? description,
+        Date? plannedStart,
+        Date? plannedEnd,
+        UserId mainTeacherId,
+        List<UserId> studentIds,
+        List<UserId> teacherIds,
+        InstitutionId institutionId
+    )
         : base(courseId)
     {
         Code = code;
         Level = level;
+        Name = name;
+        Description = description;
+        PlannedStart = plannedStart;
+        PlannedEnd = plannedEnd;
         MainTeacherId = mainTeacherId;
 
         _studentIds.AddRange(studentIds);
@@ -44,6 +60,30 @@ public sealed class Course : AggregateRoot<CourseId>
         SetInstitutionId(institutionId);
     }
 
-    public static Course Create(CourseCode code, LanguageLevel level, UserId mainTeacherId, List<UserId> studentIds, List<UserId> teacherIds, InstitutionId institutionId)
-        => new(CourseId.New, code, level, mainTeacherId, studentIds, teacherIds, institutionId);
+    public static Course Create(
+        CourseCode code,
+        LanguageLevel level,
+        string name,
+        string description,
+        Date plannedStart,
+        Date? plannedEnd,
+        UserId mainTeacherId,
+        IEnumerable<UserId> studentIds,
+        InstitutionId institutionId)
+    {
+        var course = new Course(
+            CourseId.New,
+            code,
+            level,
+            name,
+            description,
+            plannedStart,
+            plannedEnd,
+            mainTeacherId,
+            studentIds.ToList(),
+            [mainTeacherId],
+            institutionId);
+
+        return course;
+    }
 }
