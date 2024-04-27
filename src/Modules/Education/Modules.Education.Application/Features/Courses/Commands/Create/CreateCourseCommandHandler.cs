@@ -8,6 +8,7 @@ using Modules.Education.Application.Abstractions;
 using Modules.Education.Application.Abstractions.Repositories;
 using Modules.Education.Domain.Courses;
 using Modules.Education.Domain.Students;
+using Modules.Education.Domain.Teachers;
 
 namespace Modules.Education.Application.Features.Courses.Commands.Create;
 
@@ -17,6 +18,7 @@ internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseC
     private readonly ICourseCodeGenerator _courseCodeGenerator;
     private readonly ICourseRepository _courseRepository;
     private readonly IStudentRepository _studentRepository;
+    private readonly ITeacherRepository _teacherRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateCourseCommandHandler(
@@ -24,12 +26,14 @@ internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseC
         ICourseCodeGenerator courseCodeGenerator,
         ICourseRepository courseRepository,
         IStudentRepository studentRepository,
+        ITeacherRepository teacherRepository,
         IUnitOfWork unitOfWork)
     {
         _emailQueue = emailQueue;
         _courseCodeGenerator = courseCodeGenerator;
         _courseRepository = courseRepository;
         _studentRepository = studentRepository;
+        _teacherRepository = teacherRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -39,9 +43,8 @@ internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseC
         // if (!await _courseTypeRepository.ExistsAsync(request.CourseTypeId))
         //     return Result.Failure.NotFound<Guid, CourseType>();
 
-        // TODO: Add Teacher
-        // if (!await _teacherRepository.ExistsAsync(request.MainTeacherId))
-        //     return Result.Failure.NotFound<Guid, Teacher>();
+        if (!await _teacherRepository.ExistsAsync(request.MainTeacherId, cancellationToken))
+            return Result.Failure.NotFound<Guid, Teacher>();
 
         if (!await _studentRepository.ExistAsync(UserId.From(request.StudentIds), cancellationToken))
             return Result.Failure.NotFound<Guid, Student>();
