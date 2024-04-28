@@ -39,10 +39,6 @@ internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseC
 
     public async Task<Result<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
     {
-        // TODO: Add CourseType - unique within Institution
-        // if (!await _courseTypeRepository.ExistsAsync(request.CourseTypeId))
-        //     return Result.Failure.NotFound<Guid, CourseType>();
-
         if (!await _teacherRepository.ExistsAsync(request.MainTeacherId, cancellationToken))
             return Result.Failure.NotFound<Guid, Teacher>();
 
