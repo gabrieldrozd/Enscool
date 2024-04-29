@@ -14,7 +14,6 @@ namespace Modules.Education.Application.Features.Courses.Commands.Create;
 
 internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseCommand, Guid>
 {
-    private readonly IEmailQueue _emailQueue;
     private readonly ICourseCodeGenerator _courseCodeGenerator;
     private readonly ICourseRepository _courseRepository;
     private readonly IStudentRepository _studentRepository;
@@ -22,14 +21,12 @@ internal sealed class CreateCourseCommandHandler : ICommandHandler<CreateCourseC
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateCourseCommandHandler(
-        IEmailQueue emailQueue,
         ICourseCodeGenerator courseCodeGenerator,
         ICourseRepository courseRepository,
         IStudentRepository studentRepository,
         ITeacherRepository teacherRepository,
         IUnitOfWork unitOfWork)
     {
-        _emailQueue = emailQueue;
         _courseCodeGenerator = courseCodeGenerator;
         _courseRepository = courseRepository;
         _studentRepository = studentRepository;
