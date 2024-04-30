@@ -1,6 +1,5 @@
 using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
-using Core.Application.Communication.External.Emails;
 using Core.Application.Communication.Internal.Commands;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.ValueObjects;

@@ -35,25 +35,29 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47A59EF6-62E5-4718-9E78-1EF14C79B026}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Email", "src\Services\Services.Email\Services.Email.csproj", "{4C56375C-777C-45A2-A584-0CE22F63B4C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Email", "src\Services\Services.Email\Services.Email.csproj", "{4C56375C-777C-45A2-A584-0CE22F63B4C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Messaging", "src\Core\Core.Messaging\Core.Messaging.csproj", "{B667125E-5E6A-48DC-A477-559CE18441AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Messaging", "src\Core\Core.Messaging\Core.Messaging.csproj", "{B667125E-5E6A-48DC-A477-559CE18441AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Management.Messaging", "src\Modules\Management\Modules.Management.Messaging\Modules.Management.Messaging.csproj", "{49236F19-796D-4D59-8ACC-E0EB729CB56F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Management.Messaging", "src\Modules\Management\Modules.Management.Messaging\Modules.Management.Messaging.csproj", "{49236F19-796D-4D59-8ACC-E0EB729CB56F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Education", "Education", "{6459CE29-C676-4210-B63C-59E97474E945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Messaging", "src\Modules\Education\Modules.Education.Messaging\Modules.Education.Messaging.csproj", "{4B50B732-F95D-46A6-87A1-3489EAC5CDC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Education.Messaging", "src\Modules\Education\Modules.Education.Messaging\Modules.Education.Messaging.csproj", "{4B50B732-F95D-46A6-87A1-3489EAC5CDC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Infrastructure", "src\Modules\Education\Modules.Education.Infrastructure\Modules.Education.Infrastructure.csproj", "{3ACF1A9E-A27E-40AB-B7B6-4F516B6810BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Education.Infrastructure", "src\Modules\Education\Modules.Education.Infrastructure\Modules.Education.Infrastructure.csproj", "{3ACF1A9E-A27E-40AB-B7B6-4F516B6810BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Domain", "src\Modules\Education\Modules.Education.Domain\Modules.Education.Domain.csproj", "{2C184659-D82A-414F-AEE0-89B0F0E41E49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Education.Domain", "src\Modules\Education\Modules.Education.Domain\Modules.Education.Domain.csproj", "{2C184659-D82A-414F-AEE0-89B0F0E41E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Application", "src\Modules\Education\Modules.Education.Application\Modules.Education.Application.csproj", "{F46EB406-536B-4DD1-BE2E-51C98CA6B99C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Education.Application", "src\Modules\Education\Modules.Education.Application\Modules.Education.Application.csproj", "{F46EB406-536B-4DD1-BE2E-51C98CA6B99C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Education.Api", "src\Modules\Education\Modules.Education.Api\Modules.Education.Api.csproj", "{37FEC2E6-2194-42FB-93BC-62F89B1A9464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Education.Api", "src\Modules\Education\Modules.Education.Api\Modules.Education.Api.csproj", "{37FEC2E6-2194-42FB-93BC-62F89B1A9464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Outbox", "src\Services\Services.Outbox\Services.Outbox.csproj", "{9AD785FB-7EB4-43FE-A200-C13777FC29BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Outbox", "src\Services\Services.Outbox\Services.Outbox.csproj", "{9AD785FB-7EB4-43FE-A200-C13777FC29BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enscool.Host", "src\Enscool.Host\Enscool.Host.csproj", "{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.ServiceDefaults", "src\Common\Common.ServiceDefaults\Common.ServiceDefaults.csproj", "{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +141,14 @@ Global
 		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD785FB-7EB4-43FE-A200-C13777FC29BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,5 +178,7 @@ Global
 		{F46EB406-536B-4DD1-BE2E-51C98CA6B99C} = {6459CE29-C676-4210-B63C-59E97474E945}
 		{37FEC2E6-2194-42FB-93BC-62F89B1A9464} = {6459CE29-C676-4210-B63C-59E97474E945}
 		{9AD785FB-7EB4-43FE-A200-C13777FC29BA} = {47A59EF6-62E5-4718-9E78-1EF14C79B026}
+		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
+		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24} = {2798BEA4-7135-4544-AF81-D32BC53D46C5}
 	EndGlobalSection
 EndGlobal

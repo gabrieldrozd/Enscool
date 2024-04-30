@@ -1,14 +1,18 @@
+using Common.ServiceDefaults;
 using Core.Infrastructure;
 using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+
 builder.Configuration.AddUserSecrets<Program>();
 
-builder.Host.UseSerilog((context, loggerConfig)
-    => loggerConfig.ReadFrom.Configuration(context.Configuration));
+// TODO: Find a way to configure it with .NET Aspire
+// builder.Host.UseSerilog((context, loggerConfig)
+//     => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Host.ConfigureModuleCores();
 builder.Host.ConfigureServiceCores();
@@ -30,6 +34,8 @@ foreach (var service in appServices) service.RegisterService(services, builder.C
 #region app
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 app.UseCoreInfrastructure();

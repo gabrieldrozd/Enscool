@@ -2,7 +2,6 @@ using Core.Infrastructure.Database.Configurations;
 using Core.Infrastructure.Database.Converters;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Education.Domain.Students;
-using Modules.Education.Infrastructure.Database.Converters;
 
 namespace Modules.Education.Infrastructure.Database.Configurations;
 
@@ -12,7 +11,7 @@ internal sealed class StudentConfiguration : AggregateConfiguration<Student>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
-            .HasConversion<CourseIdConverter>()
+            .HasConversion<UserIdConverter>()
             .ValueGeneratedNever()
             .IsRequired();
 

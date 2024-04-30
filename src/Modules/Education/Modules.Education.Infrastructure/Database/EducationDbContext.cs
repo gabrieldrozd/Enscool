@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Education.Application.Abstractions;
 using Modules.Education.Domain.Courses;
 using Modules.Education.Domain.Students;
+using Modules.Education.Domain.Teachers;
 
 namespace Modules.Education.Infrastructure.Database;
 
@@ -17,6 +18,7 @@ public class EducationDbContext : ApplicationDbContext, IEducationDbContext
 
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<Student> Students => Set<Student>();
+    public DbSet<Teacher> Teachers => Set<Teacher>();
 
     #endregion
 

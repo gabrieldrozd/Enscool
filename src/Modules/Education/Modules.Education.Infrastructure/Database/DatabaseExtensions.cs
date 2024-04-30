@@ -15,6 +15,7 @@ public static class DatabaseExtensions
 
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<ITeacherRepository, TeacherRepository>();
 
         services.AddUnitOfWork<IUnitOfWork, EducationUnitOfWork>();
 
