@@ -45,7 +45,7 @@ public sealed class Student : AggregateRoot<UserId>
     }
 
     public static Student Create(
-        UserId id,
+        UserId studentId,
         UserState state,
         Email email,
         Phone phone,
@@ -54,5 +54,5 @@ public sealed class Student : AggregateRoot<UserId>
         LanguageLevel languageLevel,
         Date birthDate,
         InstitutionId institutionId
-    ) => new(id, state, email, phone, fullName, address, languageLevel, birthDate, institutionId);
+    ) => new(studentId, state, email, phone, fullName, address, languageLevel, birthDate, institutionId);
 }
