@@ -39,6 +39,14 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     {
     }
 
+    /// <summary>
+    /// Raises the domain event.
+    /// </summary>
+    /// <param name="domainEvent">The domain event to raise.</param>
     public void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+
+    /// <summary>
+    /// Clears the domain events.
+    /// </summary>
     public void ClearDomainEvents() => _domainEvents.Clear();
 }
