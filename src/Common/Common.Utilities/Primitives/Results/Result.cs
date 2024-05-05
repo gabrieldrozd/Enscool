@@ -95,5 +95,5 @@ public class Result : IResult
                 .AsResult<T>();
     }
 
-    private Result<T> AsResult<T>(T? value = default) => new(State, value);
+    private Result<T> AsResult<T>(T? value = default) => new(State, Message, value);
 }

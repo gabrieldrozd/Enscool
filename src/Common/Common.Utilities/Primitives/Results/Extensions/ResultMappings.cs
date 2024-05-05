@@ -16,12 +16,12 @@ public static class ResultMappings
             ResultState.Ok when result.IsSuccess => new EmptyEnvelope(),
             ResultState.Accepted when result.IsSuccess => new EmptyEnvelope(),
             ResultState.NoContent when result.IsSuccess => new EmptyEnvelope(),
-            ResultState.BadRequest when !result.IsSuccess => new EmptyEnvelope(result.Message),
-            ResultState.Unauthorized when !result.IsSuccess => new EmptyEnvelope(result.Message),
-            ResultState.Forbidden when !result.IsSuccess => new EmptyEnvelope(result.Message),
-            ResultState.NotFound when !result.IsSuccess => new EmptyEnvelope(result.Message),
-            ResultState.ServerError when !result.IsSuccess => new EmptyEnvelope(result.Message),
-            _ => new EmptyEnvelope(result.Message)
+            ResultState.BadRequest when !result.IsSuccess => new EmptyEnvelope(false, result.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new EmptyEnvelope(false, result.Message),
+            ResultState.Forbidden when !result.IsSuccess => new EmptyEnvelope(false, result.Message),
+            ResultState.NotFound when !result.IsSuccess => new EmptyEnvelope(false, result.Message),
+            ResultState.ServerError when !result.IsSuccess => new EmptyEnvelope(false, result.Message),
+            _ => new EmptyEnvelope(false, result.Message)
         };
 
         return envelope.WithCode(result.State.ToHttpCode());
@@ -40,12 +40,12 @@ public static class ResultMappings
             ResultState.Ok when result.IsSuccess => new Envelope<T>(result.Value!),
             ResultState.Accepted when result.IsSuccess => new Envelope<T>(result.Value!),
             ResultState.NoContent when result.IsSuccess => new Envelope<T>(result.Value!),
-            ResultState.BadRequest when !result.IsSuccess => new Envelope<T>(result.Message),
-            ResultState.Unauthorized when !result.IsSuccess => new Envelope<T>(result.Message),
-            ResultState.Forbidden when !result.IsSuccess => new Envelope<T>(result.Message),
-            ResultState.NotFound when !result.IsSuccess => new Envelope<T>(result.Message),
-            ResultState.ServerError when !result.IsSuccess => new Envelope<T>(result.Message),
-            _ => new Envelope<T>(result.Message)
+            ResultState.BadRequest when !result.IsSuccess => new Envelope<T>(false, result.Message),
+            ResultState.Unauthorized when !result.IsSuccess => new Envelope<T>(false, result.Message),
+            ResultState.Forbidden when !result.IsSuccess => new Envelope<T>(false, result.Message),
+            ResultState.NotFound when !result.IsSuccess => new Envelope<T>(false, result.Message),
+            ResultState.ServerError when !result.IsSuccess => new Envelope<T>(false, result.Message),
+            _ => new Envelope<T>(false, result.Message)
         };
 
         return envelope.WithCode(result.State.ToHttpCode());

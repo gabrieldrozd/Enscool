@@ -10,7 +10,7 @@ public sealed class ParameterException : CoreException
     }
 
     public ParameterException(string message, params object[] args)
-        : base(string.Format(message, args.Select(a => a.ToString())))
+        : base(string.Format(message, args))
     {
     }
 }

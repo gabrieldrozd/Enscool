@@ -10,8 +10,8 @@ public sealed class EmptyEnvelope : Envelope<EmptyData>
     {
     }
 
-    public EmptyEnvelope(string? message)
-        : base(message)
+    public EmptyEnvelope(bool isSuccess, string? message)
+        : base(isSuccess, message)
     {
     }
 

@@ -3,7 +3,7 @@ namespace Common.Utilities.Primitives.Envelope;
 /// <summary>
 /// Response envelope for request that returns no data
 /// </summary>
-public class Envelope
+public abstract class Envelope
 {
     /// <summary>
     /// HTTP status code

@@ -14,7 +14,7 @@ public class Envelope<T> : Envelope
     public Envelope(T data) : base(true, null)
         => Data = data;
 
-    public Envelope(string? message) : base(false, message)
+    public Envelope(bool isSuccess, string? message) : base(isSuccess, message)
         => Data = default;
 
     public override Envelope<T> WithCode(int code)
