@@ -31,16 +31,10 @@ internal sealed class TokenManager : ITokenManager
 
         return new AccessModel
         {
-            AccessToken = accessToken,
+            AccessToken = accessToken.Token,
+            ExpiresAt = accessToken.ExpiresAt,
             RefreshToken = refreshToken.Value,
             UserId = user.Id,
-            InstitutionId = user.InstitutionId,
-            FirstName = user.FullName.First,
-            MiddleName = user.FullName.Middle,
-            LastName = user.FullName.Last,
-            Email = user.Email,
-            Phone = user.Phone,
-            State = user.State,
             Role = user.Role
         };
     }

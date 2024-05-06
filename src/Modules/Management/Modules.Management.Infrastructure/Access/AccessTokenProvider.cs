@@ -21,7 +21,7 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
         _jwtSettings = settings.Value.JwtSettings;
     }
 
-    public string Create(User user)
+    public (string Token, DateTime ExpiresAt) Create(User user)
     {
         var expires = Date.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes);
 
@@ -50,6 +50,6 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
                 algorithm: SecurityAlgorithms.HmacSha256));
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        return tokenHandler.WriteToken(token);
+        return (tokenHandler.WriteToken(token), expires.DateTime!.Value);
     }
 }
