@@ -6,9 +6,9 @@ namespace Modules.Education.Domain.Teachers;
 
 public sealed class Teacher : AggregateRoot<UserId>
 {
-    private readonly List<CourseId> _courses = [];
+    private readonly List<CourseId> _courseIds = [];
 
-    public IReadOnlyList<CourseId> Courses => _courses;
+    public IReadOnlyList<CourseId> CourseIds => _courseIds;
 
     private Teacher()
     {
