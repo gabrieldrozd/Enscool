@@ -14,10 +14,12 @@ public sealed class Teacher : AggregateRoot<UserId>
     {
     }
 
-    private Teacher(UserId teacherId)
+    private Teacher(UserId teacherId, InstitutionId institutionId)
         : base(teacherId)
     {
+        SetInstitutionId(institutionId);
     }
 
-    public static Teacher Create(UserId teacherId) => new(teacherId);
+    public static Teacher Create(UserId teacherId, InstitutionId institutionId)
+        => new(teacherId, institutionId);
 }
