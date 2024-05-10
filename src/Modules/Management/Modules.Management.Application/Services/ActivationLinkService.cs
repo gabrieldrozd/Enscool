@@ -9,10 +9,7 @@ internal sealed class ActivationLinkService : IActivationLinkService
 {
     private readonly AccountActivationSettings _settings;
 
-    public ActivationLinkService(IOptions<AccountActivationSettings> settings)
-    {
-        _settings = settings.Value;
-    }
+    public ActivationLinkService(IOptions<AccountActivationSettings> settings) => _settings = settings.Value;
 
     public string Create(User user)
         => string.Format(_settings.ActivationLinkFormat, _settings.BaseUrl, user.Id, user.CurrentActivationCode?.Value);

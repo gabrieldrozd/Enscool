@@ -9,10 +9,7 @@ internal sealed class ActivationCodeService : IActivationCodeService
 {
     private readonly AccountActivationSettings _settings;
 
-    public ActivationCodeService(IOptions<AccountActivationSettings> settings)
-    {
-        _settings = settings.Value;
-    }
+    public ActivationCodeService(IOptions<AccountActivationSettings> settings) => _settings = settings.Value;
 
     public ActivationCode Generate() => ActivationCode.Create(_settings.CodeExpiryInHours);
 }
