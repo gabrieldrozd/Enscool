@@ -2,7 +2,6 @@ using Core.Infrastructure.Database.Configurations;
 using Core.Infrastructure.Database.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Modules.Education.Domain.Courses;
 using Modules.Education.Domain.Teachers;
 
 namespace Modules.Education.Infrastructure.Database.Configurations;

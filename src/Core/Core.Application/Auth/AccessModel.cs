@@ -1,5 +1,4 @@
 using Core.Domain.Shared.Enumerations.Roles;
-using Core.Domain.Shared.Enumerations.UserStates;
 
 namespace Core.Application.Auth;
 
