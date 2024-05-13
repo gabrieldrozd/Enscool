@@ -1,12 +1,13 @@
 using System.Linq.Expressions;
 using Common.Utilities.Abstractions.Mapping;
+using Core.Domain.Shared.DTOs;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.Users.Queries.GetProfile;
+namespace Modules.Management.Application.Features.Users.Queries.GetInstitutionUserProfile;
 
-public class GetUserProfileQueryDto : IWithExpressionMapFrom<User, GetUserProfileQueryDto>
+public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<InstitutionUser, GetInstitutionUserProfileQueryDto>
 {
     public Guid UserId { get; private init; }
     public Guid? InstitutionId { get; private init; }
@@ -17,9 +18,10 @@ public class GetUserProfileQueryDto : IWithExpressionMapFrom<User, GetUserProfil
     public string? Phone { get; private init; }
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
+    public AddressDto? Address { get; private init; }
 
-    public static Expression<Func<User, GetUserProfileQueryDto>> Mapper =>
-        user => new GetUserProfileQueryDto
+    public static Expression<Func<InstitutionUser, GetInstitutionUserProfileQueryDto>> Mapper =>
+        user => new GetInstitutionUserProfileQueryDto
         {
             UserId = user.Id,
             InstitutionId = user.InstitutionId,
@@ -29,6 +31,7 @@ public class GetUserProfileQueryDto : IWithExpressionMapFrom<User, GetUserProfil
             Email = user.Email,
             Phone = user.Phone,
             State = user.State,
-            Role = user.Role
+            Role = user.Role,
+            Address = AddressDto.FromNullable(user.Address)
         };
 }

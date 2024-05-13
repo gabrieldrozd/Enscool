@@ -6,7 +6,8 @@ namespace Core.Domain.Shared.DTOs;
 
 public sealed class AddressDto
     : IWithExpressionMapFrom<Address, AddressDto>,
-      IWithMapFrom<Address, AddressDto>
+      IWithMapFrom<Address, AddressDto>,
+      IWithMapFromNullable<Address, AddressDto>
 {
     public string ZipCode { get; init; } = null!;
     public string ZipCodeCity { get; init; } = null!;
@@ -27,4 +28,5 @@ public sealed class AddressDto
         };
 
     public static AddressDto From(Address source) => Mapper.Compile().Invoke(source);
+    public static AddressDto? FromNullable(Address? source) => source is not null ? From(source) : null;
 }
