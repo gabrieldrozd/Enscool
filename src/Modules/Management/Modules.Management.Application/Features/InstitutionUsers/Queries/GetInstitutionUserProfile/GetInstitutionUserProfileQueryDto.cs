@@ -5,7 +5,7 @@ using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.Users.Queries.GetInstitutionUserProfile;
+namespace Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUserProfile;
 
 public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<InstitutionUser, GetInstitutionUserProfileQueryDto>
 {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.Users.Queries.GetInstitutionUserProfile;
+namespace Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUserProfile;
 
 internal sealed class GetInstitutionUserProfileQueryHandler : IQueryHandler<GetInstitutionUserProfileQuery, GetInstitutionUserProfileQueryDto>
 {
