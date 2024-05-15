@@ -18,7 +18,7 @@ public class GetCurrentUserQueryDto : IWithExpressionMapFrom<User, GetCurrentUse
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
 
-    public static Expression<Func<User, GetCurrentUserQueryDto>> Mapper =>
+    public static Expression<Func<User, GetCurrentUserQueryDto>> GetMapping() =>
         user => new GetCurrentUserQueryDto
         {
             UserId = user.Id,

@@ -20,7 +20,7 @@ public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<Institut
     public UserRole Role { get; private init; }
     public AddressDto? Address { get; private init; }
 
-    public static Expression<Func<InstitutionUser, GetInstitutionUserProfileQueryDto>> Mapper =>
+    public static Expression<Func<InstitutionUser, GetInstitutionUserProfileQueryDto>> GetMapping() =>
         user => new GetInstitutionUserProfileQueryDto
         {
             UserId = user.Id,

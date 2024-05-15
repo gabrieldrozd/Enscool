@@ -12,5 +12,5 @@ public interface IWithExpressionMapFrom<TSource, TSelf>
     /// <summary>
     /// Gets the expression that performs the mapping from the specified <typeparamref name="TSource"/> type to the <typeparamref name="TSelf"/> type.
     /// </summary>
-    static abstract Expression<Func<TSource, TSelf>> Mapper { get; }
+    public static abstract Expression<Func<TSource, TSelf>> GetMapping();
 }

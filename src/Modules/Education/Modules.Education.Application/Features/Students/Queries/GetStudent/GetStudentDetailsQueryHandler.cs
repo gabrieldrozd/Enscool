@@ -20,7 +20,7 @@ internal sealed class GetStudentDetailsQueryHandler : IQueryHandler<GetStudentDe
         var institution = await _context.Students
             .Where(x => x.Id == request.StudentId)
             .AsNoTracking()
-            .Select(GetStudentDetailsQueryDto.Mapper)
+            .Select(GetStudentDetailsQueryDto.GetMapping())
             .SingleOrDefaultAsync(cancellationToken);
 
         return institution ?? Result.Failure.NotFound<GetStudentDetailsQueryDto>(Resource.UserNotFound, request.StudentId);

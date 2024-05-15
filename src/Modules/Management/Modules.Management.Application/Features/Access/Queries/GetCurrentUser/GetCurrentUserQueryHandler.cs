@@ -25,7 +25,7 @@ internal sealed class GetCurrentUserQueryHandler : IQueryHandler<GetCurrentUserQ
         var user = await _context.Users
             .Where(x => x.Id == _userContext.UserId)
             .AsNoTracking()
-            .Select(GetCurrentUserQueryDto.Mapper)
+            .Select(GetCurrentUserQueryDto.GetMapping())
             .SingleOrDefaultAsync(cancellationToken);
 
         return user?.State is not UserState.Active

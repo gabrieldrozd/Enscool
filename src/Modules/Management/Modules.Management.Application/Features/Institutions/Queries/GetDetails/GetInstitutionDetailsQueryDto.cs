@@ -17,7 +17,7 @@ public class GetInstitutionDetailsQueryDto : IWithExpressionMapFrom<Institution,
     public string? AddressState { get; init; }
     public string? AddressStreet { get; init; }
 
-    public static Expression<Func<Institution, GetInstitutionDetailsQueryDto>> Mapper =>
+    public static Expression<Func<Institution, GetInstitutionDetailsQueryDto>> GetMapping() =>
         institution => new GetInstitutionDetailsQueryDto
         {
             InstitutionId = institution.Id,

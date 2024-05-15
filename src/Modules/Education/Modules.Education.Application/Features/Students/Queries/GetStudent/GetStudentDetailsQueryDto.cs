@@ -20,7 +20,7 @@ public class GetStudentDetailsQueryDto : IWithExpressionMapFrom<Student, GetStud
     public string LanguageLevel { get; private set; } = null!;
     public DateTime BirthDate { get; private set; }
 
-    public static Expression<Func<Student, GetStudentDetailsQueryDto>> Mapper =>
+    public static Expression<Func<Student, GetStudentDetailsQueryDto>> GetMapping() =>
         student => new GetStudentDetailsQueryDto
         {
             UserId = student.Id,

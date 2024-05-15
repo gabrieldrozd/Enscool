@@ -16,7 +16,7 @@ public sealed class AddressDto
     public string? State { get; init; }
     public string? Street { get; init; }
 
-    public static Expression<Func<Address, AddressDto>> Mapper =>
+    public static Expression<Func<Address, AddressDto>> GetMapping() =>
         address => new AddressDto
         {
             ZipCode = address.ZipCode,
@@ -27,6 +27,16 @@ public sealed class AddressDto
             Street = address.Street
         };
 
-    public static AddressDto From(Address source) => Mapper.Compile().Invoke(source);
+    public static AddressDto From(Address source)
+        => new()
+        {
+            ZipCode = source.ZipCode,
+            ZipCodeCity = source.ZipCodeCity,
+            City = source.City,
+            HouseNumber = source.HouseNumber,
+            State = source.State,
+            Street = source.Street
+        };
+
     public static AddressDto? FromNullable(Address? source) => source is not null ? From(source) : null;
 }

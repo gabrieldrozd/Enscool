@@ -27,7 +27,7 @@ internal sealed class GetInstitutionUserProfileQueryHandler : IQueryHandler<GetI
             .OfType<InstitutionUser>()
             .Where(x => x.Id == _userContext.UserId)
             .AsNoTracking()
-            .Select(GetInstitutionUserProfileQueryDto.Mapper)
+            .Select(GetInstitutionUserProfileQueryDto.GetMapping())
             .SingleOrDefaultAsync(cancellationToken);
 
         return user?.State is not UserState.Active
