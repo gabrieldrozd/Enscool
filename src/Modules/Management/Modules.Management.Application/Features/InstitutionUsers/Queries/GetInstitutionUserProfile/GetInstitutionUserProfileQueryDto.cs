@@ -11,10 +11,10 @@ public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<Institut
 {
     public Guid UserId { get; private init; }
     public Guid? InstitutionId { get; private init; }
-    public string FirstName { get; private init; } = string.Empty;
+    public string FirstName { get; private init; } = null!;
     public string? MiddleName { get; private init; }
-    public string LastName { get; private init; } = string.Empty;
-    public string Email { get; private init; } = string.Empty;
+    public string LastName { get; private init; } = null!;
+    public string Email { get; private init; } = null!;
     public string? Phone { get; private init; }
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
