@@ -16,6 +16,7 @@ internal sealed class GetInstitutionUserProfileEndpoint : EndpointBase
     {
         endpointRouteBuilder
             .MapGetEndpoint(
+                "profile",
                 ManagementEndpointInfo.InstitutionUsers,
                 async (ISender sender) =>
                 {
