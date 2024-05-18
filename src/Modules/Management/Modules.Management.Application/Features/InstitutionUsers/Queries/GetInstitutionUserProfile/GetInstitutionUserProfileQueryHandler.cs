@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Common.Utilities.Primitives.Results;
 using Core.Application.Auth;
 using Core.Application.Communication.Internal.Queries;
@@ -25,10 +28,9 @@ internal sealed class GetInstitutionUserProfileQueryHandler : IQueryHandler<GetI
 
         var user = await _context.Users
             .OfType<InstitutionUser>()
-            .Where(x => x.Id == _userContext.UserId)
             .AsNoTracking()
             .Select(GetInstitutionUserProfileQueryDto.GetMapping())
-            .SingleOrDefaultAsync(cancellationToken);
+            .SingleOrDefaultAsync(x => x.UserId == _userContext.UserId, cancellationToken);
 
         return user?.State is not UserState.Active
             ? Result.Failure.Unauthorized<GetInstitutionUserProfileQueryDto>()

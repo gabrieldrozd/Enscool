@@ -1,3 +1,4 @@
+using System;
 using FluentValidation;
 
 namespace Modules.Management.Application.Features.Access.Commands.ActivateAccount;
