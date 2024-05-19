@@ -21,7 +21,7 @@ internal sealed class GetInstitutionUserProfileQueryHandler : IQueryHandler<GetI
         _userContext = userContext;
         _context = context;
     }
-
+// TODO: 
     public async Task<Result<GetInstitutionUserProfileQueryDto>> Handle(GetInstitutionUserProfileQuery request, CancellationToken cancellationToken)
     {
         _userContext.EnsureInstitutionUserAuthenticated();
