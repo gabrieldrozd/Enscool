@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Core.Application.Auth;
 using Core.Domain.Shared.EntityIds;
 

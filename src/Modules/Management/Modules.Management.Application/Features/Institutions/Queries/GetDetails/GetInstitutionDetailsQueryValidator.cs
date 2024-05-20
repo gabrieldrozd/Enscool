@@ -1,4 +1,3 @@
-using System;
 using FluentValidation;
 
 namespace Modules.Management.Application.Features.Institutions.Queries.GetDetails;

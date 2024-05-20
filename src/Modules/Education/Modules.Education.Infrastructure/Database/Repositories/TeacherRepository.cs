@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Shared.EntityIds;
+using Core.Domain.Shared.ValueObjects;
 using Core.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Modules.Education.Application.Abstractions.Repositories;
@@ -15,7 +16,9 @@ public sealed class TeacherRepository : Repository<Teacher, EducationDbContext>,
         _context = context;
     }
 
-
     public async Task<bool> ExistsAsync(UserId teacherId, CancellationToken cancellationToken = default)
         => await _context.Teachers.AnyAsync(x => x.Id == teacherId, cancellationToken);
+
+    public async Task<bool> ExistsWithinInstitutionAsync(Email email, InstitutionId institutionId, CancellationToken cancellationToken = default)
+        => await _context.Teachers.AnyAsync(x => x.Email == email && x.InstitutionId == institutionId, cancellationToken);
 }

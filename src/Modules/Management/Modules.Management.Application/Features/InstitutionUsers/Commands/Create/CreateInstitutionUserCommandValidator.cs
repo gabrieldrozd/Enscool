@@ -1,4 +1,3 @@
-using System;
 using FluentValidation;
 
 namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Create;

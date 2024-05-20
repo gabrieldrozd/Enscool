@@ -21,7 +21,7 @@ public sealed class Student : AggregateRoot<UserId>
     }
 
     private Student(
-        UserId id,
+        UserId studentId,
         UserState state,
         Email email,
         Phone phone,
@@ -31,7 +31,7 @@ public sealed class Student : AggregateRoot<UserId>
         Date birthDate,
         InstitutionId institutionId
     )
-        : base(id)
+        : base(studentId)
     {
         SetInstitutionId(institutionId);
 
@@ -39,9 +39,9 @@ public sealed class Student : AggregateRoot<UserId>
         Email = email;
         Phone = phone;
         FullName = fullName;
-        BirthDate = birthDate;
         Address = address;
         LanguageLevel = languageLevel;
+        BirthDate = birthDate;
     }
 
     public static Student Create(
