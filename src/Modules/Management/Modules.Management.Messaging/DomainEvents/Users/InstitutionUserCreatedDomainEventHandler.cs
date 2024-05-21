@@ -20,64 +20,70 @@ internal sealed class InstitutionUserCreatedDomainEventHandler : IDomainEventHan
 
     public async Task Handle(InstitutionUserCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
-        if (notification.Role is UserRole.Student)
+        switch (notification.Role)
         {
-            await _messageBus.PublishAsync(new StudentUserCreatedMessage(
-                new StudentUserCreatedMessagePayload
-                {
-                    UserId = notification.UserId,
-                    State = notification.State,
-                    Email = notification.Email,
-                    Phone = notification.Phone,
-                    FullName = new FullNamePayload
+            case UserRole.Student:
+                await _messageBus.PublishAsync(new StudentUserCreatedMessage(
+                    new StudentUserCreatedMessagePayload
                     {
-                        First = notification.FullName.First,
-                        Middle = notification.FullName.Middle,
-                        Last = notification.FullName.Last
-                    },
-                    BirthDate = notification.BirthDate!,
-                    Address = new AddressPayload
+                        UserId = notification.UserId,
+                        State = notification.State,
+                        Email = notification.Email,
+                        Phone = notification.Phone,
+                        FullName = new FullNamePayload
+                        {
+                            First = notification.FullName.First,
+                            Middle = notification.FullName.Middle,
+                            Last = notification.FullName.Last
+                        },
+                        BirthDate = notification.BirthDate!,
+                        Address = new AddressPayload
+                        {
+                            ZipCode = notification.Address!.ZipCode,
+                            ZipCodeCity = notification.Address!.ZipCodeCity,
+                            City = notification.Address!.City,
+                            HouseNumber = notification.Address!.HouseNumber,
+                            State = notification.Address!.State,
+                            Street = notification.Address!.Street
+                        },
+                        LanguageLevel = notification.LanguageLevel!,
+                        InstitutionId = notification.InstitutionId
+                    }), cancellationToken);
+                break;
+            case UserRole.Teacher:
+                await _messageBus.PublishAsync(new TeacherUserCreatedMessage(
+                    new TeacherUserCreatedMessagePayload
                     {
-                        ZipCode = notification.Address!.ZipCode,
-                        ZipCodeCity = notification.Address!.ZipCodeCity,
-                        City = notification.Address!.City,
-                        HouseNumber = notification.Address!.HouseNumber,
-                        State = notification.Address!.State,
-                        Street = notification.Address!.Street
-                    },
-                    LanguageLevel = notification.LanguageLevel!,
-                    InstitutionId = notification.InstitutionId
-                }), cancellationToken);
-        }
-
-        if (notification.Role is UserRole.Teacher)
-        {
-            await _messageBus.PublishAsync(new StudentUserCreatedMessage(
-                new StudentUserCreatedMessagePayload
-                {
-                    UserId = notification.UserId,
-                    State = notification.State,
-                    Email = notification.Email,
-                    Phone = notification.Phone,
-                    FullName = new FullNamePayload
-                    {
-                        First = notification.FullName.First,
-                        Middle = notification.FullName.Middle,
-                        Last = notification.FullName.Last
-                    },
-                    BirthDate = notification.BirthDate!,
-                    Address = new AddressPayload
-                    {
-                        ZipCode = notification.Address!.ZipCode,
-                        ZipCodeCity = notification.Address!.ZipCodeCity,
-                        City = notification.Address!.City,
-                        HouseNumber = notification.Address!.HouseNumber,
-                        State = notification.Address!.State,
-                        Street = notification.Address!.Street
-                    },
-                    LanguageLevel = notification.LanguageLevel!,
-                    InstitutionId = notification.InstitutionId
-                }), cancellationToken);
+                        UserId = notification.UserId,
+                        State = notification.State,
+                        Email = notification.Email,
+                        Phone = notification.Phone,
+                        FullName = new FullNamePayload
+                        {
+                            First = notification.FullName.First,
+                            Middle = notification.FullName.Middle,
+                            Last = notification.FullName.Last
+                        },
+                        Address = new AddressPayload
+                        {
+                            ZipCode = notification.Address!.ZipCode,
+                            ZipCodeCity = notification.Address!.ZipCodeCity,
+                            City = notification.Address!.City,
+                            HouseNumber = notification.Address!.HouseNumber,
+                            State = notification.Address!.State,
+                            Street = notification.Address!.Street
+                        },
+                        InstitutionId = notification.InstitutionId
+                    }), cancellationToken);
+                break;
+            case UserRole.Secretary:
+            case UserRole.InstitutionAdmin:
+            case UserRole.Support:
+            case UserRole.BackOfficeAdmin:
+            case UserRole.GlobalAdmin:
+            case UserRole.System:
+            default:
+                return;
         }
     }
 }
