@@ -96,4 +96,9 @@ public static class ResultExtensions
             ? Result.Failure.BadRequest<T>(result.Message!)
             : onSuccess();
     }
+
+    public static Result<T> OrNotFound<T>(this T? obj, string message, params object[] args)
+        => obj is null
+            ? Result.Failure.NotFound<T>(message, args)
+            : Result.Success.Ok(obj);
 }

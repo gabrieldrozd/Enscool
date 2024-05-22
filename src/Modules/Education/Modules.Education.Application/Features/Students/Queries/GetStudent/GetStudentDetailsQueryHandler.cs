@@ -1,4 +1,5 @@
 using Common.Utilities.Primitives.Results;
+using Common.Utilities.Primitives.Results.Extensions;
 using Common.Utilities.Resources;
 using Core.Application.Communication.Internal.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,6 @@ internal sealed class GetStudentDetailsQueryHandler : IQueryHandler<GetStudentDe
             .Select(GetStudentDetailsQueryDto.GetMapping())
             .SingleOrDefaultAsync(cancellationToken);
 
-        return institution ?? Result.Failure.NotFound<GetStudentDetailsQueryDto>(Resource.UserNotFound, request.StudentId);
+        return institution.OrNotFound(Resource.UserNotFound, request.StudentId);
     }
 }
