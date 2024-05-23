@@ -1,4 +1,5 @@
 using Common.Utilities.Primitives.Results;
+using Common.Utilities.Primitives.Results.Extensions;
 using Common.Utilities.Resources;
 using Core.Application.Communication.Internal.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,6 @@ internal sealed class GetInstitutionDetailsQueryHandler : IQueryHandler<GetInsti
             .Select(GetInstitutionDetailsQueryDto.GetMapping())
             .SingleOrDefaultAsync(cancellationToken);
 
-        return institution ?? Result.Failure.NotFound<GetInstitutionDetailsQueryDto>(Resource.InstitutionNotFound, request.InstitutionId);
+        return institution.OrNotFound(Resource.InstitutionNotFound, request.InstitutionId);
     }
 }
