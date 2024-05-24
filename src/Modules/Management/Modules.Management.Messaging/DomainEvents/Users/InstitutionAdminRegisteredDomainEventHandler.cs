@@ -5,12 +5,19 @@ using Modules.Management.Domain.Users.DomainEvents;
 
 namespace Modules.Management.Messaging.DomainEvents.Users;
 
-internal sealed class InstitutionAdminRegisteredDomainEventHandler(ISender sender)
+internal sealed class InstitutionAdminRegisteredDomainEventHandler
     : IDomainEventHandler<InstitutionAdminRegisteredDomainEvent>
 {
+    private readonly ISender _sender;
+
+    public InstitutionAdminRegisteredDomainEventHandler(ISender sender)
+    {
+        _sender = sender;
+    }
+
     public async Task Handle(InstitutionAdminRegisteredDomainEvent notification, CancellationToken cancellationToken)
     {
         var command = CreateInstitutionInternalCommand.From(notification);
-        await sender.Send(command, cancellationToken);
+        await _sender.Send(command, cancellationToken);
     }
 }
