@@ -35,6 +35,8 @@ internal sealed class TokenManager : ITokenManager
             ExpiresAt = accessToken.ExpiresAt,
             RefreshToken = refreshToken.Value,
             UserId = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
             Role = user.Role
         };
     }
