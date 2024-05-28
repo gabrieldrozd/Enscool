@@ -35,6 +35,7 @@ internal sealed class TokenManager : ITokenManager
             ExpiresAt = accessToken.ExpiresAt,
             RefreshToken = refreshToken.Value,
             UserId = user.Id,
+            InstitutionId = user.InstitutionId,
             FullName = user.FullName,
             Email = user.Email,
             Role = user.Role
