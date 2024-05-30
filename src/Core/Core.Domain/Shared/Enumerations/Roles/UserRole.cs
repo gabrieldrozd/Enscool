@@ -8,37 +8,37 @@ public enum UserRole
     /// <summary>
     /// [Institution] Represents a student.
     /// </summary>
-    Student = 0,
+    Student = 1,
 
     /// <summary>
     /// [Institution] Represents a teacher.
     /// </summary>
-    Teacher = 1,
+    Teacher = 2,
 
     /// <summary>
     /// [Institution] Represents a secretary.
     /// </summary>
-    Secretary = 2,
+    Secretary = 3,
 
     /// <summary>
     /// [Institution] Represents an institution admin.
     /// </summary>
-    InstitutionAdmin = 3,
+    InstitutionAdmin = 4,
 
     /// <summary>
     /// [BackOffice] Represents a support user.
     /// </summary>
-    Support = 4,
+    Support = 5,
 
     /// <summary>
     /// [BackOffice] Represents a back office admin.
     /// </summary>
-    BackOfficeAdmin = 5,
+    BackOfficeAdmin = 6,
 
     /// <summary>
     /// [BackOffice] Represents a global admin.
     /// </summary>
-    GlobalAdmin = 6,
+    GlobalAdmin = 7,
 
     /// <summary>
     /// [SYSTEM] Represents a system.
