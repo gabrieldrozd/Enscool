@@ -26,6 +26,7 @@ public sealed class Date : ValueObject
 
     public long ToUnixSeconds() => Value.ToUnixTimeSeconds();
 
+    public Date AddSeconds(int seconds) => Value.AddSeconds(seconds);
     public Date AddMinutes(int minutes) => Value.AddMinutes(minutes);
     public Date AddHours(int hours) => Value.AddHours(hours);
     public Date AddDays(int days) => new(Value.AddDays(days));

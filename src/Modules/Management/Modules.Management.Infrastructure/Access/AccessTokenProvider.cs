@@ -23,7 +23,7 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
 
     public (string Token, DateTime ExpiresAt) Create(User user)
     {
-        var expires = Date.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes);
+        var expires = Date.UtcNow.AddSeconds(_jwtSettings.ExpiryInSeconds);
 
         List<Claim> claims =
         [
