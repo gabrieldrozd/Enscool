@@ -59,7 +59,7 @@ internal sealed class RefreshTokenStore : IRefreshTokenStore
     private string GenerateRandomTokenString()
     {
         var randomToken = new byte[_settings.Length];
-        RandomNumberGenerator.Create().GetBytes(randomToken);
+        Random.Shared.NextBytes(randomToken);
         return Convert.ToBase64String(randomToken);
     }
 }
