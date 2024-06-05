@@ -10,10 +10,6 @@ builder.AddServiceDefaults();
 
 builder.Configuration.AddUserSecrets<Program>();
 
-// TODO: Find a way to configure it with .NET Aspire
-// builder.Host.UseSerilog((context, loggerConfig)
-//     => loggerConfig.ReadFrom.Configuration(context.Configuration));
-
 builder.Host.ConfigureModuleCores();
 builder.Host.ConfigureServiceCores();
 
