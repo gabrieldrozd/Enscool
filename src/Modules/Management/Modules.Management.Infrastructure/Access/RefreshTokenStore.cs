@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using System.Text.Json;
 using Core.Application.Auth;
 using Core.Domain.Shared.EntityIds;
