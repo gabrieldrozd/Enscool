@@ -3,7 +3,6 @@ using Core.Infrastructure;
 using Core.Infrastructure.Cores.Modules;
 using Core.Infrastructure.Cores.Services;
 using Enscool.Bootstrapper;
-using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,4 +53,4 @@ app.MapGet("/", context
 
 assemblies.Clear();
 appModules.Clear();
-app.Run();
+await app.RunAsync();
