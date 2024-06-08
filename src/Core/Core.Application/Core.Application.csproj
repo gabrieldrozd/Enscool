@@ -21,7 +21,7 @@
 
     <ItemGroup>
         <Folder Include="Communication\Internal\"/>
-        <Folder Include="Validations\"/>
+        <Folder Include="Queries\" />
     </ItemGroup>
 
 </Project>
