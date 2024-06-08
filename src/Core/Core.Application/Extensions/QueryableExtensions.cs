@@ -3,7 +3,7 @@ using Core.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Common.Utilities.Extensions;
+namespace Core.Application.Extensions;
 
 public static class QueryableExtensions
 {

@@ -1,6 +1,7 @@
 using Common.Utilities.Primitives.Results;
 using Core.Application.Auth;
 using Core.Application.Communication.Internal.Queries;
+using Core.Application.Communication.Internal.Queries.Base;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;

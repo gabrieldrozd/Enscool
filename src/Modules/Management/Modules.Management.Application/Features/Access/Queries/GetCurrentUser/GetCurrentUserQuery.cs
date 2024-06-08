@@ -1,4 +1,5 @@
 using Core.Application.Communication.Internal.Queries;
+using Core.Application.Communication.Internal.Queries.Base;
 using Modules.Management.Domain.Users;
 
 namespace Modules.Management.Application.Features.Access.Queries.GetCurrentUser;

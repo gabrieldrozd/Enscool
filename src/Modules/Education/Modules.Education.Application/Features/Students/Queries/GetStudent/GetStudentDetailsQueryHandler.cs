@@ -2,6 +2,7 @@ using Common.Utilities.Primitives.Results;
 using Common.Utilities.Primitives.Results.Extensions;
 using Common.Utilities.Resources;
 using Core.Application.Communication.Internal.Queries;
+using Core.Application.Communication.Internal.Queries.Base;
 using Microsoft.EntityFrameworkCore;
 using Modules.Education.Application.Abstractions;
 

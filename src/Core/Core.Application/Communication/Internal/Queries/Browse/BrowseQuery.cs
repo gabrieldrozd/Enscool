@@ -1,8 +1,8 @@
-using Core.Application.Communication.Internal.Queries;
+using Core.Application.Communication.Internal.Queries.Base;
 using Core.Application.Queries.Browse;
 using Core.Application.Queries.Browse.Pagination;
 
-namespace Wisse.Core.Application.Abstractions.Communication.Internal.Queries.Browse;
+namespace Core.Application.Communication.Internal.Queries.Browse;
 
 public abstract record BrowseQuery<TResponse> : IQuery<BrowseResult<TResponse>>
     where TResponse : class

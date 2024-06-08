@@ -1,4 +1,5 @@
 using Core.Application.Communication.Internal.Queries;
+using Core.Application.Communication.Internal.Queries.Base;
 using Modules.Education.Domain.Students;
 
 namespace Modules.Education.Application.Features.Students.Queries.GetStudent;
