@@ -18,6 +18,7 @@ public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<Institut
     public string? Phone { get; private init; }
     public UserState State { get; private init; }
     public UserRole Role { get; private init; }
+    public DateTime? BirthDate { get; private init; }
     public AddressDto? Address { get; private init; }
 
     public static Expression<Func<InstitutionUser, GetInstitutionUserProfileQueryDto>> GetMapping() =>
@@ -32,6 +33,7 @@ public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<Institut
             Phone = user.Phone,
             State = user.State,
             Role = user.Role,
+            BirthDate = user.BirthDate,
             Address = AddressDto.FromNullable(user.Address)
         };
 }

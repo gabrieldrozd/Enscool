@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUserProfile;
-using Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUsers;
 
 namespace Modules.Management.Api.Endpoints.InstitutionUsers.BrowseInstitutionUsers;
 

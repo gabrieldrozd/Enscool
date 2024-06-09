@@ -18,5 +18,17 @@ internal sealed class CreateInstitutionUserRequest : IWithMapTo<CreateInstitutio
     public InstitutionUserRole Role { get; init; }
     public Guid InstitutionId { get; init; }
 
-    public CreateInstitutionUserCommand Map() => new(Email, Phone, FirstName, MiddleName, LastName, BirthDate, Address, LanguageLevel, Role, InstitutionId);
+    public CreateInstitutionUserCommand Map() => new()
+    {
+        Email = Email,
+        Phone = Phone,
+        FirstName = FirstName,
+        MiddleName = MiddleName,
+        LastName = LastName,
+        BirthDate = BirthDate,
+        Address = Address,
+        LanguageLevel = LanguageLevel,
+        Role = Role,
+        InstitutionId = InstitutionId
+    };
 }

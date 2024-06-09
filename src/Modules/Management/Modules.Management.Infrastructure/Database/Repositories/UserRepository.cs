@@ -44,4 +44,15 @@ public sealed class UserRepository : Repository<User, ManagementDbContext>, IUse
         => await _context.Users
             .AsSplitQuery()
             .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+
+    public async Task<InstitutionUser?> GetInstitutionUserAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Users
+            .OfType<InstitutionUser>()
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.Id == userId && (
+                x.Role == UserRole.InstitutionAdmin ||
+                x.Role == UserRole.Secretary ||
+                x.Role == UserRole.Teacher ||
+                x.Role == UserRole.Student
+            ), cancellationToken);
 }

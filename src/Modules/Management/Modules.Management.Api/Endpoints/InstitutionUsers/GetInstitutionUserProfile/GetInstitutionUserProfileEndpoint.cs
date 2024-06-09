@@ -23,7 +23,7 @@ internal sealed class GetInstitutionUserProfileEndpoint : EndpointBase
                     var result = await sender.Send(new GetInstitutionUserProfileQuery());
                     return BuildEnvelope(result);
                 })
-            .RequireAuthorization()
+            .RequireInstitutionRoles()
             .ProducesEnvelope<GetInstitutionUserProfileQueryDto>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "GetInstitutionUserProfile",

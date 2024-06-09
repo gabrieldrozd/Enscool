@@ -24,8 +24,7 @@ public sealed class ActivationCode : ValueObject
 
     public static ActivationCode Create(int expiryInHours)
     {
-        var hmac = new HMACSHA256();
-        var code = Convert.ToBase64String(hmac.Key);
+        var code = GenerateRandomAlphanumericString(32);
         return new ActivationCode(code, Date.UtcNow.AddHours(expiryInHours));
     }
 
@@ -45,5 +44,20 @@ public sealed class ActivationCode : ValueObject
         yield return Value;
         yield return Expires;
         yield return IsActive;
+    }
+
+    private static string GenerateRandomAlphanumericString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var data = new byte[length];
+        var result = new char[length];
+
+        using (var rng = RandomNumberGenerator.Create())
+            rng.GetBytes(data);
+
+        for (var i = 0; i < length; i++)
+            result[i] = chars[data[i] % chars.Length];
+
+        return new string(result);
     }
 }

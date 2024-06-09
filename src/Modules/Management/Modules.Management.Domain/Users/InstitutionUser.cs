@@ -83,4 +83,12 @@ public class InstitutionUser : User
 
         return user;
     }
+
+    public void Update(Phone phone, FullName fullName, Address? address, Date? birthDate)
+    {
+        Phone = phone;
+        FullName = fullName;
+        Address = address;
+        BirthDate = birthDate;
+    }
 }

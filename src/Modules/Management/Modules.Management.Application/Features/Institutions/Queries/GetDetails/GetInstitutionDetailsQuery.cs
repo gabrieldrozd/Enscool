@@ -1,4 +1,3 @@
-using Core.Application.Communication.Internal.Queries;
 using Core.Application.Communication.Internal.Queries.Base;
 using Modules.Management.Domain.Institutions;
 

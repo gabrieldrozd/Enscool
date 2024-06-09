@@ -18,9 +18,9 @@ public class User : AggregateRoot<UserId>
 
     public UserState State { get; private set; } = UserState.Pending;
     public Email Email { get; private set; } = default!;
-    public Phone Phone { get; private set; } = default!;
+    public Phone Phone { get; protected set; } = default!;
     public Password? Password { get; private set; }
-    public FullName FullName { get; private set; } = default!;
+    public FullName FullName { get; protected set; } = default!;
     public UserRole Role { get; }
 
     public IReadOnlyList<ActivationCode> ActivationCodes => _activationCodes.AsReadOnly();

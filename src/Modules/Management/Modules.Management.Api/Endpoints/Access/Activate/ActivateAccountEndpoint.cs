@@ -1,3 +1,4 @@
+using Core.Application.Auth;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -23,7 +24,7 @@ internal sealed class ActivateAccountEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .AllowAnonymous()
-            .ProducesEnvelope(StatusCodes.Status201Created)
+            .ProducesEnvelope<AccessModel>(StatusCodes.Status201Created)
             .WithDocumentation(
                 "Activate",
                 "Activate User",

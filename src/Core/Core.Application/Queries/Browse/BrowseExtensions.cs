@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using Common.Utilities.Abstractions.Mapping;
-using Core.Application.Communication.Internal.Queries.Browse;
 using Core.Application.Queries.Browse.Pagination;
 using Core.Application.Queries.Browse.Search;
 using Core.Application.Queries.Browse.Sort;
