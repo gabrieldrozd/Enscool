@@ -23,7 +23,9 @@ internal sealed class StudentUserCreatedMessageHandler
             notification.Payload.State,
             notification.Payload.Email,
             notification.Payload.Phone,
-            FullName.Create(notification.Payload.FullName.First, notification.Payload.FullName.Middle, notification.Payload.FullName.Last),
+            notification.Payload.FirstName,
+            notification.Payload.MiddleName,
+            notification.Payload.LastName,
             Date.Create(notification.Payload.BirthDate),
             Address.Create(
                 notification.Payload.Address.ZipCode,

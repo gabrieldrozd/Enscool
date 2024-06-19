@@ -26,9 +26,9 @@ internal sealed class StudentConfiguration : AggregateConfiguration<Student>
             .HasConversion<PhoneConverter>()
             .IsRequired();
 
-        builder.Property(x => x.FullName)
-            .HasConversion<FullNameConverter>()
-            .IsRequired();
+        builder.Property(x => x.FirstName).IsRequired();
+        builder.Property(x => x.MiddleName);
+        builder.Property(x => x.LastName).IsRequired();
 
         builder.Property(x => x.BirthDate)
             .HasConversion<DateConverter>()

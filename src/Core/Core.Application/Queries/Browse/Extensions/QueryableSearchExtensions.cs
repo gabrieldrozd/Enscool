@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Application.Queries.Browse.Search;
+namespace Core.Application.Queries.Browse.Extensions;
 
 public static class QueryableSearchExtensions
 {
@@ -10,22 +10,24 @@ public static class QueryableSearchExtensions
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <param name="query">The query to apply the dynamic search to.</param>
-    /// <param name="searchModel">The search model containing the search query and search pattern.</param>
+    /// <param name="searchValue">The search query string.</param>
+    /// <param name="searchPattern">The search pattern to use (StartsWith, EndsWith, Contains).</param>
     /// <param name="propertySelectors">The property selectors specifying the properties to search on.</param>
     /// <returns>The query with the dynamic search applied or the original query if the search query is null or whitespace.</returns>
     public static IQueryable<TEntity> WithDynamicSearch<TEntity>(
         this IQueryable<TEntity> query,
-        SearchModel? searchModel,
+        string? searchValue,
+        SearchPattern? searchPattern,
         params Expression<Func<TEntity, string?>>[] propertySelectors
     ) where TEntity : class
     {
-        if (string.IsNullOrWhiteSpace(searchModel?.SearchValue))
+        if (string.IsNullOrWhiteSpace(searchValue))
             return query;
 
         var entityParameter = Expression.Parameter(typeof(TEntity), "e");
         var finalPredicate = propertySelectors
             .Select(selector => ConvertToObjectSelector(selector, entityParameter))
-            .Select(convertedSelector => BuildLikePredicate(convertedSelector, searchModel.SearchValue, searchModel.SearchPattern))
+            .Select(convertedSelector => BuildLikePredicate(convertedSelector, searchValue, searchPattern))
             .Aggregate<Expression, Expression?>(default, (current, likePredicate) => current is not null
                 ? Expression.OrElse(current, likePredicate)
                 : likePredicate);

@@ -66,7 +66,9 @@ public sealed record CreateInstitutionUserCommand : ITransactionCommand<Guid>
             var institutionUser = InstitutionUser.Create(
                 request.Email,
                 request.Phone,
-                FullName.Create(request.FirstName, request.MiddleName, request.LastName),
+                request.FirstName,
+                request.MiddleName,
+                request.LastName,
                 request.Role,
                 request.Address?.Map(),
                 request.LanguageLevel,
@@ -79,11 +81,11 @@ public sealed record CreateInstitutionUserCommand : ITransactionCommand<Guid>
                 .Map(() =>
                 {
                     var template = InstitutionUserCreatedEmailTemplate.Populate(
-                        institutionUser.FullName.First,
+                        institutionUser.FirstName,
                         institutionUser.Role.ToString(),
                         _activationLinkService.Create(institutionUser));
 
-                    var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FullName, template);
+                    var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FirstName, template);
                     _emailQueue.Enqueue(emailMessage);
 
                     return Result.Success.Ok(institutionUser.Id.Value);

@@ -6,10 +6,20 @@ public static class TypeExtensions
 {
     public static PropertyInfo? GetTypeProperty(this Type? type, string name)
     {
-        ArgumentNullException.ThrowIfNull(type);
-        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        while (true)
+        {
+            if (type != null && type == typeof(object))
+                return null;
 
-        return type.GetProperty(name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+            ArgumentNullException.ThrowIfNull(type);
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+            var typeProperty = type.GetProperty(name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+            if (typeProperty != null)
+                return typeProperty;
+
+            type = type.BaseType;
+        }
     }
 
     public static bool InheritsOrImplements(this Type? child, Type? parent)

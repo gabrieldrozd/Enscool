@@ -1,8 +1,6 @@
 using System.Linq.Expressions;
 using Common.Utilities.Abstractions.Mapping;
-using Core.Application.Queries.Browse.Pagination;
-using Core.Application.Queries.Browse.Search;
-using Core.Application.Queries.Browse.Sort;
+using Core.Application.Queries.Browse.Extensions;
 using Core.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,22 +10,23 @@ public static class BrowseExtensions
 {
     public static async Task<BrowseResult<TEntity>> BrowseAsync<TEntity>(
         this IQueryable<TEntity> query,
-        BrowseModel browseModel,
+        BrowseModel? browseModel,
         Expression<Func<TEntity, string?>>[] propertySelectors,
         CancellationToken cancellationToken = default
     )
         where TEntity : class, IEntity
     {
-        query = query.WithDynamicSearch(browseModel.Search, propertySelectors);
+        var model = browseModel ?? BrowseModel.Default;
+        query = query.WithDynamicSearch(model.Search, model.Pattern, propertySelectors);
 
         var totalItems = await query.CountAsync(cancellationToken);
 
         var items = await query
-            .WithDynamicSort(browseModel.Sort)
-            .WithPagination(browseModel.Pagination)
+            .WithDynamicSort(model.Sort, model.Order)
+            .WithPagination(model.Page, model.Size)
             .ToListAsync(cancellationToken);
 
-        return BrowseResult<TEntity>.Create(browseModel.Pagination, totalItems, items);
+        return BrowseResult<TEntity>.Create(model.Page, model.Size, totalItems, items);
     }
 
     // public static async Task<BrowseResult<TEntityDto>> MapResult<TEntity, TEntityDto>(

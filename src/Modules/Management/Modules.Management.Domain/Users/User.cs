@@ -20,7 +20,9 @@ public class User : AggregateRoot<UserId>
     public Email Email { get; private set; } = default!;
     public Phone Phone { get; protected set; } = default!;
     public Password? Password { get; private set; }
-    public FullName FullName { get; protected set; } = default!;
+    public string FirstName { get; protected set; } = default!;
+    public string? MiddleName { get; protected set; }
+    public string LastName { get; protected set; } = default!;
     public UserRole Role { get; }
 
     public IReadOnlyList<ActivationCode> ActivationCodes => _activationCodes.AsReadOnly();
@@ -38,7 +40,9 @@ public class User : AggregateRoot<UserId>
         UserId id,
         Email email,
         Phone phone,
-        FullName fullName,
+        string firstName,
+        string? middleName,
+        string lastName,
         UserRole role,
         InstitutionId? institutionId,
         List<InstitutionId> institutionIds
@@ -49,7 +53,9 @@ public class User : AggregateRoot<UserId>
 
         Email = email;
         Phone = phone;
-        FullName = fullName;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
         Role = role;
 
         _institutionIds.AddRange(institutionIds);

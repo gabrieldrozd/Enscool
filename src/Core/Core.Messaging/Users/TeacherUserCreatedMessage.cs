@@ -12,7 +12,9 @@ public sealed class TeacherUserCreatedMessagePayload
     public required UserState State { get; init; }
     public required string Email { get; init; }
     public required string Phone { get; init; }
-    public required FullNamePayload FullName { get; init; }
+    public required string FirstName { get; init; }
+    public required string? MiddleName { get; init; }
+    public required string LastName { get; init; }
     public required AddressPayload Address { get; init; }
     public required Guid InstitutionId { get; init; }
 }

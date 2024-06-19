@@ -45,8 +45,8 @@ internal sealed class GeneratePasswordResetCodeCommandHandler : ICommandHandler<
         return await _unitOfWork.CommitAsync(cancellationToken)
             .Map(() =>
             {
-                var template = PasswordResetCodeEmailTemplate.Populate(user.FullName.First, passwordResetCode.Value, _passwordResetSettings.CodeExpiryInHours);
-                var emailMessage = EmailMessage.Create(user.Email, user.FullName, template);
+                var template = PasswordResetCodeEmailTemplate.Populate(user.FirstName, passwordResetCode.Value, _passwordResetSettings.CodeExpiryInHours);
+                var emailMessage = EmailMessage.Create(user.Email, user.FirstName, template);
                 _emailQueue.Enqueue(emailMessage);
                 return Result.Success.Ok();
             });

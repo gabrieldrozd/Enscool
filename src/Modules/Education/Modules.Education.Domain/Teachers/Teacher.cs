@@ -13,7 +13,9 @@ public sealed class Teacher : AggregateRoot<UserId>
     public UserState State { get; private set; }
     public Email Email { get; private set; } = null!;
     public Phone Phone { get; private set; } = null!;
-    public FullName FullName { get; private set; } = null!;
+    public string FirstName { get; private set; } = null!;
+    public string? MiddleName { get; private set; }
+    public string LastName { get; private set; } = null!;
     public Address Address { get; private set; } = null!;
 
     public IReadOnlyList<CourseId> CourseIds => _courseIds;
@@ -27,7 +29,9 @@ public sealed class Teacher : AggregateRoot<UserId>
         UserState state,
         Email email,
         Phone phone,
-        FullName fullName,
+        string firstName,
+        string? middleName,
+        string lastName,
         Address address,
         InstitutionId institutionId
     )
@@ -38,7 +42,9 @@ public sealed class Teacher : AggregateRoot<UserId>
         State = state;
         Email = email;
         Phone = phone;
-        FullName = fullName;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
         Address = address;
     }
 
@@ -47,8 +53,10 @@ public sealed class Teacher : AggregateRoot<UserId>
         UserState state,
         Email email,
         Phone phone,
-        FullName fullName,
+        string firstName,
+        string? middleName,
+        string lastName,
         Address address,
         InstitutionId institutionId
-    ) => new(teacherId, state, email, phone, fullName, address, institutionId);
+    ) => new(teacherId, state, email, phone, firstName, middleName, lastName, address, institutionId);
 }

@@ -1,6 +1,5 @@
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUserProfile;

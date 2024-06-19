@@ -1,6 +1,5 @@
 using Common.Utilities.Abstractions.Mapping;
 using Core.Application.Queries.Base;
-using Core.Application.Queries.Browse.Pagination;
 
 namespace Core.Application.Queries.Browse;
 
@@ -15,9 +14,9 @@ public sealed record BrowseResult<TEntity> where TEntity : class
         List = list;
     }
 
-    public static BrowseResult<TEntity> Create(PaginationModel pagination, int totalItems, List<TEntity> items)
+    public static BrowseResult<TEntity> Create(int pageIndex, int pageSize, int totalItems, List<TEntity> items)
     {
-        var paginationInfo = PaginationInfo.Create(pagination.PageIndex, pagination.PageSize, items.Count, totalItems);
+        var paginationInfo = PaginationInfo.Create(pageIndex, pageSize, items.Count, totalItems);
         return new BrowseResult<TEntity>(paginationInfo, items);
     }
 

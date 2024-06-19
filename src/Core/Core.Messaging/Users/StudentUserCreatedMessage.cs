@@ -12,7 +12,9 @@ public sealed class StudentUserCreatedMessagePayload
     public required UserState State { get; init; }
     public required string Email { get; init; }
     public required string Phone { get; init; }
-    public required FullNamePayload FullName { get; init; }
+    public required string FirstName { get; init; }
+    public required string? MiddleName { get; init; }
+    public required string LastName { get; init; }
     public required DateTime BirthDate { get; init; }
     public required AddressPayload Address { get; init; }
     public required string LanguageLevel { get; init; }
@@ -27,11 +29,4 @@ public sealed class AddressPayload
     public required string HouseNumber { get; init; }
     public required string? State { get; init; }
     public required string? Street { get; init; }
-}
-
-public sealed class FullNamePayload
-{
-    public required string First { get; init; }
-    public required string? Middle { get; init; }
-    public required string Last { get; init; }
 }

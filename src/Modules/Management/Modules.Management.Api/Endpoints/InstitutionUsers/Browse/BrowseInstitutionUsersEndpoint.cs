@@ -1,12 +1,13 @@
+using Core.Application.Queries.Browse;
 using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUserProfile;
+using Modules.Management.Application.Features.InstitutionUsers.Queries.GetInstitutionUsers;
 
-namespace Modules.Management.Api.Endpoints.InstitutionUsers.BrowseInstitutionUsers;
+namespace Modules.Management.Api.Endpoints.InstitutionUsers.Browse;
 
 /// <summary>
 /// Get current user <see cref="EndpointBase"/>.
@@ -16,7 +17,7 @@ internal sealed class BrowseInstitutionUsersEndpoint : EndpointBase
     public override void AddEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
     {
         endpointRouteBuilder
-            .MapGetEndpoint(
+            .MapPostEndpoint(
                 "browse",
                 ManagementEndpointInfo.InstitutionUsers,
                 async ([FromBody] BrowseInstitutionUsersRequest request, ISender sender) =>
@@ -25,7 +26,7 @@ internal sealed class BrowseInstitutionUsersEndpoint : EndpointBase
                     return BuildEnvelope(result);
                 })
             .RequireAuthorization()
-            .ProducesEnvelope<GetInstitutionUserProfileQueryDto>(StatusCodes.Status200OK)
+            .ProducesEnvelope<BrowseResult<BrowseInstitutionUsersQueryDto>>(StatusCodes.Status200OK)
             .WithDocumentation(
                 "BrowseInstitutionUsers",
                 "Get list of institution users",

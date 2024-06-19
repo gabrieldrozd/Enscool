@@ -2,14 +2,14 @@ using System.Linq.Expressions;
 using Common.Utilities.Extensions;
 using Core.Domain.Primitives;
 
-namespace Core.Application.Queries.Browse.Sort;
+namespace Core.Application.Queries.Browse.Extensions;
 
 public static class QueryableSortExtensions
 {
-    public static IQueryable<TEntity> WithDynamicSort<TEntity>(this IQueryable<TEntity> query, SortModel? sortModel)
+    public static IQueryable<TEntity> WithDynamicSort<TEntity>(this IQueryable<TEntity> query, string? sortBy, SortOrder? sortOrder)
         where TEntity : class, IEntity
     {
-        var sortBy = sortModel?.SortBy ?? nameof(IEntity.CreatedOnUtc);
+        sortBy ??= nameof(IEntity.CreatedOnUtc);
         var propertyInfo = typeof(TEntity).GetTypeProperty(sortBy);
         if (propertyInfo is null)
             return query;
@@ -18,7 +18,7 @@ public static class QueryableSortExtensions
         var property = Expression.Property(parameter, propertyInfo);
         var lambda = Expression.Lambda(property, parameter);
 
-        var orderByMethod = sortModel?.SortOrder switch
+        var orderByMethod = sortOrder switch
         {
             SortOrder.Ascending => "OrderBy",
             SortOrder.Descending => "OrderByDescending",

@@ -2,10 +2,10 @@
 
 <root>
     <xsd:schema
-            id="root"
-            xmlns=""
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+        id="root"
+        xmlns=""
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
     >
         <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
@@ -91,9 +91,6 @@
     </data>
     <data name="InvalidUserStateTransition" xml:space="preserve">
         <value>Nie można zmienić stanu użytkownika z '{0}' na '{1}'</value>
-    </data>
-    <data name="InvalidFullName" xml:space="preserve">
-        <value>Nieprawidłowe imię, drugie imię lub nazwisko</value>
     </data>
     <data name="DatabaseError" xml:space="preserve">
         <value>Nieoczekiwany błąd bazy danych podczas przetwarzania zapytania</value>

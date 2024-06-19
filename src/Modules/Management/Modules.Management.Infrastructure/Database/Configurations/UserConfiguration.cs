@@ -29,9 +29,9 @@ internal sealed class UserConfiguration : AggregateConfiguration<User>
         builder.Property(x => x.Password)
             .HasConversion<PasswordConverter>();
 
-        builder.Property(x => x.FullName)
-            .HasConversion<FullNameConverter>()
-            .IsRequired();
+        builder.Property(x => x.FirstName).IsRequired();
+        builder.Property(x => x.MiddleName);
+        builder.Property(x => x.LastName).IsRequired();
 
         builder.Property(x => x.Role).IsRequired();
 

@@ -26,9 +26,9 @@ public class GetInstitutionUserProfileQueryDto : IWithExpressionMapFrom<Institut
         {
             UserId = user.Id,
             InstitutionId = user.InstitutionId,
-            FirstName = user.FullName.First,
-            MiddleName = user.FullName.Middle,
-            LastName = user.FullName.Last,
+            FirstName = user.FirstName,
+            MiddleName = user.MiddleName,
+            LastName = user.LastName,
             Email = user.Email,
             Phone = user.Phone,
             State = user.State,

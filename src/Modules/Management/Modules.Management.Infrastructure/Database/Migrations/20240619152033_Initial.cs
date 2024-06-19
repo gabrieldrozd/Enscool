@@ -55,7 +55,9 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: true),
-                    FullName = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    MiddleName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<string>(type: "character varying(21)", maxLength: 21, nullable: false),
                     Address_ZipCode = table.Column<string>(type: "text", nullable: true),
@@ -99,6 +101,28 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                         column: x => x.InstitutionId,
                         principalSchema: "Management",
                         principalTable: "Institutions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BackOfficeUserInstitutionIds",
+                schema: "Management",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    InstitutionId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BackOfficeUserInstitutionIds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BackOfficeUserInstitutionIds_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Management",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -154,6 +178,12 @@ namespace Modules.Management.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BackOfficeUserInstitutionIds_UserId",
+                schema: "Management",
+                table: "BackOfficeUserInstitutionIds",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InstitutionAdministratorIds_InstitutionId",
                 schema: "Management",
                 table: "InstitutionAdministratorIds",
@@ -170,6 +200,10 @@ namespace Modules.Management.Infrastructure.Database.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BackOfficeUserInstitutionIds",
+                schema: "Management");
+
             migrationBuilder.DropTable(
                 name: "InstitutionAdministratorIds",
                 schema: "Management");

@@ -36,7 +36,9 @@ internal sealed class TokenManager : ITokenManager
             RefreshToken = refreshToken.Value,
             UserId = user.Id,
             InstitutionId = user.InstitutionId,
-            FullName = user.FullName,
+            FirstName = user.FirstName,
+            MiddleName = user.MiddleName,
+            LastName = user.LastName,
             Email = user.Email,
             Role = user.Role
         };

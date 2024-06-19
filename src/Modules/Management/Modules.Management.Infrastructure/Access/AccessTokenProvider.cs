@@ -33,7 +33,7 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
             new Claim(ClaimConsts.UserId, user.Id.ToString()),
             new Claim(ClaimConsts.InstitutionId, user.InstitutionId?.ToString() ?? string.Empty),
             new Claim(ClaimConsts.InstitutionIds, user.InstitutionIds.Join()),
-            new Claim(ClaimConsts.FullName, user.FullName.ToString()),
+            new Claim(ClaimConsts.FullName, string.Join(";", user.FirstName, user.MiddleName, user.LastName)),
             new Claim(ClaimConsts.Email, user.Email.Value),
             new Claim(ClaimConsts.Phone, user.Phone.Value),
             new Claim(ClaimConsts.UserState, $"{(int) user.State}"),

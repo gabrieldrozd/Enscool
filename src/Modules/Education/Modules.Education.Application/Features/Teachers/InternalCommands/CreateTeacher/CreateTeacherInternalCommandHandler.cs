@@ -29,7 +29,9 @@ internal sealed class CreateTeacherInternalCommandHandler : ICommandHandler<Crea
             request.State,
             request.Email,
             request.Phone,
-            request.FullName,
+            request.FirstName,
+            request.MiddleName,
+            request.LastName,
             request.Address,
             request.InstitutionId);
 

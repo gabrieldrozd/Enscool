@@ -8,15 +8,15 @@ public enum BackOfficeUserRole
     /// <summary>
     /// [BackOffice] Represents a support user.
     /// </summary>
-    Support = 4,
+    Support = 5,
 
     /// <summary>
     /// [BackOffice] Represents a back office admin.
     /// </summary>
-    BackOfficeAdmin = 5,
+    BackOfficeAdmin = 6,
 
     /// <summary>
     /// [BackOffice] Represents a global admin.
     /// </summary>
-    GlobalAdmin = 6
+    GlobalAdmin = 7
 }

@@ -54,7 +54,9 @@ public sealed record RegisterCommand(
             var institutionUser = InstitutionUser.CreateInitialInstitutionAdmin(
                 request.Email,
                 request.Phone,
-                FullName.Create(request.FirstName, request.MiddleName, request.LastName),
+                request.FirstName,
+                request.MiddleName,
+                request.LastName,
                 _activationCodeService.Generate());
 
             _userRepository.Insert(institutionUser);
@@ -62,10 +64,10 @@ public sealed record RegisterCommand(
                 .Map(() =>
                 {
                     var template = InstitutionRegisteredEmailTemplate.Populate(
-                        institutionUser.FullName.First,
+                        institutionUser.FirstName,
                         _activationLinkService.Create(institutionUser));
 
-                    var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FullName, template);
+                    var emailMessage = EmailMessage.Create(institutionUser.Email, institutionUser.FirstName, template);
                     _emailQueue.Enqueue(emailMessage);
 
                     return Result.Success.Ok();

@@ -10,7 +10,9 @@ public sealed class AccessModel
 
     public Guid UserId { get; init; }
     public Guid? InstitutionId { get; init; }
-    public string FullName { get; init; } = string.Empty;
+    public string FirstName { get; init; } = string.Empty;
+    public string? MiddleName { get; init; }
+    public string LastName { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
     public UserRole Role { get; init; }
 }

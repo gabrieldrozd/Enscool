@@ -17,7 +17,7 @@ internal sealed class UserContext : IUserContext
 
     private ClaimsPrincipal? ClaimsPrincipal => _httpContextAccessor?.HttpContext?.User;
 
-    [MemberNotNullWhen(true, nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNullWhen(true, nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     public bool Authenticated => ClaimsPrincipal?.Identity?.IsAuthenticated ?? false;
 
     public string? Token => RequestMetadataExtractor.GetToken(_httpContextAccessor?.HttpContext);
@@ -26,7 +26,9 @@ internal sealed class UserContext : IUserContext
     public UserId? UserId => ClaimsExtractor.GetUserId(ClaimsPrincipal?.Claims);
     public InstitutionId? InstitutionId => ClaimsExtractor.GetUserInstitutionId(ClaimsPrincipal?.Claims);
     public IEnumerable<InstitutionId> InstitutionIds => ClaimsExtractor.GetUserInstitutionIds(ClaimsPrincipal?.Claims);
-    public FullName? FullName => ClaimsExtractor.GetUserFullName(ClaimsPrincipal?.Claims);
+    public string? FirstName => ClaimsExtractor.GetUserFullName(ClaimsPrincipal?.Claims)?.FirstName;
+    public string? MiddleName => ClaimsExtractor.GetUserFullName(ClaimsPrincipal?.Claims)?.MiddleName;
+    public string? LastName => ClaimsExtractor.GetUserFullName(ClaimsPrincipal?.Claims)?.LastName;
     public Email? Email => ClaimsExtractor.GetUserEmail(ClaimsPrincipal?.Claims);
     public Phone? Phone => ClaimsExtractor.GetUserPhone(ClaimsPrincipal?.Claims);
     public UserState? State => ClaimsExtractor.GetUserState(ClaimsPrincipal?.Claims);
@@ -40,14 +42,14 @@ internal sealed class UserContext : IUserContext
     public bool IsInRole(IEnumerable<UserRole> requiredRoles)
         => Role is not null && requiredRoles.HasOther(Role.Value);
 
-    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     public void EnsureAuthenticated()
     {
         if (!Authenticated)
             throw new NotAuthenticatedException();
     }
 
-    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
+    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
     public void EnsureInstitutionUserAuthenticated()
     {
         EnsureAuthenticated();

@@ -42,11 +42,15 @@ internal static class ClaimsExtractor
             .ToList() ?? [];
     }
 
-    internal static FullName? GetUserFullName(IEnumerable<Claim>? claims)
+    internal static (string? FirstName, string? MiddleName, string? LastName)? GetUserFullName(IEnumerable<Claim>? claims)
     {
         return claims?
             .Where(x => x.Type == ClaimConsts.FullName)
-            .Select(x => !string.IsNullOrWhiteSpace(x.Value) ? FullName.FromString(x.Value) : null)
+            .Select(x =>
+            {
+                var parts = x.Value.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                return (parts[0], parts[1], parts[2]);
+            })
             .FirstOrDefault();
     }
 

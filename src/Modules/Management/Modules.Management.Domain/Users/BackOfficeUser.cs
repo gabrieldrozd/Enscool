@@ -10,8 +10,8 @@ public class BackOfficeUser : User
     {
     }
 
-    public BackOfficeUser(UserId id, Email email, Phone phone, FullName fullName, BackOfficeUserRole role, List<InstitutionId> institutionIds)
-        : base(id, email, phone, fullName, role.ToUserRole(), null, institutionIds)
+    public BackOfficeUser(UserId id, Email email, Phone phone, string firstName, string? middleName, string lastName, BackOfficeUserRole role, List<InstitutionId> institutionIds)
+        : base(id, email, phone, firstName, middleName, lastName, role.ToUserRole(), null, institutionIds)
     {
     }
 }

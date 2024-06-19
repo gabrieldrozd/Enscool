@@ -25,9 +25,9 @@ public class GetStudentDetailsQueryDto : IWithExpressionMapFrom<Student, GetStud
         {
             UserId = student.Id,
             InstitutionId = student.InstitutionId,
-            FirstName = student.FullName.First,
-            MiddleName = student.FullName.Middle,
-            LastName = student.FullName.Last,
+            FirstName = student.FirstName,
+            MiddleName = student.MiddleName,
+            LastName = student.LastName,
             Email = student.Email.Value,
             Phone = student.Phone.Value,
             State = student.State,

@@ -1,7 +1,20 @@
-using Core.Application.Queries.Browse.Pagination;
-using Core.Application.Queries.Browse.Search;
-using Core.Application.Queries.Browse.Sort;
-
 namespace Core.Application.Queries.Browse;
 
-public sealed record BrowseModel(PaginationModel Pagination, SortModel? Sort = null, SearchModel? Search = null);
+public sealed record BrowseModel
+{
+    public int Page { get; set; }
+    public int Size { get; set; }
+
+    public string? Sort { get; set; }
+    public SortOrder? Order { get; set; }
+
+    public string? Search { get; set; }
+    public SearchPattern? Pattern { get; set; }
+    public string[]? Properties { get; set; }
+
+    public static BrowseModel Default => new()
+    {
+        Page = 1,
+        Size = 10
+    };
+}

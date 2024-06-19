@@ -30,12 +30,9 @@ internal sealed class InstitutionUserCreatedDomainEventHandler : IDomainEventHan
                         State = notification.State,
                         Email = notification.Email,
                         Phone = notification.Phone,
-                        FullName = new FullNamePayload
-                        {
-                            First = notification.FullName.First,
-                            Middle = notification.FullName.Middle,
-                            Last = notification.FullName.Last
-                        },
+                        FirstName = notification.FirstName,
+                        MiddleName = notification.MiddleName,
+                        LastName = notification.LastName,
                         BirthDate = notification.BirthDate!,
                         Address = new AddressPayload
                         {
@@ -58,12 +55,9 @@ internal sealed class InstitutionUserCreatedDomainEventHandler : IDomainEventHan
                         State = notification.State,
                         Email = notification.Email,
                         Phone = notification.Phone,
-                        FullName = new FullNamePayload
-                        {
-                            First = notification.FullName.First,
-                            Middle = notification.FullName.Middle,
-                            Last = notification.FullName.Last
-                        },
+                        FirstName = notification.FirstName,
+                        MiddleName = notification.MiddleName,
+                        LastName = notification.LastName,
                         Address = new AddressPayload
                         {
                             ZipCode = notification.Address!.ZipCode,

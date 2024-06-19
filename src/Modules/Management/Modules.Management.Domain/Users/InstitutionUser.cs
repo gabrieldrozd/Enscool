@@ -21,14 +21,16 @@ public class InstitutionUser : User
         UserId id,
         Email email,
         Phone phone,
-        FullName fullName,
+        string firstName,
+        string? middleName,
+        string lastName,
         InstitutionUserRole role,
         InstitutionId institutionId,
         Address? address = null,
         LanguageLevel? languageLevel = null,
         Date? birthDate = null
     )
-        : base(id, email, phone, fullName, role.ToUserRole(), institutionId, [])
+        : base(id, email, phone, firstName, middleName, lastName, role.ToUserRole(), institutionId, [])
     {
         BirthDate = birthDate;
         Address = address;
@@ -38,12 +40,12 @@ public class InstitutionUser : User
     /// <summary>
     /// Creates initial <see cref="UserRole.InstitutionAdmin"/> user.
     /// </summary>
-    public static InstitutionUser CreateInitialInstitutionAdmin(Email email, Phone phone, FullName fullName, ActivationCode activationCode)
+    public static InstitutionUser CreateInitialInstitutionAdmin(Email email, Phone phone, string firstName, string? middleName, string lastName, ActivationCode activationCode)
     {
-        var user = new InstitutionUser(UserId.New, email, phone, fullName, InstitutionUserRole.InstitutionAdmin, InstitutionId.New);
+        var user = new InstitutionUser(UserId.New, email, phone, firstName, middleName, lastName, InstitutionUserRole.InstitutionAdmin, InstitutionId.New);
         user.AddActivationCode(activationCode);
 
-        user.RaiseDomainEvent(new InstitutionAdminRegisteredDomainEvent(user.Id, user.Email, user.Phone, user.FullName, user.InstitutionId!));
+        user.RaiseDomainEvent(new InstitutionAdminRegisteredDomainEvent(user.Id, user.Email, user.Phone, user.FirstName, user.MiddleName, user.LastName, user.InstitutionId!));
 
         return user;
     }
@@ -54,7 +56,9 @@ public class InstitutionUser : User
     public static InstitutionUser Create(
         Email email,
         Phone phone,
-        FullName fullName,
+        string firstName,
+        string? middleName,
+        string lastName,
         InstitutionUserRole role,
         Address? address,
         LanguageLevel? languageLevel,
@@ -66,7 +70,7 @@ public class InstitutionUser : User
         Validate(new StudentLanguageLevelRequiredRule(role, languageLevel));
         Validate(new StudentBirthDateRequiredRule(role, birthDate));
 
-        var user = new InstitutionUser(UserId.New, email, phone, fullName, role, institutionId, address, languageLevel, birthDate);
+        var user = new InstitutionUser(UserId.New, email, phone, firstName, middleName, lastName, role, institutionId, address, languageLevel, birthDate);
         user.AddActivationCode(activationCode);
 
         user.RaiseDomainEvent(new InstitutionUserCreatedDomainEvent(
@@ -74,7 +78,9 @@ public class InstitutionUser : User
             user.State,
             user.Email,
             user.Phone,
-            user.FullName,
+            user.FirstName,
+            user.MiddleName,
+            user.LastName,
             user.Role,
             user.BirthDate,
             user.Address,
@@ -84,10 +90,12 @@ public class InstitutionUser : User
         return user;
     }
 
-    public void Update(Phone phone, FullName fullName, Address? address, Date? birthDate)
+    public void Update(Phone phone, string firstName, string? middleName, string lastName, Address? address, Date? birthDate)
     {
         Phone = phone;
-        FullName = fullName;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
         Address = address;
         BirthDate = birthDate;
     }

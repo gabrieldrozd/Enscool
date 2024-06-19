@@ -11,6 +11,8 @@ public sealed record InstitutionAdminRegisteredDomainEvent(
     UserId UserId,
     Email Email,
     Phone Phone,
-    FullName FullName,
+    string FirstName,
+    string? MiddleName,
+    string LastName,
     InstitutionId InstitutionId
 ) : IDomainEvent;

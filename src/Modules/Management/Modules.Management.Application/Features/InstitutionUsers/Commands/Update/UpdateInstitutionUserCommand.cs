@@ -42,7 +42,9 @@ public sealed record UpdateInstitutionUserCommand : ITransactionCommand<Guid>
 
             institutionUser.Update(
                 request.Phone,
-                FullName.Create(request.FirstName, request.MiddleName, request.LastName),
+                request.FirstName,
+                request.MiddleName,
+                request.LastName,
                 request.Address?.Map(),
                 Date.Create(request.BirthDate));
 

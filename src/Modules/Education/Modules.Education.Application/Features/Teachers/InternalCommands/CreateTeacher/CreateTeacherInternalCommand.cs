@@ -10,7 +10,9 @@ public sealed record CreateTeacherInternalCommand(
     UserState State,
     Email Email,
     Phone Phone,
-    FullName FullName,
+    string FirstName,
+    string? MiddleName,
+    string LastName,
     Address Address,
     InstitutionId InstitutionId
 ) : IInternalCommand;

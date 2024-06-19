@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Queries.Browse.Search;
+﻿namespace Core.Application.Queries.Browse;
 
 public enum SearchPattern
 {

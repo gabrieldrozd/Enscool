@@ -186,15 +186,6 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid full name.
-        /// </summary>
-        public static string InvalidFullName {
-            get {
-                return ResourceManager.GetString("InvalidFullName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cannot change user state from &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string InvalidUserStateTransition {

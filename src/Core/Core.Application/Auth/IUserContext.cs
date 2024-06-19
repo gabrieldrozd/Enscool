@@ -8,7 +8,7 @@ namespace Core.Application.Auth;
 
 public interface IUserContext
 {
-    [MemberNotNullWhen(true, nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNullWhen(true, nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     bool Authenticated { get; }
 
     string? Token { get; }
@@ -17,7 +17,9 @@ public interface IUserContext
     public UserId? UserId { get; }
     public InstitutionId? InstitutionId { get; }
     public IEnumerable<InstitutionId> InstitutionIds { get; }
-    public FullName? FullName { get; }
+    public string? FirstName { get; }
+    public string? MiddleName { get; }
+    public string? LastName { get; }
     public Email? Email { get; }
     public Phone? Phone { get; }
     public UserState? State { get; }
@@ -25,9 +27,9 @@ public interface IUserContext
 
     bool IsInRole(IEnumerable<UserRole> requiredRoles);
 
-    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
+    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role))]
     void EnsureAuthenticated();
 
-    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FullName), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
+    [MemberNotNull(nameof(Token), nameof(Expires), nameof(UserId), nameof(FirstName), nameof(LastName), nameof(Email), nameof(Phone), nameof(State), nameof(Role), nameof(InstitutionId))]
     void EnsureInstitutionUserAuthenticated();
 }

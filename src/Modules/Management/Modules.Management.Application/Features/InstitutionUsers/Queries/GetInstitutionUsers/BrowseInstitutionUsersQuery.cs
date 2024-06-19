@@ -39,7 +39,9 @@ public sealed record BrowseInstitutionUsersQuery : BrowseQuery<BrowseInstitution
                 .BrowseAsync(
                     request.Model,
                     [
-                        x => x.FullName,
+                        x => x.FirstName,
+                        x => x.MiddleName,
+                        x => x.LastName,
                         x => x.Email
                     ],
                     cancellationToken)
