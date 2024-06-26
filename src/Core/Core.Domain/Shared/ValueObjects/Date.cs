@@ -8,7 +8,7 @@ namespace Core.Domain.Shared.ValueObjects;
 public sealed class Date : ValueObject
 {
     public DateTimeOffset Value { get; }
-    public DateTime? DateTime => Value.UtcDateTime;
+    public DateTime DateTime => Value.UtcDateTime;
 
     public Date(DateTimeOffset value)
     {
@@ -48,6 +48,7 @@ public sealed class Date : ValueObject
     public static bool operator >=(Date first, Date second) => first.Value >= second.Value;
 
     public override string ToString() => Value.ToString("yyyy-MM-dd HH:mm:ss");
+    public string ToFormattedString() => Value.ToString("dd.MM.yyyy");
 
     protected override IEnumerable<object> GetAtomicValues()
     {

@@ -2,10 +2,10 @@
 
 <root>
     <xsd:schema
-            id="root"
-            xmlns=""
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+        id="root"
+        xmlns=""
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
     >
         <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
@@ -163,5 +163,8 @@
     </data>
     <data name="InstitutionUserAddressRequired" xml:space="preserve">
         <value>Institution user address is required</value>
+    </data>
+    <data name="UserCannotBeDeleted" xml:space="preserve">
+        <value>User cannot be deleted</value>
     </data>
 </root>

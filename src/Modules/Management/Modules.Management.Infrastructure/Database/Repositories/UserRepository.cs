@@ -55,4 +55,11 @@ public sealed class UserRepository : Repository<User, ManagementDbContext>, IUse
                 x.Role == UserRole.Teacher ||
                 x.Role == UserRole.Student
             ), cancellationToken);
+
+    public async Task<InstitutionUser?> GetDeletedInstitutionUserAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Users
+            .IgnoreQueryFilters()
+            .OfType<InstitutionUser>()
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.Id == userId && x.Deleted, cancellationToken);
 }

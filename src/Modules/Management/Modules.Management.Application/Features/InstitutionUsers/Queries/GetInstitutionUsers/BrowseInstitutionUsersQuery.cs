@@ -2,6 +2,7 @@ using Common.Utilities.Primitives.Results;
 using Core.Application.Communication.Internal.Queries.Browse;
 using Core.Application.Extensions;
 using Core.Application.Queries.Browse;
+using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
@@ -15,7 +16,8 @@ namespace Modules.Management.Application.Features.InstitutionUsers.Queries.GetIn
 public sealed record BrowseInstitutionUsersQuery : BrowseQuery<BrowseInstitutionUsersQueryDto>
 {
     public Guid InstitutionId { get; init; }
-    public UserState? State { get; init; }
+    public List<UserRole> Roles { get; init; } = [];
+    public List<UserState> States { get; init; } = [];
 
     internal sealed class BrowseInstitutionUsersQueryHandler : BrowseQueryHandler<BrowseInstitutionUsersQuery, BrowseInstitutionUsersQueryDto>
     {
@@ -30,12 +32,13 @@ public sealed record BrowseInstitutionUsersQuery : BrowseQuery<BrowseInstitution
         {
             var query = _context.Users.OfType<InstitutionUser>().AsQueryable();
 
-            if (request.State is UserState.Deleted)
+            if (request.States.Contains(UserState.Deleted))
                 query = query.IgnoreQueryFilters();
 
             var results = await query
-                .WhereIf(request.InstitutionId != Guid.Empty, x => x.InstitutionId! == request.InstitutionId)
-                .WhereIf(request.State is not null, x => x.State == request.State)
+                .Where(x => x.InstitutionId! == request.InstitutionId)
+                .WhereIf(request.States.Count > 0, x => request.States.Contains(x.State))
+                .WhereIf(request.Roles.Count > 0, x => request.Roles.Contains(x.Role))
                 .BrowseAsync(
                     request.Model,
                     [

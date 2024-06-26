@@ -1,6 +1,6 @@
 using Core.Application.Communication.External.Messages;
 using Core.Domain.Shared.ValueObjects;
-using Core.Messaging.Users;
+using Core.Messaging.Users.Students;
 using MediatR;
 using Modules.Education.Application.Features.Students.InternalCommands.CreateStudent;
 

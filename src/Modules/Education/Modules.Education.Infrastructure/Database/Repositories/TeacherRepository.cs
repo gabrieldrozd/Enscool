@@ -21,4 +21,7 @@ public sealed class TeacherRepository : Repository<Teacher, EducationDbContext>,
 
     public async Task<bool> ExistsWithinInstitutionAsync(Email email, InstitutionId institutionId, CancellationToken cancellationToken = default)
         => await _context.Teachers.AnyAsync(x => x.Email == email && x.InstitutionId == institutionId, cancellationToken);
+
+    public async Task<Teacher?> GetAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Teachers.FindAsync([userId], cancellationToken);
 }

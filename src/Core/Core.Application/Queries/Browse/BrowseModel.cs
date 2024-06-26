@@ -9,8 +9,6 @@ public sealed record BrowseModel
     public SortOrder? Order { get; set; }
 
     public string? Search { get; set; }
-    public SearchPattern? Pattern { get; set; }
-    public string[]? Properties { get; set; }
 
     public static BrowseModel Default => new()
     {

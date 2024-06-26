@@ -11,13 +11,11 @@ public static class QueryableSearchExtensions
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <param name="query">The query to apply the dynamic search to.</param>
     /// <param name="searchValue">The search query string.</param>
-    /// <param name="searchPattern">The search pattern to use (StartsWith, EndsWith, Contains).</param>
     /// <param name="propertySelectors">The property selectors specifying the properties to search on.</param>
     /// <returns>The query with the dynamic search applied or the original query if the search query is null or whitespace.</returns>
     public static IQueryable<TEntity> WithDynamicSearch<TEntity>(
         this IQueryable<TEntity> query,
         string? searchValue,
-        SearchPattern? searchPattern,
         params Expression<Func<TEntity, string?>>[] propertySelectors
     ) where TEntity : class
     {
@@ -27,7 +25,7 @@ public static class QueryableSearchExtensions
         var entityParameter = Expression.Parameter(typeof(TEntity), "e");
         var finalPredicate = propertySelectors
             .Select(selector => ConvertToObjectSelector(selector, entityParameter))
-            .Select(convertedSelector => BuildLikePredicate(convertedSelector, searchValue, searchPattern))
+            .Select(convertedSelector => BuildLikePredicate(convertedSelector, searchValue))
             .Aggregate<Expression, Expression?>(default, (current, likePredicate) => current is not null
                 ? Expression.OrElse(current, likePredicate)
                 : likePredicate);
@@ -70,11 +68,10 @@ public static class QueryableSearchExtensions
     /// </summary>
     /// <param name="propertyExpression">The expression representing the property to search.</param>
     /// <param name="searchQuery">The search query string.</param>
-    /// <param name="searchPattern">The search pattern to use (StartsWith, EndsWith, Contains).</param>
     /// <returns>An expression representing the LIKE predicate.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the 'Like' method is not found.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the search pattern is unknown.</exception>
-    private static MethodCallExpression BuildLikePredicate(Expression propertyExpression, string searchQuery, SearchPattern? searchPattern)
+    private static MethodCallExpression BuildLikePredicate(Expression propertyExpression, string searchQuery)
     {
         if (propertyExpression.Type != typeof(string))
             propertyExpression = Expression.Convert(propertyExpression, typeof(string));
@@ -83,14 +80,7 @@ public static class QueryableSearchExtensions
         var likeMethod = typeof(DbFunctionsExtensions).GetMethod(likeMethodName, [typeof(DbFunctions), typeof(string), typeof(string)]);
         if (likeMethod == null) throw new InvalidOperationException("Unable to find 'Like' method.");
 
-        var pattern = searchPattern switch
-        {
-            SearchPattern.StartsWith => $"{searchQuery}%",
-            SearchPattern.EndsWith => $"%{searchQuery}",
-            SearchPattern.Contains => $"%{searchQuery}%",
-            _ => $"%{searchQuery}%"
-        };
-
+        var pattern = $"%{searchQuery}%";
         return Expression.Call(null, likeMethod, Expression.Constant(EF.Functions), propertyExpression, Expression.Constant(pattern, typeof(string)));
     }
 

@@ -50,6 +50,6 @@ internal sealed class AccessTokenProvider : IAccessTokenProvider
                 algorithm: SecurityAlgorithms.HmacSha256));
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        return (tokenHandler.WriteToken(token), expires.DateTime!.Value);
+        return (tokenHandler.WriteToken(token), expires.DateTime);
     }
 }

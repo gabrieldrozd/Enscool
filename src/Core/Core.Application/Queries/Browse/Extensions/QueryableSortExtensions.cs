@@ -9,7 +9,9 @@ public static class QueryableSortExtensions
     public static IQueryable<TEntity> WithDynamicSort<TEntity>(this IQueryable<TEntity> query, string? sortBy, SortOrder? sortOrder)
         where TEntity : class, IEntity
     {
-        sortBy ??= nameof(IEntity.CreatedOnUtc);
+        sortBy = string.IsNullOrWhiteSpace(sortBy)
+            ? nameof(IEntity.CreatedOnUtc)
+            : sortBy;
         var propertyInfo = typeof(TEntity).GetTypeProperty(sortBy);
         if (propertyInfo is null)
             return query;

@@ -17,7 +17,7 @@ public static class BrowseExtensions
         where TEntity : class, IEntity
     {
         var model = browseModel ?? BrowseModel.Default;
-        query = query.WithDynamicSearch(model.Search, model.Pattern, propertySelectors);
+        query = query.WithDynamicSearch(model.Search, propertySelectors);
 
         var totalItems = await query.CountAsync(cancellationToken);
 

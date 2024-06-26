@@ -1,7 +1,8 @@
 using Core.Application.Communication.External.Messages;
 using Core.Domain.DomainEvents;
 using Core.Domain.Shared.Enumerations.Roles;
-using Core.Messaging.Users;
+using Core.Messaging.Users.Students;
+using Core.Messaging.Users.Teachers;
 using MediatR;
 using Modules.Management.Domain.Users.DomainEvents;
 

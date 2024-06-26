@@ -16,7 +16,7 @@ public class GetStudentDetailsQueryDto : IWithExpressionMapFrom<Student, GetStud
     public string Email { get; private init; } = string.Empty;
     public string? Phone { get; private init; }
     public UserState State { get; private init; }
-    public AddressDto Address { get; set; }
+    public AddressDto Address { get; set; } = null!;
     public string LanguageLevel { get; private set; } = null!;
     public DateTime BirthDate { get; private set; }
 
@@ -33,6 +33,6 @@ public class GetStudentDetailsQueryDto : IWithExpressionMapFrom<Student, GetStud
             State = student.State,
             Address = AddressDto.From(student.Address),
             LanguageLevel = student.LanguageLevel.ToString(),
-            BirthDate = student.BirthDate.DateTime!.Value
+            BirthDate = student.BirthDate.DateTime
         };
 }

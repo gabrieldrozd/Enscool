@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enscool.Host", "src\Enscool
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.ServiceDefaults", "src\Common\Common.ServiceDefaults\Common.ServiceDefaults.csproj", "{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Queries", "src\Core\Core.Queries\Core.Queries.csproj", "{774AA673-102B-4A31-8C04-57785CC0F239}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,10 @@ Global
 		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774AA673-102B-4A31-8C04-57785CC0F239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774AA673-102B-4A31-8C04-57785CC0F239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774AA673-102B-4A31-8C04-57785CC0F239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774AA673-102B-4A31-8C04-57785CC0F239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,5 +186,6 @@ Global
 		{9AD785FB-7EB4-43FE-A200-C13777FC29BA} = {47A59EF6-62E5-4718-9E78-1EF14C79B026}
 		{5AD7D1B4-7A6B-4817-BCD7-95D3A1BBB46E} = {0210CAFE-65E1-4E96-B84C-8BA1DDAA82FD}
 		{47691FDE-4BCB-44AF-BA45-6D98B4E91E24} = {2798BEA4-7135-4544-AF81-D32BC53D46C5}
+		{774AA673-102B-4A31-8C04-57785CC0F239} = {CBF7EF35-89C1-419A-B7B5-7DC447D683B0}
 	EndGlobalSection
 EndGlobal

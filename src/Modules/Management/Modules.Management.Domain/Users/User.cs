@@ -4,6 +4,7 @@ using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
+using Modules.Management.Domain.Users.DomainEvents;
 
 namespace Modules.Management.Domain.Users;
 
@@ -97,6 +98,46 @@ public class User : AggregateRoot<UserId>
     {
         _passwordResetCodes.ForEach(x => x.Deactivate());
         Password = create;
+    }
+
+    #endregion
+
+    #region State
+
+    // TODO NOTE: Option to activate, after user was Deactivated
+    public void Activate()
+    {
+        State.ValidateTransitionTo(UserState.Active);
+
+        State = UserState.Active;
+    }
+
+    // TODO NOTE: Option to deactivate, after user was Activated
+    public void Deactivate()
+    {
+        State.ValidateTransitionTo(UserState.Inactive);
+
+        State = UserState.Inactive;
+    }
+
+    public override void Restore()
+    {
+        State.ValidateTransitionTo(UserState.Active);
+
+        State = UserState.Active;
+        base.Restore();
+
+        RaiseDomainEvent(new UserRestoredDomainEvent(Id, Role));
+    }
+
+    public override void Delete()
+    {
+        State.ValidateTransitionTo(UserState.Deleted);
+
+        State = UserState.Deleted;
+        base.Delete();
+
+        RaiseDomainEvent(new UserDeletedDomainEvent(Id, Role));
     }
 
     #endregion

@@ -348,6 +348,15 @@ namespace Common.Utilities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User cannot be deleted.
+        /// </summary>
+        public static string UserCannotBeDeleted {
+            get {
+                return ResourceManager.GetString("UserCannotBeDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User with given id &apos;{0}&apos; not found.
         /// </summary>
         public static string UserNotFound {

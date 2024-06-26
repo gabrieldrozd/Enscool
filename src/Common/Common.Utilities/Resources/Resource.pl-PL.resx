@@ -164,4 +164,7 @@
     <data name="InstitutionUserAddressRequired" xml:space="preserve">
         <value>Adres użytkownika jest wymagany</value>
     </data>
+    <data name="UserCannotBeDeleted" xml:space="preserve">
+        <value>Użytkownik nie może zostać usunięty</value>
+    </data>
 </root>

@@ -1,3 +1,4 @@
+using Core.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,8 @@ internal static class Extensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IEducationQueryService, EducationQueryService>();
+
         return services;
     }
 
