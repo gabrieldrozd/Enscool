@@ -1,12 +1,12 @@
-using Core.Domain.Communication.DomainEvents;
-using Core.Domain.Communication.Messages;
+using Core.Application.Communication.External.Messages;
+using Core.Domain.DomainEvents;
 using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Payloads;
 using Core.Messaging.Users.Students;
 using MediatR;
 using Modules.Management.Domain.Users.DomainEvents;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.DomainEvents;
+namespace Modules.Management.Messaging.DomainEvents.Users;
 
 internal sealed class InstitutionUserUpdatedDomainEventHandler : IDomainEventHandler<InstitutionUserUpdatedDomainEvent>
 {
@@ -24,19 +24,19 @@ internal sealed class InstitutionUserUpdatedDomainEventHandler : IDomainEventHan
         switch (notification.Role)
         {
             case UserRole.Student:
-                await _messageBus.PublishAsync(new StudentUserUpdatedMessage(
-                    new StudentUserUpdatedMessagePayload
-                    {
-                        UserId = notification.UserId,
-                        Phone = notification.Phone,
-                        FirstName = notification.FirstName,
-                        MiddleName = notification.MiddleName,
-                        LastName = notification.LastName,
-                        BirthDate = notification.BirthDate!,
-                        Address = AddressPayload.From(notification.Address!)
-                    }), cancellationToken);
+                await _messageBus.PublishAsync(new StudentUserUpdatedMessage
+                {
+                    UserId = notification.UserId,
+                    Phone = notification.Phone,
+                    FirstName = notification.FirstName,
+                    MiddleName = notification.MiddleName,
+                    LastName = notification.LastName,
+                    Address = AddressPayload.From(notification.Address!),
+                    BirthDate = notification.BirthDate!
+                }, cancellationToken);
                 break;
             case UserRole.Teacher:
+            //TODO
             // await _messageBus.PublishAsync(new TeacherUserUpdatedMessage(
             //     new TeacherUserUpdatedMessagePayload
             //     {

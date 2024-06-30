@@ -8,26 +8,26 @@ using Modules.Management.Domain.Users.DomainEvents;
 
 namespace Modules.Management.Messaging.DomainEvents.Users;
 
-internal sealed class UserDeletedDomainEventHandler : IDomainEventHandler<UserDeletedDomainEvent>
+internal sealed class UserRestoredDomainEventHandler : IDomainEventHandler<UserRestoredDomainEvent>
 {
     private readonly ISender _sender;
     private readonly IMessageBus _messageBus;
 
-    public UserDeletedDomainEventHandler(ISender sender, IMessageBus messageBus)
+    public UserRestoredDomainEventHandler(ISender sender, IMessageBus messageBus)
     {
         _sender = sender;
         _messageBus = messageBus;
     }
 
-    public async Task Handle(UserDeletedDomainEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(UserRestoredDomainEvent notification, CancellationToken cancellationToken)
     {
         switch (notification.Role)
         {
             case UserRole.Student:
-                await _messageBus.PublishAsync(new StudentUserDeletedMessage { UserId = notification.UserId }, cancellationToken);
+                await _messageBus.PublishAsync(new StudentUserRestoredMessage { UserId = notification.UserId }, cancellationToken);
                 break;
             case UserRole.Teacher:
-                await _messageBus.PublishAsync(new TeacherUserDeletedMessage { UserId = notification.UserId }, cancellationToken);
+                await _messageBus.PublishAsync(new TeacherUserRestoredMessage { UserId = notification.UserId }, cancellationToken);
                 break;
             case UserRole.Secretary:
             case UserRole.InstitutionAdmin:

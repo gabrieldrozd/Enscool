@@ -17,23 +17,15 @@ internal sealed class TeacherUserCreatedMessageHandler
     }
 
     public async Task Handle(TeacherUserCreatedMessage notification, CancellationToken cancellationToken)
-    {
-        await _sender.Send(new CreateTeacherInternalCommand(
-            notification.Payload.UserId,
-            notification.Payload.State,
-            notification.Payload.Email,
-            notification.Payload.Phone,
-            notification.Payload.FirstName,
-            notification.Payload.MiddleName,
-            notification.Payload.LastName,
-            Address.Create(
-                notification.Payload.Address.ZipCode,
-                notification.Payload.Address.ZipCodeCity,
-                notification.Payload.Address.City,
-                notification.Payload.Address.HouseNumber,
-                notification.Payload.Address.State,
-                notification.Payload.Address.Street),
-            notification.Payload.InstitutionId
+        => await _sender.Send(new CreateTeacherInternalCommand(
+            notification.UserId,
+            notification.State,
+            notification.Email,
+            notification.Phone,
+            notification.FirstName,
+            notification.MiddleName,
+            notification.LastName,
+            notification.Address.Map(),
+            notification.InstitutionId
         ), cancellationToken);
-    }
 }

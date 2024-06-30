@@ -15,5 +15,5 @@ internal sealed class TeacherUserRestoredMessageHandler : IMessageHandler<Teache
     }
 
     public async Task Handle(TeacherUserRestoredMessage notification, CancellationToken cancellationToken)
-        => await _sender.Send(new RestoreTeacherInternalCommand(notification.Payload.UserId), cancellationToken);
+        => await _sender.Send(new RestoreTeacherInternalCommand(notification.UserId), cancellationToken);
 }

@@ -1,6 +1,7 @@
 using Core.Application.Communication.External.Messages;
 using Core.Domain.DomainEvents;
 using Core.Domain.Shared.Enumerations.Roles;
+using Core.Domain.Shared.Payloads;
 using Core.Messaging.Users.Students;
 using Core.Messaging.Users.Teachers;
 using MediatR;
@@ -24,52 +25,34 @@ internal sealed class InstitutionUserCreatedDomainEventHandler : IDomainEventHan
         switch (notification.Role)
         {
             case UserRole.Student:
-                await _messageBus.PublishAsync(new StudentUserCreatedMessage(
-                    new StudentUserCreatedMessagePayload
-                    {
-                        UserId = notification.UserId,
-                        State = notification.State,
-                        Email = notification.Email,
-                        Phone = notification.Phone,
-                        FirstName = notification.FirstName,
-                        MiddleName = notification.MiddleName,
-                        LastName = notification.LastName,
-                        BirthDate = notification.BirthDate!,
-                        Address = new AddressPayload
-                        {
-                            ZipCode = notification.Address!.ZipCode,
-                            ZipCodeCity = notification.Address!.ZipCodeCity,
-                            City = notification.Address!.City,
-                            HouseNumber = notification.Address!.HouseNumber,
-                            State = notification.Address!.State,
-                            Street = notification.Address!.Street
-                        },
-                        LanguageLevel = notification.LanguageLevel!,
-                        InstitutionId = notification.InstitutionId
-                    }), cancellationToken);
+                await _messageBus.PublishAsync(new StudentUserCreatedMessage
+                {
+                    UserId = notification.UserId,
+                    State = notification.State,
+                    Email = notification.Email,
+                    Phone = notification.Phone,
+                    FirstName = notification.FirstName,
+                    MiddleName = notification.MiddleName,
+                    LastName = notification.LastName,
+                    BirthDate = notification.BirthDate!,
+                    Address = AddressPayload.From(notification.Address!),
+                    LanguageLevel = notification.LanguageLevel!,
+                    InstitutionId = notification.InstitutionId
+                }, cancellationToken);
                 break;
             case UserRole.Teacher:
-                await _messageBus.PublishAsync(new TeacherUserCreatedMessage(
-                    new TeacherUserCreatedMessagePayload
-                    {
-                        UserId = notification.UserId,
-                        State = notification.State,
-                        Email = notification.Email,
-                        Phone = notification.Phone,
-                        FirstName = notification.FirstName,
-                        MiddleName = notification.MiddleName,
-                        LastName = notification.LastName,
-                        Address = new AddressPayload
-                        {
-                            ZipCode = notification.Address!.ZipCode,
-                            ZipCodeCity = notification.Address!.ZipCodeCity,
-                            City = notification.Address!.City,
-                            HouseNumber = notification.Address!.HouseNumber,
-                            State = notification.Address!.State,
-                            Street = notification.Address!.Street
-                        },
-                        InstitutionId = notification.InstitutionId
-                    }), cancellationToken);
+                await _messageBus.PublishAsync(new TeacherUserCreatedMessage
+                {
+                    UserId = notification.UserId,
+                    State = notification.State,
+                    Email = notification.Email,
+                    Phone = notification.Phone,
+                    FirstName = notification.FirstName,
+                    MiddleName = notification.MiddleName,
+                    LastName = notification.LastName,
+                    Address = AddressPayload.From(notification.Address!),
+                    InstitutionId = notification.InstitutionId
+                }, cancellationToken);
                 break;
             case UserRole.Secretary:
             case UserRole.InstitutionAdmin:

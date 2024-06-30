@@ -15,5 +15,5 @@ internal sealed class StudentUserDeletedMessageHandler : IMessageHandler<Student
     }
 
     public async Task Handle(StudentUserDeletedMessage notification, CancellationToken cancellationToken)
-        => await _sender.Send(new DeleteStudentInternalCommand(notification.Payload.UserId), cancellationToken);
+        => await _sender.Send(new DeleteStudentInternalCommand(notification.UserId), cancellationToken);
 }
