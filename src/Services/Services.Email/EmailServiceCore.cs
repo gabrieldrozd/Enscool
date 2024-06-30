@@ -20,6 +20,12 @@ public class EmailServiceCore : IServiceCore
         services.AddTransient<IEmailSender, EmailSender>();
     }
 
+    // TODO: Change the `Services` to `Components`
+    // TODO: Change the `Services` to `Components`
+    // TODO: Change the `Services` to `Components`
+    // TODO: Change the `Services` to `Components`
+    // TODO: Change the `Services` to `Components`
+
     public void UseService(WebApplication app)
     {
     }

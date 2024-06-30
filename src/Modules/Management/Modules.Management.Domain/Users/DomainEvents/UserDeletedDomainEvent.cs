@@ -1,4 +1,4 @@
-using Core.Domain.DomainEvents;
+using Core.Domain.Communication.DomainEvents;
 using Core.Domain.Shared.EntityIds;
 using Core.Domain.Shared.Enumerations.Roles;
 

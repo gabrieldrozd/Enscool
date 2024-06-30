@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Education.Application.Features.Students.Queries.GetStudent;
 
-namespace Modules.Education.Api.Endpoints.Students.GetDetails;
+namespace Modules.Education.Api.Endpoints.Students;
 
 /// <summary>
 /// Get current user <see cref="EndpointBase"/>.

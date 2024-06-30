@@ -63,4 +63,20 @@ public sealed class Student : AggregateRoot<UserId>
         Date birthDate,
         InstitutionId institutionId
     ) => new(studentId, state, email, phone, firstName, middleName, lastName, address, languageLevel, birthDate, institutionId);
+
+    public void Update(
+        Phone phone,
+        string firstName,
+        string? middleName,
+        string lastName,
+        Address address,
+        Date birthDate)
+    {
+        Phone = phone;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
+        Address = address;
+        BirthDate = birthDate;
+    }
 }

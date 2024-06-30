@@ -45,7 +45,7 @@ public class InstitutionUser : User
         var user = new InstitutionUser(UserId.New, email, phone, firstName, middleName, lastName, InstitutionUserRole.InstitutionAdmin, InstitutionId.New);
         user.AddActivationCode(activationCode);
 
-        user.RaiseDomainEvent(new InstitutionAdminRegisteredDomainEvent(user.Id, user.Email, user.Phone, user.FirstName, user.MiddleName, user.LastName, user.InstitutionId!));
+        user.RaiseDomainEvent(new InstitutionAdminRegisteredDomainEvent(user));
 
         return user;
     }
@@ -73,19 +73,7 @@ public class InstitutionUser : User
         var user = new InstitutionUser(UserId.New, email, phone, firstName, middleName, lastName, role, institutionId, address, languageLevel, birthDate);
         user.AddActivationCode(activationCode);
 
-        user.RaiseDomainEvent(new InstitutionUserCreatedDomainEvent(
-            user.Id,
-            user.State,
-            user.Email,
-            user.Phone,
-            user.FirstName,
-            user.MiddleName,
-            user.LastName,
-            user.Role,
-            user.BirthDate,
-            user.Address,
-            user.LanguageLevel,
-            user.InstitutionId!));
+        user.RaiseDomainEvent(new InstitutionUserCreatedDomainEvent(user));
 
         return user;
     }
@@ -98,5 +86,7 @@ public class InstitutionUser : User
         LastName = lastName;
         Address = address;
         BirthDate = birthDate;
+
+        RaiseDomainEvent(new InstitutionUserUpdatedDomainEvent(this));
     }
 }
