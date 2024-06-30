@@ -29,7 +29,6 @@ public sealed record DeactivateInstitutionUsersCommand : ITransactionCommand
         public async Task<Result> Handle(DeactivateInstitutionUsersCommand request, CancellationToken cancellationToken)
         {
             var users = await _context.Users
-                .AsNoTracking()
                 .OfType<InstitutionUser>()
                 .WhereIf(request.UserIds.Count > 0, x => request.UserIds.Contains(x.Id))
                 .ToListAsync(cancellationToken);

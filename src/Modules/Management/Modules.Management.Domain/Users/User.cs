@@ -5,6 +5,7 @@ using Core.Domain.Shared.Enumerations.Roles;
 using Core.Domain.Shared.Enumerations.UserStates;
 using Core.Domain.Shared.ValueObjects;
 using Modules.Management.Domain.Users.DomainEvents;
+using Modules.Management.Domain.Users.Rules;
 
 namespace Modules.Management.Domain.Users;
 
@@ -105,12 +106,13 @@ public class User : AggregateRoot<UserId>
     #region State
 
     // TODO NOTE: Option to activate, after user was Deactivated
-    public void Activate()
+    public void Reactivate()
     {
+        Validate(new UserReactivationPasswordMustBeSetRule(HasPassword()));
         State.ValidateTransitionTo(UserState.Active);
         State = UserState.Active;
 
-        // TODO: Raise domain event
+        RaiseDomainEvent(new UserReactivatedDomainEvent(Id, Role));
     }
 
     public void Deactivate()
@@ -151,4 +153,8 @@ public class User : AggregateRoot<UserId>
 
     public bool CanBeLoggedIn()
         => State is UserState.Active;
+
+    [MemberNotNullWhen(true, nameof(Password))]
+    public bool HasPassword()
+        => Password is not null;
 }

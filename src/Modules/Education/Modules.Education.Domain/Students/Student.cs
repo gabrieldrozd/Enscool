@@ -80,7 +80,7 @@ public sealed class Student : AggregateRoot<UserId>
         BirthDate = birthDate;
     }
 
-    public void Activate()
+    public void Reactivate()
     {
         State.ValidateTransitionTo(UserState.Active);
         State = UserState.Active;

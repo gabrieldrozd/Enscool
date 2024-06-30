@@ -21,8 +21,8 @@ public class DomainLayerException : CoreException
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     /// <param name="args">The arguments to be formatted into the message.</param>
-    public DomainLayerException(string message, params object[] args)
-        : base(string.Format(message, args.Select(x => x.ToString())))
+    public DomainLayerException(string message, params object?[] args)
+        : base(string.Format(message, args))
     {
     }
 }

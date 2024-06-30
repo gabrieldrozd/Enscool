@@ -74,5 +74,29 @@ public sealed class Teacher : AggregateRoot<UserId>
         Address = address;
     }
 
-    public void Deactivate() => State = UserState.Inactive;
+    public void Reactivate()
+    {
+        State.ValidateTransitionTo(UserState.Active);
+        State = UserState.Active;
+    }
+
+    public void Deactivate()
+    {
+        State.ValidateTransitionTo(UserState.Inactive);
+        State = UserState.Inactive;
+    }
+
+    public override void Restore()
+    {
+        State.ValidateTransitionTo(UserState.Active);
+        State = UserState.Active;
+        base.Restore();
+    }
+
+    public override void Delete()
+    {
+        State.ValidateTransitionTo(UserState.Deleted);
+        State = UserState.Deleted;
+        base.Delete();
+    }
 }
