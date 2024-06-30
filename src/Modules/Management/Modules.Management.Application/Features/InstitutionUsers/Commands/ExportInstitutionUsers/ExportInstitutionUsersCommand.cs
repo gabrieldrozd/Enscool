@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Management.Application.Abstractions;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Export;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.ExportInstitutionUsers;
 
 /// <summary>
 /// Creates xlsx file with <see cref="InstitutionUser"/>s data.

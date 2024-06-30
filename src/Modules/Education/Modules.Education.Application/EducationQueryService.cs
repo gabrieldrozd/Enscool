@@ -18,8 +18,8 @@ public class EducationQueryService : IEducationQueryService
     /// <inheritdoc/>
     public async Task<bool> CanDeleteUserAsync(UserId userId, UserRole role, CancellationToken cancellationToken = default) => role switch
     {
-        UserRole.Student => !await _context.Courses.AnyAsync(x => x.StudentIds.Contains(userId), cancellationToken),
-        UserRole.Teacher => !await _context.Courses.AnyAsync(x => x.MainTeacherId == userId || x.TeacherIds.Contains(userId), cancellationToken),
+        UserRole.Student => !await _context.Courses.AnyAsync(x => x.StudentIds.Select(y => y.Value).Contains(userId), cancellationToken),
+        UserRole.Teacher => !await _context.Courses.AnyAsync(x => x.MainTeacherId == userId || x.TeacherIds.Select(y => y.Value).Contains(userId), cancellationToken),
         _ => true
     };
 }

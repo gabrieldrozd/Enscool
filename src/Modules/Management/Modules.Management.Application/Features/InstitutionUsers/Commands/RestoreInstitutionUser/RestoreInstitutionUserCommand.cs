@@ -6,7 +6,7 @@ using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Restore;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.RestoreInstitutionUser;
 
 /// <summary>
 /// Deletes <see cref="InstitutionUser"/>.

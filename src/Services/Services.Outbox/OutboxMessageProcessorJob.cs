@@ -21,7 +21,7 @@ public class OutboxMessageProcessorJob : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             await ProcessMessagesAsync(stoppingToken);
-            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
         }
     }
 

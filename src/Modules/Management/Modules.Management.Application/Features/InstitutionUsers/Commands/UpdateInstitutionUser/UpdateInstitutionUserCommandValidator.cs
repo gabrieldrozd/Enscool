@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Update;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.UpdateInstitutionUser;
 
 internal sealed class UpdateInstitutionUserCommandValidator : AbstractValidator<UpdateInstitutionUserCommand>
 {

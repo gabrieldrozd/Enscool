@@ -59,4 +59,20 @@ public sealed class Teacher : AggregateRoot<UserId>
         Address address,
         InstitutionId institutionId
     ) => new(teacherId, state, email, phone, firstName, middleName, lastName, address, institutionId);
+
+    public void Update(
+        Phone phone,
+        string firstName,
+        string? middleName,
+        string lastName,
+        Address address)
+    {
+        Phone = phone;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
+        Address = address;
+    }
+
+    public void Deactivate() => State = UserState.Inactive;
 }

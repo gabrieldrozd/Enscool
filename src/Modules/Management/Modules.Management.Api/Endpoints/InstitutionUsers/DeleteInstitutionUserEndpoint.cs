@@ -2,7 +2,7 @@ using Core.Infrastructure.Cores.Modules.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.InstitutionUsers.Commands.Delete;
+using Modules.Management.Application.Features.InstitutionUsers.Commands.DeleteInstitutionUser;
 
 namespace Modules.Management.Api.Endpoints.InstitutionUsers;
 

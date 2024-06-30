@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.InstitutionUsers.Commands.Export;
+using Modules.Management.Application.Features.InstitutionUsers.Commands.ExportInstitutionUsers;
 
 namespace Modules.Management.Api.Endpoints.InstitutionUsers;
 

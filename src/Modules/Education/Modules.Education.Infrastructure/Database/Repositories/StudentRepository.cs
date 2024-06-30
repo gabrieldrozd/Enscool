@@ -32,4 +32,10 @@ public sealed class StudentRepository : Repository<Student, EducationDbContext>,
         => await _context.Students
             .AsSplitQuery()
             .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+
+    public async Task<Student?> GetDeletedAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Students
+            .IgnoreQueryFilters()
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.Id == userId && x.Deleted, cancellationToken);
 }

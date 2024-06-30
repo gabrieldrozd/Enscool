@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.InstitutionUsers.Commands.Update;
+using Modules.Management.Application.Features.InstitutionUsers.Commands.UpdateInstitutionUser;
 
 namespace Modules.Management.Api.Endpoints.InstitutionUsers;
 

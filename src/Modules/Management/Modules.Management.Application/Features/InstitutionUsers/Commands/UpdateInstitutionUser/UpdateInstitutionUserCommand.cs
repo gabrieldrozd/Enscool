@@ -8,7 +8,7 @@ using Modules.Management.Application.Abstractions;
 using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Update;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.UpdateInstitutionUser;
 
 /// <summary>
 /// Creates new <see cref="InstitutionUser"/> in the system.

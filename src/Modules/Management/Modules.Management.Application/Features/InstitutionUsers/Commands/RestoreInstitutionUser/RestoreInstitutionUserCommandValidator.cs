@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Restore;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.RestoreInstitutionUser;
 
 internal sealed class RestoreInstitutionUserCommandValidator : AbstractValidator<RestoreInstitutionUserCommand>
 {

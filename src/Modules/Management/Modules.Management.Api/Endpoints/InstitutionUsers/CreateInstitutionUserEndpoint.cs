@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Management.Application.Features.InstitutionUsers.Commands.Create;
+using Modules.Management.Application.Features.InstitutionUsers.Commands.CreateInstitutionUser;
 
 namespace Modules.Management.Api.Endpoints.InstitutionUsers;
 

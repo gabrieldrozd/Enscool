@@ -10,4 +10,5 @@ public interface ITeacherRepository : IRepository<Teacher>
     Task<bool> ExistsAsync(UserId teacherId, CancellationToken cancellationToken = default);
     Task<bool> ExistsWithinInstitutionAsync(Email email, InstitutionId institutionId, CancellationToken cancellationToken = default);
     Task<Teacher?> GetAsync(UserId userId, CancellationToken cancellationToken = default);
+    Task<Teacher?> GetDeletedAsync(UserId userId, CancellationToken cancellationToken = default);
 }

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Create;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.CreateInstitutionUser;
 
 internal sealed class CreateInstitutionUserCommandValidator : AbstractValidator<CreateInstitutionUserCommand>
 {

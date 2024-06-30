@@ -108,22 +108,22 @@ public class User : AggregateRoot<UserId>
     public void Activate()
     {
         State.ValidateTransitionTo(UserState.Active);
-
         State = UserState.Active;
+
+        // TODO: Raise domain event
     }
 
-    // TODO NOTE: Option to deactivate, after user was Activated
     public void Deactivate()
     {
         State.ValidateTransitionTo(UserState.Inactive);
-
         State = UserState.Inactive;
+
+        RaiseDomainEvent(new UserDeactivatedDomainEvent(Id, Role));
     }
 
     public override void Restore()
     {
         State.ValidateTransitionTo(UserState.Active);
-
         State = UserState.Active;
         base.Restore();
 
@@ -133,7 +133,6 @@ public class User : AggregateRoot<UserId>
     public override void Delete()
     {
         State.ValidateTransitionTo(UserState.Deleted);
-
         State = UserState.Deleted;
         base.Delete();
 

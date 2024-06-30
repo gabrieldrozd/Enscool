@@ -10,12 +10,12 @@ namespace Modules.Education.Application.Features.Students.InternalCommands.Resto
 
 public sealed record RestoreStudentInternalCommand(UserId UserId) : IInternalCommand
 {
-    internal sealed class CreateStudentInternalCommandHandler : ICommandHandler<RestoreStudentInternalCommand>
+    internal sealed class Handler : ICommandHandler<RestoreStudentInternalCommand>
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateStudentInternalCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork)
+        public Handler(IStudentRepository studentRepository, IUnitOfWork unitOfWork)
         {
             _studentRepository = studentRepository;
             _unitOfWork = unitOfWork;
@@ -23,7 +23,7 @@ public sealed record RestoreStudentInternalCommand(UserId UserId) : IInternalCom
 
         public async Task<Result> Handle(RestoreStudentInternalCommand request, CancellationToken cancellationToken)
         {
-            var student = await _studentRepository.GetAsync(request.UserId, cancellationToken);
+            var student = await _studentRepository.GetDeletedAsync(request.UserId, cancellationToken);
             if (student is null) return Result.Failure.NotFound<Student>();
 
             student.Restore();

@@ -24,4 +24,10 @@ public sealed class TeacherRepository : Repository<Teacher, EducationDbContext>,
 
     public async Task<Teacher?> GetAsync(UserId userId, CancellationToken cancellationToken = default)
         => await _context.Teachers.FindAsync([userId], cancellationToken);
+
+    public async Task<Teacher?> GetDeletedAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await _context.Teachers
+            .IgnoreQueryFilters()
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.Id == userId && x.Deleted, cancellationToken);
 }

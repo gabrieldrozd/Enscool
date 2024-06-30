@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Delete;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.DeleteInstitutionUser;
 
 internal sealed class DeleteInstitutionUserCommandValidator : AbstractValidator<DeleteInstitutionUserCommand>
 {

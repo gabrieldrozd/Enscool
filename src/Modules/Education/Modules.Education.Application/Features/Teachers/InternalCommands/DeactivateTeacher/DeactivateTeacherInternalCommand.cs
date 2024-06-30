@@ -6,27 +6,27 @@ using Modules.Education.Application.Abstractions;
 using Modules.Education.Application.Abstractions.Repositories;
 using Modules.Education.Domain.Teachers;
 
-namespace Modules.Education.Application.Features.Teachers.InternalCommands.RestoreTeacher;
+namespace Modules.Education.Application.Features.Teachers.InternalCommands.DeactivateTeacher;
 
-public sealed record RestoreTeacherInternalCommand(UserId UserId) : IInternalCommand
+public sealed record DeactivateTeacherInternalCommand(UserId UserId) : IInternalCommand
 {
-    internal sealed class CreateTeacherInternalCommandHandler : ICommandHandler<RestoreTeacherInternalCommand>
+    internal sealed class Handler : ICommandHandler<DeactivateTeacherInternalCommand>
     {
         private readonly ITeacherRepository _teacherRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateTeacherInternalCommandHandler(ITeacherRepository teacherRepository, IUnitOfWork unitOfWork)
+        public Handler(ITeacherRepository teacherRepository, IUnitOfWork unitOfWork)
         {
             _teacherRepository = teacherRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(RestoreTeacherInternalCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeactivateTeacherInternalCommand request, CancellationToken cancellationToken)
         {
             var teacher = await _teacherRepository.GetAsync(request.UserId, cancellationToken);
             if (teacher is null) return Result.Failure.NotFound<Teacher>();
 
-            teacher.Restore();
+            teacher.Deactivate();
 
             return await _unitOfWork.CommitAsync(cancellationToken)
                 .Map(Result.Success.Ok);

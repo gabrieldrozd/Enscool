@@ -12,7 +12,7 @@ using Modules.Management.Application.Abstractions.Repositories;
 using Modules.Management.Domain.Abstractions;
 using Modules.Management.Domain.Users;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Create;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.CreateInstitutionUser;
 
 /// <summary>
 /// Creates new <see cref="InstitutionUser"/> in the system.

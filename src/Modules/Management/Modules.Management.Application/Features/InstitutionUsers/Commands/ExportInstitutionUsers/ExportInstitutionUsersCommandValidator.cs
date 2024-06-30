@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Modules.Management.Application.Features.InstitutionUsers.Commands.Export;
+namespace Modules.Management.Application.Features.InstitutionUsers.Commands.ExportInstitutionUsers;
 
 internal sealed class ExportInstitutionUsersCommandValidator : AbstractValidator<ExportInstitutionUsersCommand>
 {

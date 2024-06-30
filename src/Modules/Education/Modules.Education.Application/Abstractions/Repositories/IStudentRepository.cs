@@ -13,4 +13,5 @@ public interface IStudentRepository : IRepository<Student>
 
     Task<Student?> GetAsync(UserId userId, CancellationToken cancellationToken = default);
     Task<Student?> GetAsync(Email email, CancellationToken cancellationToken = default);
+    Task<Student?> GetDeletedAsync(UserId userId, CancellationToken cancellationToken = default);
 }

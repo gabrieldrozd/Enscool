@@ -1,5 +1,4 @@
 using Core.Application.Communication.External.Messages;
-using Core.Domain.Shared.ValueObjects;
 using Core.Messaging.Users.Teachers;
 using MediatR;
 using Modules.Education.Application.Features.Teachers.InternalCommands.CreateTeacher;
